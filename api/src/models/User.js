@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
           return false;
         },
       },
+      restoreCode: {
+        type: DataTypes.STRING,
+      },
     },
     { timestamps: true }
   );
