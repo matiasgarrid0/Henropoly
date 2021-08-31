@@ -1,6 +1,7 @@
 import React from 'react';
 import { VscClose } from 'react-icons/vsc';
 import ReactDOM from 'react-dom';
+import './style.css';
 
 const Portal = ({children, onClose}) => {
     return ReactDOM.createPortal(
