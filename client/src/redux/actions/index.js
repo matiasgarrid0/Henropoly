@@ -1,0 +1,1 @@
+export { register, setLoading, setAuthenticate, setToken, setUser, logOut } from "./auth";

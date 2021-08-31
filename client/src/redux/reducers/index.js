@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import reducer1 from "./reducer";
-import reducerUser from "./reducerUser";
+import auth from './auth'
 
-
-const rootReducer = combineReducers(reducer1, reducerUser);
-
-export default rootReducer;
+export default combineReducers({
+  auth
+});
