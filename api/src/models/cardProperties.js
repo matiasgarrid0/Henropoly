@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "cardProperties",
+    "cardproperties",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -23,15 +23,15 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      housesPrices: {
+      commonVersion: {
           type: DataTypes.INTEGER,
           allowNull: false,
       },
-      hotelPrices: {
+      premiumVersion: {
           type: DataTypes.INTEGER,
           allowNull: false,
       },
-      valueLot: {
+      licenseValue: {
           type: DataTypes.INTEGER,
           allowNull: false,
       },
