@@ -20,7 +20,7 @@ function validate(input) {
       else if(!input.username || !/^.{4,25}$/.test(input.username) || !/^[a-zA-Z0-9_-]+$/.test(input.username)) {
         errors.username= 'username must be from 4 to 25 characters'
       }
-      else if(!input.password || /^.{8,16}$/.test(input.password)) {
+      else if(!input.password || !/^.{8,16}$/.test(input.password)) {
          errors.password ='password must be from 8 to 16 characterers'
       }
 
