@@ -25,7 +25,7 @@ function handleSubmit(e) {
          
               <label>Username</label>
               <input
-                 className ='jhh'
+                 className =''
                  type= 'text'
 			     name='username'
 			     value={input.username}
@@ -35,7 +35,7 @@ function handleSubmit(e) {
          
               <label>Password</label>
               <input
-                 className ='hjhjgh'
+                 className =''
                  type= 'text'
 			     name='password'
 			     value={input.password}
@@ -43,7 +43,7 @@ function handleSubmit(e) {
 			   placeholder='password'
 		    /> 
           </form>  
-          <button className='fdf' type="submit">enter</button>
+          <button className='' type="submit">enter</button>
 
           </div>
           
