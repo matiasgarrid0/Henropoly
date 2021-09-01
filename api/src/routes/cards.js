@@ -5,7 +5,7 @@ let jsonData = require('../../dbData/cardProperties');
 
 const router = Router();
 
-router.get("/cards", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
 
     res.send(jsonData)
