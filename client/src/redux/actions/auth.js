@@ -12,8 +12,9 @@ export const register = ( username, email, password ) => {
   return async (dispatch) =>{
     dispatch(setLoading(true));
     try {
-      const response = await axios.post( `localhost:3001/auth/signUp`,data)
+      const response = await axios.post(`http://localhost:3001/auth/signUp`,data)
       if(response.data){
+        console.log(response.data)
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));
         dispatch(setAuthenticate(true));
@@ -22,6 +23,7 @@ export const register = ( username, email, password ) => {
       }
       dispatch(setLoading(false));
     } catch (error) {
+      console.log(error)
       dispatch(setMaintenance(true));
       dispatch(logOut());
       dispatch(setLoading(false));

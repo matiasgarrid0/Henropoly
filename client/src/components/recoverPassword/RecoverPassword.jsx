@@ -41,3 +41,5 @@ function handleChange(e){
    
  )
 }
+
+export default RecoverPassword
