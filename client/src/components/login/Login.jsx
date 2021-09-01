@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 //import { register }  from '../../redux/actions'
 //import { Link, useHistory } from 'react-router-dom';
 
 function Loggin () {
-//const dispatch = useDispatch();
+const dispatch = useDispatch();
 
 const [input, setInput] = useState({
     username :'',
@@ -17,6 +18,7 @@ const [input, setInput] = useState({
 }  
 function handleSubmit(e) {
     e.preventDefault()
+    
 }
  return (
     <>
@@ -46,7 +48,10 @@ function handleSubmit(e) {
           <button className='' type="submit">enter</button>
 
           </div>
-          
+          {/* LINKS? A PORTALES */}
+          <p>forgot your password?</p>
+
+          <p>You don't have an account, singn up</p>
      </>
    
  )

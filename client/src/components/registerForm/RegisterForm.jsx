@@ -86,6 +86,7 @@ function handleSubmit(e) {
 				onChange={(e)=>handleChange(e)} 
 			   placeholder='password'
 		    /> 
+          {errors.password && (<p className='b'>{errors.password}</p>)}
             <button className='fdf' type="submit">send</button>
           </form>  
         
