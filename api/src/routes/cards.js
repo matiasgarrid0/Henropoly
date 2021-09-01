@@ -1,13 +1,17 @@
 const { Router } = require("express");
 const { cardProperties } = require("./../db");
 
+let jsonData = require('../../dbData/cardProperties');
+
 const router = Router();
 
+router.get("/cards", async (req, res, next) => {
+  try {
 
-router.post("/cards", async (req, res, next) => {
-    try {
-        const cards = cardProperties.findAll()
-    } catch (error) {
-      next(error);
-    }
-  });
+    res.send(jsonData)
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
