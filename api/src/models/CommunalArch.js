@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "communalArch",
+    "communalarch",
     {
       ID: {
         type: DataTypes.INTEGER,
