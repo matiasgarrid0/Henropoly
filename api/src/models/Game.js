@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "railway",
+    "player",
     {
       ID: {
         type: DataTypes.INTEGER,
@@ -10,16 +10,12 @@ module.exports = (sequelize) => {
         primaryKey: true,
         unique: true,
       },
-      rent: {
+      state: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      numberBox: {
-        type: DataTypes.INTEGER,
+      funds: {
+        type: DataType.INTEGER,
         allowNull: false,
       },
     },
