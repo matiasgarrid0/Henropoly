@@ -5,6 +5,7 @@ const card = require("./cards");
 
 // Configurar los routers
 router.use("/auth", auth);
-router.use("/", card);
+router.use("/cards", card);
+
 
 module.exports = router;
