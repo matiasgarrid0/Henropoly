@@ -15,11 +15,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       totalgames: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       maxfunds: {
-        type: DataType.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
