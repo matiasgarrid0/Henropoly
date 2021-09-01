@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH, SET_MAINTENANCE} from "../constants";
-const { URL_API } = process.env;
+//const { URL_API } = process.env;
 
 export const register = ( username, email, password ) => {
   const data = {
