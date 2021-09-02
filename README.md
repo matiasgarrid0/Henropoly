@@ -8,12 +8,15 @@ Henropoly es un juego de mesa traido al internet, este se basa en la compra y la
 2- Cada jugador puede comprar hasta un máximo de 5 casas en una misma propiedad adquirida, y luego de esa cantidad máxima se deben comprar edificios.
 3- Los impuestos que debe pagar cada jugador por caer en una casilla adquirida por otro jugador, se determina por la cantidad de edificaciones hechas y por el tipo.
 
-### `api ENV`
-DB_USER
-DB_PASSWORD
-DB_HOST
-DB_PORT
-DB_NAME
-AUTH_SECRET
-AUTH_EXPIRES
-AUTH_ROUNDS
+### api ENV:
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_HOST`
+- `DB_PORT`
+- `DB_NAME`
+- `AUTH_SECRET=hola1234`
+- `AUTH_EXPIRES=24h`
+- `AUTH_ROUNDS=10`
+
+#### client ENV
+- `URL_API=http://localhost:3001`
