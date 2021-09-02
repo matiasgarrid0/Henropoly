@@ -11,7 +11,7 @@ const usersData = [
   },
   {
     username: "FlorAdmin",
-    password: "flor1234",
+    password: "$2b$10$elY6Zggtpetw72cNnAI4Y.Ot0mMnsRh2Bx.9eQdLqiSJy2SQ7A4kO",
     email: "florenciahidalgoq@hotmail.com",
   },
   {
