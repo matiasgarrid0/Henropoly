@@ -11,6 +11,7 @@ export const register = ( username, email, password) => {
   }
   return async (dispatch) =>{
     dispatch(setLoading(true));
+    await callbackTest();
     try {
       const response = await axios.post(`http://localhost:3001/auth/signUp`,data)
       if(response.data){
@@ -35,6 +36,7 @@ export const login = ( username, password) => {
   }
   return async (dispatch) =>{
     dispatch(setLoading(true));
+    await callbackTest();
     try {
       const response = await axios.post(`http://localhost:3001/auth/signIn`,data)
       if(response.data){
@@ -55,6 +57,7 @@ export const login = ( username, password) => {
 
 export const checkToken = (token) => {
   return async (dispatch) =>{
+    await callbackTest();
     try {
       const response = await AxiosApi.checkToken();
       if(response.data){
@@ -101,6 +104,9 @@ export const setLoading = (bolean) => {
       payload: user,
     };
   }
+  const callbackTest = () => {
+    return new Promise((resolve) => setTimeout(resolve, 1500));
+  };
 
   export const logOut = () => {
     return (dispatch) => {
