@@ -16,17 +16,19 @@ const Nav = () => {
     
 
 
-    return(<header>
+    return(
+    <div>
         <div className='principal'>
             <h1 className='logo'>HENROPOLY</h1>
-        {!isAuth && values.portal ==='login' && <Portal onClose={setPortal(null)}><Loggin register ={setPortal('register')} /></Portal>}
-        {!isAuth && values.portal ==='register' && <Portal onClose={setPortal(null)}><RegisterForm /></Portal>}
-        {isAuth ? <LogOut/> :
-        <div>
+        {values.portal ==='login' && <Portal onClose={setPortal(null)}><Loggin/></Portal>}
+        {values.portal ==='register' && <Portal onClose={setPortal(null)}><RegisterForm/></Portal>}
+        {isAuth ? <button className='logout'>Log Out</button> :
+        <div className="btn-direction">
             <button className='login btn btn-verde' onClick={setPortal('login')}>Log In</button>
             <button className='register btn btn-verde' onClick={setPortal('register')}>Register</button>
         </div>}
         </div>
-    </header>)
+    </div>
+    )
 }
 export default Nav;

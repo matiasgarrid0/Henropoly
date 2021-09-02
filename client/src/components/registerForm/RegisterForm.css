@@ -1,0 +1,86 @@
+.container-register {
+    background-color: #ececec;
+    margin:1rem 1rem;
+    /* align-items: center;
+    text-align: center;
+    transform: translateY(30%) translateX(150%); */
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+    height:400px;
+    width: 350px;
+    border: solid black 2px;
+    border-radius: 5px;
+}
+
+.logo-register {
+    margin-top: 3rem;
+    text-align:center;
+}
+
+.box-register {
+    align-items:center;
+    top: 15px;
+}
+
+.email {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 15px;
+    margin-top: 3rem;
+    text-transform: uppercase;
+}
+
+.email-text {
+    height: 20px;
+    width: 270px;
+    text-transform: uppercase;
+}
+
+.username {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.username-text {
+    height: 20px;
+    width: 230px;
+    text-transform: uppercase;
+}
+
+.password {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.password-text {
+    height: 20px;
+    width: 230px;
+    text-transform: uppercase;
+}
+
+.btn-send {
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    margin-top: 2rem;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #FFEC00;
+    transition: background-color .3s ease;
+    border-radius:4px;
+    margin-left: 5.6rem;
+    border: none;
+}
+
+.btn-send:hover {
+    cursor:pointer;
+    border: solid 1px black;
+}
