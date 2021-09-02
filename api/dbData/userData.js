@@ -11,13 +11,28 @@
     },
     {
         username: "FlorAdmin",
-        email:"florenciahidalgoq@hotmail.com",
-        password:"flor1234"
+        password:"flor1234",
+        email:"florenciahidalgoq@hotmail.com"
     },
     {
         username: "FacuRearte",
-        password: "asdfghjkl123",
+        password: "12345678",
         email: "Facundorearte13@gmail.com",
+    },
+    {
+        username: "ludmila",
+        password: "12345678",
+        email: "taborda@hotmail.com",
+    },
+    {
+        username: "AlanGiavino",
+        password: "hellopeople",
+        email: "alangiavino97@gmail.com",
+    },
+    {
+        username: "MatiasGarrido",
+        password:"Matiaslg", 
+        email:"matias17garrido@gmail.com"
     }
 ]
 
