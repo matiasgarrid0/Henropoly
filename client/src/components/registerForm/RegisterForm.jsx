@@ -14,8 +14,8 @@ import './RegisterForm.css'
 //!/^[a-zA-Z0-9_-]+$/.test(input.username)
 function validate(input) { 
    let errors = {};
-      if( !input.mail || !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input.mail)) {
-        errors.mail= 'mail not valid';
+      if( !input.email || !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input.email)) {
+        errors.email= 'mail not valid';
       } 
       else if(!input.username || !/^.{4,25}$/.test(input.username) || !/^[a-zA-Z0-9_-]+$/.test(input.username)) {
         errors.username= 'username must be from 4 to 25 characters'
@@ -33,7 +33,7 @@ const dispatch = useDispatch();
 const [input, setInput] = useState({
     username :'',
     password :'',
-    mail:''
+    email:''
  });
  const [errors, setErrors] = useState({})
 
@@ -45,8 +45,8 @@ const [input, setInput] = useState({
 }  
 function handleSubmit(e) {
     e.preventDefault()
-    if(!errors.username && !errors.mail && !errors.password) {
-     dispatch(register(input.username, input.mail, input.password))
+    if(!errors.username && !errors.email && !errors.password) {
+     dispatch(register(input.username, input.email, input.password))
      setInput({
        username:'',
        password:'',
@@ -72,7 +72,7 @@ function handleSubmit(e) {
                   onChange={(e)=>handleChange(e)} 
                   placeholder='mail'
                   />
-                  {errors.mail && (<p className='bjjjbjb'>{errors.mail}</p>)}
+                  {errors.email && (<p className='bjjjbjb'>{errors.email}</p>)}
                 </div>
 
                 <div className='username'>

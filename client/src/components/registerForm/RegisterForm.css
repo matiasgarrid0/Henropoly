@@ -28,39 +28,39 @@
     align-items:center;
     padding-bottom: 15px;
     margin-top: 3rem;
-    text-transform: uppercase;
+ /*    text-transform: uppercase; */
 }
 
 .email-text {
     height: 20px;
     width: 270px;
-    text-transform: uppercase;
+/*     text-transform: uppercase; */
 }
 
 .username {
     text-align: center;
     align-items:center;
     padding-bottom: 15px;
-    text-transform: uppercase;
+  /*   text-transform: uppercase; */
 }
 
 .username-text {
     height: 20px;
     width: 230px;
-    text-transform: uppercase;
+  /*   text-transform: uppercase; */
 }
 
 .password {
     text-align: center;
     align-items:center;
-    padding-bottom: 15px;
-    text-transform: uppercase;
+     padding-bottom: 15px;
+  /*  text-transform: uppercase; */
 }
 
 .password-text {
     height: 20px;
     width: 230px;
-    text-transform: uppercase;
+  /*   text-transform: uppercase; */
 }
 
 .btn-send {
