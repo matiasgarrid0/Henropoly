@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { useDispatch} from 'react-redux';
 import { register } from '../../redux/actions';
+import './RegisterForm.css'
 
 
 
@@ -57,47 +58,55 @@ function handleSubmit(e) {
     }
 }
  return (
-    <>
-          <div className='dfgfg'>
-          <form onSubmit={(e)=>handleSubmit(e)} >
-              <label>Email *</label>
-              <input
-               className ='jhh'
-               type= 'text'
-			     name='mail'
-			     value={input.mail}
-				  onChange={(e)=>handleChange(e)} 
-				placeholder='mail'
-		    /> 
-          {errors.mail && (<p className='bjjjbjb'>{errors.mail}</p>)}
-              <label>UserName *</label>
-              <input
-                className ='hjhjgh'
-                type= 'text'
-			     name='username'
-			     value={input.username}
-				onChange={(e)=>handleChange(e)} 
-			   placeholder='username'
-		    /> 
-           {errors.username && (<p className='b'>{errors.username}</p>)}
+<div className='container-register'>
+          <div className='box-register'>
+            <h3 className='logo-register'>HENROPOLY</h3>
+            <form onSubmit={(e)=>handleSubmit(e)} >
+                <div className='email'>
+                  <label>Email: </label>
+                  <input
+                  className ='email-text'
+                  type= 'text'
+                  name='email'
+                  value={input.email}
+                  onChange={(e)=>handleChange(e)} 
+                  placeholder='mail'
+                  />
+                  {errors.mail && (<p className='bjjjbjb'>{errors.mail}</p>)}
+                </div>
 
-            <label>Password *</label>
-              <input
-                className ='hjhjgh'
-                type= 'text'
-			     name='password'
-			     value={input.password}
-				onChange={(e)=>handleChange(e)} 
-			   placeholder='password'
-		    /> 
-          {errors.password && (<p className='b'>{errors.password}</p>)}
-            <button className='fdf' type="submit">send</button>
-          </form>  
-        
+                <div className='username'>
+                  <label>UserName: </label>
+                  <input
+                    className ='username-text'
+                    type= 'text'
+                    name='username'
+                    value={input.username}
+                    onChange={(e)=>handleChange(e)} 
+                    placeholder='username'
+                  /> 
+                  {errors.username && (<p className='b'>{errors.username}</p>)}
+                </div>
 
+                <div className='password'>
+                  <label>Password: </label>
+                    <input
+                      className ='password-text'
+                      type= 'text'
+                      name='password'
+                      value={input.password}
+                      onChange={(e)=>handleChange(e)} 
+                      placeholder='password'
+                    /> 
+                    {errors.password && (<p className='b'>{errors.password}</p>)}
+                </div>
+
+              <button className='btn-send' type="submit">send</button>
+
+            </form>  
           </div>
           
-     </>
+     </div>
    
  )
 }
