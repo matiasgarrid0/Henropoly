@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "cardproperties",
+    "cardProperty",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -15,8 +15,28 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
       },
-      rent: {
-        type: DataTypes.STRING,
+      versionAlpha: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      versionOne: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      versionTwo: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      versionThree: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      versionFour: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      versionPremium: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       aditional: {
