@@ -1,0 +1,49 @@
+.principal-login {
+    background-color: #ececec;
+    
+    align-items: center;
+    text-align: center;
+    height:400px;
+    width: 300px;
+    border: solid black 2px;
+    border-radius: 5px;
+}
+.center{
+    align-items: center;
+}
+.formulario {
+    display:flex;
+    flex-direction:column;
+    width: min(60rem, 100%);
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    align-items: center;
+  
+}
+.list{
+list-style: none;
+}
+.formulario fieldset {
+border: none;
+}
+  
+.formulario legend {
+text-align: center;
+font-size: 1.8rem;
+text-transform: uppercase;
+font-weight: 700;
+margin-bottom: 2rem;
+color: #ffc107;
+}
+.searchBar{
+font-size: 1.2rem;
+outline:none;
+border: none;
+margin-right: 4rem;
+}
+.flex{
+    display: flex;
+    flex-direction: column;
+}
