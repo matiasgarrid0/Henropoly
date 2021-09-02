@@ -1,11 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-//import { register }  from '../../redux/actions'
-//import { Link, useHistory } from 'react-router-dom';
+import React, { useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { login }  from '../../redux/actions'
 
-function Loggin () {
+
+function Loggin (props) {
 const dispatch = useDispatch();
 
 const [input, setInput] = useState({
@@ -18,7 +17,7 @@ const [input, setInput] = useState({
 }  
 function handleSubmit(e) {
     e.preventDefault()
-    
+    dispatch(login(input.username,input.password))
 }
  return (
     <>
@@ -43,15 +42,15 @@ function handleSubmit(e) {
 			     value={input.password}
 				onChange={(e)=>handleChange(e)} 
 			   placeholder='password'
-		    /> 
+		    />    
+           <button className='' type="submit">enter</button>
           </form>  
-          <button className='' type="submit">enter</button>
+      
 
           </div>
-          {/* LINKS? A PORTALES */}
           <p>forgot your password?</p>
 
-          <p>You don't have an account, singn up</p>
+          <label  onClick={props.register}>You don't have an account, singn up</label>
      </>
    
  )

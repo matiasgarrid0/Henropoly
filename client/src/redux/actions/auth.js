@@ -1,20 +1,43 @@
 import axios from "axios";
-import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH, SET_MAINTENANCE} from "../constants";
+import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH } from "../constants";
+import * as AxiosApi from './../../controllers/auth';
 //const { URL_API } = process.env;
 
-export const register = ( username, email, password ) => {
+export const register = ( username, email, password) => {
   const data = {
     username: username,
     email: email,
     password: password
   }
-  console.log(data)
   return async (dispatch) =>{
     dispatch(setLoading(true));
     try {
       const response = await axios.post(`http://localhost:3001/auth/signUp`,data)
       if(response.data){
-        console.log(response.data)
+        dispatch(setUser(response.data.user));
+        dispatch(setToken(response.data.token));
+        dispatch(setAuthenticate(true));
+      } else {
+        dispatch(logOut());
+      }
+      dispatch(setLoading(false));
+    } catch (error) {
+      dispatch(logOut());
+      dispatch(setLoading(false));
+    }
+  } 
+};
+
+export const login = ( username, password) => {
+  const data = {
+    username: username,
+    password: password
+  }
+  return async (dispatch) =>{
+    dispatch(setLoading(true));
+    try {
+      const response = await axios.post(`http://localhost:3001/auth/signIn`,data)
+      if(response.data){
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));
         dispatch(setAuthenticate(true));
@@ -24,12 +47,32 @@ export const register = ( username, email, password ) => {
       dispatch(setLoading(false));
     } catch (error) {
       console.log(error)
-      dispatch(setMaintenance(true));
       dispatch(logOut());
       dispatch(setLoading(false));
     }
   } 
 };
+
+export const checkToken = (token) => {
+  return async (dispatch) =>{
+    try {
+      const response = await AxiosApi.checkToken();
+      if(response.data){
+        dispatch(setUser(response.data.user));
+        dispatch(setToken(response.data.token));
+        dispatch(setAuthenticate(true));
+      } else {
+       dispatch(logOut());
+      }
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.log(error)
+      dispatch(logOut());
+      dispatch(setLoading(false));
+    }
+  } 
+};
+
 
 export const setLoading = (bolean) => {
     return {
@@ -57,18 +100,14 @@ export const setLoading = (bolean) => {
       type: SET_USER,
       payload: user,
     };
-  };
+  }
+
   export const logOut = () => {
     return (dispatch) => {
+      dispatch(setAuthenticate(false));
+      dispatch(setToken(null));
       localStorage.removeItem("user");
       localStorage.removeItem("access_token");
-      dispatch(setToken(null));
-      dispatch(setAuthenticate(false));
     };
-  };
-  export const setMaintenance = (bolean) => {
-    return {
-      type: SET_MAINTENANCE,
-      payload: bolean,
-    };
-  };
+ 
+};

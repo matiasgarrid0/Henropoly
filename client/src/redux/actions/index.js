@@ -1,1 +1,1 @@
-export { register, setLoading, setAuthenticate, setToken, setUser, logOut } from "./auth";
+export { register, setLoading, setAuthenticate, setToken, setUser, logOut, login, checkToken } from "./auth";

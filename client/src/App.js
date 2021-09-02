@@ -1,16 +1,33 @@
 import { Route, Switch } from "react-router-dom";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Nav } from './components';
-import { Home } from './views'
+import { SwitchPage } from './views'
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, checkToken } from './redux/actions'
 
 const App =() => {
+  const dispatch = useDispatch();
+  const { isAuth, isLoading, token } = useSelector((state) => state.auth);
+  
+  useEffect(()=>{
+    if(isAuth){
+      dispatch(checkToken(token));
+    } else{
+      dispatch(setLoading(false));
+    }
+  /* eslint-disable react-hooks/exhaustive-deps */
+  },[]);
+  
+  if(isLoading) {
+    return <div>Loading</div>;
+  }
   return (
-    <>
+    <div>
       <Route path="/" component={Nav} />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={SwitchPage} />
       </Switch>
-    </>
+    </div>
   )
 }
 

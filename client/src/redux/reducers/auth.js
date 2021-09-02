@@ -1,14 +1,13 @@
-import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH, SET_MAINTENANCE} from '../constants';
+import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH } from '../constants';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const token = localStorage.getItem('access_token');
 
 const initialState = {
-  user: user && user,
+  user: user  ? user : null,
 	token: token ? token : null,
 	isAuth: user && token ? true : false,
-	isLoading: true,
-  inMaintenance: false,
+	isLoading: true
 };
 
 const auth = (state = initialState, action) => {
@@ -30,10 +29,6 @@ const auth = (state = initialState, action) => {
     return {
       ...state, isAuth:payload
       }
-      case SET_MAINTENANCE:
-        return {
-          ...state, inMaintenance:payload
-          }
     default: 
       return state;
   }

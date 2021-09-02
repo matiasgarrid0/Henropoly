@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
- import { useDispatch, useSelector } from 'react-redux';
-/*import { Link, useHistory } from 'react-router-dom'; */
+import React, { useState} from 'react';
+import { useDispatch} from 'react-redux';
 import { register } from '../../redux/actions';
 
 
 
 
-const expressions = {
+/* const expressions = {
    expressionStandar: /^[a-zA-Z0-9_-]+$/, // Letras, numeros, guion y guion_bajo
    usernameLong: /^.{4,25}$/, // 4 a 25 digitos.
    passwordLong: /^.{8,16}$/, // 4 a 16 digitos.
- };
+ }; */
 //!/^[a-zA-Z0-9_-]+$/.test(input.username)
 function validate(input) { 
    let errors = {};
@@ -27,7 +26,7 @@ function validate(input) {
    return errors
 }
 
-function RegisterForm () {
+function RegisterForm (props) {
 const dispatch = useDispatch();
 
 const [input, setInput] = useState({
@@ -47,6 +46,11 @@ function handleSubmit(e) {
     e.preventDefault()
     if(!errors.username && !errors.mail && !errors.password) {
      dispatch(register(input.username, input.mail, input.password))
+     setInput({
+       username:'',
+       password:'',
+       mail:''
+     })
     } 
     else {
     alert("Fill all required fields")
