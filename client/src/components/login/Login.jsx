@@ -40,9 +40,10 @@ function handleSubmit(e) {
            name='password'
            value={input.password}
            onChange={(e)=>handleChange(e)} 
-           placeholder='password'/> 
+           placeholder='password'/>
+         <button className='btn btn-verde' type="submit">enter</button> 
      </form>  
-     <button className='btn btn-verde' type="submit">enter</button> 
+   
       
 
           </div>
