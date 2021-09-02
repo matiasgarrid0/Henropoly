@@ -1,9 +1,10 @@
 import './Nav.css';
 import React from 'react';
-import { useSelector} from "react-redux";
-import { Portal, RegisterForm, Loggin, LogOut } from './../'
+import { useSelector } from "react-redux";
+import { Portal, RegisterForm, Loggin } from './../'
 
 const Nav = () => {
+
     const [values, setValues] = React.useState({
         portal: null,
     });
@@ -13,9 +14,8 @@ const Nav = () => {
         };
     };
     const { isAuth } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
     
-
-
     return(
     <div>
         <div className='principal'>
