@@ -1,15 +1,15 @@
 const { Router } = require("express");
-const { cardProperties } = require("./../db");
+const { CardProperty,CommunalArch,FortuneCard } = require("./../db");
 
-let jsonData = require('../../dbData/cardProperties');
 
 const router = Router();
 
 router.get("/", async (req, res, next) => {
-
   try {
-
-    res.send(jsonData)
+    const responseProperty = await CardProperty.findAll()
+    const responseComunalArch = await CommunalArch.findAll()
+    const responseFortuneCard= await FortuneCard.findAll()
+    res.send({table:responseProperty,fortune:responseFortuneCard,comunal:responseComunalArch})
   } catch (error) {
     next(error);
   }

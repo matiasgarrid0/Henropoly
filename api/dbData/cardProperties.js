@@ -1,5 +1,13 @@
+
+/**"property","service","lucky","comunal","railway","exit","jail","goJail","stop" */
 const cardpropertiesData = [
     {
+        id:0,
+        type:"exit",
+    },
+    {
+        id:1,
+        type:"property",
         name: " CSS",
         versionAlpha: 2,
         versionOne: 10,
@@ -14,6 +22,12 @@ const cardpropertiesData = [
         color: "brown"
     },
     {
+        id:2,
+        type:"comunal",
+    },
+    {
+        id:3,
+        type:"property",
         name: "HTML",
         versionAlpha: 4,
         versionOne: 20,
@@ -28,6 +42,21 @@ const cardpropertiesData = [
         color: "brown"
     },
     {
+        id:4,
+        type:"tax",
+    },
+    {
+        id:5,
+        type:"railway",
+        name: "HENRY M1",
+        takeCheckpoint: 25,
+        twoCheckpoint: 50,
+        threeCheckpoint: 100,
+        fourCheckpoint: 200
+    },
+    {
+        id:6,
+        type:"property",
         name: "Postgres",
         versionAlpha: 6,
         versionOne: 30,
@@ -42,6 +71,12 @@ const cardpropertiesData = [
         color: "light blue"
     },
     {
+        id:7,
+        type:"lucky",
+    },
+    {
+        id:8,
+        type:"property",
         name: "SQLITE",
         versionAlpha: 6,
         versionOne: 30,
@@ -56,6 +91,8 @@ const cardpropertiesData = [
         color: "light blue"
     },
     {
+        id:9,
+        type:"property",
         name: "MySQL",
         versionAlpha: 8,
         versionOne: 40,
@@ -70,6 +107,12 @@ const cardpropertiesData = [
         color: "light blue"
     },
     {
+        id:10,
+        type:"jail",
+    },
+    {
+        id:11,
+        type:"property",
         name: "C#",
         versionAlpha: 10,
         versionOne: 50,
@@ -84,6 +127,14 @@ const cardpropertiesData = [
         color: "pink"
     },
     {
+        id:12,
+        type:"service",
+        name:"ELECTRICITY COMPANY",
+        licenseValue:"75"
+    },
+    {
+        id:13,
+        type:"property",
         name: "C++",
         versionAlpha: 10,
         versionOne: 50,
@@ -98,6 +149,8 @@ const cardpropertiesData = [
         color: "pink"
     },
     {
+        id:14,
+        type:"property",
         name: "C",
         versionAlpha: 12,
         versionOne: 60,
@@ -112,6 +165,17 @@ const cardpropertiesData = [
         color: "pink"
     },
     {
+        id:15,
+        type:"railway",
+        name: "HENRY M2",
+        takeCheckpoint: 25,
+        twoCheckpoint: 50,
+        threeCheckpoint: 100,
+        fourCheckpoint: 200
+    },
+    {
+        id:16,
+        type:"property",
         name: "BootStrap",
         versionAlpha: 14,
         versionOne: 70,
@@ -126,6 +190,12 @@ const cardpropertiesData = [
         color: "orange"
     },
     {
+        id:17,
+        type:"comunal",
+    },
+    {
+        id:18,
+        type:"property",
         name: "Diseño UI/UX",
         versionAlpha: 14,
         versionOne: 70,
@@ -140,6 +210,8 @@ const cardpropertiesData = [
         color: "orange"
     },
     {
+        id:19,
+        type:"property",
         name: "Express",
         versionAlpha: 16,
         versionOne: 80,
@@ -154,6 +226,12 @@ const cardpropertiesData = [
         color: "orange"
     },
     {
+        id:20,
+        type:"stop",
+    },
+    {
+        id:21,
+        type:"property",
         name: "Vue",
         versionAlpha: 18,
         versionOne: 90,
@@ -168,6 +246,12 @@ const cardpropertiesData = [
         color: "red"
     },
     {
+        id:22,
+        type:"lucky",
+    },
+    {
+        id:23,
+        type:"property",
         name: "Angular",
         versionAlpha: 18,
         versionOne: 90,
@@ -182,6 +266,8 @@ const cardpropertiesData = [
         color: "red"
     },
     {
+        id:24,
+        type:"property",
         name: "Node",
         versionAlpha: 20,
         versionOne: 100,
@@ -196,15 +282,24 @@ const cardpropertiesData = [
         color: "red"
     },
     {
+        id:25,
+        type:"railway",
+        name: "HENRY M3",
+        takeCheckpoint: 25,
+        twoCheckpoint: 50,
+        threeCheckpoint: 100,
+        fourCheckpoint: 200
+    },
+    {
+        id:26,
+        type:"property",
         name: "Python",
-
         versionAlpha: 22,
         versionOne: 110,
         versionTwo: 330,
         versionThree: 800,
         versionFour: 975,
         versionPremium: 1150,
-
         aditional: "además V4.0",
         commonVersion: 150,
         premiumVersion: 150,
@@ -212,6 +307,8 @@ const cardpropertiesData = [
         color: "yellow"
     },
     {
+        id:27,
+        type:"property",
         name: "Java",
         versionAlpha: 22,
         versionOne: 110,
@@ -226,6 +323,15 @@ const cardpropertiesData = [
         color: "yellow"
     },
     {
+        id:28,
+        type:"service",
+        name:"INTERNET COMPANY",
+        licenseValue:"75",
+
+    }, 
+    {
+        id:29,
+        type:"property",
         name: "JavaScript",
         versionAlpha: 22,
         versionOne: 110,
@@ -240,6 +346,12 @@ const cardpropertiesData = [
         color: "yellow"
     },
     {
+        id:30,
+        type:"goJail",
+    },
+    {
+        id:31,
+        type:"property",
         name: "Sequelize",
         versionAlpha: 26,
         versionOne: 130,
@@ -254,6 +366,8 @@ const cardpropertiesData = [
         color: "green"
     },
     {
+        id:32,
+        type:"property",
         name: "GitHub",
         versionAlpha: 26,
         versionOne: 130,
@@ -268,6 +382,12 @@ const cardpropertiesData = [
         color: "green"
     },
     {
+        id:33,
+        type:"comunal",
+    },
+    {
+        id:34,
+        type:"property",
         name: "Git",
         versionAlpha: 28,
         versionOne: 150,
@@ -282,6 +402,21 @@ const cardpropertiesData = [
         color: "green"
     },
     {
+        id:35,
+        type:"railway",
+        name: "HENRY M4",
+        takeCheckpoint: 25,
+        twoCheckpoint: 50,
+        threeCheckpoint: 100,
+        fourCheckpoint: 200
+    },
+    {
+        id:36,
+        type:"lucky",
+    },
+    {
+        id:37,
+        type:"property",
         name: "Redux",
         versionAlpha: 35,
         versionOne: 175,
@@ -296,6 +431,12 @@ const cardpropertiesData = [
         color: "blue"
     },
     {
+        id:38,
+        type:"taxVip",
+    },
+    {
+        id:39,
+        type:"property",
         name: "React",
         versionAlpha: 50,
         versionOne: 200,
@@ -309,25 +450,6 @@ const cardpropertiesData = [
         licenseValue: 200,
         color: "blue"
     },
-    {
-        name:"INTERNET COMPANY",
-        licenseValue:"75"
-    }, 
-    {
-        name:"ELECTRICITY COMPANY",
-        licenseValue:"75"
-    }
 ]
 
 module.exports = { cardpropertiesData }
-
-/**[
-    {
-        "name": "INTERNET COMPANY",
-        "licenseValue": "75"
-    }, 
-    {
-        "name": "ELECTRICITY COMPANY",
-        "licenseValue": "75"
-    }
-] */

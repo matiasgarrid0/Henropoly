@@ -6,60 +6,66 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
         unique: true,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false,
       },
       versionAlpha: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       versionOne: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       versionTwo: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       versionThree: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       versionFour: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       versionPremium: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       aditional: {
         type: DataTypes.STRING,
-        allowNull: true,
       },
       commonVersion: {
-          type: DataTypes.INTEGER,
-          allowNull: true,
+        type: DataTypes.INTEGER,
       },
       premiumVersion: {
-          type: DataTypes.INTEGER,
-          allowNull: true,
+        type: DataTypes.INTEGER,
       },
       licenseValue: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
+        type: DataTypes.INTEGER,
       },
       color: {
-          type: DataTypes.STRING,
-          allowNull: true,
-      }
+        type: DataTypes.STRING,
+      },
+      takeCheckpoint: {
+        type: DataTypes.INTEGER,
+      },
+      twoCheckpoint: {
+        type: DataTypes.INTEGER,
+      },
+      threeCheckpoint: {
+        type: DataTypes.INTEGER,
+      },
+      fourCheckpoint: {
+        type: DataTypes.INTEGER,
+      },
+      numberBox: {
+        type: DataTypes.INTEGER,
+      },
     },
-    { timestamps: true }
+    { timestamps: false }
   );
 };
