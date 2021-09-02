@@ -308,7 +308,26 @@ const cardpropertiesData = [
         premiumVersion: 200,
         licenseValue: 200,
         color: "blue"
+    },
+    {
+        name:"INTERNET COMPANY",
+        licenseValue:"75"
+    }, 
+    {
+        name:"ELECTRICITY COMPANY",
+        licenseValue:"75"
     }
 ]
 
 module.exports = { cardpropertiesData }
+
+/**[
+    {
+        "name": "INTERNET COMPANY",
+        "licenseValue": "75"
+    }, 
+    {
+        "name": "ELECTRICITY COMPANY",
+        "licenseValue": "75"
+    }
+] */

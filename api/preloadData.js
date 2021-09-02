@@ -1,9 +1,10 @@
-const { User, CardProperty, CommunalArch,FortuneCard } = require('./src/db')
+const { User, CardProperty, CommunalArch,FortuneCard,Railway } = require('./src/db')
 
 const { cardpropertiesData } = require('./dbData/cardProperties')
 const { usersData } = require('./dbData/userData')
 const { comunalCards } = require('./dbData/comunalArch')
 const { luckyCards } = require('./dbData/FortuneCard')
+const {railwayCards} = require('./dbData/Railway')
 
 const preloadData = async () => {
     const searchUsers = await User.findOne()
@@ -16,6 +17,8 @@ const preloadData = async () => {
         await CommunalArch.bulkCreate(comunalCards)
         //---------|FortuneCard|---------//
         await FortuneCard.bulkCreate(luckyCards)
+        //---------|RailwayCards|---------//
+        await Railway.bulkCreate(railwayCards)
     }
 }
 

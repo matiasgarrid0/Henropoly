@@ -17,39 +17,39 @@ module.exports = (sequelize) => {
       },
       versionAlpha: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       versionOne: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       versionTwo: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       versionThree: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       versionFour: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       versionPremium: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       aditional: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       commonVersion: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
       },
       premiumVersion: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
       },
       licenseValue: {
           type: DataTypes.INTEGER,
@@ -57,7 +57,7 @@ module.exports = (sequelize) => {
       },
       color: {
           type: DataTypes.STRING,
-          allowNull: false,
+          allowNull: true,
       }
     },
     { timestamps: true }

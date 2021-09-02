@@ -10,17 +10,29 @@ module.exports = (sequelize) => {
         primaryKey: true,
         unique: true,
       },
-      rent: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
       name: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      numberBox: {
+      takeCheckpoint: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      twoCheckpoint: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      threeCheckpoint: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      fourCheckpoint: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      numberBox: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
     { timestamps: true }
