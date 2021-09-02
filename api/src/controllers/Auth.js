@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const { AUTH_SECRET } = process.env;
 const checkToken = (req, res, next) => {
-  if (!req.headers.token) {
+  if (!req.headers.authorization) {
     return res
       .status(403)
       .send({ success: false, message: "No Token Provided." });
   }
-  const token = req.headers.token;
+  const token = req.headers.authorization.replace("Basic ", "");
   try {
     var decoded = jwt.verify(token, AUTH_SECRET);
     req.user = decoded;
