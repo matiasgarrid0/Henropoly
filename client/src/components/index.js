@@ -4,11 +4,13 @@ import Nav from './nav/Nav.jsx';
 import Portal from './portal/Portal.jsx';
 import LogOut from './logOut/LogOut.jsx';
 import Loading from './loading/Loading.jsx';
+import Board from './board/board'
 export {
     Loggin,
     RegisterForm,
     Nav,
     Portal,
     LogOut,
-    Loading
+    Loading,
+    Board
 }

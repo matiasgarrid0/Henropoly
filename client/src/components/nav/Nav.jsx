@@ -2,6 +2,7 @@ import "./Nav.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Portal, RegisterForm, Loggin, LogOut } from "./../";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [values, setValues] = React.useState({
@@ -30,7 +31,13 @@ const Nav = () => {
         {isAuth && <div><span className="nav-text-user">Bienvenido {user.username} :)</span></div>}
         <div>
           {isAuth ? (
+            <>   
+            <Link to='/board'>
+            <button className='button-one nav-btn'>a board</button>
+            </Link>
             <LogOut />
+          
+            </>
           ) : (
             <>
               <button className='button-one nav-btn' onClick={setPortal("login")}>Log In</button>
