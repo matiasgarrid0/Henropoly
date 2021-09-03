@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import React, { useEffect } from 'react';
 import { Nav, Loading, Board } from './components';
-import { SwitchPage } from './views'
+import { SwitchPage, Game} from './views'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken } from './redux/actions'
 
@@ -27,6 +27,7 @@ const App =() => {
       <Switch>
         <Route path="/" exact component={SwitchPage} />
         <Route path="/board" exact component={Board} />
+        <Route path="/game" exact component={Game} />
       </Switch>
     </div>
   )
