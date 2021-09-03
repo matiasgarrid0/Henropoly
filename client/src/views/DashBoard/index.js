@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import './dashboard.css'
-
+import { IoIosArrowForward } from "react-icons/io";
 
 const DashBoard = () => {
     const { user } = useSelector((state) => state.auth);
@@ -24,11 +24,15 @@ Tirar los dados hará avanzará tu pieza por el tablero
 ¡OJO! Si sacas 3 veces seguidas, ¡debes ir a la cárcel! No completes tu tercer turno.
 Finalizar tu turno hará que no puedas hacer cambios PIENSALO BIEN
 	</div>
-
+<div className='contSalyImg'>
 <div className='crearSala'> 
-    <h3>crear sala</h3>
-    <h3>unirse a sala</h3>
+    <h3 className='text-hov'>crear sala</h3>
+    <h3 className='text-hov'>unirse a sala</h3>    
 </div>
+  <div className='conimg'>
+    <img className='imgn' src='https://cdn-pro.elsalvador.com/wp-content/uploads/2020/07/Ramon-Valdes.jpg'/>
+ </div>
+ </div>
 </div>
     </div>)
 }
