@@ -1,0 +1,39 @@
+.total {
+    margin-left: 50px;
+    width : 50%;
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+    max-width: 400px;
+    background: #e2d956;
+   /*  background: -moz-linear-gradient(45deg, #F6D6BC 0%, #F6D6BC 50%, #E0A06B 100%);
+    background: -webkit-linear-gradient(45deg, #F6D6BC 0%, #F6D6BC 50%, #E0A06B 100%); */
+    border-radius: 10px;
+    box-shadow: 0 14px 24px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding: .65rem;
+}
+.crearSala {
+    margin-left: 50px;
+    width : 50%;
+    margin-left: 100px;
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+    max-width: 400px;
+    background: #eee787;
+   /*  background: -moz-linear-gradient(45deg, #F6D6BC 0%, #F6D6BC 50%, #E0A06B 100%);
+    background: -webkit-linear-gradient(45deg, #F6D6BC 0%, #F6D6BC 50%, #E0A06B 100%); */
+    border-radius: 10px;
+    box-shadow: 0 14px 24px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding: .65rem;
+}
+.position {
+    font-family: var(--text-one);
+    font-size: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+}
+.asd {
+    height: 45px;
+}

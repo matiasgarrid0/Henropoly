@@ -18,13 +18,15 @@
   font-family: var(--text-one);
   font-size: 45px;
   color: var(--color-gray);
+
 }
 .nav-text-user{
   display: flex;
-  margin-top: 30px;
+  margin-top: 15px;
   font-size: 17px;
   letter-spacing: 1px;
   font-family: var(--text-two);
+
 }
 .nav-btn {
   margin-top: 9px;
