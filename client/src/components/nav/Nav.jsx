@@ -1,4 +1,5 @@
 import "./Nav.css";
+import Logo from '../../image/Henropoly.png'
 import React from "react";
 import { useSelector } from "react-redux";
 import { Portal, RegisterForm, Loggin, LogOut } from "./../";
@@ -27,7 +28,7 @@ const Nav = () => {
         </Portal>
       )}
       <div className="nav-container">
-        <div><span className="nav-text-logo">HENROPOLY</span></div>
+        <div><img className='logo-nav' src= {Logo}/></div>
         {isAuth && <div><span className="nav-text-user">Bienvenido {user.username} :)</span></div>}
         <div>
           {isAuth ? (
