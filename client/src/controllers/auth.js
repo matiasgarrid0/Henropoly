@@ -12,3 +12,4 @@ axiosApi.interceptors.request.use((req) => {
 
 //actions:
 export const checkToken = () => axiosApi.post('/auth/check');
+export const setDefault = () => axiosApi.get('/cards');

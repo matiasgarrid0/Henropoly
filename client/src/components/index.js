@@ -6,6 +6,7 @@ import LogOut from './logOut/LogOut.jsx';
 import Loading from './loading/Loading.jsx';
 import Board from './board/Board.jsx'
 import DisplayGame from './displayGame/DisplayGame.jsx'
+import GameDashBoard from './gameDashBoard/GameDashBoard.jsx'
 export {
     Loggin,
     RegisterForm,
@@ -14,5 +15,6 @@ export {
     LogOut,
     Loading,
     Board,
-    DisplayGame
+    DisplayGame,
+    GameDashBoard
 }

@@ -1,8 +1,13 @@
 .space-game {
-    padding-top: 100px;
+    padding-top: 70px;
     width: 100%;
     display: flex;
 }
 .box-game{
 margin: auto;
+}
+.game-dashboard {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
 }
