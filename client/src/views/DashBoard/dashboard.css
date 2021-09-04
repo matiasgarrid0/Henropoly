@@ -75,3 +75,48 @@
     padding: .65rem;
     height: 290px;
 }
+
+.ranking {
+    margin-left: 100px;
+    width : 50%;
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+    /* align-items: center; */
+    max-width: 300px;
+    max-height: 350px;
+    background: #e2d956;
+    border-radius: 10px;
+    box-shadow: 0 14px 24px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    padding: .65rem;
+}
+
+
+.person{
+    height: 50px;
+    width:50px; 
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around;
+    margin-left: 10%;
+    margin-bottom: 10%;  
+}
+
+.person img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%; 
+    margin-left: 300%;
+}
+
+.person h4{
+    margin: 30%;
+}
+
+.number {
+    /* max-width: 100px;
+    max-height: 100px; */
+    padding: 9px;
+    background-color: rgb(200, 182, 13);
+    box-shadow: 0 14px 24px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
