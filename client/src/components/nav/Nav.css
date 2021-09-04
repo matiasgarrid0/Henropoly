@@ -12,12 +12,10 @@
   display: flex;
   justify-content: space-between;
 }
-.nav-text-logo {
-  display: flex;
-  margin-top: 3px;
-  font-family: var(--text-one);
-  font-size: 45px;
-  color: var(--color-gray);
+.logo-nav {
+  width: 90px;
+  height: 48px;
+  margin-top: 1px;
 }
 .nav-text-user{
   display: flex;
