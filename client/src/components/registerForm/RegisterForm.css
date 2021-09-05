@@ -1,9 +1,6 @@
 .container-register {
-    background-color: #ececec;
+    background-color: black;
     margin:1rem 1rem;
-    /* align-items: center;
-    text-align: center;
-    transform: translateY(30%) translateX(150%); */
     display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -11,6 +8,7 @@
     width: 350px;
     border: solid black 2px;
     border-radius: 5px;
+    color:white;
 }
 
 .logo-register {
@@ -26,41 +24,56 @@
 .email {
     text-align: center;
     align-items:center;
-    padding-bottom: 15px;
-    margin-top: 3rem;
- /*    text-transform: uppercase; */
+    margin-top: 6rem;
 }
 
 .email-text {
     height: 20px;
     width: 270px;
-/*     text-transform: uppercase; */
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
+    color:white;
 }
 
-.username {
+.email-text:hover {
+    height: 20px;
+    width: 270px;
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
+    color:white;
+}
+
+.username-reg {
     text-align: center;
     align-items:center;
-    padding-bottom: 15px;
-  /*   text-transform: uppercase; */
+    margin-top: 1rem;
 }
 
 .username-text {
     height: 20px;
     width: 230px;
-  /*   text-transform: uppercase; */
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
+    color:white;
 }
 
 .password {
     text-align: center;
     align-items:center;
-     padding-bottom: 15px;
-  /*  text-transform: uppercase; */
+    padding-bottom: 15px;
 }
 
 .password-text {
     height: 20px;
     width: 230px;
-  /*   text-transform: uppercase; */
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
+    color:white;
+
 }
 
 .btn-send {
