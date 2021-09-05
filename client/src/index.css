@@ -52,3 +52,6 @@ body {
   box-shadow: 0 0 3px var(--color-gray);
   transition: 0.2s;
 }
+.espacio-one {
+  height: 50px;
+}

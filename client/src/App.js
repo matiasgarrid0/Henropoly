@@ -4,21 +4,23 @@ import { Nav, Loading, Board } from './components';
 import { SwitchPage } from './views'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken } from './redux/actions'
+import { Chat } from './components/chat/Chat'
+import { Prueba } from './components/chat/Prueba'
 
-const App =() => {
+const App = () => {
   const dispatch = useDispatch();
   const { isAuth, isLoading, token } = useSelector((state) => state.auth);
-  
-  useEffect(()=>{
-    if(isAuth){
+
+  useEffect(() => {
+    if (isAuth) {
       dispatch(checkToken(token));
-    } else{
+    } else {
       dispatch(setLoading(false));
     }
-  /* eslint-disable react-hooks/exhaustive-deps */
-  },[]);
-  
-  if(isLoading) {
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, []);
+
+  if (isLoading) {
     return <Loading />;
   }
   return (
@@ -27,6 +29,8 @@ const App =() => {
       <Switch>
         <Route path="/" exact component={SwitchPage} />
         <Route path="/board" exact component={Board} />
+        <Route path="/chat" component={Chat} />
+        <Route path="/prueba" component={Prueba} />
       </Switch>
     </div>
   )

@@ -17,7 +17,20 @@ const checkToken = (req, res, next) => {
       .send({ success: false, message: "Failed to authenticate user." });
   }
 };
+//middleware para Traer token al front y usarlo JoseB
+const checkTokenBySocket = (token) => {
+	return new Promise(async (resolve, reject) => {
+		jwt.verify(token, AUTH_SECRET, (error, decoded) => {
+			if (error) {
+				resolve(null);
+			} else {
+				resolve(decoded);
+			}
+		});
+	});
+};
 
 module.exports = {
+  checkTokenBySocket,
   checkToken,
 };
