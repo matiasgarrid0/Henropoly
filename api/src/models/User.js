@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
       restoreCode: {
         type: DataTypes.STRING,
       },
+      connected: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
     },
     { timestamps: true }
   );
