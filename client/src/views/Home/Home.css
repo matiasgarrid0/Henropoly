@@ -1,5 +1,5 @@
 .principal {
-  background-color: rgb(255, 255, 53);
+  background-color: rgba(0, 0, 0, 0.767) ;
   align-items: center;
   text-align: center;
   transform: translateY(15%) translateX(55%);
@@ -11,6 +11,7 @@
   font-family: var(--text-one);
   font-size: 45px;
   margin-top: -2.5rem;
+  color:rgb(251, 255, 6);
 }
 
 .head{
