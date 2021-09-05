@@ -20,43 +20,40 @@ function handleSubmit(e) {
     console.log('dfjdfjfjhffhjfdhjfjhfjhfdhjfdhjfdhjdfhjdf')
     dispatch(login(input.username,input.password))
 }
- return (
-   <div className="principal-login">
-   <div className='body-form'>
-     <form onSubmit={(e)=>handleSubmit(e)} className="form">
-        {/* <label className="lbl-form">
-          <span className="text-form">Username</span>
-          </label>
+return (
+  <div className="container-login">
+    <div className='box-register'>
+      <form onSubmit={(e)=>handleSubmit(e)}>
+        <div className="username">
+        <label >Username: </label>
         <input
-          //  className="searchBar"
-           type= 'text'
-           name='username'
-           value={input.username}
-           onChange={(e)=>handleChange(e)} 
-           placeholder='username'/>  */}
+            className="form"
+            type= 'text'
+            name='username'
+            value={input.username}
+            onChange={(e)=>handleChange(e)} 
+            placeholder='username'/>
+        </div>
+        <div className="password">
+        <label>Password: </label>
+        <input
+            className="form"
+            type= 'text'
+            name='password'
+            value={input.password}
+            onChange={(e)=>handleChange(e)} 
+            placeholder='password'/>
+        </div>
+        <button className='btn-enter' type="submit">enter</button> 
+    </form>  
+         </div>
+         <div className="down-card">
+            <p>forgot your password?</p>
+            <label className="dont-have" onClick={props.register}>You don't have an account, singn up</label>
+         </div>
+    </div>
   
-       <label className="lbl-form">
-         <span className="text-form">Password</span>
-       </label>
-       <input
-          //  className="searchBar"
-           type= 'text'
-           name='password'
-           value={input.password}
-           onChange={(e)=>handleChange(e)} 
-           placeholder='password'/>
-         {/* <button className='btn-enter' type="submit">enter</button>  */}
-     </form>  
-   
-      
-
-          </div>
-          {/* <p>forgot your password?</p>
-
-          <label  onClick={props.register}>You don't have an account, singn up</label> */}
-     </div>
-   
- )
+)
 }
 
 export default Loggin 

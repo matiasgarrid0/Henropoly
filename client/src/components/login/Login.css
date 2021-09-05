@@ -1,132 +1,79 @@
-.principal-login {
+.container-login {
     background-color: black;
-    align-items: center;
+    margin:1rem 1rem;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+    height:400px;
+    width: 350px;
     border: solid black 2px;
     border-radius: 5px;
     color:white;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+}
 
+.logo-register {
+    margin-top: 3rem;
+    text-align:center;
 }
-/* .center{
-    align-items: center;
+
+.box-register {
+    align-items:center;
+    top: 15px;
 }
-.formulario {
-    display:flex;
-    flex-direction:column;
-    width: min(60rem, 100%);
-    margin: 0 auto;
-    padding: 2rem;
-    border-radius: 2rem;
+
+.username {
     text-align: center;
-    align-items: center;
-  
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 4rem;
 }
-.list{
-list-style: none;
+
+.form {
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
 }
-.formulario fieldset {
-border: none;
+
+.password {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 1rem;
 }
-  
-.formulario legend {
-text-align: center;
-font-size: 1.8rem;
-text-transform: uppercase;
-font-weight: 700;
-margin-bottom: 2rem;
-color: #ffc107;
-}
-.searchBar{
-font-size: 1.2rem;
-outline:none;
-border: none;
-margin-right: 4rem;
-}
-.flex{
-    display: flex;
-    flex-direction: column;
-} */
-.btn-enter{
+
+.btn-enter {
     color: black;
     font-weight: 700;
     text-decoration: none;
     font-size: 1rem;
     padding: 1rem 3rem;
-    margin-top: 2rem;
+    margin-top: 3.5rem;
     display: inline-block;
     text-align: center;
     text-transform: uppercase;
     background-color: #FFEC00;
     transition: background-color .3s ease;
     border-radius:4px;
-    margin-left: 5.6rem;
+    margin-left: 4.5rem;
     border: none;
 }
 
-.body-form{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0b1721;
+.btn-enter:hover {
+    cursor:pointer;
+    border: solid 1px yellow;
+    background-color: transparent;
+    color: yellow;
 }
 
-.form{
-    width: 100%;
-    height: 50px;
-    max-width: 400px;
-    position: relative;
-    overflow: hidden;
+.down-card {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 2rem;
 }
-.form input{
-    width: 100%;
-    height: 100%;
-    background: none;
-    color: #fff;
-    padding-top: 20px;
-    border: none;
-    outline: 0px;
+
+.dont-have:hover{
+    font-size: 17px;
+    text-shadow: 2px 1px 5px rgba(255,247,29,0.85);
+    border-bottom: 1px solid yellow;
 }
-.form .lbl-form{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    border-bottom: 1px solid #c7c7c7;
-}
-.form .lbl-form:after{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 100%;
-    height: 100%;
-    border-bottom: 3px solid #2ecece;
-    transform: translateX(-100%);
-    transition: all 0.3s ease;
-}
-.text-form{
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    transition: all 0.3s ease;
-    color: #fff;
-}
-.form input:focus + .lbl-form .text-form,.form input:valid + .lbl-form .text-form{
-    transform: translateY(-150%);
-    font-size: 14px;
-    color: #2ecece;
-}
-.form input:focus + .lbl-form:after, .form input:valid + .lbl-form:after{
-    transform: translateX(0%);
-}
-@media only screen and (min-width:320px) and (max-width:768px){
- .form{
-    width:85%;
-}
-    }
