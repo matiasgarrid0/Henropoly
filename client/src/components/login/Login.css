@@ -1,14 +1,15 @@
 .principal-login {
-    background-color: #ececec;
-    
+    background-color: black;
     align-items: center;
-    text-align: center;
-    height:400px;
-    width: 300px;
     border: solid black 2px;
     border-radius: 5px;
+    color:white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
 }
-.center{
+/* .center{
     align-items: center;
 }
 .formulario {
@@ -46,4 +47,86 @@ margin-right: 4rem;
 .flex{
     display: flex;
     flex-direction: column;
+} */
+.btn-enter{
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    margin-top: 2rem;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #FFEC00;
+    transition: background-color .3s ease;
+    border-radius:4px;
+    margin-left: 5.6rem;
+    border: none;
 }
+
+.body-form{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b1721;
+}
+
+.form{
+    width: 100%;
+    height: 50px;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+}
+.form input{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #fff;
+    padding-top: 20px;
+    border: none;
+    outline: 0px;
+}
+.form .lbl-form{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid #c7c7c7;
+}
+.form .lbl-form:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid #2ecece;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+.text-form{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+.form input:focus + .lbl-form .text-form,.form input:valid + .lbl-form .text-form{
+    transform: translateY(-150%);
+    font-size: 14px;
+    color: #2ecece;
+}
+.form input:focus + .lbl-form:after, .form input:valid + .lbl-form:after{
+    transform: translateX(0%);
+}
+@media only screen and (min-width:320px) and (max-width:768px){
+ .form{
+    width:85%;
+}
+    }

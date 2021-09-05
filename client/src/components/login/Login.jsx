@@ -21,35 +21,39 @@ function handleSubmit(e) {
     dispatch(login(input.username,input.password))
 }
  return (
-   <div className="principal-login center">
-   <div className=''>
-     <form onSubmit={(e)=>handleSubmit(e)} className="formulario">
-        <label className="center">Username</label>
+   <div className="principal-login">
+   <div className='body-form'>
+     <form onSubmit={(e)=>handleSubmit(e)} className="form">
+        {/* <label className="lbl-form">
+          <span className="text-form">Username</span>
+          </label>
         <input
-           className="searchBar"
+          //  className="searchBar"
            type= 'text'
            name='username'
            value={input.username}
            onChange={(e)=>handleChange(e)} 
-           placeholder='username'/> 
+           placeholder='username'/>  */}
   
-       <label>Password</label>
+       <label className="lbl-form">
+         <span className="text-form">Password</span>
+       </label>
        <input
-           className="searchBar"
+          //  className="searchBar"
            type= 'text'
            name='password'
            value={input.password}
            onChange={(e)=>handleChange(e)} 
            placeholder='password'/>
-         <button className='btn btn-verde' type="submit">enter</button> 
+         {/* <button className='btn-enter' type="submit">enter</button>  */}
      </form>  
    
       
 
           </div>
-          <p>forgot your password?</p>
+          {/* <p>forgot your password?</p>
 
-          <label  onClick={props.register}>You don't have an account, singn up</label>
+          <label  onClick={props.register}>You don't have an account, singn up</label> */}
      </div>
    
  )
