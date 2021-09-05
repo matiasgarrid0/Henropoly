@@ -11,11 +11,27 @@
   --text-two: "Titillium Web", sans-serif;
   --text-three: "Bebas Neue", cursive;
 }
+
+.logo{
+  width: 45rem;
+  margin-left: 11rem;
+  position: absolute;
+	transform: rotateZ(-45deg) translateX(-29%) translateY(35%);
+	text-align: center;
+
+}
+
+.square{
+	perspective: 900px;
+}
+
 .table {
   background-color: #ffde59;
   box-shadow: inset 0 0 0 7px #5f59226e;
   width: var(--total);
   height: var(--total);
+  transform-style: preserve-3d;
+  transform: rotateX(30deg) translateY(-30%);
 }
 .container-card {
   width: var(--x);
@@ -24,6 +40,7 @@
   color: black;
   font-size: 20px;
   text-align: center;
+  
 }
 .container-card-cube {
   display: flex;
@@ -59,12 +76,25 @@
   height: 20%;
   display: flex;
 }
+.div-title-empty{
+  
+  height: 20%;
+  display: flex;
+  margin-top: 0.2rem;
+}
 .title-card {
   width: 100%;
   font-family: var(--text-three);
   letter-spacing: 1px;
   text-align: center;
   margin: auto;
+}
+.title-cardEmpty{
+  width: 100%;
+  font-family: var(--text-three);
+  letter-spacing: 1px;
+  text-align: center;
+  padding-top: 2rem;
 }
 .card-icon {
   margin-top: 20px;
@@ -97,4 +127,50 @@
 }
 .top{
   margin-top: 5rem;
+}
+.card-blue {
+  
+	background: linear-gradient(#4ccaf4, #a3dff9);
+	transform: rotateZ(-45deg) translateX(25%) translateY(140%);
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.card-orange {
+	background: linear-gradient(#f99120, #f57420);
+	transform: rotateZ(-45deg) translateX(20%) translateY(550%);
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.card-box {
+	position: absolute;
+	width: 15%;
+	height: 9vw;
+}
+.square2 {
+	flex-grow: 1;
+	outline: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+.corner {
+	position: absolute;
+	text-align: center;
+	line-height: 2vw;
+	font-size: 1.2vw;
+	font-weight: 500;
+}
+
+.corner1 {
+  transform: rotateZ(135deg) translateX(10%) translateY(-115%);
+}
+.corner2 {
+  transform: rotateZ(-135deg) translateX(-210%) translateY(20%);
+  line-height: 2vw;
+}
+.corner3 {
+  transform: rotateZ(30deg) translateX(220%) translateY(-15%);
 }

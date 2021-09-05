@@ -25,7 +25,7 @@ const Card = ({ data, grade, icons }) => {
             </div>
             <div className="box-column"></div>
             <div>{icons}</div>
-            <div>{data.versionAlpha}</div>
+            <div>{data.id}</div>
           </>
         )}
       </div>
