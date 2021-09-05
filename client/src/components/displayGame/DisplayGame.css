@@ -9,8 +9,14 @@
   justify-content: center;
   align-items: center;
 }
-.display-table {
-  background-color: aqua;
+.container-gametable {
   width: 1300px;
   height: 1300px;
+  position: relative;
+  perspective: 1500px;
+}
+.container-gametable-cube {
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }

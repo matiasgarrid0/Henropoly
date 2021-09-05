@@ -16,17 +16,22 @@ const DisplayGame = () => {
     return () => dispatch(resetTable());
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
+  const style = {
+    width: '1300px',
+    height: '1300px',
+    position: "absolute",
+    transform: `scale(${tableDefault.scale}) rotateX(${tableDefault.high}deg) rotateZ(${tableDefault.angle}deg)`,
+    marginLeft: `${tableDefault.x-50}px`
+  };
   return (
     <div className="body-display no-select">
       {statusTable === "complete" ? (
-        <div
-          id="game-table"
-          style={{ transform: `scale(${tableDefault.scale})` }}
-          className="display-table"
-        >
-          <div>
-            <Board cards={tableGame.table} />
-            <div></div>
+        <div className="container-gametable">
+          <div className="container-gametable-cube">
+            <div id="game-table" style={style} className="display-table">
+              <Board cards={tableGame.table} />
+              <div></div>
+            </div>
           </div>
         </div>
       ) : statusTable === "loading" ? (

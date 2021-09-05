@@ -9,8 +9,12 @@ const initialState = {
   tableGame: null,
   actualGame: false,
   tableDefault: {
-    scale: 0.7,
+    scale: 0.4,
+    x: 0,
+    high: 0,
+    angle: 0,
   },
+  position:''
 };
 
 const game = (state = initialState, action) => {
