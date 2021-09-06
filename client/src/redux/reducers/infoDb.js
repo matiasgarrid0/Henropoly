@@ -1,6 +1,5 @@
 import { GET_INFO } from '../constants';
 
-
 const initialState = {
   info:[]
 };

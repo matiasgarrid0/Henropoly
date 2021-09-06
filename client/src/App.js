@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
-import React, { useEffect } from "react";
-import { Nav, Loading } from "./components";
-import { SwitchPage } from "./views";
+import React, { useEffect } from 'react';
+import { Nav, Loading, ViewBoard } from './components';
+import { SwitchPage,  } from './views/'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken } from "./redux/actions";
 
@@ -26,6 +26,7 @@ const App = () => {
       <Route path="/" component={Nav} />
       <Switch>
         <Route path="/" exact component={SwitchPage} />
+        <Route path="/ViewBoard" exact component={ViewBoard} />
       </Switch>
     </div>
   );

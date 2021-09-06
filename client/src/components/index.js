@@ -5,6 +5,7 @@ import Portal from './portal/Portal.jsx';
 import LogOut from './logOut/LogOut.jsx';
 import Loading from './loading/Loading.jsx';
 import Board from './board/Board.jsx'
+import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
 
 export {
@@ -15,5 +16,6 @@ export {
     LogOut,
     Loading,
     Board,
+    ViewBoard,
     Background3D
 }

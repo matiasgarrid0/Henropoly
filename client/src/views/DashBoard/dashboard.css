@@ -1,7 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css");
 .total {
     margin-left: 50px;
-    width : 50%;
+   
     margin-top: 10px;
     display:flex;
     flex-direction: column;
@@ -40,11 +40,19 @@
     color:rgb(251, 255, 6);
 }
 .position {
+    margin:auto;
     font-family: var(--text-one);
     font-size: 20px;
     margin-top: 40px;
     display: flex;
     flex-direction: row;
+}
+.dashboard-todo{
+    display: flex;
+    width: 100%;
+}
+.dashboard-hijo{
+    margin:auto;
 }
 .asd {
     height: 45px;
@@ -87,7 +95,7 @@
 
 .ranking {
     margin-left: 100px;
-    width : 50%;
+    width: 250px;
     margin-top: 10px;
     display:flex;
     flex-direction: column;
@@ -100,7 +108,9 @@
     padding: .65rem;
 }
 
-
+.dashboard-h4{
+    width: 250px;
+}
 .person{
     height: 50px;
     width:50px; 
@@ -116,16 +126,21 @@
     width: 50px;
     border-radius: 100%; 
     margin-left: 300%;
+    background-color: springgreen;
 }
 
 .person h4{
     margin: 30%;
 }
-
+.dashboard-pepito{
+    margin-top: 15px;
+}
 .number {
     /* max-width: 100px;
     max-height: 100px; */
-    padding: 9px;
+    margin-top: 10px;
+    padding: 8px;
+    padding-bottom: 6px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 14px 24px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }

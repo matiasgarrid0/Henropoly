@@ -15,13 +15,13 @@ import './RegisterForm.css'
 function validate(input) { 
    let errors = {};
       if( !input.email || !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input.email)) {
-        errors.email= 'email not valid';
+        errors.email= 'email inválido';
       } 
       else if(!input.username || !/^.{4,25}$/.test(input.username) || !/^[a-zA-Z0-9_-]+$/.test(input.username)) {
-        errors.username= 'username must be from 4 to 25 characters'
+        errors.username= 'el usuario debe contener entre 4 y 25 caracteres'
       }
       else if(!input.password || !/^.{8,16}$/.test(input.password)) {
-         errors.password ='password must be from 8 to 16 characterers'
+         errors.password ='la clave debe contener entre 8 y 16 caracteres'
       }
 
    return errors
@@ -75,32 +75,32 @@ function handleSubmit(e) {
                 </div>
 
                 <div className='username-reg'>
-                  <label>UserName: </label>
+                  <label>Usuario: </label>
                   <input
                     className ='username-text'
                     type= 'text'
                     name='username'
                     value={input.username}
                     onChange={(e)=>handleChange(e)} 
-                    placeholder='username'
+                    placeholder='usuario'
                   /> 
                   {errors.username && (<p className='b'>{errors.username}</p>)}
                 </div>
 
                 <div className='password'>
-                  <label>Password: </label>
+                  <label>Clave: </label>
                     <input
                       className ='password-text'
-                      type= 'text'
+                      type= 'password'
                       name='password'
                       value={input.password}
                       onChange={(e)=>handleChange(e)} 
-                      placeholder='password'
+                      placeholder='clave'
                     /> 
                     {errors.password && (<p className='b'>{errors.password}</p>)}
                 </div>
 
-              <button className='btn-send' type="submit">send</button>
+              <button className='btn-send' type="submit">Registrar</button>
 
             </form>  
           </div>
