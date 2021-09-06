@@ -1,5 +1,5 @@
 import React from "react";
-import "./Board.css";
+import "./board.css";
 import Card from "./Card";
 import { AiFillHtml5 } from "react-icons/ai";
 import {
