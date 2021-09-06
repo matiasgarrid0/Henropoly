@@ -4,7 +4,9 @@ import Nav from './nav/Nav.jsx';
 import Portal from './portal/Portal.jsx';
 import LogOut from './logOut/LogOut.jsx';
 import Loading from './loading/Loading.jsx';
-import Board from './board/board'
+import Board from './board/Board.jsx'
+import Background3D from './background3D/Background3D.jsx'
+
 export {
     Loggin,
     RegisterForm,
@@ -12,5 +14,6 @@ export {
     Portal,
     LogOut,
     Loading,
-    Board
+    Board,
+    Background3D
 }
