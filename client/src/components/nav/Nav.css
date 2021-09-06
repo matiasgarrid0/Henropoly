@@ -1,5 +1,5 @@
 .nav-body {
-  position: absolute;
+  position: fixed;
   width: 100%;
   background-color: rgb(71, 71, 71);
   height: 70px;
@@ -33,4 +33,7 @@
   letter-spacing: 1px;
   border-radius: 10px;
   margin-right: 10px;
+}
+.nav-space {
+  height: 70px;
 }
