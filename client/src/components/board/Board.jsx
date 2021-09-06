@@ -1470,7 +1470,7 @@ const Board = () => {
             <div className="card-box card-blue">
                 <div className="card-blue-inside">{<GiLockedChest  className='card-icon'/>}</div>
               </div>
-              <img className='logo' src={Logo}/>
+              <img className='board-logo' src={Logo}/>
               <div className="card-box card-orange">
                 <div className="card-orange-inside">{<FaQuestion className='card-icon' />}</div>						
               </div>

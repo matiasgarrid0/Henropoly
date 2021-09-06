@@ -61,7 +61,7 @@
 }
 
 .password {
-    text-align: center;
+    /*text-align: center;*/
     align-items:center;
     padding-bottom: 15px;
 }
@@ -89,7 +89,7 @@
     background-color: #FFEC00;
     transition: background-color .3s ease;
     border-radius:4px;
-    margin-left: 5.6rem;
+    margin-left: 70px;
     border: none;
 }
 

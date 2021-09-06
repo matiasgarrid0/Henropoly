@@ -31,7 +31,7 @@ const Nav = () => {
         )}
         <div className="nav-container">
           <div>
-            <img className="logo-nav" src={Logo} alt="logo" />
+         <Link to='/'><img className="logo-nav" src={Logo} alt="logo" /></Link>
           </div>
           {isAuth && (
             <div>
@@ -43,7 +43,7 @@ const Nav = () => {
           <div>
             {isAuth ? (
               <>
-                <Link to='/ViewBoard'><button  className="button-one nav-btn">Board</button></Link> <LogOut />
+                <Link to='/ViewBoard'><button  className="button-one nav-btn">Tablero</button></Link> <LogOut />
               </>
             ) : (
               <>
@@ -51,13 +51,13 @@ const Nav = () => {
                   className="button-one nav-btn"
                   onClick={setPortal("login")}
                 >
-                  Log In
+                  Iniciar Sesión
                 </button>
                 <button
                   className="button-one nav-btn"
                   onClick={setPortal("register")}
                 >
-                  Register
+                  Registrarse
                 </button>
               </>
             )}

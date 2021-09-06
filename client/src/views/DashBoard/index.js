@@ -7,7 +7,8 @@ const DashBoard = () => {
     const { user } = useSelector((state) => state.auth);
 
     return (
-        <div >
+        <div className='dashboard-todo'>
+        <div className='dashboard-hijo'>
             <div className='asd'> </div>
 
             <div className='position'>
@@ -37,41 +38,42 @@ const DashBoard = () => {
                     <h3>Mas partidas ganadas</h3>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U020K03EUHG-f49f0477ebe4-512' alt='img' />
-                        <h4>senjo903</h4>
-                        <h4 className='number'>10</h4>
+                        <h4 className='dashboard-h4'>senjo903</h4>
+                        <div className='dashboard-pepito'> <span className='number'>10</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U01RENRHB6K-19d480373bd1-512' alt='img' />
-                        <h4>FacuRearte</h4>
-                        <h4 className='number'>7</h4>
+                        <h4 className='dashboard-h4'>FacuRearte</h4>
+                        <div className='dashboard-pepito'> <span className='number'>7</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U02046U590X-519f10bc999e-512' alt='img' />
-                        <h4>AlanGiavino</h4>
-                        <h4 className='number'>5</h4>
+                        <h4 className='dashboard-h4'>AlanGiavino</h4>
+                        <div className='dashboard-pepito'> <span className='number'>5</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U01UZGHU3J8-8209681533eb-512' alt='img' />
-                        <h4>MatiGarrido</h4>
-                        <h4 className='number'>4</h4>
+                        <h4 className='dashboard-h4'>MatiGarrido</h4>
+                        <div className='dashboard-pepito'> <span className='number'>4</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U01T4MPG0BF-eadd1fea01c5-512' alt='img' />
-                        <h4>Sebi_elmejor</h4>
-                        <h4 className='number'>3</h4>
+                        <h4 className='dashboard-h4'>Sebi_elmejor</h4>
+                        <div className='dashboard-pepito'> <span className='number'>3</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U01V60B1T9P-0f495ba2e434-512' alt='img' />
-                        <h4>Moniss_94</h4>
-                        <h4 className='number'>2</h4>
+                        <h4 className='dashboard-h4'>Moniss_94</h4>
+                        <div className='dashboard-pepito'> <span className='number'>2</span></div>
                     </div>
                     <div className='person'>
                         <img src='https://ca.slack-edge.com/TPRS7H4PN-U01RUQXGKD0-67b4aeef2acb-512' alt='img' />
-                        <h4>FlorHQ_92</h4>
-                        <h4 className='number'>1</h4>
+                        <h4 className='dashboard-h4'>FlorHQ_92</h4>
+                        <div className='dashboard-pepito'> <span className='number'>1</span></div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>)
 }
 export default DashBoard;

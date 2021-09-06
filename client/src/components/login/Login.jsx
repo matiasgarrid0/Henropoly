@@ -25,31 +25,31 @@ return (
     <div className='box-register'>
       <form onSubmit={(e)=>handleSubmit(e)}>
         <div className="username">
-        <label >Username: </label>
+        <label >Usuario: </label>
         <input
             className="form"
             type= 'text'
             name='username'
             value={input.username}
             onChange={(e)=>handleChange(e)} 
-            placeholder='username'/>
+            placeholder='usuario'/>
         </div>
         <div className="password">
-        <label>Password: </label>
+        <label>Clave: </label>
         <input
             className="form"
-            type= 'text'
+            type= 'password'
             name='password'
             value={input.password}
             onChange={(e)=>handleChange(e)} 
-            placeholder='password'/>
+            placeholder='clave'/>
         </div>
-        <button className='btn-enter' type="submit">enter</button> 
+        <button className='btn-enter' type="submit">entrar</button> 
     </form>  
          </div>
          <div className="down-card">
-            <p>forgot your password?</p>
-            <label className="dont-have" onClick={props.register}>You don't have an account, singn up</label>
+            <p>Olvidaste tu clave?</p>
+            <label className="dont-have" onClick={props.register}>No tienes una cuenta? Regístrate!</label>
          </div>
     </div>
   

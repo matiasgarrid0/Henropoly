@@ -7,6 +7,6 @@ const LogOut = () => {
     const closeSession =()=>{
         dispatch(logOut());
     }
-    return(<button className='button-one nav-btn' onClick={closeSession} >Log Out</button>)
+    return(<button className='button-one nav-btn' onClick={closeSession} >Cerrar Sesión</button>)
 }
 export default LogOut;
