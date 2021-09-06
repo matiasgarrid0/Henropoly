@@ -15,7 +15,7 @@ import './RegisterForm.css'
 function validate(input) { 
    let errors = {};
       if( !input.email || !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input.email)) {
-        errors.email= 'mail not valid';
+        errors.email= 'email not valid';
       } 
       else if(!input.username || !/^.{4,25}$/.test(input.username) || !/^[a-zA-Z0-9_-]+$/.test(input.username)) {
         errors.username= 'username must be from 4 to 25 characters'
@@ -60,7 +60,6 @@ function handleSubmit(e) {
  return (
 <div className='container-register'>
           <div className='box-register'>
-            <h3 className='logo-register'>HENROPOLY</h3>
             <form onSubmit={(e)=>handleSubmit(e)} >
                 <div className='email'>
                   <label>Email: </label>
@@ -70,12 +69,12 @@ function handleSubmit(e) {
                   name='email'
                   value={input.email}
                   onChange={(e)=>handleChange(e)} 
-                  placeholder='mail'
+                  placeholder='email'
                   />
                   {errors.email && (<p className='bjjjbjb'>{errors.email}</p>)}
                 </div>
 
-                <div className='username'>
+                <div className='username-reg'>
                   <label>UserName: </label>
                   <input
                     className ='username-text'

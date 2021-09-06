@@ -6,7 +6,6 @@ export const getInfoDb = ( ) => {
       const response = await axios.get(`http://localhost:3001/cards`, {
       });
       console.log(response.data)
-    return dispatch({type: 'GET_INFO', payload:response.data});
     } catch (error) {
      console.log(error)
     }

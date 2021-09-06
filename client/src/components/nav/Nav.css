@@ -1,9 +1,9 @@
 .nav-body {
-  position: absolute;
+  position: fixed;
   width: 100%;
-  background-color: var(--color-yellow);
-  height: 50px;
-  border-bottom: 2px solid var(--color-gray);
+  background-color: rgb(71, 71, 71);
+  height: 70px;
+  border-bottom: 2px solid yellow;
   box-shadow: 0 0 5px var(--color-grayThree);
 }
 .nav-container {
@@ -12,26 +12,28 @@
   display: flex;
   justify-content: space-between;
 }
-.nav-text-logo {
-  display: flex;
-  margin-top: 3px;
-  font-family: var(--text-one);
-  font-size: 45px;
-  color: var(--color-gray);
+.logo-nav {
+  width: 130px;
+  height: 60px;
+  margin-top:3px;
 }
 .nav-text-user{
   display: flex;
   margin-top: 30px;
-  font-size: 17px;
+  font-size: 25px;
   letter-spacing: 1px;
-  font-family: var(--text-two);
+  font-family: var(--text-one);
+  color:white;
 }
 .nav-btn {
-  margin-top: 9px;
+  margin-top: 18px;
   font-family: var(--text-one);
   padding-top: 3px;
   font-size: 22px;
   letter-spacing: 1px;
   border-radius: 10px;
   margin-right: 10px;
+}
+.nav-space {
+  height: 70px;
 }

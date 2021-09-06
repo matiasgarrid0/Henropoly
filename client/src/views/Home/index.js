@@ -1,31 +1,24 @@
-import './Home.css';
-import React from 'react';
-import { useSelector } from "react-redux";
-import { Portal, RegisterForm, Loggin, LogOut } from './../../components'
+import "./Home.css";
+import Logo from "../../image/Henropoly.png";
+import React from "react";
 
 const Home = () => {
-   const { isAuth } = useSelector((state) => state.auth);
-    const [values, setValues] = React.useState({
-        portal: null,
-    });
-    const setPortal = (popUp) => {
-        return () => {
-          setValues((values) => ({ ...values, portal: popUp }));
-        };
-    };
-    return(
-    <div>
-        <div className='principal'>
-            <h1 className='logo'>HENROPOLY</h1>
-        {!isAuth && values.portal ==='login' && <Portal onClose={setPortal(null)}><Loggin register ={setPortal('register')} /></Portal>}
-        {!isAuth && values.portal ==='register' && <Portal onClose={setPortal(null)}><RegisterForm /></Portal>}
-        {isAuth ? <LogOut /> :
-        <div className="btn-direction">
-            <button className='login btn btn-verde' onClick={setPortal('login')}>Log In</button>
-            <button className='register btn btn-verde' onClick={setPortal('register')}>Register</button>
-        </div>}
+  return (
+    <div className='body-home-align'>
+      <div className="principal">
+        <div className="container-home">
+          <h2 classname="title-home">Bienvenido a</h2>
+          <img className="logo" src={Logo} alt="logo" />
+          <h4 className="h2-home">¿Qué es HENROPOLY?</h4>
+          <div className="div-home">
+            Henropoly Es un juego de mesa fácil de jugar creado por alumnos de
+            Henry y pensado para su comunidad. Puede ser disfrutado por 2 a 8
+            jugadores a través de un sistema multijugador donde cada uno compite
+            por no quedar en bancarrota y llegar hasta el final de la partida.
+          </div>
         </div>
+      </div>
     </div>
-    )
-}
+  );
+};
 export default Home;

@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@1,200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Teko&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@1,200&display=swap");
 
 :root {
-  --background-color: #ffe797;
+  --background-color: rgb(255, 199, 15);
   --color-yellow: #ffec00;
   --color-yellowTwo: #ffde59;
   --color-gray: #323639;
   --color-grayTwo: #737373;
   --color-grayThree: #919191;
   --width-container: 1250px;
-  --text-one: 'Teko', sans-serif;
-  --text-two: 'Titillium Web', sans-serif;
+  --text-one: "Teko", sans-serif;
+  --text-two: "Titillium Web", sans-serif;
 }
 body {
-  background-color: var(--background-color);
+  background-color: var(--color-yellowTwo);
 }
 .container-body {
   width: 100%;
@@ -31,14 +31,18 @@ body {
   display: flex;
   flex-direction: column;
 }
-.no-select{
+.no-select {
   user-select: none;
 }
 
 .button-one {
-  color: var(--color-grayTwo);
+  color: black;
   background-color: var(--color-yellow);
-  border: 2px solid var(--color-grayTwo);
+  border: 1px solid black;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 1px 2px 2px 1px black;
 }
 .button-one:hover {
   color: var(--color-gray);

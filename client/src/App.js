@@ -3,22 +3,22 @@ import React, { useEffect } from 'react';
 import { Nav, Loading, ViewBoard } from './components';
 import { SwitchPage,  } from './views/'
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, checkToken } from './redux/actions'
+import { setLoading, checkToken } from "./redux/actions";
 
-const App =() => {
+const App = () => {
   const dispatch = useDispatch();
   const { isAuth, isLoading, token } = useSelector((state) => state.auth);
-  
-  useEffect(()=>{
-    if(isAuth){
+
+  useEffect(() => {
+    if (isAuth) {
       dispatch(checkToken(token));
-    } else{
+    } else {
       dispatch(setLoading(false));
     }
-  /* eslint-disable react-hooks/exhaustive-deps */
-  },[]);
-  
-  if(isLoading) {
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, []);
+
+  if (isLoading) {
     return <Loading />;
   }
   return (
@@ -29,7 +29,7 @@ const App =() => {
         <Route path="/ViewBoard" exact component={ViewBoard} />
       </Switch>
     </div>
-  )
-}
+  );
+};
 
 export default App;
