@@ -4,6 +4,7 @@ import { Nav, Loading, ViewBoard } from './components';
 import { SwitchPage,  } from './views/'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken } from "./redux/actions";
+import Dices from "./components/dices/Dices";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={SwitchPage} />
         <Route path="/ViewBoard" exact component={ViewBoard} />
+        <Route path="/dados" exact component={Dices} />
       </Switch>
     </div>
   );
