@@ -4,7 +4,7 @@ const { AUTH_SECRET, AUTH_EXPIRES, AUTH_ROUNDS } = process.env;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("./../db");
-const { checkToken } = require("./../controllers/auth");
+const { checkToken } = require("../controllers/Auth");
 const {
   validateUsername,
   validatePassword,
