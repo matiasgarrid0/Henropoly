@@ -46,10 +46,10 @@ export const changeValueTable = (type, value) => {
     payload: {type, value},
   };
 };
-export const changeValueTarget = (type, value) => {
+export const changeValueTarget = (player, value) => {
   return {
     type: SET_DATA_TARGET,
-    payload: {type, value},
+    payload: {player, value},
   };
 };
 const callbackTest = () => {

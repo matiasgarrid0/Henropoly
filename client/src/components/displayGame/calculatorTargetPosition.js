@@ -1,35 +1,28 @@
-const oneTarget = (player, box, roll) => {
-  var position;
-  switch (player) {
-    case 1:
-        position.x = 0
-        position.y = 0
-      break;
-    case 2:
-      //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
-      break;
-    case 3:
-      //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
-      break;
-    default:
-      //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
-      break;
-  }
-  if (box !== 0 && box !== 10 && box !== 20 && box !== 30) {
-    return "ddd";
-  }
-  if (box > 0 && box < 10) {
-    return "dd";
-  }
-  if (box > 10 && box < 20) {
-    return "ddd";
-  }
-  if (box > 20 && box < 30) {
-    return "sss";
-  }
-  return "s";
+const positions = {
+  target1: {
+    x: [120,240,340,440,540,640,740,840,940,1040,1140,1120],
+    y: [120,140,140,140,140,140,140,140,140,140,120,240],
+  },
+  target2: {
+    x: [40,220,320,420,520,620,720,820,920,1020,1140,1160],
+    y: [120,100,100,100,100,100,100,100,100,100,40,220],
+  },
+  target3: {
+    x: [120,240,340,440,540,640,740,840,940,1040,1220,1200],
+    y: [40,60,60,60,60,60,60,60,60,60,120,240],
+  },
+  target4: {
+    x: [40,220,320,420,520,620,720,820,920,1020,1220,1240],
+    y: [40,20,20,20,20,20,20,20,20,20,40,220],
+  },
 };
-
+const targetX = (player, box) => {
+ return positions[player].x[box]
+};
+const targetY = (player, box) => {
+  return positions[player].y[box]
+};
 module.exports = {
-  oneTarget,
+  targetX,
+  targetY,
 };

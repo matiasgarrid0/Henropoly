@@ -8,17 +8,9 @@ import {
 } from "./../../redux/actions";
 import { Board } from "./../";
 import Imagen from "./table.jpg";
+import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGame = () => {
-  const [status, setStatus] = useState({
-    mouseActive: false,
-    clientX: null,
-    clientY: null,
-  });
-  const dispatch = useDispatch();
-  const { statusTable, tableGame, tableDefault, players } = useSelector(
-    (state) => state.game
-  );
   useEffect(() => {
     if (statusTable === "loading") {
       dispatch(setDefault());
@@ -26,6 +18,35 @@ const DisplayGame = () => {
     return () => dispatch(resetTable());
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
+  const dispatch = useDispatch();
+  const { statusTable, tableGame, view, playerPosition } = useSelector(
+    (state) => state.game
+  );
+  const [status, setStatus] = useState({
+    mouseActive: false,
+    clientX: null,
+    clientY: null,
+    target1: {
+      box: playerPosition.target1,
+      x: targetX("target1", playerPosition.target1),
+      y: targetY("target1", playerPosition.target1),
+    },
+    target2: {
+      box: playerPosition.target2,
+      x: targetX("target2", playerPosition.target2),
+      y: targetY("target2", playerPosition.target2),
+    },
+    target3: {
+      box: playerPosition.target3,
+      x: targetX("target3", playerPosition.target3),
+      y: targetY("target3", playerPosition.target3),
+    },
+    target4: {
+      box: playerPosition.target4,
+      x: targetX("target4", playerPosition.target4),
+      y: targetY("target4", playerPosition.target4),
+    },
+  });
   const style = {
     backgroundSize: "700px",
     backgroundImage: `url(${Imagen})`,
@@ -33,15 +54,15 @@ const DisplayGame = () => {
     width: "1800px",
     height: "1800px",
     position: "absolute",
-    transform: `scale(${tableDefault.scale}) rotateX(${tableDefault.high}deg) rotateZ(${tableDefault.angle}deg)`,
+    transform: `scale(${view.scale}) rotateX(${view.high}deg) rotateZ(${view.angle}deg)`,
     marginLeft: `-300px`,
     marginTop: `-250px`,
   };
   const handleWheelEvent = (e) => {
-    if (e.deltaY === -100 && tableDefault.scale > 0.4) {
-      dispatch(changeValueTable("scale", tableDefault.scale - 0.02));
-    } else if (e.deltaY === 100 && tableDefault.scale < 0.85) {
-      dispatch(changeValueTable("scale", tableDefault.scale + 0.02));
+    if (e.deltaY === -100 && view.scale > 0.4) {
+      dispatch(changeValueTable("scale", view.scale - 0.02));
+    } else if (e.deltaY === 100 && view.scale < 0.85) {
+      dispatch(changeValueTable("scale", view.scale + 0.02));
     }
   };
 
@@ -56,26 +77,26 @@ const DisplayGame = () => {
   const handleOnMouseMoveEvent = (e) => {
     if (status.mouseActive) {
       if (e.clientX > status.clientX + 5) {
-        dispatch(changeValueTable("angle", tableDefault.angle - 1));
+        dispatch(changeValueTable("angle", view.angle - 1));
         setStatus({
           ...status,
           clientX: e.clientX,
         });
       } else if (e.clientX < status.clientX - 5) {
-        dispatch(changeValueTable("angle", tableDefault.angle + 1));
+        dispatch(changeValueTable("angle", view.angle + 1));
         setStatus({
           ...status,
           clientX: e.clientX,
         });
       }
-      if (e.clientY > status.clientY + 5 && tableDefault.high > 0) {
-        dispatch(changeValueTable("high", tableDefault.high - 1));
+      if (e.clientY > status.clientY + 5 && view.high > 0) {
+        dispatch(changeValueTable("high", view.high - 1));
         setStatus({
           ...status,
           clientY: e.clientY,
         });
-      } else if (e.clientY < status.clientY - 5 && tableDefault.high < 70) {
-        dispatch(changeValueTable("high", tableDefault.high + 1));
+      } else if (e.clientY < status.clientY - 5 && view.high < 70) {
+        dispatch(changeValueTable("high", view.high + 1));
         setStatus({
           ...status,
           clientY: e.clientY,
@@ -94,19 +115,47 @@ const DisplayGame = () => {
             <div className="container-gametable-cube">
               <div style={style}>
                 <div className="align-game">
-                  <Board className='board-position' cards={tableGame.table} />
+                  <Board className="board-position" cards={tableGame.table} />
                   <div className="game-box">
-                    {players.target1 !== null && (
-                      <div className="target-one"></div>
+                    {playerPosition.target1 !== null && (
+                      <div
+                        style={{
+                          backgroundColor: "rgb(255, 0, 0)",
+                          marginLeft: `${1260 - status.target1.x}px`,
+                          marginTop: `${1260 - status.target1.y}px`,
+                        }}
+                        className="target"
+                      ></div>
                     )}
-                    {players.target2 !== null && (
-                      <div className="target-two"></div>
+                    {playerPosition.target2 !== null && (
+                      <div
+                        style={{
+                          backgroundColor: "rgb(9, 255, 0)",
+                          marginLeft: `${1260 - status.target2.x}px`,
+                          marginTop: `${1260 - status.target2.y}px`,
+                        }}
+                        className="target"
+                      ></div>
                     )}
-                    {players.target3 !== null && (
-                      <div className="target-three"></div>
+                    {playerPosition.target3 !== null && (
+                      <div
+                        style={{
+                          backgroundColor: "rgb(0, 255, 234)",
+                          marginLeft: `${1260 - status.target3.x}px`,
+                          marginTop: `${1260 - status.target3.y}px`,
+                        }}
+                        className="target"
+                      ></div>
                     )}
-                    {players.target4 !== null && (
-                      <div className="target-four"></div>
+                    {playerPosition.target4 !== null && (
+                      <div
+                        style={{
+                          backgroundColor: "rgb(255, 0, 255)",
+                          marginLeft: `${1260 - status.target4.x}px`,
+                          marginTop: `${1260 - status.target4.y}px`,
+                        }}
+                        className="target"
+                      ></div>
                     )}
                   </div>
                 </div>
