@@ -9,12 +9,36 @@ const initialState = {
   tableGame: null,
   actualGame: false,
   tableDefault: {
-    scale: 0.4,
-    x: 0,
-    high: 0,
+    scale: 0.6,
+    high: 70,
     angle: 0,
   },
-  position:''
+  players: {
+    target1: {
+      box: 0,
+      wallet: 1500,
+      properties: [],
+      user: { ID: 1, username: "Seba", urlImage: "" },
+    },
+    target2: {
+      box: 0,
+      wallet: 1500,
+      properties: [],
+      user: { ID: 3, username: "FlorAdmin", urlImage: "" },
+    },
+    target3: {
+      box: 0,
+      wallet: 1500,
+      properties: [],
+      user: { ID: 4, username: "FacuRearte", urlImage: "" },
+    },
+    target4: {
+      box: 0,
+      wallet: 1500,
+      properties: [],
+      user: { ID: 5, username: "ludmila", urlImage: "" },
+    },
+  },
 };
 
 const game = (state = initialState, action) => {

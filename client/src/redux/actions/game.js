@@ -2,6 +2,7 @@ import {
   SET_STATUS_TABLE,
   SET_TABLE_GAME,
   SET_DATA_DEFAULT,
+  SET_DATA_TARGET
 } from "../constants";
 import * as AxiosApi from "./../../controllers/auth";
 
@@ -42,6 +43,12 @@ export const resetTable = () => {
 export const changeValueTable = (type, value) => {
   return {
     type: SET_DATA_DEFAULT,
+    payload: {type, value},
+  };
+};
+export const changeValueTarget = (type, value) => {
+  return {
+    type: SET_DATA_TARGET,
     payload: {type, value},
   };
 };
