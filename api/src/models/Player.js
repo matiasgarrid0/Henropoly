@@ -15,9 +15,17 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       properties: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT, 
         allowNull: false,
       },
+      money: {
+        type:DataTypes.INTEGER, 
+        allowNull: false,
+      },
+      initialPosition: { 
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
     { timestamps: true }
   );

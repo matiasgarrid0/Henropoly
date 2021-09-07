@@ -1438,7 +1438,7 @@ const Board = () => {
       <div className="square">
         <div className="table">
           <div className="box-row responsive">
-          {console.log('cardss',cards)}
+          
             <div className="square2"><span className="corner corner1">FREE <br /> PARKING</span>
             <Card data={cards.table[20]} grade="180" icons={<FaVuejs className='card-icon'/>} />
             </div>

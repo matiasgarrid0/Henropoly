@@ -7,7 +7,8 @@ import Loading from './loading/Loading.jsx';
 import Board from './board/Board.jsx'
 import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
-
+import ActionGame from './player/player.jsx';
+import  Player from './player/displayPlayer.jsx'
 export {
     Loggin,
     RegisterForm,
@@ -17,5 +18,7 @@ export {
     Loading,
     Board,
     ViewBoard,
-    Background3D
+    Background3D,
+    ActionGame, 
+    Player
 }

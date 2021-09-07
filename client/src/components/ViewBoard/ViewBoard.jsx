@@ -1,5 +1,5 @@
 import React from "react";
-import { Board } from "..";
+import { Board, ActionGame } from "..";
 
 const ViewBoard = () =>{
     return(
@@ -12,8 +12,11 @@ const ViewBoard = () =>{
             <Board></Board>
           </div>
         </div>
+        
+     
+       </div>
         </div>
-        </div>
+        <div><ActionGame/></div>
         </div>  
     )
 
