@@ -14,15 +14,14 @@ useEffect(() => {
   dispatch(getPlayerDb())
   },[dispatch]);
   
-const infoPlayer = useSelector((state) => state.players);  
-console.log('ssddfsffddffgfgfgfgfgf',infoPlayer)
+const players = useSelector((state) => state.reducerInfo.players);  
+console.log('ssddfsffddffgfgfgfgfgf',players)
 
  return (
    <div>
     <div>
-    {/* {infoPlayer.map((user) =>{
-      return <displayPlayer user={user}/>
-         })} */}
+   <h1>HENRYCOINS {players.henrycoin}</h1>
+   <h1>PROPERTIES{players.properties}</h1>
    </div>
    </div>
   
