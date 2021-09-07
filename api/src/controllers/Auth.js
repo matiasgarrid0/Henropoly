@@ -17,7 +17,7 @@ const checkToken = (req, res, next) => {
       .send({ success: false, message: "Failed to authenticate user." });
   }
 };
-
+// algo
 module.exports = {
   checkToken,
 };
