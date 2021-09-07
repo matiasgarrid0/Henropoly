@@ -13,7 +13,7 @@ export const register = ( username, email, password) => {
     dispatch(setLoading(true));
     await callbackTest();
     try {
-      const response = await axios.post(`http://localhost:3001/auth/signUp`,data)
+      const response = await axios.post(`/auth/signUp`,data)
       if(response.data){
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));
@@ -38,7 +38,7 @@ export const login = ( username, password) => {
     dispatch(setLoading(true));
     await callbackTest();
     try {
-      const response = await axios.post(`http://localhost:3001/auth/signIn`,data)
+      const response = await axios.post(`/auth/signIn`,data)
       if(response.data){
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));

@@ -14,6 +14,7 @@ Henropoly es un juego de mesa traido al internet, este se basa en la compra y la
 - `DB_HOST`
 - `DB_PORT`
 - `DB_NAME`
+- `PORT`
 - `AUTH_SECRET=hola1234`
 - `AUTH_EXPIRES=24h`
 - `AUTH_ROUNDS=10`
