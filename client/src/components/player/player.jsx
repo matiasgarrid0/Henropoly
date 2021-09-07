@@ -14,7 +14,7 @@ useEffect(() => {
   dispatch(getPlayerDb())
   },[dispatch]);
   
-const { infoPlayer } = useSelector((state) => state.players);  
+const infoPlayer = useSelector((state) => state.players);  
 console.log('ssddfsffddffgfgfgfgfgf',infoPlayer)
 
  return (
