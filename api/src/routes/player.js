@@ -1,24 +1,23 @@
 const { Router } = require("express");
 const {Player} = require("./../db");
-const infoPlayer = require("../../InfoGameStarted")
+let infoPlayer = require("../../InfoGameStarted")
 
 
 const router = Router();
 router.put("/", async (req, res, next) => {
-    let {description, properties, money, initialPosition} = req.body;
+    let { properties,henrycoin, position} = req.body;
 
-   try { let playerOne= await Player.findOrCreate({
-        description,
-        properties,
-        money, 
-        initialPosition
-    }) 
+   try {
+       player = {
+         properties,
+         henrycoin,
+         position
+       }
+       res.send(player)
     } catch (error) {
       next(error);
     }
-   let player= await Player.findAll()
-   console.log(player)
-   res.send(player)
+  
   });
 
 

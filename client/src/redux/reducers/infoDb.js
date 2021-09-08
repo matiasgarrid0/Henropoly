@@ -24,4 +24,5 @@ const reducerInfo = (state = initialState, action) => {
   }
 }
 
+
 export default reducerInfo;

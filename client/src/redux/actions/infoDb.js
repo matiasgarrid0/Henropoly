@@ -27,11 +27,12 @@ export const getPlayerDb = () => {
 };
 
 
- export const postPlayer = (data) => {
+ export const putPlayer = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`http://localhost:3001/players`, data)
-      return response;
+      const response = await axios.put(`http://localhost:3001/players`, data)
+      console.log(response.data)
+      return dispatch({type: GET_PLAYER, payload:response.data})
     } catch (error) {
      console.log(error)
     }
