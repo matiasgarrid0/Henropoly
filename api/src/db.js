@@ -32,6 +32,8 @@ const { Box, CardProperty, CommunalArch, FortuneCard, Game, Permission, Player, 
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+User.belongsTo(Game)
+Game.hasMany(User)
 Game.hasMany(Box)
 Box.belongsTo(Game)
 Game.hasOne(UserStatistics)
