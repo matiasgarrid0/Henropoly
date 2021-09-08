@@ -1,22 +1,6 @@
 import React from 'react';
 import './Card.css';
 
-// const data = {
-//         id:1,
-//         type:"property",
-//         name: " CSS",
-//         versionAlpha: 2,
-//         versionOne: 10,
-//         versionTwo: 30,
-//         versionThree: 90,
-//         versionFour: 160,
-//         versionPremium: 250,
-//         aditional: "además V4.0",
-//         commonVersion: 50,
-//         premiumVersion: 50,
-//         licenseValue: 30,
-// }
-
 
  const Card = ({data}/*{name,versionAlpha,versionOne,versionTwo,versionThree,versionFour,versionPremium,aditional,commonVersion,premiumVersion,licenseValue }*/) => {
     return(
