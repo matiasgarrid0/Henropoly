@@ -14,15 +14,18 @@ useEffect(() => {
   dispatch(getPlayerDb())
   },[dispatch]);
   
-const { infoPlayer } = useSelector((state) => state.players);  
-console.log('ssddfsffddffgfgfgfgfgf',infoPlayer)
-
+const players  = useSelector((state) => state.reducerInfo);  
+  if(players){
+    console.log('players en player.jsx',players.players)
+  }else{
+    console.log('no entra la data')
+  }
  return (
    <div>
     <div>
-    {/* {infoPlayer.map((user) =>{
-      return <displayPlayer user={user}/>
-         })} */}
+    {players?.players?.map((users) =>{
+      return <displayPlayer users={users}/>
+         })}
    </div>
    </div>
   
