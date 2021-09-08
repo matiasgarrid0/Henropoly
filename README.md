@@ -2,6 +2,9 @@
 
 Henropoly es un juego de mesa traido al internet, este se basa en la compra y la venta de propiedades en casilleros, cobrando impuestos a los que caigan en lo del propietario.
 
+## `Si querés jugar, entra al siguiente link:`
+[Henropoly](https://henropoly.vercel.app/)
+
 ### `Reglas`
 
 1- Cada jugador debe tirar dos dados en su turno. Estos dados poseen ciertas sinergias y ciertas casillas necesitan una combinacion exacta para ciertas acciones.
@@ -14,6 +17,7 @@ Henropoly es un juego de mesa traido al internet, este se basa en la compra y la
 - `DB_HOST`
 - `DB_PORT`
 - `DB_NAME`
+- `PORT=3001`
 - `AUTH_SECRET=hola1234`
 - `AUTH_EXPIRES=24h`
 - `AUTH_ROUNDS=10`

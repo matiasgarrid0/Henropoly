@@ -1,49 +1,80 @@
-.principal-login {
-    background-color: #ececec;
-    
-    align-items: center;
-    text-align: center;
+.container-login {
+    background-color: black;
+   
+    display: flex;
+	flex-direction: column;
+	
     height:400px;
-    width: 300px;
+    width: 350px;
     border: solid black 2px;
     border-radius: 5px;
+    color:white;
 }
-.center{
-    align-items: center;
+
+.logo-register {
+    margin-top: 3rem;
+    text-align:center;
 }
-.formulario {
-    display:flex;
-    flex-direction:column;
-    width: min(60rem, 100%);
-    margin: 0 auto;
-    padding: 2rem;
-    border-radius: 2rem;
+
+.box-register {
+    align-items:center;
+    top: 15px;
+}
+
+.username {
     text-align: center;
-    align-items: center;
-  
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 4rem;
 }
-.list{
-list-style: none;
+
+.form {
+    border: none;
+    border-bottom: 2px solid yellow;
+    background-color: transparent;
+    color: white;
 }
-.formulario fieldset {
-border: none;
+
+.password {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 1rem;
 }
-  
-.formulario legend {
-text-align: center;
-font-size: 1.8rem;
-text-transform: uppercase;
-font-weight: 700;
-margin-bottom: 2rem;
-color: #ffc107;
+
+.btn-enter {
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    margin-left: 96px;
+    margin-top: 3.5rem;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #FFEC00;
+    transition: background-color .3s ease;
+    border-radius:4px;
+    border: none;
 }
-.searchBar{
-font-size: 1.2rem;
-outline:none;
-border: none;
-margin-right: 4rem;
+
+.btn-enter:hover {
+    cursor:pointer;
+    border: solid 1px yellow;
+    background-color: transparent;
+    color: yellow;
 }
-.flex{
-    display: flex;
-    flex-direction: column;
+
+.down-card {
+    text-align: center;
+    align-items:center;
+    padding-bottom: 5px;
+    margin-top: 2rem;
+}
+
+.dont-have:hover{
+    font-size: 17px;
+    text-shadow: 2px 1px 5px rgba(255,247,29,0.85);
+    border-bottom: 1px solid yellow;
 }

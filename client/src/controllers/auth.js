@@ -1,6 +1,7 @@
 import axios from 'axios';
-const URL = 'http://localhost:3001';
-const axiosApi = axios.create({ baseURL: URL });
+//const URL = 'http://localhost:3001';
+//const axiosApi = axios.create({ baseURL: URL });
+const axiosApi = axios.create({ baseURL: axios.defaults.baseURL});
 
 axiosApi.interceptors.request.use((req) => {
     if(localStorage.getItem('access_token')){

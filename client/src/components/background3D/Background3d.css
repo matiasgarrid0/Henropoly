@@ -1,0 +1,77 @@
+.background3d-body {
+  background-image: url("./room.jpg");
+  background-position: center;
+  background-position: 0 -150px;
+  background-size: 3000px;
+  user-select: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  animation: desplazar 60s linear infinite;
+}
+@keyframes desplazar {
+  0% {
+    background-position: 0 -150px;
+  }
+  100% {
+    background-position: -3000px -150px;
+  }
+}
+.background3d-contenedor {
+  backdrop-filter: blur(2px);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.body-display {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-gametable {
+  width: 1300px;
+  height: 1300px;
+  position: relative;
+  perspective: 1700px;
+}
+.container-gametable-cube {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.align-game {
+  margin-top: 250px;
+  margin-left: 250px;
+  width: 1300px;
+  height: 1300px;
+}
+.style-3d {
+  background-size: 700px;
+  background-image: url("./table.jpg");
+  box-shadow: inset 0 0 0 20px #00000033;
+  width: 1800px;
+  height: 1800px;
+  position: absolute;
+  margin-left: -250px;
+  margin-top: -50px;
+  animation: giro 60s linear infinite;
+}
+.game-box {
+  margin-top: -1300px;
+  margin-left: 0px;
+  width: 1300px;
+  height: 1300px;
+  backdrop-filter: blur(0.5px);
+}
+@keyframes giro {
+  0% {
+    transform: scale(0.9) rotateX(88deg) rotateZ(0deg);
+  }
+  100% {
+    transform: scale(0.9) rotateX(88deg) rotateZ(-360deg);
+  }
+}
