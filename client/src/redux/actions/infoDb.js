@@ -1,14 +1,19 @@
 import axios from "axios";
+import { GET_INFO } from "../constants";
 
-export const getInfoDb = ( ) => {
-  return async (dispatch) =>{
-    try {
+export const getInfoDb = () => {
+  try {
+    return async (dispatch) => {
       const response = await axios.get(`/cards`, {
       });
-      console.log(response.data)
-    } catch (error) {
-     console.log(error)
+      return dispatch({
+        type: GET_INFO,
+        payload: response.data
+      })
     }
-  } 
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
