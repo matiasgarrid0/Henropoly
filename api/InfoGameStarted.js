@@ -1054,7 +1054,7 @@ const cards = {
     },
 
     {
-        //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+      //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
       id: 31,
       type: "property",
       name: "Sequelize",
@@ -1400,11 +1400,12 @@ const cards = {
     },
   ],
 };
+
 let jose = {
   properties: null,
   henrycoin: 1500,
   position: 0,
-};
+}; //HIPOTECAR
 function gameActionsBoard(position, dice, player, action, cards, type) {
   //   if (position === 1) {
   //     if (action === "comprar") {
@@ -1421,6 +1422,13 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
   //       });
   //     }
   //   }
+
+  if (cards.table[position].type === "properties") {
+
+  }
+  if (cards.table[position].type === "comunal") {
+      
+}
 
   switch (position) {
     case 0:
@@ -1439,67 +1447,70 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
         });
       }
     case 2:
-      
+
     case 3:
-        if (action === "comprar") {
-            return (player = {
-              properties: "HTML",
-              henrycoin: player.henrycoin - cards,
-              position: 2,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 2,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "HTML",
+          henrycoin: player.henrycoin - cards,
+          position: 2,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 2,
+        });
+      }
     case 4:
 
     case 5:
 
     case 6:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Postgres",
-              henrycoin: player.henrycoin - cards,
-              position: 6,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 6,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Postgres",
+          henrycoin: player.henrycoin - cards,
+          position: 6,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 6,
+        });
+      }
     case 7:
 
     case 8:
-        if (action === "comprar") {
-            return (player = {
-              properties:player.properties=== null? "Postgres" : player.properties + "Postgres",
-              henrycoin: player.henrycoin - cards,
-              position: 8,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 8,
-            });
-          }
-    case 9:
-     if (action === "comprar") {
+      if (action === "comprar") {
         return (player = {
-            properties: "MySQL",
-            henrycoin: player.henrycoin - cards,
-            position: 9,
-          });
-        } else {
-          return (player = {
-            ...player,
-            position: 9,
-          });
-        } 
+          properties:
+            player.properties === null
+              ? "Postgres"
+              : player.properties + "Postgres",
+          henrycoin: player.henrycoin - cards,
+          position: 8,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 8,
+        });
+      }
+    case 9:
+      if (action === "comprar") {
+        return (player = {
+          properties: "MySQL",
+          henrycoin: player.henrycoin - cards,
+          position: 9,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 9,
+        });
+      }
     //
-    case 10: 
+    case 10:
     //jail
 
     case 11:
@@ -1514,7 +1525,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 11,
         });
-    }
+      }
 
     case 12:
       if (action === "comprar") {
@@ -1528,7 +1539,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 12,
         });
-    }
+      }
 
     case 13:
       if (action === "comprar") {
@@ -1542,7 +1553,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 13,
         });
-    }
+      }
 
     case 14:
       if (action === "comprar") {
@@ -1556,7 +1567,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 14,
         });
-    }
+      }
 
     case 15:
       if (action === "comprar") {
@@ -1570,7 +1581,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 15,
         });
-    }
+      }
 
     case 16:
       if (action === "comprar") {
@@ -1584,10 +1595,10 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 16,
         });
-    }
+      }
 
     case 17:
-     //comunal
+    //comunal
 
     case 18:
       if (action === "comprar") {
@@ -1601,7 +1612,7 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 18,
         });
-    }
+      }
 
     case 19:
       if (action === "comprar") {
@@ -1615,12 +1626,12 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 19,
         });
-    }
+      }
 
     case 20:
     //park
     case 21:
-        if (action === "comprar") {
+      if (action === "comprar") {
         return (player = {
           properties: "Vue",
           henrycoin: player.henrycoin - cards,
@@ -1631,204 +1642,204 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
           ...player,
           position: 21,
         });
-    }
+      }
     case 23:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Angular",
-              henrycoin: player.henrycoin - cards,
-              position: 23,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 23,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Angular",
+          henrycoin: player.henrycoin - cards,
+          position: 23,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 23,
+        });
+      }
     case 24:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Node",
-              henrycoin: player.henrycoin - cards,
-              position: 24,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 24,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Node",
+          henrycoin: player.henrycoin - cards,
+          position: 24,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 24,
+        });
+      }
     case 25:
-        if (action === "comprar") {
-            return (player = {
-              properties: "HENRY M3",
-              henrycoin: player.henrycoin - cards,
-              position: 25,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 25,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "HENRY M3",
+          henrycoin: player.henrycoin - cards,
+          position: 25,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 25,
+        });
+      }
     case 26:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Python",
-              henrycoin: player.henrycoin - cards,
-              position: 26,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 26,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Python",
+          henrycoin: player.henrycoin - cards,
+          position: 26,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 26,
+        });
+      }
     case 27:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Java",
-              henrycoin: player.henrycoin - cards,
-              position: 27,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 27,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Java",
+          henrycoin: player.henrycoin - cards,
+          position: 27,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 27,
+        });
+      }
 
     case 29:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Javascript",
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-    }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Javascript",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
 
     case 31:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Sequelize",
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Sequelize",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 32:
-        if (action === "comprar") {
-            return (player = {
-              properties: "GitHub", 
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "GitHub",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 33:
-        if (action === "comprar") {
-            return (player = {
-              properties: "comunal", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "comunal", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 34:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Git",
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Git",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 35:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Henry M4", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Henry M4", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 36:
-        if (action === "comprar") {
-            return (player = {
-              properties: "lucky", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "lucky", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 37:
-        if (action === "comprar") {
-            return (player = {
-              properties: "Redux",
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "Redux",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 38:
-        if (action === "comprar") {
-            return (player = {
-              properties: "tax", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "tax", //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     case 39:
-        if (action === "comprar") {
-            return (player = {
-              properties: "React",
-              henrycoin: player.henrycoin - cards,
-              position: 1,
-            });
-          } else {
-            return (player = {
-              ...player,
-              position: 1,
-            });
-          }
+      if (action === "comprar") {
+        return (player = {
+          properties: "React",
+          henrycoin: player.henrycoin - cards,
+          position: 1,
+        });
+      } else {
+        return (player = {
+          ...player,
+          position: 1,
+        });
+      }
     default:
       break;
   }
