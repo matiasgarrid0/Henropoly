@@ -19,7 +19,7 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
    let game = game.findAll()
-    res.send(infoPlayer)
+    res.send(game)
   } catch (error) {
     next(error);
   }

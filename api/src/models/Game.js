@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       },
       funds: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull:true,
       },
     },
     { timestamps: true }

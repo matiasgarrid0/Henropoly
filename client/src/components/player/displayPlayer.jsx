@@ -1,8 +1,9 @@
 import React from 'react'
 import '../../index.css'
 
-export const Player = ({user}) => {
-    const {henrycoin} = user;
+export const Player = ({users}) => {
+    const {henrycoin} = users;
+   
     return (
             <div className="card"> 
                <div>
