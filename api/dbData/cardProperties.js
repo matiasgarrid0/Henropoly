@@ -1,5 +1,5 @@
 
-/**"property","service","lucky","comunal","railway","exit","jail","goJail","stop" */
+/**"property","service","lucky","comunal","checkpoint","exit","jail","goJail","stop" */
 const cardpropertiesData = [
     {
         id:0,
@@ -47,7 +47,7 @@ const cardpropertiesData = [
     },
     {
         id:5,
-        type:"railway",
+        type:"checkpoint",
         name: "HENRY M1",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -166,7 +166,7 @@ const cardpropertiesData = [
     },
     {
         id:15,
-        type:"railway",
+        type:"checkpoint",
         name: "HENRY M2",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -283,7 +283,7 @@ const cardpropertiesData = [
     },
     {
         id:25,
-        type:"railway",
+        type:"checkpoint",
         name: "HENRY M3",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -403,7 +403,7 @@ const cardpropertiesData = [
     },
     {
         id:35,
-        type:"railway",
+        type:"checkpoint",
         name: "HENRY M4",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
