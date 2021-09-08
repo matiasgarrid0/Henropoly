@@ -10,38 +10,62 @@ const GameDashBoard = () => {
     return () => {
       switch (player) {
         case "target1":
-          if (playerPosition.target1 + num < 40) {
-            dispatch(changeValueTarget(player, playerPosition.target1 + num));
+          if (playerPosition.target1.box + num < 40) {
+            dispatch(
+              changeValueTarget(player, "box", playerPosition.target1.box + num)
+            );
           } else {
             dispatch(
-              changeValueTarget(player, playerPosition.target1 + num - 40)
+              changeValueTarget(
+                player,
+                "box",
+                playerPosition.target1.box + num - 40
+              )
             );
           }
           break;
         case "target2":
-          if (playerPosition.target2 + num < 40) {
-            dispatch(changeValueTarget(player, playerPosition.target2 + num));
+          if (playerPosition.target2.box + num < 40) {
+            dispatch(
+              changeValueTarget(player, "box", playerPosition.target2.box + num)
+            );
           } else {
             dispatch(
-              changeValueTarget(player, playerPosition.target2 + num - 40)
+              changeValueTarget(
+                player,
+                "box",
+                playerPosition.target2.box + num - 40
+              )
             );
           }
           break;
         case "target3":
-          if (playerPosition.target3 + num < 40) {
-            dispatch(changeValueTarget(player, playerPosition.target3 + num));
+          if (playerPosition.target3.box + num < 40) {
+            dispatch(
+              changeValueTarget(player, "box", playerPosition.target3.box + num)
+            );
           } else {
             dispatch(
-              changeValueTarget(player, playerPosition.target3 + num - 40)
+              changeValueTarget(
+                player,
+                "box",
+                playerPosition.target3.box + num - 40
+              )
             );
           }
           break;
         default:
-          if (playerPosition.target4 + num < 40) {
-            dispatch(changeValueTarget(player, playerPosition.target4 + num));
+          if (playerPosition.target4.box + num < 40) {
+            dispatch(
+              changeValueTarget(player, "box", playerPosition.target4.box + num)
+            );
           } else {
             dispatch(
-              changeValueTarget(player, playerPosition.target4 + num - 40)
+              changeValueTarget(
+                player,
+                "box",
+                playerPosition.target4.box + num - 40
+              )
             );
           }
       }
@@ -65,7 +89,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target1", 10)}>10</button>
           <button onClick={movePlayer("target1", 11)}>11</button>
           <button onClick={movePlayer("target1", 12)}>12</button>
-          {playerPosition.target1}
+          {playerPosition.target1.box}
         </div>
         <div className="box-row">
           <label className="label-game">player2:</label>
@@ -81,7 +105,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target2", 10)}>10</button>
           <button onClick={movePlayer("target2", 11)}>11</button>
           <button onClick={movePlayer("target2", 12)}>12</button>
-          {playerPosition.target2}
+          {playerPosition.target2.box}
         </div>
         <div className="box-row">
           <label className="label-game">player3:</label>
@@ -97,7 +121,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target3", 10)}>10</button>
           <button onClick={movePlayer("target3", 11)}>11</button>
           <button onClick={movePlayer("target3", 12)}>12</button>
-          {playerPosition.target3}
+          {playerPosition.target3.box}
         </div>
         <div className="box-row">
           <label className="label-game">player4:</label>
@@ -113,7 +137,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target4", 10)}>10</button>
           <button onClick={movePlayer("target4", 11)}>11</button>
           <button onClick={movePlayer("target4", 12)}>12</button>
-          {playerPosition.target4}
+          {playerPosition.target4.box}
         </div>
       </div>
     </div>

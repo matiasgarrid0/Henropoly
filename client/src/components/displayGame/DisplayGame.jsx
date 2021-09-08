@@ -5,6 +5,7 @@ import {
   setDefault,
   resetTable,
   changeValueTable,
+  changeValueTarget,
 } from "./../../redux/actions";
 import { Board } from "./../";
 import Imagen from "./table.jpg";
@@ -26,27 +27,94 @@ const DisplayGame = () => {
     mouseActive: false,
     clientX: null,
     clientY: null,
+    targetMove: false,
     target1: {
-      box: playerPosition.target1,
-      x: targetX("target1", playerPosition.target1),
-      y: targetY("target1", playerPosition.target1),
+      box: playerPosition.target1.box,
     },
     target2: {
-      box: playerPosition.target2,
-      x: targetX("target2", playerPosition.target2),
-      y: targetY("target2", playerPosition.target2),
+      box: playerPosition.target2.box
     },
     target3: {
-      box: playerPosition.target3,
-      x: targetX("target3", playerPosition.target3),
-      y: targetY("target3", playerPosition.target3),
+      box: playerPosition.target3.box
     },
     target4: {
-      box: playerPosition.target4,
-      x: targetX("target4", playerPosition.target4),
-      y: targetY("target4", playerPosition.target4),
+      box: playerPosition.target4.box
     },
   });
+  const moveTime = () => {
+    return new Promise((resolve) => setTimeout(resolve, 120));
+  };
+  const alignTarget = async (player) => {
+    setStatus({ ...status, targetMove: true });
+    var actualBox = status[player].box;
+    var finalBox = playerPosition[player].box;
+    while (finalBox !== actualBox) {
+      let initialX = targetX(player, actualBox);
+      let initialY = targetY(player, actualBox);
+      actualBox++;
+      if (actualBox === 40) actualBox = 0;
+      let valueX = targetX(player, actualBox) - initialX;
+      let valueY = targetY(player, actualBox) - initialY;
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5)));
+      await moveTime();
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*2)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*2)));
+      await moveTime();
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*3)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*3)));
+      await moveTime();
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*4)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*4)));
+      await moveTime();
+      dispatch(changeValueTarget(player, "x", initialX + valueX));
+      dispatch(changeValueTarget(player, "y", initialY + valueY));
+      await moveTime();
+      setStatus({
+        ...status,
+        [player]: {
+          ...status[player],
+          box: actualBox,
+        },
+      });
+    }
+    setStatus({
+      ...status,
+      [player]: {
+        ...status[player],
+        box: finalBox,
+      },
+      targetMove: false,
+    });
+  };
+  useEffect(() => {
+    if (
+      status.target1.box !== playerPosition.target1.box &&
+      status.targetMove === false
+    )
+      alignTarget("target1");
+  }, [playerPosition.target1.box]);
+  useEffect(() => {
+    if (
+      status.target2.box !== playerPosition.target2.box &&
+      status.targetMove === false
+    )
+      alignTarget("target2");
+  }, [playerPosition.target2.box]);
+  useEffect(() => {
+    if (
+      status.target3.box !== playerPosition.target3.box &&
+      status.targetMove === false
+    )
+      alignTarget("target3");
+  }, [playerPosition.target3.box]);
+  useEffect(() => {
+    if (
+      status.target4.box !== playerPosition.target4.box &&
+      status.targetMove === false
+    )
+      alignTarget("target4");
+  }, [playerPosition.target4.box]);
   const style = {
     backgroundSize: "700px",
     backgroundImage: `url(${Imagen})`,
@@ -65,7 +133,6 @@ const DisplayGame = () => {
       dispatch(changeValueTable("scale", view.scale + 0.02));
     }
   };
-
   const handleMousedownEvent = (e) => {
     setStatus({
       ...status,
@@ -121,8 +188,8 @@ const DisplayGame = () => {
                       <div
                         style={{
                           backgroundColor: "rgb(255, 0, 0)",
-                          marginLeft: `${1260 - status.target1.x}px`,
-                          marginTop: `${1260 - status.target1.y}px`,
+                          marginLeft: `${1260 - playerPosition.target1.x}px`,
+                          marginTop: `${1260 - playerPosition.target1.y}px`,
                         }}
                         className="target"
                       ></div>
@@ -131,8 +198,8 @@ const DisplayGame = () => {
                       <div
                         style={{
                           backgroundColor: "rgb(9, 255, 0)",
-                          marginLeft: `${1260 - status.target2.x}px`,
-                          marginTop: `${1260 - status.target2.y}px`,
+                          marginLeft: `${1260 - playerPosition.target2.x}px`,
+                          marginTop: `${1260 - playerPosition.target2.y}px`,
                         }}
                         className="target"
                       ></div>
@@ -141,8 +208,8 @@ const DisplayGame = () => {
                       <div
                         style={{
                           backgroundColor: "rgb(0, 255, 234)",
-                          marginLeft: `${1260 - status.target3.x}px`,
-                          marginTop: `${1260 - status.target3.y}px`,
+                          marginLeft: `${1260 - playerPosition.target3.x}px`,
+                          marginTop: `${1260 - playerPosition.target3.y}px`,
                         }}
                         className="target"
                       ></div>
@@ -151,8 +218,8 @@ const DisplayGame = () => {
                       <div
                         style={{
                           backgroundColor: "rgb(255, 0, 255)",
-                          marginLeft: `${1260 - status.target4.x}px`,
-                          marginTop: `${1260 - status.target4.y}px`,
+                          marginLeft: `${1260 - playerPosition.target4.x}px`,
+                          marginTop: `${1260 - playerPosition.target4.y}px`,
                         }}
                         className="target"
                       ></div>

@@ -14,10 +14,10 @@ const initialState = {
     angle: 0,
   },
   playerPosition: {
-    target1: 1,
-    target2: 1,
-    target3: 1,
-    target4: 1,
+    target1: { box: 0, x: 120, y: 120 },
+    target2: { box: 0, x: 40, y: 120 },
+    target3: { box: 0, x: 120, y: 40 },
+    target4: { box: 0, x: 40, y: 40 },
   },
 };
 
@@ -42,7 +42,10 @@ const game = (state = initialState, action) => {
     case SET_DATA_TARGET:
       return {
         ...state,
-        playerPosition: { ...state.playerPosition, [payload.player]: payload.value },
+        playerPosition: {
+          ...state.playerPosition,
+          [payload.player]: {...state.playerPosition[payload.player], [payload.data]: payload.value}
+        },
       };
     default:
       return state;
