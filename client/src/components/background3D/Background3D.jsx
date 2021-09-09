@@ -5,6 +5,10 @@ import { Board } from "./../";
 import { boardData } from "./../board/data";
 const Background3d = () => {
   const { isAuth } = useSelector((state) => state.auth);
+  const { info } = useSelector(
+    (state) => state.reducerInfo
+  );
+  
   return (
     <>
       {!isAuth && window.location.pathname === "/" && (
@@ -15,7 +19,7 @@ const Background3d = () => {
                 <div className="modul3d-container-gametable-cube">
                   <div className="modul3d-style-3d">
                     <div className="modul3d-align-game">
-                      <Board cards={boardData.table} />
+                      <Board cards={info.table} />
                       <div className="modul3d-game-box"></div>
                     </div>
                   </div>
