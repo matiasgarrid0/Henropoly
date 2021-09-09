@@ -128,7 +128,6 @@ const GameNav = () => {
                 </Portal>
             )}
             <button onClick={setPortal("card")}>Cartas</button>
-            <Dados />
         </div>
     )
 }
