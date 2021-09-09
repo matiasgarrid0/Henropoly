@@ -6,7 +6,7 @@ import { DisplayGame, GameDashBoard } from "./../../components";
 const Game = () => {
   
   const infoGame= useSelector((state)=> state.reducerInfo.infoGame)
-  console.log('aaaaaaaaaaaaaaaaaccccccccccccccccccc',infoGame[0])
+ // console.log('aaaaaaaaaaaaaaaaaccccccccccccccccccc',infoGame[0])
   return (
     <div className="space-game box-column">
       <div className="game-dashboard">

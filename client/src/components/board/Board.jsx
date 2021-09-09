@@ -6,9 +6,9 @@ import CardComunal from "./CardComunal";
 import CardLucky from "./CardLucky"
 import CardRail from "./CardRail"
 import CardTaxes from "./CardTaxes"
-import { AiFillHtml5 } from "react-icons/ai";
+// import { AiFillHtml5 } from "react-icons/ai";
 import { GiLockedChest } from "react-icons/gi";
-import { RiLightbulbFlashFill } from "react-icons/ri";
+// import { RiLightbulbFlashFill } from "react-icons/ri";
 import {
   SiCss3,
   SiPostgresql,
@@ -1438,7 +1438,6 @@ const Board = () => {
       <div className="square">
         <div className="table">
           <div className="box-row responsive">
-          {console.log('cardss',cards)}
             <div className="square2"><span className="corner corner1">FREE <br /> PARKING</span>
             <Card data={cards.table[20]} grade="180" icons={<FaVuejs className='card-icon'/>} />
             </div>.
@@ -1470,7 +1469,7 @@ const Board = () => {
             <div className="card-box card-blue">
                 <div className="card-blue-inside">{<GiLockedChest  className='card-icon'/>}</div>
               </div>
-              <img className='board-logo' src={Logo}/>
+              <img className='board-logo' src={Logo} alt="logo board"/>
               <div className="card-box card-orange">
                 <div className="card-orange-inside">{<FaQuestion className='card-icon' />}</div>						
               </div>

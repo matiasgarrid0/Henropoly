@@ -114,7 +114,7 @@ const DashBoard = () => {
                             <h3 className='text-hov'>Unirse a sala</h3>
                         </div>
                         <div className='conimg'>
-                            <img className='imgn' src='https://cdn-pro.elsalvador.com/wp-content/uploads/2020/07/Ramon-Valdes.jpg' />
+                            <img className='imgn' src='https://cdn-pro.elsalvador.com/wp-content/uploads/2020/07/Ramon-Valdes.jpg' alt="Don Ramón"/>
                         </div>
                     </div>
                     <div className='ranking'>
