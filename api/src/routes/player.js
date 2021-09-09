@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const {Player} = require("./../db");
-let infoPlayer = require("../../InfoGameStarted")
+let { player } = require("../../InfoGameStarted")
 
 
 const router = Router();
@@ -23,8 +23,8 @@ router.put("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log(infoPlayer)
-    res.send(infoPlayer)
+    console.log('jkhhjhjhghhghgghhggh',player)
+    res.send(player)
   } catch (error) {
     next(error);
   }

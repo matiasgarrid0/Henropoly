@@ -1,2 +1,2 @@
 export { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH } from "./auth";
-export { GET_INFO, GET_PLAYER } from './infoDb';
+export { GET_INFO, GET_PLAYER, CHANGE_PLAYER} from './infoDb';

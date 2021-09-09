@@ -1,8 +1,3 @@
-let player = {
-  properties: null,
-  henrycoin: 1500,
-  position: 0,
-};
 const cards = {
   table: [
     {
@@ -1406,7 +1401,15 @@ let jose = {
   henrycoin: 1500,
   position: 0,
 }; //HIPOTECAR
-function gameActionsBoard(position, dice, player, action, cards, type) {
+
+let player = {
+    properties: null,
+    henrycoin: 1500,
+    position: 0,
+    ludmila: "sdjbdbhjdbdbjbsdbjdbjdbjdbdbj",
+};
+
+function gameActionsBoard(player, action, cards, type) {
   //   if (position === 1) {
   //     if (action === "comprar") {
   //       return (jose = {
@@ -1423,14 +1426,12 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
   //     }
   //   }
 
-  if (cards.table[position].type === "properties") {
+//   if (cards.table[position].type === "properties") {
+//   }
+//   if (cards.table[position].type === "comunal") {
+//   }
 
-  }
-  if (cards.table[position].type === "comunal") {
-      
-}
-
-  switch (position) {
+  switch (player.position) {
     case 0:
     // |||||||||||||||||||||||||||||||||||
     case 1:
@@ -1845,8 +1846,8 @@ function gameActionsBoard(position, dice, player, action, cards, type) {
   }
 }
 
-console.log(
+/* console.log(
   gameActionsBoard(1, 6, jose, "comprar", cards.table[1].versionAlpha)
-);
+); */
 
-// module.exports = { player }
+ module.exports = { player }

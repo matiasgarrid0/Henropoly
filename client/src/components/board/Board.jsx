@@ -1952,9 +1952,9 @@ function gameActionsBoard(position, dice, player, action, cards) {
   }
 }
 
-console.log(
-  gameActionsBoard(1, 6, jose, "comprar", cards.table[1].versionAlpha)
-);
+// console.log(
+//   gameActionsBoard(1, 6, jose, "comprar", cards.table[1].versionAlpha)
+// );
 
 
 export default Board;
