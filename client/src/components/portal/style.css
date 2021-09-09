@@ -10,6 +10,8 @@
     align-items: center;
 }
 .modal {
+    display: flex;
+    flex-direction: row;
     margin: auto;
     width: max-content;
     position: relative;

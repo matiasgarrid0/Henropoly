@@ -1,23 +1,25 @@
 import React from 'react';
 import './Card.css';
 
-
- const Card = ({data}/*{name,versionAlpha,versionOne,versionTwo,versionThree,versionFour,versionPremium,aditional,commonVersion,premiumVersion,licenseValue }*/) => {
-    return(
-        <div>
-            <h3>{data.name}</h3>
-            <ul>
-                <li>Version Alpha: {data.versionAlpha}</li>
-                <li>Version One: {data.versionOne}</li>
-                <li>Version Two: {data.versionTwo}</li>
-                <li>Version Three: {data.versionThree}</li>
-                <li>Version Four: {data.versionFour}</li>
-                <li>Version Pre: {data.versionPremium}</li>
-            </ul>
-            <span>Aditional:{data.aditional}</span>
-            <span>CommonVersion:{data.commonVersion}</span>
-            <span>PremiumVersion:{data.premiumVersion}</span>
-            <span>LicenseValue:{data.licenseValue}</span>
+//{ name, versionAlpha, versionOne, versionTwo, versionThree, versionFour, versionPremium, aditional, commonVersion, premiumVersion, licenseValue }
+const Card = (data) => {
+    return (
+        <div className= "all">
+            <div className ="cnt">
+                <h3 className = "h1">{data.name}</h3>
+                <ul>
+                    <li>Version desarrollo: {data.versionAlpha}$</li>
+                    <li>Version uno: {data.versionOne}$</li>
+                    <li>Version dos: {data.versionTwo}$</li>
+                    <li>Version tres: {data.versionThree}$</li>
+                    <li>Version cuatro: {data.versionFour}$</li>
+                    <li>Version Premium: {data.versionPremium}$</li>
+                </ul>
+                <p className = "pgame">Adicional: {data.aditional}</p>
+                <p className = "pgame">Version Comun: {data.commonVersion}$</p>
+                <p className = "pgame">Version Premium: {data.premiumVersion}$</p>
+                <p className = "pgame">Valor de la Licencia: {data.licenseValue}$</p>
+            </div>
         </div>
     )
 }
@@ -38,7 +40,7 @@ export default Card;
     //         color: "brown"
 
 
-/**            <div className = {cardCss.h1btn}> 
+/**            <div className = {cardCss.h1btn}>
                 <Link to = {`/detail/${id}`} style={{ textDecoration: 'none' }} >
                     <h1 className={cardCss.h1}>{name}</h1>
                 </Link>
