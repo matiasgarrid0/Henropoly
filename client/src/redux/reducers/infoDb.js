@@ -19,7 +19,7 @@ const reducerInfo = (state = initialState, action) => {
         players: action.payload,
       };
     case CHANGE_PLAYER:
-      let player = action.payload === "se movio"? player = {
+      let player = action.payload === "se movio"? {
         henrycoin: 1500,
         position: 6,
         properties:'css'
