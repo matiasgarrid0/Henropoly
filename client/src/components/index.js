@@ -9,6 +9,7 @@ import DisplayGame from './displayGame/DisplayGame.jsx'
 import GameDashBoard from './gameDashBoard/GameDashBoard.jsx'
 import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
+import Dices from './dice/Dice.jsx';
 
 export {
     Loggin,
@@ -21,5 +22,6 @@ export {
     DisplayGame,
     GameDashBoard,
     ViewBoard,
-    Background3D
+    Background3D,
+    Dices
 }

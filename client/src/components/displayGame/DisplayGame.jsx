@@ -7,7 +7,7 @@ import {
   changeValueTable,
   changeValueTarget,
 } from "./../../redux/actions";
-import { Board } from "./../";
+import { Board, Dices } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
@@ -40,15 +40,38 @@ const DisplayGame = () => {
     target4: {
       box: playerPosition.target4.box
     },
+    roll: false,
+    rollOne: null,
+    rollTwo: null,
   });
-  const moveTime = () => {
-    return new Promise((resolve) => setTimeout(resolve, 120));
+
+  const moveTime = (value) => {
+    return new Promise((resolve) => setTimeout(resolve, value));
   };
   const alignTarget = async (player) => {//target1 0 5
     setStatus({ ...status, targetMove: true });
-    //await lanzardados(player)
+
+    let num = Math.floor((Math.random() * 6) + 1);
+
     var actualBox = status[player].box;//0
     var finalBox = playerPosition[player].box;//5
+
+    var roll = finalBox - actualBox
+    var rollOne;
+    var rollTwo;
+    if (roll === 2) {
+      rollOne = 1;
+      rollTwo = 1;
+    } else if (roll > num) {
+      rollOne = num
+      rollTwo = roll - num
+    } else {
+      rollOne = roll - 1
+      rollTwo = 1
+    }
+    setStatus({ ...status, rollOne: rollOne , rollTwo:rollTwo, roll:true});
+    await moveTime(2000)
+
     while (finalBox !== actualBox) {//1 5
       let initialX = targetX(player, actualBox);//target1 1 dfdffd
       let initialY = targetY(player, actualBox);//target1 1 dffdfdfd
@@ -56,21 +79,21 @@ const DisplayGame = () => {
       if (actualBox === 40) actualBox = 0;
       let valueX = targetX(player, actualBox) - initialX; // 2 - 1 200px
       let valueY = targetY(player, actualBox) - initialY; // 2 - 1 150px
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5)));
-      await moveTime();
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*2)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*2)));
-      await moveTime();
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*3)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*3)));
-      await moveTime();
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*4)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*4)));
-      await moveTime();
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5)));
+      await moveTime(120);
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 2)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 2)));
+      await moveTime(120);
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 3)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 3)));
+      await moveTime(120);
+      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 4)));
+      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 4)));
+      await moveTime(120);
       dispatch(changeValueTarget(player, "x", initialX + valueX)); //2
       dispatch(changeValueTarget(player, "y", initialY + valueY)); //2
-      await moveTime();
+      await moveTime(120);
       setStatus({
         ...status,
         [player]: {
@@ -79,6 +102,7 @@ const DisplayGame = () => {
         },
       });
     }
+    setStatus({ ...status, roll:false});
     setStatus({
       ...status,
       [player]: {
@@ -244,6 +268,9 @@ const DisplayGame = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       ></div>
+      {
+        status.roll && <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
+      }
     </div>
   );
 };

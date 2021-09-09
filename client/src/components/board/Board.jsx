@@ -1441,7 +1441,7 @@ const Board = () => {
           {console.log('cardss',cards)}
             <div className="square2"><span className="corner corner1">FREE <br /> PARKING</span>
             <Card data={cards.table[20]} grade="180" icons={<FaVuejs className='card-icon'/>} />
-            </div>
+            </div>.
             <Card data={cards.table[21]} grade="180" icons={<FaVuejs className='card-icon' />} />
             <CardLucky data={cards.table[22]} grade="180" icons={<FaQuestion className='card-icon' />} />
             <Card data={cards.table[23]} grade="180" icons={<FaAngular className='card-icon' />} />

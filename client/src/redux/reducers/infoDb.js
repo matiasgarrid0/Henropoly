@@ -1,7 +1,8 @@
-import { GET_INFO } from '../constants';
+import { GET_INFO, POST_PLAYERS } from '../constants';
 
 const initialState = {
-  info:[]
+  info:[],  
+  infoGame:[]
 };
 
 const reducerInfo = (state = initialState, action) => {
@@ -12,7 +13,11 @@ const reducerInfo = (state = initialState, action) => {
         ...state,
          info: action.payload
       }
-   
+    case POST_PLAYERS:
+      return {
+        ...state,
+        infoGame: [...state.infoGame, action.payload]
+      }
     default: 
       return state;
   }

@@ -6,8 +6,9 @@ import { changeValueTarget } from "./../../redux/actions";
 const GameDashBoard = () => {
   const dispatch = useDispatch();
   const { playerPosition } = useSelector((state) => state.game);
-  const movePlayer = (player, num) => {
+  const movePlayer = (player) => {
     return () => {
+      let num = Math.floor((Math.random() * 11) + 2);
       switch (player) {
         case "target1":
           if (playerPosition.target1.box + num < 40) {
@@ -77,66 +78,22 @@ const GameDashBoard = () => {
       <div className="body-dashboard-table box-column">
         <div className="box-row">
           <label className="label-game">player1:</label>
-          <button onClick={movePlayer("target1", 1)}>1</button>
-          <button onClick={movePlayer("target1", 2)}>2</button>
-          <button onClick={movePlayer("target1", 3)}>3</button>
-          <button onClick={movePlayer("target1", 4)}>4</button>
-          <button onClick={movePlayer("target1", 5)}>5</button>
-          <button onClick={movePlayer("target1", 6)}>6</button>
-          <button onClick={movePlayer("target1", 7)}>7</button>
-          <button onClick={movePlayer("target1", 8)}>8</button>
-          <button onClick={movePlayer("target1", 9)}>9</button>
-          <button onClick={movePlayer("target1", 10)}>10</button>
-          <button onClick={movePlayer("target1", 11)}>11</button>
-          <button onClick={movePlayer("target1", 12)}>12</button>
+          <button onClick={movePlayer("target1")}>Roll</button>
           {playerPosition.target1.box}
         </div>
         <div className="box-row">
           <label className="label-game">player2:</label>
-          <button onClick={movePlayer("target2", 1)}>1</button>
-          <button onClick={movePlayer("target2", 2)}>2</button>
-          <button onClick={movePlayer("target2", 3)}>3</button>
-          <button onClick={movePlayer("target2", 4)}>4</button>
-          <button onClick={movePlayer("target2", 5)}>5</button>
-          <button onClick={movePlayer("target2", 6)}>6</button>
-          <button onClick={movePlayer("target2", 7)}>7</button>
-          <button onClick={movePlayer("target2", 8)}>8</button>
-          <button onClick={movePlayer("target2", 9)}>9</button>
-          <button onClick={movePlayer("target2", 10)}>10</button>
-          <button onClick={movePlayer("target2", 11)}>11</button>
-          <button onClick={movePlayer("target2", 12)}>12</button>
+          <button onClick={movePlayer("target2")}>Roll</button>
           {playerPosition.target2.box}
         </div>
         <div className="box-row">
           <label className="label-game">player3:</label>
-          <button onClick={movePlayer("target3", 1)}>1</button>
-          <button onClick={movePlayer("target3", 2)}>2</button>
-          <button onClick={movePlayer("target3", 3)}>3</button>
-          <button onClick={movePlayer("target3", 4)}>4</button>
-          <button onClick={movePlayer("target3", 5)}>5</button>
-          <button onClick={movePlayer("target3", 6)}>6</button>
-          <button onClick={movePlayer("target3", 7)}>7</button>
-          <button onClick={movePlayer("target3", 8)}>8</button>
-          <button onClick={movePlayer("target3", 9)}>9</button>
-          <button onClick={movePlayer("target3", 10)}>10</button>
-          <button onClick={movePlayer("target3", 11)}>11</button>
-          <button onClick={movePlayer("target3", 12)}>12</button>
+          <button onClick={movePlayer("target3")}>Roll</button>
           {playerPosition.target3.box}
         </div>
         <div className="box-row">
           <label className="label-game">player4:</label>
-          <button onClick={movePlayer("target4", 1)}>1</button>
-          <button onClick={movePlayer("target4", 2)}>2</button>
-          <button onClick={movePlayer("target4", 3)}>3</button>
-          <button onClick={movePlayer("target4", 4)}>4</button>
-          <button onClick={movePlayer("target4", 5)}>5</button>
-          <button onClick={movePlayer("target4", 6)}>6</button>
-          <button onClick={movePlayer("target4", 7)}>7</button>
-          <button onClick={movePlayer("target4", 8)}>8</button>
-          <button onClick={movePlayer("target4", 9)}>9</button>
-          <button onClick={movePlayer("target4", 10)}>10</button>
-          <button onClick={movePlayer("target4", 11)}>11</button>
-          <button onClick={movePlayer("target4", 12)}>12</button>
+          <button onClick={movePlayer("target4")}>Roll</button>
           {playerPosition.target4.box}
         </div>
       </div>
