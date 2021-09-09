@@ -68,7 +68,7 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color: "light-blue"
+        color:"light-blue"
     },
     {
         id:7,
@@ -88,7 +88,7 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color: "light-blue"
+        color:"light-blue"
     },
     {
         id:9,
@@ -104,7 +104,7 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 60,
-        color: "light-blue"
+        color:"light-blue"
     },
     {
         id:10,

@@ -156,7 +156,6 @@
 	font-size: 1.2vw;
 	font-weight: 500;
 }
-
 .corner1 {
   transform: rotateZ(135deg) translateX(10px) translateY(-115px);
 }
