@@ -23,7 +23,7 @@ const { conn } = require('./src/db.js');
 const { preloadData } = require('./preloadData')
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(async() => {
+conn.sync({ force: false }).then(async() => {
   await preloadData()
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
