@@ -19,12 +19,12 @@ const Card = ({ data, grade, icons }) => {
       >
         {data.type === "property" && (
           <>
-            <div className={`div-title color-card-${data.color}`}>
+            {/* <div className={`div-title color-card-${data.color}`}>
               <label className="title-card">{data.name}</label>
             </div>
             <div className="box-column"></div>
             <div>{icons}</div>
-            <div>{data.versionAlpha}</div>
+            <div>{data.versionAlpha}</div> */}
           </>
         )}
       </div>
