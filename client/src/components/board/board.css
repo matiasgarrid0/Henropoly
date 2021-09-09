@@ -16,15 +16,10 @@
   width: 40rem;
   margin-left: 11rem;
   position: absolute;
-	transform: rotateZ(-45deg) translateX(-29%) translateY(60%);
+	transform: rotateZ(-45deg) translateX(-120px) translateY(90px);
 	text-align: center;
 
 }
-
-.square{
-	
-}
-
 .table {
   background-color: #ffde59;
   box-shadow: inset 0 0 0 7px #5f59226e;
@@ -128,25 +123,23 @@
   margin-top: 5rem;
 }
 .card-blue {
-  position: absolute;
 	background: linear-gradient(#4ccaf4, #a3dff9);
-	transform: rotateZ(-45deg) translateX(60px) translateY(200px);
+	transform: rotateZ(-45deg) translateX(50px) translateY(220px);
   align-items: center;
   text-align: center;
   justify-content: center;
 }
 
 .card-orange {
-  position: absolute;
 	background: linear-gradient(#f99120, #f57420);
-	transform: rotateZ(-45deg) translateX(60px) translateY(950px);
+	transform: rotateZ(-45deg) translateX(143px) translateY(890px);
   align-items: center;
   text-align: center;
   justify-content: center;
 }
 .card-box {
-	position: absolute;
-	width: 15%;
+	
+	width: 180px;
 	height: 9vw;
 }
 .square2 {
@@ -163,16 +156,15 @@
 	font-size: 1.2vw;
 	font-weight: 500;
 }
-
 .corner1 {
-  transform: rotateZ(135deg) translateX(10%) translateY(-115%);
+  transform: rotateZ(135deg) translateX(10px) translateY(-115px);
 }
 .corner2 {
-  transform: rotateZ(-135deg) translateX(-210%) translateY(20%);
+  transform: rotateZ(-135deg) translateX(-100px) translateY(20px);
   line-height: 2vw;
 }
 .corner3 {
-  transform: rotateZ(30deg) translateX(220%) translateY(-15%);
+  transform: rotateZ(30deg) translateX(100px) translateY(5px);
 }
 .board-square-3d{
 	perspective: 900px;
