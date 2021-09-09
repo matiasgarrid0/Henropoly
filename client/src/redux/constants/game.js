@@ -1,0 +1,4 @@
+export const SET_STATUS_TABLE = "SET_STATUS_TABLE";
+export const SET_TABLE_GAME = "SET_TABLE_GAME";
+export const SET_DATA_DEFAULT = 'SET_DATA_DEFAULT';
+export const SET_DATA_TARGET = 'SET_DATA_TARGET';

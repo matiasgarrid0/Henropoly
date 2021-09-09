@@ -1,7 +1,6 @@
 import axios from "axios";
 import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH } from "../constants";
 import * as AxiosApi from './../../controllers/auth';
-//const { URL_API } = process.env;
 
 export const register = ( username, email, password) => {
   const data = {

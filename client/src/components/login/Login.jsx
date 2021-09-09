@@ -17,7 +17,6 @@ const [input, setInput] = useState({
 }  
 function handleSubmit(e) {
     e.preventDefault()
-    console.log('dfjdfjfjhffhjfdhjfjhfjhfdhjfdhjfdhjdfhjdf')
     dispatch(login(input.username,input.password))
 }
 return (

@@ -5,6 +5,8 @@ import Portal from './portal/Portal.jsx';
 import LogOut from './logOut/LogOut.jsx';
 import Loading from './loading/Loading.jsx';
 import Board from './board/Board.jsx'
+import DisplayGame from './displayGame/DisplayGame.jsx'
+import GameDashBoard from './gameDashBoard/GameDashBoard.jsx'
 import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
 
@@ -16,6 +18,8 @@ export {
     LogOut,
     Loading,
     Board,
+    DisplayGame,
+    GameDashBoard,
     ViewBoard,
     Background3D
 }

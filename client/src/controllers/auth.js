@@ -1,7 +1,7 @@
 import axios from 'axios';
 //const URL = 'http://localhost:3001';
 //const axiosApi = axios.create({ baseURL: URL });
-const axiosApi = axios.create({ baseURL: axios.defaults.baseURL});
+const axiosApi = axios.create({ baseURL: process.env.REACT_APP_API || 'http://localhost:3001' });
 
 axiosApi.interceptors.request.use((req) => {
     if(localStorage.getItem('access_token')){
@@ -13,3 +13,4 @@ axiosApi.interceptors.request.use((req) => {
 
 //actions:
 export const checkToken = () => axiosApi.post('/auth/check');
+export const setDefault = () => axiosApi.get('/cards');
