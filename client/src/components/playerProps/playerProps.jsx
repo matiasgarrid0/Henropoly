@@ -6,15 +6,7 @@ import './playerProps.css'
 function PlayerProps(idsala) {
   const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
- /* let a;
-  if(!players[0] === undefined) {
-    return a = {
-  base1 : players[0].resultNewGame.PlayerData.target1,
-  base2 :players[0].resultNewGame.PlayerData.target2,
-  base3 : players[0].resultNewGame.PlayerData.target3,
-  base4 : players[0].resultNewGame.PlayerData.target4 
-}
-} */
+ 
   return (
     <div>
       {players[0] === undefined ? (
