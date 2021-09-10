@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 /* import { register } from "../../redux/actions"; */
+import Action from "./switchBoxBoard";
 import './playerProps.css'
 
 function PlayerProps(idsala) {
@@ -22,7 +23,7 @@ function PlayerProps(idsala) {
           <label>HenryCoins: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.henryCoins} </span>
           <label> Tecnologias: </label>
-          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e) :<div>no tenes propis</div> } </span> 
+          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target1.cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
        </div>
@@ -62,23 +63,10 @@ function PlayerProps(idsala) {
         </div>
         </div>
       )}
+      <Action players = {players}/>
     </div>
   );
 }
-
-/* resultNewGame:
-Bank:
-BankHenryCoins: 200000
-properties: []
-[[Prototype]]: Object
-PlayerData:
-target1: {ID: "1", username: "JHHHJ", henryCoins: 1500, properties: Array(0), cards: Array(0)}
-target2: {ID: "2", username: "HGHH", henryCoins: 1500, properties: Array(0), cards: Array(0)}
-target3: {ID: "3", username: "JHJHJJ", henryCoins: 1500, properties: Array(0), cards: Array(0)}
-target4: {ID: "4", username: "JHJHJH", henryCoins: 1500, properties: Array(0), cards: Array(0)}
-[[Prototype]]: Object
-actualTurn: "target1"
-order: (4) ["target1", "target3", "target4", "target2"] */
 
 export default PlayerProps;
 

@@ -1,7 +1,7 @@
 import {// FACU GRACIAS X NADAAAAAAAAA    OJALA SE E CORTE LA LUZ
   SET_STATUS_TABLE,
-  SET_TABLE_GAME,              /////facuuuuuuuuuuuuuuuuuuuuuu
-  SET_DATA_DEFAULT,              ////// euuuuuuuuuuuuuuu
+  SET_TABLE_GAME,              
+  SET_DATA_DEFAULT,            
   SET_DATA_TARGET,
 } from "../constants";
 

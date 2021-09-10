@@ -1,3 +1,4 @@
 export const GET_INFO = 'GET_INFO';
 export const POST_PLAYERS = 'POST_PLAYERS';
-export const SET_STATUS_INFO = 'SET_STATUS_INFO'
+export const SET_STATUS_INFO = 'SET_STATUS_INFO';
+export const FILTER_RANDOM ='FILTER_RANDOM';

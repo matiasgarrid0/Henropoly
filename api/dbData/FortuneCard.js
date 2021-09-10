@@ -1,7 +1,7 @@
 const luckyCards = [
     {
         name: "Suerte",
-        description: "No comiteaste bien | Retrocede 3 casilleros"
+        description: "No comiteaste bien | Pagás $5"
     },
     {
         name: "Suerte",
@@ -19,6 +19,7 @@ const luckyCards = [
         name: "Suerte",
         description: "Te cortaron la luz, perdiste 3 dias en el PI | Retrocede 3 espacios"
     },
+
     {
         name: "Suerte",
         description: "Te encontraron muteado en el Pair-Programming | Paga $4"

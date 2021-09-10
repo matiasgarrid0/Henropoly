@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_INFO, POST_PLAYERS,SET_STATUS_INFO } from '../constants'
+import { GET_INFO, POST_PLAYERS,SET_STATUS_INFO, FILTER_RANDOM } from '../constants'
 
 
 export const getInfoDb = () => {
@@ -10,7 +10,6 @@ export const getInfoDb = () => {
       dispatch(setStatusInfo());
       return dispatch ({type:GET_INFO, payload:response.data})
     } catch (error) {
-      console.log(error)
     }
   }
 };
@@ -21,9 +20,11 @@ export const setStatusInfo = () =>{
 export function postPlayer(payload) {
   return async function (dispatch) {
     const response = await axios.post("/game/RegisterGame", payload)
-    console.log(response.data)
     return dispatch({ type: POST_PLAYERS, payload: response.data })
   }
 }
 
-
+export const filterCardsRandom = (type) =>{
+  console.log('PAYLOAD SDKJDJDSKJDSJ,', type)
+  return {type:FILTER_RANDOM, payload:type }
+}

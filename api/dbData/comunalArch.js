@@ -9,7 +9,7 @@ const comunalCards = [
     },
     {
         name: "Comunal",
-        description: "Conseguiste un puesto de Semi-Senior directamente| Cobrás $10"
+        description: "Conseguiste un puesto de Semi-Senior directamente| Cobrás $15"
     },
     {
         name: "Comunal",
@@ -17,19 +17,19 @@ const comunalCards = [
     },
     {
         name: "Comunal",
-        description: "Repasaste con los videos de Franco | Te salvás de migrar por esforzarte"
+        description: "Repasaste con los videos de Franco | Cobrás $15"
     },
     {
         name: "Comunal",
-        description: "Ayudaste a Franco con la pregunta y te ganaste un Henry Coin | Cobras $11"
+        description: "Ayudaste a Franco con la pregunta y te ganaste un Henry Coin | Cobras $20"
     },
     {
         name: "Comunal",
-        description: "Le preguntaste en el Q/A a Martu de la recursión | Te salvás de migrar por preguntar"
+        description: "Le preguntaste en el Q/A a Martu de la recursión | Cobrás $15"
     },
     {
         name: "Comunal",
-        description: "Repasaste todos los días | Avanzaste 5 casilleros"
+        description: "Repasaste todos los días | Cobrás $10"
     }
 ]
 
