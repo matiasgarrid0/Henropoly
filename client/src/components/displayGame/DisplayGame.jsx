@@ -44,17 +44,18 @@ const DisplayGame = () => {
   const moveTime = () => {
     return new Promise((resolve) => setTimeout(resolve, 120));
   };
-  const alignTarget = async (player) => {
+  const alignTarget = async (player) => {//target1 0 5
     setStatus({ ...status, targetMove: true });
-    var actualBox = status[player].box;
-    var finalBox = playerPosition[player].box;
-    while (finalBox !== actualBox) {
-      let initialX = targetX(player, actualBox);
-      let initialY = targetY(player, actualBox);
-      actualBox++;
+    //await lanzardados(player)
+    var actualBox = status[player].box;//0
+    var finalBox = playerPosition[player].box;//5
+    while (finalBox !== actualBox) {//1 5
+      let initialX = targetX(player, actualBox);//target1 1 dfdffd
+      let initialY = targetY(player, actualBox);//target1 1 dffdfdfd
+      actualBox++; //2
       if (actualBox === 40) actualBox = 0;
-      let valueX = targetX(player, actualBox) - initialX;
-      let valueY = targetY(player, actualBox) - initialY;
+      let valueX = targetX(player, actualBox) - initialX; // 2 - 1 200px
+      let valueY = targetY(player, actualBox) - initialY; // 2 - 1 150px
       dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5)));
       dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5)));
       await moveTime();
@@ -67,14 +68,14 @@ const DisplayGame = () => {
       dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX/5*4)));
       dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY/5*4)));
       await moveTime();
-      dispatch(changeValueTarget(player, "x", initialX + valueX));
-      dispatch(changeValueTarget(player, "y", initialY + valueY));
+      dispatch(changeValueTarget(player, "x", initialX + valueX)); //2
+      dispatch(changeValueTarget(player, "y", initialY + valueY)); //2
       await moveTime();
       setStatus({
         ...status,
         [player]: {
           ...status[player],
-          box: actualBox,
+          box: actualBox,//5
         },
       });
     }

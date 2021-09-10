@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { Nav, Loading, ViewBoard } from "./components";
 import { SwitchPage, Game, DashBoardBeta } from "./views";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, checkToken} from "./redux/actions";
+import { setLoading, checkToken, getInfoDb } from "./redux/actions";
 
 const App = () => {
   const dispatch = useDispatch();
   const { isAuth, isLoading, token } = useSelector((state) => state.auth);
+  const { stateI } = useSelector((state) => state.reducerInfo);
 
   useEffect(() => {
     if (isAuth) {
@@ -16,6 +17,11 @@ const App = () => {
       dispatch(setLoading(false));
     }
     /* eslint-disable react-hooks/exhaustive-deps */
+  }, []);
+  useEffect(() => {
+   if(!stateI){
+    dispatch(getInfoDb());
+   }
   }, []);
 
   if (isLoading) {

@@ -5,18 +5,22 @@ import { Board } from "./../";
 import { boardData } from "./../board/data";
 const Background3d = () => {
   const { isAuth } = useSelector((state) => state.auth);
+  const { info } = useSelector(
+    (state) => state.reducerInfo
+  );
+  
   return (
     <>
       {!isAuth && window.location.pathname === "/" && (
-        <div className='background3d-body'>
-          <div className='background3d-contenedor'>
-            <div className="body-display no-select">
-              <div className="container-gametable">
-                <div className="container-gametable-cube">
-                  <div className="style-3d">
-                    <div className="align-game">
-                      <Board cards={boardData.table} />
-                      <div className="game-box"></div>
+        <div className='modul3d-background3d-body'>
+          <div className='modul3d-background3d-contenedor'>
+            <div className="modul3d-body-display no-select">
+              <div className="modul3d-container-gametable">
+                <div className="modul3d-container-gametable-cube">
+                  <div className="modul3d-style-3d">
+                    <div className="modul3d-align-game">
+                      <Board cards={info.table} />
+                      <div className="modul3d-game-box"></div>
                     </div>
                   </div>
                 </div>
