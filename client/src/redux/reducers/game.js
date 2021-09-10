@@ -1,7 +1,7 @@
-import {// FACU GRACIAS X NADAAAAAAAAA    OJALA SE E CORTE LA LUZ
+import {
   SET_STATUS_TABLE,
-  SET_TABLE_GAME,              /////facuuuuuuuuuuuuuuuuuuuuuu
-  SET_DATA_DEFAULT,              ////// euuuuuuuuuuuuuuu
+  SET_TABLE_GAME,             
+  SET_DATA_DEFAULT,             
   SET_DATA_TARGET,
 } from "../constants";
 
@@ -13,11 +13,14 @@ const initialState = {
     high: 70,
     angle: 0,
   },
+  henryBank:{
+    properties:[],
+  },
   playerPosition: {
-    target1: { box: 0, x: 120, y: 120 },
-    target2: { box: 0, x: 40, y: 120 },
-    target3: { box: 0, x: 120, y: 40 },
-    target4: { box: 0, x: 40, y: 40 },
+    target1: { box: 0, x: 120, y: 120, henrycoins:1500, cards:[], properties:[], username: null, ID: null},
+    target2: { box: 0, x: 40, y: 120, henrycoins:1500, cards:[], properties:[], username: null, ID: null },
+    target3: { box: 0, x: 120, y: 40, henrycoins:1500, cards:[], properties:[], username: null, ID: null },
+    target4: { box: 0, x: 40, y: 40, henrycoins:1500, cards:[], properties:[], username: null, ID: null},
   },
 };
 

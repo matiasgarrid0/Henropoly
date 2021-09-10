@@ -40,7 +40,7 @@ const DashBoard = () => {
         }
         console.log(send)
         dispatch(postPlayer(send))        
-        history.push('/PLAYERS')
+        history.push('/game')
     }
 
     /**
