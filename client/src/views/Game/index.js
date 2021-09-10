@@ -1,15 +1,12 @@
 import "./Game.css";
 import React from "react";
-import { DisplayGame, GameDashBoard } from "./../../components";
+import { Chat } from "./../../components";
 
 const Game = () => {
   return (
     <div className="space-game box-column">
       <div className="box-game">
-        <DisplayGame />
-      </div>
-      <div className="game-dashboard">
-        <GameDashBoard />
+        <Chat room={'Global'}/>
       </div>
     </div>
   );

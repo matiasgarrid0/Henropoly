@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Nav, Loading, ViewBoard } from "./components";
 import { SwitchPage, Game, DashBoardBeta } from "./views";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, checkToken, connectSocket } from "./redux/actions";
+import { setLoading, checkToken} from "./redux/actions";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,6 @@ const App = () => {
   useEffect(() => {
     if (isAuth) {
       dispatch(checkToken(token));
-      dispatch(connectSocket(token));
     } else {
       dispatch(setLoading(false));
     }

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SET_TOKEN, SET_USER, SET_LOADING, SET_AUTH } from "../constants";
-import { connectSocket } from './../actions'
 import * as AxiosApi from './../../controllers/auth';
 
 export const register = ( username, email, password) => {
@@ -17,7 +16,6 @@ export const register = ( username, email, password) => {
       if(response.data){
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));
-        dispatch(connectSocket(response.data.token))
         dispatch(setAuthenticate(true));
       } else {
         dispatch(logOut());
@@ -43,7 +41,6 @@ export const login = ( username, password) => {
       if(response.data){
         dispatch(setUser(response.data.user));
         dispatch(setToken(response.data.token));
-        dispatch(connectSocket(response.data.token))
         dispatch(setAuthenticate(true));
       } else {
         dispatch(logOut());

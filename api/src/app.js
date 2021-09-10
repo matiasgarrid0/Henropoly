@@ -14,15 +14,21 @@ const io = require("socket.io")(http, {
   },
 });
 
-io.on("connection", async (socket) => {
-  try {
+io.on("connection", (socket) => {
+  /*try {
     var decoded = await jwt.verify(socket.handshake.auth.token, AUTH_SECRET);
     socket.join(decoded.user.ID);
   } catch (err) {
     socket.disconnect();
-  }
-
-
+  }*/
+  socket.on('sendGlobal', (data) => {
+    socket.broadcast.emit('chatGlobal', {
+      username: data.username,
+      message: data.message
+    });
+  });
+  socket.on("chatGlobal", () => {
+  });
   socket.on("disconnect", () => {
   });
 });
