@@ -4,7 +4,6 @@ import { getInfoDb } from '../../redux/actions'
 import { Portal } from '..';
 import Trade from '../trade/Trade'
 import Card from '../card/Card'
-import Dados from '../dados/Dados'
 
 const GameNav = () => {
 
