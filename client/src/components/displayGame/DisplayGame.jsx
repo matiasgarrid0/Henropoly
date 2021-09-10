@@ -201,12 +201,18 @@ const DisplayGame = () => {
     setStatus({ ...status, mouseActive: false });
   };
   return (
-    <div className="border">
+    <div className="border">  
+     <div>
+         <PlayerProps target1={playerPosition.target1.box} />
+        </div>
       <div className="body-display no-select">
-        {statusTable === "complete" ? (
-          <div className="container-gametable">
+        {statusTable === "complete" ? ( 
+            
+          <div className="container-gametable"> 
+      
             <div className="container-gametable-cube">
-              <div style={style}>
+              <div style={style}>  
+             
                 <div className="align-game">
                   <Board className="board-position" cards={tableGame.table} />
                   <div className="game-box">
@@ -272,6 +278,7 @@ const DisplayGame = () => {
       {
         status.roll && <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
       }
+      
     </div>
   );
 };
