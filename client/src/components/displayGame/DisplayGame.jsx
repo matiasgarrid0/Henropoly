@@ -51,7 +51,8 @@ const DisplayGame = () => {
   const alignTarget = async (player) => {//target1 0 5
     setStatus({ ...status, targetMove: true });
 
-    let num = Math.floor((Math.random() * 6) + 1);
+    let num = Math.floor((Math.random() * 6) + 2);
+    console.log("log del random DisplayGame   " + num)
 
     var actualBox = status[player].box;//0
     var finalBox = playerPosition[player].box;//5
@@ -69,8 +70,8 @@ const DisplayGame = () => {
       rollOne = roll - 1
       rollTwo = 1
     }
-    setStatus({ ...status, rollOne: rollOne , rollTwo:rollTwo, roll:true});
-    await moveTime(2000)
+    setStatus({ ...status, rollOne: rollOne, rollTwo: rollTwo, roll: true });
+    await moveTime(1000)
 
     while (finalBox !== actualBox) {//1 5
       let initialX = targetX(player, actualBox);//target1 1 dfdffd
@@ -102,7 +103,7 @@ const DisplayGame = () => {
         },
       });
     }
-    setStatus({ ...status, roll:false});
+    setStatus({ ...status, roll: false });
     setStatus({
       ...status,
       [player]: {
@@ -269,7 +270,7 @@ const DisplayGame = () => {
         onMouseOut={handleOnMouseUpEvent}
       ></div>
       {
-       <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
+        status.roll && <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
       }
     </div>
   );

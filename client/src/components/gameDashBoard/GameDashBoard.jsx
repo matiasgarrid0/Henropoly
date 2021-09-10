@@ -9,6 +9,7 @@ const GameDashBoard = () => {
   const movePlayer = (player) => {
     return () => {
       let num = Math.floor((Math.random() * 11) + 2);
+      console.log("log del random GameDashBoard   " + num)
       switch (player) {
         case "target1":
           if (playerPosition.target1.box + num < 40) {

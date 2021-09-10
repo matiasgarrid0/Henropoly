@@ -9,26 +9,22 @@ function Dices({ rollOne, rollTwo }) {
     rollDice();
   });
 
-  const [number, setNumber] = useState(null);
+  const [vuelta, setVuelta] = useState(true);
 
   function rollDice() {
-    const time = 1;
-    diceOne.current.style.transition = "";
-    diceOne.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-    diceTwo.current.style.transition = "";
-    diceTwo.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-
-    setTimeout(() => {
+    const time = 1
+    if(vuelta){
+      diceOne.current.style.transition = "";
+      diceOne.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+      diceTwo.current.style.transition = "";
+      diceTwo.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+    }
       diceOne.current.style.transition = `transform ${time}s`;
       diceTwo.current.style.transition = `transform ${time}s`;
       let randomNumberDiceOne = rollOne;
       let randomNumberDiceTwo = rollTwo;
 
-      console.log(randomNumberDiceOne, randomNumberDiceTwo);
-      setNumber(randomNumberDiceOne + randomNumberDiceTwo);
-
-      // number = randomNumberDiceOne + randomNumberDiceTwo
-
+      console.log( "log del random Dice  " + randomNumberDiceOne +"  "+ randomNumberDiceTwo);
       switch (randomNumberDiceOne) {
         case 1:
           diceOne.current.style.transform = ` rotateX(3600deg) rotateY(3600deg) rotateZ(3600deg)`;
@@ -69,7 +65,6 @@ function Dices({ rollOne, rollTwo }) {
           diceTwo.current.style.transform = ` rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
           break;
       }
-    });
   }
 
   return (

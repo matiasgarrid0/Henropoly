@@ -40,7 +40,6 @@ import {getInfoDb} from '../../redux/actions'
 const Board = ({cards}) => {
  
  
- console.log('board', cards)
   if (cards) {
     return (
       <div className="square">
