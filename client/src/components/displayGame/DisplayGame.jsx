@@ -269,7 +269,7 @@ const DisplayGame = () => {
         onMouseOut={handleOnMouseUpEvent}
       ></div>
       {
-        status.roll && <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
+       <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
       }
     </div>
   );

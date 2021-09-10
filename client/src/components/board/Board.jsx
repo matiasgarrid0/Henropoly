@@ -6,9 +6,9 @@ import CardComunal from "./CardComunal";
 import CardLucky from "./CardLucky"
 import CardRail from "./CardRail"
 import CardTaxes from "./CardTaxes"
-import { AiFillHtml5 } from "react-icons/ai";
+// import { AiFillHtml5 } from "react-icons/ai";
 import { GiLockedChest } from "react-icons/gi";
-import { RiLightbulbFlashFill } from "react-icons/ri";
+// import { RiLightbulbFlashFill } from "react-icons/ri";
 import {
   SiCss3,
   SiPostgresql,
@@ -44,6 +44,7 @@ const Board = ({cards}) => {
   if (cards) {
     return (
       <div className="square">
+<<<<<<< HEAD
       <div className="table">
         <div className="box-row responsive">
           <div className="square2"><span className="corner corner1">FREE <br /> PARKING</span>
@@ -76,6 +77,45 @@ const Board = ({cards}) => {
           <div className="max-table">
           <div className="card-box card-blue">
               <div className="card-blue-inside">{<GiLockedChest  className='card-icon'/>}</div>
+=======
+        <div className="table">
+          <div className="box-row responsive">
+            <div className="square2"><span className="corner corner1">FREE <br /> PARKING</span>
+            <Card data={cards.table[20]} grade="180" icons={<FaVuejs className='card-icon'/>} />
+            </div>.
+            <Card data={cards.table[21]} grade="180" icons={<FaVuejs className='card-icon' />} />
+            <CardLucky data={cards.table[22]} grade="180" icons={<FaQuestion className='card-icon' />} />
+            <Card data={cards.table[23]} grade="180" icons={<FaAngular className='card-icon' />} />
+            <Card data={cards.table[24]} grade="180" icons={<FaNode className='card-icon' />} />
+            <CardRail data={cards.table[25]} grade="180" icons={<FaTrain className='card-icon' />} />
+            <Card data={cards.table[26]} grade="180" icons={<FaPython className='card-icon' />} />
+            <Card data={cards.table[27]} grade="180" icons={<DiJava className='card-icon' />} />
+            <CardTaxes data={cards.table[28]} grade="180" icons={<FcWiFiLogo className='card-icon' />} />
+            <Card data={cards.table[29]} grade="180" icons={<SiJavascript className='card-icon' />} />
+            <div className="square2"><span className="corner corner2">GO TO<br />JAIL</span></div>
+            <Card data={cards.table[30]} grade="180" icons={<SiCss3 className='card-icon' />} />
+            </div>
+          <div className="box-row">
+            <div className="box-column">
+              <Card data={cards.table[19]} grade="90" icons={<SiCss3 className='card-icon' />} />
+              <Card data={cards.table[18]} grade="90" icons={<SiCss3 className='card-icon' />} />
+              <CardComunal data={cards.table[17]} grade="90" icons={<GiLockedChest className='card-icon' />} />
+              <Card data={cards.table[16]} grade="90" icons={<BsFillBootstrapFill className='card-icon' />} />
+              <CardRail data={cards.table[15]} grade="90" icons={<FaTrain className='card-icon' />} />
+              <Card data={cards.table[14]} grade="90" icons={<BsFillBootstrapFill className='card-icon' />} />
+              <Card data={cards.table[13]} grade="90" icons={<SiCss3 className='card-icon' />} />
+              <CardTaxes data={cards.table[12]} grade="90" icons={<FcIdea className='card-icon' />} />
+              <Card data={cards.table[11]} grade="90" icons={<SiCss3 className='card-icon' />} />
+            </div>
+            <div className="max-table">
+            <div className="card-box card-blue">
+                <div className="card-blue-inside">{<GiLockedChest  className='card-icon'/>}</div>
+              </div>
+              <img className='board-logo' src={Logo} alt="logo board"/>
+              <div className="card-box card-orange">
+                <div className="card-orange-inside">{<FaQuestion className='card-icon' />}</div>						
+              </div>
+>>>>>>> 88a453e7d0f87e108bf7122c993a5ad447779a2e
             </div>
             <img className='board-logo' src={Logo}/>
             <div className="card-box card-orange">
