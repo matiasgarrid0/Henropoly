@@ -1,6 +1,6 @@
 import "./Game.css";
 import React from "react";
-import { DisplayGame, GameDashBoard } from "./../../components";
+import { GameDashBoard,DisplayGame } from "./../../components";
 
 const Game = () => {
   return (
@@ -11,7 +11,6 @@ const Game = () => {
       <div className="box-game">
         <DisplayGame />
       </div>
-      
     </div>
   );
 };
