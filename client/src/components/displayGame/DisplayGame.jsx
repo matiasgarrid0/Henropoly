@@ -7,7 +7,7 @@ import {
   changeValueTable,
   changeValueTarget,
 } from "./../../redux/actions";
-import { Board, Dices } from "./../";
+import { Board, Dices, PlayerProps } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 

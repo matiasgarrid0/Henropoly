@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import React, { useEffect } from 'react';
-import { Nav, Loading, ViewBoard } from './components';
+import { Nav, Loading, ViewBoard, PlayerProps, Action } from './components';
 import { SwitchPage, Game} from './views'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken, getInfoDb } from "./redux/actions";
@@ -35,9 +35,13 @@ const App = () => {
         <Route path="/" exact component={SwitchPage} />
         <Route path="/game" exact component={Game} />
         <Route path="/ViewBoard" exact component={ViewBoard} />
+        <Route path="/PLAYERS" exact component={PlayerProps} />
+        <Route path="/switch-case" exact component={Action} />
       </Switch>
     </div>
-  );
+  ); 
+ 
+  
 };
 
 export default App;

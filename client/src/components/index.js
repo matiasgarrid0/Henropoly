@@ -10,6 +10,8 @@ import GameDashBoard from './gameDashBoard/GameDashBoard.jsx'
 import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
 import Dices from './dice/Dice.jsx';
+import PlayerProps from './playerProps/playerProps.jsx';
+import Action from './playerProps/switchBoxBoard'
 
 export {
     Loggin,
@@ -23,5 +25,7 @@ export {
     GameDashBoard,
     ViewBoard,
     Background3D,
-    Dices
+    Dices,
+    PlayerProps, 
+    Action
 }

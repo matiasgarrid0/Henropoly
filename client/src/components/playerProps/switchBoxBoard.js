@@ -1,9 +1,31 @@
+import React, { useState} from 'react';
+import { useDispatch} from 'react-redux';
+
+/* const expressions = {
+   expressionStandar: /^[a-zA-Z0-9_-]+$/, // Letras, numeros, guion y guion_bajo
+   usernameLong: /^.{4,25}$/, // 4 a 25 digitos.
+   passwordLong: /^.{8,16}$/, // 4 a 16 digitos.
+ }; */
+//!/^[a-zA-Z0-9_-]+$/.test(input.username)
 let player = {
     properties: null,
     henrycoin: 1500,
     position: 0,
     ludmila: "sdjbdbhjdbdbjbsdbjdbjdbjdbdbj",
 };
+/* resultNewGame:
+Bank:
+BankHenryCoins: 200000
+properties: []
+[[Prototype]]: Object
+PlayerData:
+target1: {ID: "1", username: "JHHHJ", henryCoins: 1500, properties: Array(0), cards: Array(0)}
+target2: {ID: "2", username: "HGHH", henryCoins: 1500, properties: Array(0), cards: Array(0)}
+target3: {ID: "3", username: "JHJHJJ", henryCoins: 1500, properties: Array(0), cards: Array(0)}
+target4: {ID: "4", username: "JHJHJH", henryCoins: 1500, properties: Array(0), cards: Array(0)}
+[[Prototype]]: Object
+actualTurn: "target1"
+order: (4) ["target1", "target3", "target4", "target2"] */
 
 function gameActionsBoard(player, action, cards, type) {
   //   if (position === 1) {
@@ -442,8 +464,18 @@ function gameActionsBoard(player, action, cards, type) {
   }
 }
 
-/* console.log(
-  gameActionsBoard(1, 6, jose, "comprar", cards.table[1].versionAlpha)
-); */
-/* 
- module.exports = { player } */
+function  Action(props) {
+  const dispatch = useDispatch();
+  
+  
+   return (
+  <div className='container-register'>
+     {/*    {console.log(
+  gameActionsBoard()} */}
+
+       </div>
+     
+   ) 
+  }
+  
+  export default Action;
