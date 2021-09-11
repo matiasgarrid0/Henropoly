@@ -110,6 +110,7 @@ const GameNav = () => {
                         carta.map((e) => (
                             <Card register={setPortal("card")}
                                 name={e.name}
+                                color={e.color}
                                 id={e.id}
                                 versionAlpha={e.versionAlpha}
                                 versionOne={e.versionOne}

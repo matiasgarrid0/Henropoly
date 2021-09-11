@@ -1,6 +1,7 @@
 import React from "react";
 import "./board.css";
 const Card = ({ data, grade, icons }) => {
+  console.log(data.color)
   if (data) {
     return (
       <div

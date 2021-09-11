@@ -37,3 +37,31 @@
 .nav-space {
   height: 70px;
 }
+/* .btn {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color .3s ease;
+  border-radius:15px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #e4e002;
+  color: #000000;
+  border: solid 1px #fffb01;
+  }
+.btn-verde {
+  background-color: #fffb01;
+  color: #000000;
+  border: 1px solid #fffb01;
+  margin-left: 2rem;
+  } */
