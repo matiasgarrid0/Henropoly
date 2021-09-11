@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Portal } from '..';
-import {filterCardsRandom} from '../../redux/actions'
+import {filterLuckyRandom , filterComunalRandom} from '../../redux/actions'
 import LuckyCard from '../luckyCard/LuckyCard'
 // import './luckyCard.css'
 
 const PortalCard = () => {
     const dispatch = useDispatch();
-    const random = useSelector((state) => state.reducerInfo.cardFilter);    
-    console.log('cardFilter',random)
+    const luckyCard = useSelector((state) => state.reducerInfo.luckyCard);
+    console.log('ASKLDJASLDKJASLKDJSLADKJSALDK',luckyCard)
+    const comunalCard = useSelector((state) => state.reducerInfo.comunalCard);     
+
 
     useEffect(() => {
-        dispatch(filterCardsRandom("hola"))
+        dispatch(filterLuckyRandom())
+        dispatch(filterComunalRandom())
     }, [])
 
     const [values, setValues] = React.useState({
@@ -29,13 +32,13 @@ const PortalCard = () => {
         <div>
             {values.portal === "suerte" && (
                 <Portal onClose={setPortal(null)}>
-                    <LuckyCard register={setPortal("suerte")} data={random} />
+                    <LuckyCard register={setPortal("suerte")} data={luckyCard} />
                 </Portal>
             )}
                 <button onClick={setPortal("suerte")}>FortuneCard</button>
             {values.portal === "comunal" && (
                 <Portal onClose={setPortal(null)}>
-                    <LuckyCard className="mati-luckyCard" register={setPortal("comunal")} data={random} />
+                    <LuckyCard className="mati-luckyCard" register={setPortal("comunal")} data={comunalCard} />
                 </Portal>
             )}
             <button onClick={setPortal("comunal")}>Comunal </button>
@@ -45,4 +48,3 @@ const PortalCard = () => {
 }
     
 export default PortalCard;
-

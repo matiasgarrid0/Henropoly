@@ -116,9 +116,9 @@ function Action() {
   const dispatch = useDispatch();
   const { info, infoGame } = useSelector((state) => state.reducerInfo);
 
-  useEffect(() => {
-    dispatch(filterCardsRandom("Suerte"));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(filterCardsRandom("Suerte"));
+  // }, [dispatch]);
 
   //PLAYER= objeto con muchas props
   //valor= VALOR QUE SE DESCUENTA,

@@ -11,10 +11,10 @@ const GameDashBoard = () => {
   const cardReducer = useSelector((state) => state.reducerInfo.info);
   let myArr;
   /**
-   * 
+   *
    * @param {number} positionDices1 numero de la posición segun dados
    * @param {array} arr son las cartas del tablero que estan en info
-   * @returns 
+   * @returns
    */
   const findIdCard = (positionDices1, arr) => {
 
@@ -25,8 +25,8 @@ const GameDashBoard = () => {
   const { playerPosition } = useSelector((state) => state.game);
   const movePlayer = (player) => {
     return () => {
-      let num = Math.floor((Math.random() * 11) + 2);
-      console.log("log del random GameDashBoard   " + num)
+      let num = Math.floor(Math.random() * 11 + 2);
+      console.log("log del random GameDashBoard   " + num);
       switch (player) {
         case "target1":
           if (playerPosition.target1.box + num < 40) {
@@ -45,6 +45,7 @@ const GameDashBoard = () => {
             // console.log(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr)
             // gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr)
             // console.log('2222222kjsnjsdajnsadjnsdjkjsdjakds', gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr))           
+                       
           }
 
           break;
