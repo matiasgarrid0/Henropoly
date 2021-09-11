@@ -19,7 +19,8 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 30,
-        color: "brown"
+        color: "brown",
+        owner: null
     },
     {
         id:2,
@@ -39,7 +40,8 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 30,
-        color: "brown"
+        color: "brown",
+        owner: null,
     },
     {
         id:4,
@@ -52,7 +54,8 @@ const cardpropertiesData = [
         takeCheckpoint: 25,
         twoCheckpoint: 50,
         threeCheckpoint: 100,
-        fourCheckpoint: 200
+        fourCheckpoint: 200,
+        owner: null,
     },
     {
         id:6,
@@ -68,7 +71,8 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color:"light-blue"
+        color:"light-blue",
+        owner: null,
     },
     {
         id:7,
@@ -88,7 +92,8 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color:"light-blue"
+        color:"light-blue",
+        owner: null,
     },
     {
         id:9,
@@ -104,7 +109,8 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 60,
-        color:"light-blue"
+        color:"light-blue",
+        owner: null,
     },
     {
         id:10,
@@ -124,13 +130,15 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 70,
-        color: "pink"
+        color: "pink",
+        owner: null,
     },
     {
         id:12,
         type:"service",
         name:"ELECTRICITY COMPANY",
-        licenseValue:"75"
+        licenseValue:"75",
+        owner: null,
     },
     {
         id:13,
@@ -146,7 +154,8 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 70,
-        color: "pink"
+        color: "pink",
+        owner: null,
     },
     {
         id:14,
@@ -162,7 +171,8 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 80,
-        color: "pink"
+        color: "pink",
+        owner: null,
     },
     {
         id:15,
@@ -171,7 +181,8 @@ const cardpropertiesData = [
         takeCheckpoint: 25,
         twoCheckpoint: 50,
         threeCheckpoint: 100,
-        fourCheckpoint: 200
+        fourCheckpoint: 200,
+        owner: null,
     },
     {
         id:16,
@@ -187,7 +198,8 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 90,
-        color: "orange"
+        color: "orange",
+        owner: null,
     },
     {
         id:17,
@@ -207,7 +219,8 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 90,
-        color: "orange"
+        color: "orange",
+        owner: null,
     },
     {
         id:19,
@@ -223,7 +236,8 @@ const cardpropertiesData = [
         commonVersion: 100,
         premiumVersion: 100,
         licenseValue: 100,
-        color: "orange"
+        color: "orange",
+        owner: null,
     },
     {
         id:20,
@@ -243,7 +257,8 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 110,
-        color: "red"
+        color: "red",
+        owner: null,
     },
     {
         id:22,
@@ -263,7 +278,8 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 110,
-        color: "red"
+        color: "red",
+        owner: null,
     },
     {
         id:24,
@@ -279,7 +295,8 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 120,
-        color: "red"
+        color: "red",
+        owner: null,
     },
     {
         id:25,
@@ -288,7 +305,8 @@ const cardpropertiesData = [
         takeCheckpoint: 25,
         twoCheckpoint: 50,
         threeCheckpoint: 100,
-        fourCheckpoint: 200
+        fourCheckpoint: 200,
+        owner: null,
     },
     {
         id:26,
@@ -304,7 +322,8 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 130,
-        color: "yellow"
+        color: "yellow",
+        owner: null,
     },
     {
         id:27,
@@ -320,14 +339,15 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 130,
-        color: "yellow"
+        color: "yellow",
+        owner: null,
     },
     {
         id:28,
         type:"service",
         name:"INTERNET COMPANY",
         licenseValue:"75",
-
+        owner: null,
     }, 
     {
         id:29,
@@ -343,7 +363,8 @@ const cardpropertiesData = [
         commonVersion: 150,
         premiumVersion: 150,
         licenseValue: 130,
-        color: "yellow"
+        color: "yellow",
+        owner: null,
     },
     {
         id:30,
@@ -363,7 +384,8 @@ const cardpropertiesData = [
         commonVersion: 200,
         premiumVersion: 200,
         licenseValue: 150,
-        color: "green"
+        color: "green",
+        owner: null,
     },
     {
         id:32,
@@ -379,7 +401,8 @@ const cardpropertiesData = [
         commonVersion: 200,
         premiumVersion: 200,
         licenseValue: 150,
-        color: "green"
+        color: "green",
+        owner: null,
     },
     {
         id:33,
@@ -399,7 +422,8 @@ const cardpropertiesData = [
         commonVersion: 200,
         premiumVersion: 200,
         licenseValue: 160,
-        color: "green"
+        color: "green",
+        owner: null,
     },
     {
         id:35,
@@ -408,7 +432,8 @@ const cardpropertiesData = [
         takeCheckpoint: 25,
         twoCheckpoint: 50,
         threeCheckpoint: 100,
-        fourCheckpoint: 200
+        fourCheckpoint: 200,
+        owner: null,
     },
     {
         id:36,
@@ -428,7 +453,8 @@ const cardpropertiesData = [
         commonVersion: 200,
         premiumVersion: 200,
         licenseValue: 175,
-        color: "blue"
+        color: "blue",
+        owner: null,
     },
     {
         id:38,
@@ -448,7 +474,8 @@ const cardpropertiesData = [
         commonVersion: 200,
         premiumVersion: 200,
         licenseValue: 200,
-        color: "blue"
+        color: "blue",
+        owner: null,
     },
 ]
 

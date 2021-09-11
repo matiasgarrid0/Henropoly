@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 /* import { register } from "../../redux/actions"; */
 import Action from "./switchBoxBoard";
+import { portalCard } from "./../";
 import './playerProps.css'
 
 
@@ -71,6 +72,7 @@ function PlayerProps({idsala, target1}) {
         </div>
       )}
       <Action players = {players}/>
+     
     </div>
   );
 }

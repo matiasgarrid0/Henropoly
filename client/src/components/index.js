@@ -12,6 +12,7 @@ import Background3D from './background3D/Background3D.jsx'
 import Dices from './dice/Dice.jsx';
 import PlayerProps from './playerProps/playerProps.jsx';
 import Action from './playerProps/switchBoxBoard'
+import portalCard from './portalCard/portalCard.jsx';
 
 export {
     Loggin,
@@ -27,5 +28,6 @@ export {
     Background3D,
     Dices,
     PlayerProps, 
-    Action
+    Action,
+    portalCard
 }

@@ -1,15 +1,15 @@
 const luckyCards = [
     {
         name: "Suerte",
-        description: "No comiteaste bien | Pagás $5"
+        description: "No comiteaste bien | Pagás $20"
     },
     {
         name: "Suerte",
-        description: "No creaste bien tu rama | Retrocede 4 casilleros"
+        description: "No creaste bien tu rama | Pagas $25"
     },
     {
         name: "Suerte",
-        description: "Te aceptaron de TA | Cobra un bonus de $5"
+        description: "Te aceptaron de TA | Cobra un bonus de $20"
     },
     {
         name: "Suerte",
@@ -17,28 +17,29 @@ const luckyCards = [
     },
     {
         name: "Suerte",
-        description: "Te cortaron la luz, perdiste 3 dias en el PI | Retrocede 3 espacios"
+        description: "Te cortaron la luz, perdiste 3 dias en el PI | Pagas $40"
     },
 
     {
         name: "Suerte",
-        description: "Te encontraron muteado en el Pair-Programming | Paga $4"
+        description: "Te encontraron muteado en el Pair-Programming | Paga $40"
     },
     {
         name: "Suerte",
-        description: "Le hablaste a Anthony por un problema | Te salvás de migrar por errores administrativos"
+        description: "Le hablaste a Anthony por un problema | Te salvás de migrar por errores administrativos",
+        owner: null,
     },
     {
         name: "Suerte",
-        description: "Te pasó la 4x4 de Diego | Retrocede 2 casilleros"
+        description: "Te pasó la 4x4 de Diego | Paga $10"
     },
     {
         name: "Suerte",
-        description: "Conseguiste el buda de la suerte en el repo | avanza 5 casilleros"
+        description: "Conseguiste el buda de la suerte en el repo | Cobras $100"
     },
     {
         name: "Suerte",
-        description: "Aprobaste el Proyecto Final | Avanza hasta la salida"
+        description: "Aprobaste el Proyecto Final | Cobras $50" 
     },
     {
         name: "Suerte",
@@ -46,7 +47,7 @@ const luckyCards = [
     },
     {
         name: "Suerte",
-        description: "No te conectaste a las clases ni al stand-up | Pagas 5$ "
+        description: "No te conectaste a las clases ni al stand-up | Pagas $5 "
     }
 ]
 
