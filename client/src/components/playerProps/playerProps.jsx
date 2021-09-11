@@ -7,10 +7,16 @@ import './playerProps.css'
 
 
 
+
+
 function PlayerProps({idsala, target1}) {
   const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
-  let playeRedux = useSelector((state) => state.game.playerPosition)
+  let playerRedux = useSelector((state) => state.game.playerPosition)
+
+
+
+
   return (
     <div>
       {players[0] === undefined ? (
@@ -25,11 +31,12 @@ function PlayerProps({idsala, target1}) {
           <label>HenryCoins: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.henryCoins} </span>
           <label> Tecnologias: </label>
-          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e) :<div>Aún no tenés propiedades</div> } </span> 
+          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e.name) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target1.cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
           <label> Posicion: </label>
-         <span>{target1 } </span>  
+         <span>{target1 } </span> 
+          
        </div>
 
         <div className="playerProps-box"> 

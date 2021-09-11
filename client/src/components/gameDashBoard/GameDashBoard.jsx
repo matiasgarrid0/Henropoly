@@ -2,9 +2,31 @@ import React from "react";
 import "./GameDashBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValueTarget } from "./../../redux/actions";
+import { gameActionsBoard } from "../playerProps/switchBoxBoard";//
+
+
+
+
 
 const GameDashBoard = () => {
   const dispatch = useDispatch();
+  const players = useSelector((state) => state.reducerInfo.infoGame);
+  const cardReducer = useSelector((state) => state.reducerInfo.info);
+  let myArr;
+  /**
+   * 
+   * @param {number} positionDices1 numero de la posición segun dados
+   * @param {array} arr son las cartas del tablero que estan en info
+   * @returns 
+   */
+  const findIdCard = (positionDices1, arr) => {
+    
+    let aux = arr.table.filter(e => e.id === positionDices1)
+    console.log('AUXXXXXXXX', arr)
+    return aux;
+  }
+
+
   const { playerPosition } = useSelector((state) => state.game);
   const movePlayer = (player) => {
     return () => {
@@ -15,7 +37,7 @@ const GameDashBoard = () => {
           if (playerPosition.target1.box + num < 40) {
             dispatch(
               changeValueTarget(player, "box", playerPosition.target1.box + num)
-            );
+              )
           } else {
             dispatch(
               changeValueTarget(
@@ -23,8 +45,13 @@ const GameDashBoard = () => {
                 "box",
                 playerPosition.target1.box + num - 40
               )
-            );
+            ); 
+            myArr = findIdCard(playerPosition.target1.box,cardReducer)
+            console.log(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr)
+            gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr)
+            console.log('2222222kjsnjsdajnsadjnsdjkjsdjakds', gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr))           
           }
+         
           break;
         case "target2":
           if (playerPosition.target2.box + num < 40) {
@@ -73,6 +100,12 @@ const GameDashBoard = () => {
       }
     };
   };
+  const hardcodeo = (player) => {
+  myArr = findIdCard(playerPosition.target1.box,cardReducer)
+    console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
+      gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr[0].type, myArr)
+      console.log('111111111kjsnjsdajnsadjnsdjkjsdjakds', gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr))
+  }
 
   return (
     <div className="body-dashboard box-row no-select">
@@ -80,6 +113,8 @@ const GameDashBoard = () => {
         <div className="box-row">
           <label className="label-game">player1:</label>
           <button onClick={movePlayer("target1")}>Roll</button>
+          <button onClick={hardcodeo}> ii</button>
+         
           {playerPosition.target1.box}
         </div>
         <div className="box-row">
