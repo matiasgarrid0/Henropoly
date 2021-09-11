@@ -1,5 +1,7 @@
 import React, { useState, useEffect }  from "react";
-import Logo from './img/Henropoly.png'
+import LogoBoard from './img/Henropoly-blanco.png'
+import Cofre from './img/cofre.png'
+import Lucky from './img/lucky.png'
 import "./board.css";
 import Card from "./Card";
 import CardComunal from "./CardComunal";
@@ -75,11 +77,11 @@ const Board = ({cards}) => {
           </div>
           <div className="max-table">
           <div className="card-box card-blue">
-              <div className="card-blue-inside">{<GiLockedChest  className='card-icon'/>}</div>
-            </div>
-            <img className='board-logo' src={Logo}/>
-            <div className="card-box card-orange">
-              <div className="card-orange-inside">{<FaQuestion className='card-icon' />}</div>						
+              <img className="card-blue-inside" src={Cofre}/>
+          </div>
+            <img className='board-logo' src={LogoBoard}/>
+            <div className="card-box card-orange" >
+              <img className="card-orange-inside" src={Lucky}/>						
             </div>
           </div>
           <div className="box-column">
