@@ -1,10 +1,11 @@
-import { GET_INFO, POST_PLAYERS, SET_STATUS_INFO, FILTER_RANDOM } from '../constants';
+import { GET_INFO, POST_PLAYERS, SET_STATUS_INFO, FILTER_LUCKY_RANDOM,FILTER_COMUNAL_RANDOM } from '../constants';
 
 const initialState = {
   info:[],  
   infoGame:[],
   stateI: false,
-  cardFilter: []
+  luckyCard: [],
+  comunalCard:[]
 }
 
 const reducerInfo = (state = initialState, action) => {
@@ -25,17 +26,26 @@ const reducerInfo = (state = initialState, action) => {
        ...state,
        stateI: action.payload,
      }
-    case FILTER_RANDOM: 
+    case FILTER_LUCKY_RANDOM: 
      const randomLucky = (arr) =>{
       const number = Math.floor((Math.random() * 12) + 1)
        const luckyCard = arr.filter((e) => e.ID === number)
-      console.log('luckyCard-infoDb',luckyCard)
       return luckyCard
     }
     return { 
     ...state,
-     cardFilter: action.payload =='Suerte' ? randomLucky(state.info.fortune): randomLucky(state.info.comunal)
+     luckyCard: randomLucky(state.info.fortune)
     }
+    case FILTER_COMUNAL_RANDOM: 
+    const randomComnual = (arr) =>{
+     const number = Math.floor((Math.random() * 7) + 1)
+      const comunalCard = arr.filter((e) => e.ID === number)
+     return comunalCard
+   }
+   return { 
+   ...state,
+   comunalCard: randomComnual(state.info.comunal)
+   }
     default: 
       return state;
   }

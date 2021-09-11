@@ -13,6 +13,7 @@ import Dices from './dice/Dice.jsx';
 import PlayerProps from './playerProps/playerProps.jsx';
 import Action from './playerProps/switchBoxBoard'
 import portalCard from './portalCard/portalCard.jsx';
+import LuckyCard from './luckyCard/LuckyCard.jsx';
 
 export {
     Loggin,
@@ -29,5 +30,6 @@ export {
     Dices,
     PlayerProps, 
     Action,
-    portalCard
+    portalCard,
+    LuckyCard
 }

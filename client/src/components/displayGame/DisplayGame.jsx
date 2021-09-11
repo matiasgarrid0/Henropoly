@@ -6,8 +6,10 @@ import {
   resetTable,
   changeValueTable,
   changeValueTarget,
+  filterLuckyRandom,
+  filterComunalRandom,
 } from "./../../redux/actions";
-import { Board, Dices, PlayerProps } from "./../";
+import { Board, Dices, PlayerProps, Portal, LuckyCard } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
@@ -22,23 +24,25 @@ const DisplayGame = () => {
   const dispatch = useDispatch();
   const { statusTable, tableGame, view, playerPosition } = useSelector(
     (state) => state.game
-  );
+  ); //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const [status, setStatus] = useState({
     mouseActive: false,
     clientX: null,
     clientY: null,
     targetMove: false,
+    portal: null,
     target1: {
       box: playerPosition.target1.box,
     },
     target2: {
-      box: playerPosition.target2.box
+      box: playerPosition.target2.box,
     },
     target3: {
-      box: playerPosition.target3.box
+      box: playerPosition.target3.box,
     },
     target4: {
-      box: playerPosition.target4.box
+      box: playerPosition.target4.box,
     },
     roll: false,
     rollOne: null,
@@ -48,49 +52,67 @@ const DisplayGame = () => {
   const moveTime = (value) => {
     return new Promise((resolve) => setTimeout(resolve, value));
   };
-  const alignTarget = async (player) => {//target1 0 5
+  const alignTarget = async (player) => {
+    //target1 0 5
     setStatus({ ...status, targetMove: true });
 
-    let num = Math.floor((Math.random() * 6) + 2);
-    console.log("log del random DisplayGame   " + num)
+    let num = Math.floor(Math.random() * 6 + 2);
+    console.log("log del random DisplayGame   " + num);
 
-    var actualBox = status[player].box;//0
-    var finalBox = playerPosition[player].box;//5
+    var actualBox = status[player].box; //0
+    var finalBox = playerPosition[player].box; //5
 
-    var roll = finalBox - actualBox
+    var roll = finalBox - actualBox;
     var rollOne;
     var rollTwo;
     if (roll === 2) {
       rollOne = 1;
       rollTwo = 1;
     } else if (roll > num) {
-      rollOne = num
-      rollTwo = roll - num
+      rollOne = num;
+      rollTwo = roll - num;
     } else {
-      rollOne = roll - 1
-      rollTwo = 1
+      rollOne = roll - 1;
+      rollTwo = 1;
     }
     setStatus({ ...status, rollOne: rollOne, rollTwo: rollTwo, roll: true });
-    await moveTime(1000)
+    await moveTime(1000);
 
-    while (finalBox !== actualBox) {//1 5
-      let initialX = targetX(player, actualBox);//target1 1 dfdffd
-      let initialY = targetY(player, actualBox);//target1 1 dffdfdfd
+    while (finalBox !== actualBox) {
+      //1 5
+      let initialX = targetX(player, actualBox); //target1 1 dfdffd
+      let initialY = targetY(player, actualBox); //target1 1 dffdfdfd
       actualBox++; //2
       if (actualBox === 40) actualBox = 0;
       let valueX = targetX(player, actualBox) - initialX; // 2 - 1 200px
       let valueY = targetY(player, actualBox) - initialY; // 2 - 1 150px
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5)));
+      dispatch(
+        changeValueTarget(player, "x", initialX + Math.floor(valueX / 5))
+      );
+      dispatch(
+        changeValueTarget(player, "y", initialY + Math.floor(valueY / 5))
+      );
       await moveTime(120);
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 2)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 2)));
+      dispatch(
+        changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 2))
+      );
+      dispatch(
+        changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 2))
+      );
       await moveTime(120);
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 3)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 3)));
+      dispatch(
+        changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 3))
+      );
+      dispatch(
+        changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 3))
+      );
       await moveTime(120);
-      dispatch(changeValueTarget(player, "x", initialX + Math.floor(valueX / 5 * 4)));
-      dispatch(changeValueTarget(player, "y", initialY + Math.floor(valueY / 5 * 4)));
+      dispatch(
+        changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 4))
+      );
+      dispatch(
+        changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 4))
+      );
       await moveTime(120);
       dispatch(changeValueTarget(player, "x", initialX + valueX)); //2
       dispatch(changeValueTarget(player, "y", initialY + valueY)); //2
@@ -99,7 +121,7 @@ const DisplayGame = () => {
         ...status,
         [player]: {
           ...status[player],
-          box: actualBox,//5
+          box: actualBox, //5
         },
       });
     }
@@ -107,12 +129,25 @@ const DisplayGame = () => {
     setStatus({
       ...status,
       [player]: {
-        ...status[player],
+        ...status[player], //
         box: finalBox,
       },
       targetMove: false,
-    });
+    }); //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    if (tableGame.table[playerPosition[player].box].type) {
+      if (tableGame.table[playerPosition[player].box].type === "comunal") {
+        dispatch(filterComunalRandom());
+        setStatus({ ...status, portal: "comunal" });
+      }
+      if (tableGame.table[playerPosition[player].box].type === "lucky") {
+        dispatch(filterLuckyRandom());
+        setStatus({ ...status, portal: "lucky" });
+      }
+    }
   };
+  function closedPortal() {
+    setStatus({ ...status, portal: null });
+  }
   useEffect(() => {
     if (
       status.target1.box !== playerPosition.target1.box &&
@@ -200,19 +235,27 @@ const DisplayGame = () => {
   const handleOnMouseUpEvent = (e) => {
     setStatus({ ...status, mouseActive: false });
   };
+
   return (
-    <div className="border">  
-     <div>
-         <PlayerProps target1={playerPosition.target1.box} />
-        </div>
+    <div className="border">
+      {status.portal === "lucky" && (
+        <Portal onClose={closedPortal}>
+          <LuckyCard data={luckyCard} />
+        </Portal>
+      )}
+      {status.portal === "comunal" && (
+        <Portal onClose={closedPortal}>
+          <LuckyCard data={comunalCard} />
+        </Portal>
+      )}
+      <div>
+        <PlayerProps target1={playerPosition.target1.box} />
+      </div>
       <div className="body-display no-select">
-        {statusTable === "complete" ? ( 
-            
-          <div className="container-gametable"> 
-      
+        {statusTable === "complete" ? (
+          <div className="container-gametable">
             <div className="container-gametable-cube">
-              <div style={style}>  
-             
+              <div style={style}>
                 <div className="align-game">
                   <Board className="board-position" cards={tableGame.table} />
                   <div className="game-box">
@@ -275,10 +318,9 @@ const DisplayGame = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       ></div>
-      {
-        status.roll && <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
-      }
-      
+      {status.roll && (
+        <Dices rollOne={status.rollOne} rollTwo={status.rollTwo} />
+      )}
     </div>
   );
 };

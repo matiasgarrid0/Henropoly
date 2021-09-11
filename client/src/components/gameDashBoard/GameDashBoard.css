@@ -12,3 +12,8 @@
 .label-game {
   width: 50px;
 }
+
+.h1-fs{
+  position: absolute;
+  font-size: 10000px;
+}
