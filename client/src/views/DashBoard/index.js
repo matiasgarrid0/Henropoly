@@ -1,12 +1,12 @@
 import React from "react";
-
+import { Chat } from "../../components";
 import "./dashboard.css";
 
 const DashBoard = () => {
 
   return (
     <div className="dashboard-todo">
-      <div className="dashboard-hijo">
+      {/* <div className="dashboard-hijo">
         <div className="asd"> </div>
 
         <div className="position">
@@ -122,6 +122,9 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
+      </div> */}
+      <div>
+        <Chat/>
       </div>
     </div>
   );
