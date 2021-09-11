@@ -31,7 +31,7 @@ function PlayerProps({idsala, target1}) {
           <label>HenryCoins: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.henryCoins} </span>
           <label> Tecnologias: </label>
-          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e.name) :<div>Aún no tenés propiedades</div> } </span> 
+          <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e[0].name) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target1.cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
           <label> Posicion: </label>

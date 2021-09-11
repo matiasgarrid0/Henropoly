@@ -9,58 +9,99 @@ export function gameActionsBoard(player, action, type, card) {
       if (action === "comprar") {
         //cuando comprar la propiedad básica
         // card.owner= player.ID
+       //console.log('lo que estra para filter', player.properties[0][0].id, card[0].id)    
+        player.henryCoins = player.henryCoins - card[0].licenseValue
         return (player = {
           ...player,
-          properties: player.properties.push(card),
-          henryCoins: Number(player.henryCoins) - Number(card[0].licenseValue),
+          properties: player.properties.push(card)
         });
       }
-      if (action === "pagar") {
+      if (action === "pagar") { //ver logica porq solo se paga si tiene dueño
+        player.henryCoins= player.henryCoins - card[0].versionAlpha
         return (player = {
-          ...player,
-          henryCoins: player.henryCoins - card.versionAlpha,
+          ...player
         });
       }
       if (action === "vender") {
         //cuando vendes al banco, se le suma el precio base y fin.
-        return (player = {
-          properties: player.properties.filter((e) => e.id !== e.id),
-          henrycoin: player.henrycoin - card.versionAlpha,
-        });
+        player.henryCoins= player.henryCoins + card[0].versionAlpha
+                                             //  [0, 1, 2]
+        player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
+        return player
       }
       if (action === "mejorar") {
         //comprar una casita u hotel de mejora
+        player.henryCoins= player.henryCoins - card[0].versionAlpha
         return (player = {
-          henrycoin: player.henrycoin - 50, //le resta el valor para mejorar.
-          position: 1,
+          ...player //le resta el valor para mejorar.         
         });
         //Si entra aca... Filtramos las cartas que conincidan con la posicion 1 en este caso y pusheamos esa carta al array de jugador
       } else {
         return player;
       }
-
     case "comunal":
-      return player;
-    //dispatch(fiterrandom) -----> card id
-    // otra switch (id) ----> return el playercambiado segun carta
+        return player;
+      //dispatch(fiterrandom) -----> card id
+      // otra switch (id) ----> return el playercambiado segun carta
     case "lucky":
       //dispatch(fiterrandom) -----> card id
       // otra switch (id) ----> return el playercambiado segun carta
       return player;
-      //*"property","service","lucky","comunal","railway","exit","jail","goJail","stop"service":
-      return (player = {
-        ...player,
-        henrycoin: player.henrycoin - 90,
-      });
+    case "service":
+        if (action === "comprar") {
+          player.henryCoins = player.henryCoins - card[0].licenseValue
+          return (player = {
+            ...player,
+            properties: player.properties.push(card)
+          });
+        }
+        if (action === "pagar") {//ver logica porq solo se paga si tiene dueño
+          player.henryCoins= player.henryCoins - 15
+          return (player = {
+            ...player
+          });
+        }
+        if (action === "vender") {
+          player.henryCoins= player.henryCoinsn + 90
+          player.properties= player.properties.filter((e) => e.id !== e.id)
+          return (player = {
+            ...player
+          });
+        }
     case "railway":
-      return (player = {
-        ...player,
-        henrycoin: player.henrycoin - 500,
-      });
+      if (action === "comprar") {
+        player.henryCoins = player.henryCoins - card[0].takeCheckpoint
+        return (player = {
+          ...player,
+          properties: player.properties.push(card)
+        });
+      }
+      if (action === "pagar") {//ver logica porq solo se paga si tiene dueño
+        player.henryCoins= player.henryCoins - 10
+        return (player = {
+          ...player
+        });
+      }
+      if (action === "vender") {
+        player.henryCoins= player.henryCoins +  40
+        return (player = {
+          ...player,
+          properties:player.properties.filter((e) => e[0].id !== card[0].id)
+        });
+      }
+      // player.henryCoins= player.henryCoins - 500
+      // return (player = {
+      //   ...player
+      // });
     case "tax":
+      player.henryCoins= player.henryCoins - 200
       return (player = {
-        ...player,
-        henrycoin: player.henrycoin - 500,
+        ...player
+      });
+    case "taxVip":
+      player.henryCoins= player.henryCoins - 400
+      return (player = {
+          ...player
       });
 
     case "exit" || "jail" || "goJail" || "stop":
