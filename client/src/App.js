@@ -34,7 +34,6 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={SwitchPage} />
         <Route path="/game" exact component={Game} />
-        <Route path="/card" exact component={portalCard} />
         <Route path="/PLAYERS" exact component={Action} />
       </Switch>
     </div>

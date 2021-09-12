@@ -1,14 +1,21 @@
 import React from 'react';
+import './RailwayCard.css';
 
-const LuckyCard = ({data}) => {
-    console.log("DATA",data[0].name)
+const RailwayCard = ({data}) => {
     return (
         <div className='railway-background-initial'>
-            <div className ="railway-background">
-                <h3 className = "railway-h3">{data[0].name}</h3>
-                <span>{data[0].description}</span>
+            <div className ="RailwayCard-background-no-repeat">
+                <h3 className = "RailwayCard-h3">{data.name}</h3>
+                <span className = "card-span-bold"> Checkpoint:{data.takeCheckpoint}</span>
+                <span className = "card-span-bold">Dos checkpoint:{data.twoCheckpoint}</span>
+                <span className = "card-span-bold" >Tres checkpoint:{data.threeCheckpoint}</span>
+                <span className = "card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}</span>
+                <div>
+                    <button>Comprar</button>
+                    <button>Cancelar</button>
+                </div>
             </div>
         </div>
     )
 }
-export default LuckyCard;
+export default RailwayCard;

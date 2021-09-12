@@ -12,9 +12,10 @@ import Background3D from './background3D/Background3D.jsx'
 import Dices from './dice/Dice.jsx';
 import PlayerProps from './playerProps/playerProps.jsx';
 import Action from './playerProps/switchBoxBoard'
-import portalCard from './portalCard/portalCard.jsx';
 import LuckyCard from './luckyCard/LuckyCard.jsx';
 import PropertyCard from './PropertyCard/PropertyCard.jsx';
+import RailwayCard from './railwayCard/RailwayCard'
+import ServiceCard  from './serviceCard/ServiceCard'
 
 export {
     Loggin,
@@ -31,7 +32,8 @@ export {
     Dices,
     PlayerProps, 
     Action,
-    portalCard,
     LuckyCard,
-    PropertyCard
+    PropertyCard,
+    RailwayCard,
+    ServiceCard
 }
