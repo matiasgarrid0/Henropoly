@@ -14,27 +14,33 @@
 
 .board-logo{
   width: 40rem;
-  margin-left: 11rem;
-  position: absolute;
-	transform: rotateZ(-45deg) translateX(-110px) translateY(90px);
+	transform: rotateZ(-45deg) translateX(-5px) translateY(220px);
+}
+.board-logo-toniPolice{
+  width: 10rem;
+	transform: rotateZ(0deg) translateX(85px) translateY(-30px);
 	text-align: center;
-
+}
+.board-logo-toniJail{
+  width: 16rem;
+	transform: rotateZ(10.5deg) translateX(-140px) translateY(9px);
+	text-align: center;
 }
 .table {
   background: radial-gradient(#414141, #0e0e0e);
   box-shadow: inset 0 0 0 5px #ffffffc7;
   width: var(--total);
   height: var(--total);
-
 }
 .container-card {
   width: var(--x);
   height: var(--y);
   box-shadow: inset 0 0 0 2px #ffffff;
   color: rgb(226, 226, 226);
+  /* background-color: blue; */
+  -webkit-text-stroke: 1px rgb(122, 122, 122);
   font-size: 20px;
   text-align: center;
-  
 }
 .container-card-cube {
   display: flex;
@@ -71,7 +77,6 @@
   display: flex;
 }
 .div-title-empty{
-  
   height: 20%;
   display: flex;
   margin-top: 0.2rem;
@@ -90,49 +95,76 @@
   text-align: center;
   padding-top: 2rem;
 }
+/*ICONS*/
 .card-icon {
   margin-top: 20px;
   font-size: 70px;
   color: rgb(226, 226, 226);
 }
+.card-icon-import-express{
+  margin-top: 3.2rem;
+  margin-bottom: 0.9rem;
+  width: 5.5rem;
+}
+.card-icon-import-Cplus{
+  margin-top: 0.9rem;
+  margin-bottom: -0.2rem;
+  width: 4.3rem;
+}
+.card-icon-import-Csharp{
+  margin-top: 0.9rem;
+  margin-bottom: -0.2rem;
+  width: 4.1rem;
+}
+.card-icon-import-Ui{
+  margin-top: 1.5rem;
+  margin-bottom: -0.2rem;
+  width: 4.2rem;
+}
+.card-icon-import-Modulos{
+  margin-top: 1.5rem;
+  margin-bottom: -0.2rem;
+  width: 4.5rem;
+}
+.card-icon-import-Sequelize{
+  margin-top: 1.1rem;
+  margin-bottom: -0.2rem;
+  width: 4.1rem;
+}
 .color-card-brown {
-  background-color: #966237;
+  background: linear-gradient(#e49f68, #966237);
 }
 .color-card-light-blue {
-  background-color: #3fa2cc;
+  background: linear-gradient(#91d6f3, #3fa2cc);
 }
 .color-card-pink {
-  background-color: violet;
+  background: linear-gradient(#fda7fd, #e060e0);
 }
 .color-card-orange {
-  background-color: #bd6422;
+  background: linear-gradient(#eb924f, #bd6422);
 }
 .color-card-red {
-  background-color: #b1342a;
+  background: linear-gradient(#ee6c62, #b1342a);
 }
 .color-card-yellow {
-  background-color: #d4c218;
+  background: linear-gradient(#f5e557, #d4c218);
 }
 .color-card-green {
-  background-color: #028730;
+  background: linear-gradient(#2ecc65, #028730);
 }
 .color-card-blue {
-  background-color: #154375;
+  background: linear-gradient(#5593d6, #154375);
+
 }
 .top{
   margin-top: 5rem;
 }
-.card-blue {
-	transform: rotateZ(-45deg) translateX(25px) translateY(230px);
-}
 .card-blue-inside{
+  transform: rotateZ(-45deg) translateX(50px) translateY(230px);
   width: 15rem;
 }
-.card-orange {
-	transform: rotateZ(-45deg) translateX(120px) translateY(850px);
-
-}
 .card-orange-inside{
+  transform: rotateZ(-45deg) translateX(370px) translateY(560px);
   width: 15rem;
 }
 .card-box {	
