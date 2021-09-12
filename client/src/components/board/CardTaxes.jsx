@@ -32,7 +32,7 @@ const CardEmpty = ({ data, grade, icons }) => {
               <label className="title-card">{data.name}</label>
             </div>
               <div className="box-column"></div>
-              <div>{icons}</div>
+              <div className='board-color-bill'>{icons}</div>
             </>
           )}
             {data.type === "service" &&  (

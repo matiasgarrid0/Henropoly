@@ -1,5 +1,5 @@
 import "./Nav.css";
-import Logo from "../../image/Henropoly.png";
+import LogoNav from '../../image/logo-nav.png'
 import React from "react";
 import { useSelector } from "react-redux";
 import { Portal, RegisterForm, Loggin, LogOut, Background3D } from "./../";
@@ -31,7 +31,7 @@ const Nav = () => {
         )}
         <div className="nav-container">
           <div>
-         <Link to='/'><img className="logo-nav" src={Logo} alt="logo" /></Link>
+         <Link to='/'><img className="logo-nav" src={LogoNav} alt="logo" /></Link>
           </div>
           {isAuth && (
             <div>

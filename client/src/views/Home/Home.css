@@ -1,22 +1,22 @@
 .body-home-align{
   position: absolute;
   width: 100%;
- 
+  margin-top: 40px;
 }
 .principal {
   margin: auto;
   margin-top: 50px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.705);
   align-items: center;
   text-align: center;
   height: 540px;
   width: 600px;
-  border: solid black 2px;
+  border: groove rgb(0, 0, 0) 2px;
   border-radius: 5px;
   box-shadow: 7px 10px 12px 3px #000000;
   font-family: var(--text-one);
   font-size: 45px;
-  color: rgb(251, 255, 6);
+  color: rgb(251, 255, 9);
 }
 .container-home {
   margin-top: -2rem;
@@ -35,5 +35,7 @@
   margin-top: -3rem;
   letter-spacing: -1.3px;
   text-align: center;
-  font-size: 30px;
+  font-size: 33px;
+  border-color: 1px solid black;
+  word-spacing: 1px;
 }

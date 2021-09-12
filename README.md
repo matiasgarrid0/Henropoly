@@ -24,3 +24,5 @@ Henropoly es un juego de mesa traido al internet, este se basa en la compra y la
 
 #### client ENV
 - `URL_API=http://localhost:3001`
+- URL_SOCKET=//localhost:3001
+

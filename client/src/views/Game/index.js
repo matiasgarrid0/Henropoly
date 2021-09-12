@@ -15,7 +15,6 @@ const Game = () => {
       <div className="box-game">
         <DisplayGame />
       </div>
-      
     </div>
   );
 };

@@ -6,6 +6,8 @@ import { postPlayer } from "../../redux/actions";
 import { IoIosArrowForward } from "react-icons/io";
 import { CreateGame } from "../../components/index";
 import { Portal } from "../../components/index";
+import Shop from "../../image/SHOP.png"
+
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -62,10 +64,12 @@ const DashBoard = () => {
 }
      */
 
+
   return (
     <div className="dashboard-todo">
       <div className="dashboard-hijo">
         <div className="asd"> </div>
+
         <div className="position">
           <div className="total">
             <h3 className="h3-total"> ¡JUEGA!</h3>
@@ -77,79 +81,31 @@ const DashBoard = () => {
             El primer jugador en mover su pieza será seleccionado al azar al
             comiendo de cada partida
             <h4>QUÉ HACER EN TU TURNO</h4>
-            Tirar los dados te hará avanzar en el tablero. ¿Dónde has caído?
-            Cómprala o paga impuestos al propietario. ¿Has sacado dobles? Tienes
-            otra tirada. ¡OJO! Si sacas 3 veces seguidas, ¡debes ir a la cárcel!
-            No completes tu tercer turno. Finalizar tu turno hará que no puedas
-            hacer cambios, PIENSALO BIEN.
+            Tirar los dados hará avanzará tu pieza por el tablero ¿Dónde has
+            caído? Haz lo que indique la casilla depende de ello para saber cómo
+            continuar ¿Has sacado dobles? Vuelve a tirar los dados y juega de
+            nuevo. ¡OJO! Si sacas 3 veces seguidas, ¡debes ir a la cárcel! No
+            completes tu tercer turno. Finalizar tu turno hará que no puedas
+            hacer cambios PIENSALO BIEN
           </div>
           <div className="contSalyImg">
             <div className="crearSala">
-              <button onClick={openPortal}>
-                <h3 className="text-hov">crear sala</h3>
-              </button>
+              <button className="text-hov" onClick={openPortal}>
+              Crear sala</button>
               {portal === "createGame" && (
                 <Portal onClose={closedPortal}>
                   <CreateGame />
                 </Portal>
-              )}
-              <h3 className="text-hov">Unirse a sala</h3>
-            </div>
-            {/* 
-                            
-                            <form onSubmit={(e) => handleSubmit(e)}>
-                                <label>Player 1</label>
-                                <input
-                                    type='text'
-                                    name='playerOne'
-                                    value={input.playerOne}
-                                    onChange={e => handleChange(e)}
-                                    placeholder='name player'
-                                />
-                                <label>Player 2</label>
-                                <input
-                                    type='text'
-                                    name='playerTwo'
-                                    value={input.playerTwo}
-                                    onChange={e => handleChange(e)}
-                                    placeholder='name player'
-                                />
-                                <label>Player 3</label>
-                                <input
-                                    type='text'
-                                    name='playerThree'
-                                    value={input.playerThree}
-                                    onChange={e => handleChange(e)}
-                                    placeholder='name player'
-                                />
-                                <label>Player 4</label>
-                                <input
-                                    type='text'
-                                    name='playerFour'
-                                    value={input.playerFour}
-                                    onChange={e => handleChange(e)}
-                                    placeholder='name player'
-                                />
-                                <button type="submit" >Enviar </button>
-                            </form>
-                            <h3 className='text-hov'>Unirse a sala</h3>
-                        </div> */}
-            <div className="conimg">
-              <img
-                className="imgn"
-                src="https://cdn-pro.elsalvador.com/wp-content/uploads/2020/07/Ramon-Valdes.jpg"
-                alt="Don Ramón"
-              />
+              )}            
+              <button className="text-hov">Unirse a Sala</button>
+              <img className="imgn" src={Shop} alt="shop"/>
             </div>
           </div>
           <div className="ranking">
-            <h3>Mas partidas ganadas</h3>
+            <span className="game-win">Mas partidas ganadas</span>
             <div className="person">
-              <img
-                src="https://ca.slack-edge.com/TPRS7H4PN-U020K03EUHG-f49f0477ebe4-512"
-                alt="img"
-              />
-              <h4 className="dashboard-h4">senjo903</h4>
+              <img src="https://ca.slack-edge.com/TPRS7H4PN-U020K03EUHG-f49f0477ebe4-512" alt="img"/>
+              <span className="dashboard-span">senjo903</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">10</span>
@@ -160,7 +116,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RENRHB6K-19d480373bd1-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">FacuRearte</h4>
+              <span className="dashboard-h4">FacuRearte</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">7</span>
@@ -171,7 +127,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U02046U590X-519f10bc999e-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">AlanGiavino</h4>
+              <span className="dashboard-span">AlanGiavino</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">5</span>
@@ -182,7 +138,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01UZGHU3J8-8209681533eb-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">MatiGarrido</h4>
+              <span className="dashboard-span">MatiGarrido</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">4</span>
@@ -193,7 +149,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01T4MPG0BF-eadd1fea01c5-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">Sebi_elmejor</h4>
+              <span className="dashboard-span">Sebi_elmejor</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">3</span>
@@ -204,7 +160,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01V60B1T9P-0f495ba2e434-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">Moniss_94</h4>
+              <span className="dashboard-span">Moniss_94</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">2</span>
@@ -215,7 +171,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RUQXGKD0-67b4aeef2acb-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">FlorHQ_92</h4>
+              <span className="dashboard-span">FlorHQ_92</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">1</span>
