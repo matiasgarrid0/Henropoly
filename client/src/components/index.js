@@ -14,6 +14,7 @@ import PlayerProps from './playerProps/playerProps.jsx';
 import Action from './playerProps/switchBoxBoard'
 import portalCard from './portalCard/portalCard.jsx';
 import LuckyCard from './luckyCard/LuckyCard.jsx';
+import PropertyCard from './PropertyCard/PropertyCard.jsx';
 
 export {
     Loggin,
@@ -31,5 +32,6 @@ export {
     PlayerProps, 
     Action,
     portalCard,
-    LuckyCard
+    LuckyCard,
+    PropertyCard
 }

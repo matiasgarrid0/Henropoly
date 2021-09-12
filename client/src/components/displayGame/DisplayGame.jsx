@@ -9,7 +9,8 @@ import {
   filterLuckyRandom,
   filterComunalRandom,
 } from "./../../redux/actions";
-import { Board, Dices, PlayerProps, Portal, LuckyCard } from "./../";
+
+import { Board, Dices, PlayerProps, Portal, LuckyCard,PropertyCard  } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
@@ -25,9 +26,10 @@ const DisplayGame = () => {
   const { statusTable, tableGame, view, playerPosition } = useSelector(
     (state) => state.game
   ); //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
+  const { luckyCard, comunalCard  } = useSelector((state) => state.reducerInfo);
   const [status, setStatus] = useState({
     mouseActive: false,
+    cartita:null,
     clientX: null,
     clientY: null,
     targetMove: false,
@@ -142,6 +144,11 @@ const DisplayGame = () => {
       if (tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterLuckyRandom());
         setStatus({ ...status, portal: "lucky" });
+      } 
+      if (tableGame.table[playerPosition[player].box].type === "property") {
+        //|| tableGame.table[playerPosition[player].box].type === "railway" || tableGame.table[playerPosition[player].box].type === "service"
+        console.log("PROPIEDAD")
+        setStatus({ ...status, cartita:tableGame.table[playerPosition[player].box] , portal: "property" });
       }
     }
   };
@@ -246,6 +253,11 @@ const DisplayGame = () => {
       {status.portal === "comunal" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={comunalCard} />
+        </Portal>
+      )}
+        {status.portal === "property" && (
+        <Portal onClose={closedPortal}>
+          <PropertyCard data={status.cartita} />
         </Portal>
       )}
       <div>
