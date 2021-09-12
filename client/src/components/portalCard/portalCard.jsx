@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Portal } from '..';
-import {filterLuckyRandom , filterComunalRandom} from '../../redux/actions'
+import {filterLuckyRandom , filterComunalRandom, getInfoDb} from '../../redux/actions'
 import LuckyCard from '../luckyCard/LuckyCard'
+import RailwayCard from '../railwayCard/RailwayCard'
 // import './luckyCard.css'
 
 const PortalCard = () => {
     const dispatch = useDispatch();
     const luckyCard = useSelector((state) => state.reducerInfo.luckyCard);
-    console.log('ASKLDJASLDKJASLKDJSLADKJSALDK',luckyCard)
+    const infoRail = useSelector((state) => state.reducerInfo.info);
+    console.log('ASKLDJASLDKJASLKDJSLADKJSALDK', infoRail);
     const comunalCard = useSelector((state) => state.reducerInfo.comunalCard);     
 
 
     useEffect(() => {
         dispatch(filterLuckyRandom())
         dispatch(filterComunalRandom())
+        dispatch(getInfoDb())
     }, [])
 
     const [values, setValues] = React.useState({

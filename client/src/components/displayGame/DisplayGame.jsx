@@ -5,6 +5,7 @@ import {
   setDefault,
   resetTable,
   changeValueTable,
+  getInfoDb,
   changeValueTarget,
   filterLuckyRandom,
   filterComunalRandom,
@@ -142,6 +143,10 @@ const DisplayGame = () => {
       if (tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterLuckyRandom());
         setStatus({ ...status, portal: "lucky" });
+      }
+      if (tableGame.table[playerPosition[player].box].type === "railway") {
+        dispatch(getInfoDb());
+        setStatus({ ...status, portal: "railway" });
       }
     }
   };
