@@ -14,7 +14,7 @@ import {
 import { Board, Dices, PlayerProps, Portal, LuckyCard,PropertyCard  } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-import { luckyOrArc } from '../playerProps/switchBoxBoard' 
+import { luckyOrArc, gameActionsBoard } from '../playerProps/switchBoxBoard' 
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -26,9 +26,10 @@ const DisplayGame = () => {
   }, []);
   const dispatch = useDispatch();
   const { statusTable, tableGame, view, playerPosition } = useSelector(
-    (state) => state.game
-  ); //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    (state) => state.game  );
+   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   const players = useSelector((state) => state.reducerInfo.infoGame);
+  const cardReducer = useSelector((state) => state.reducerInfo.info);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const [portal, setPortal]= useState(null)
   const [status, setStatus] = useState({
@@ -168,6 +169,26 @@ const DisplayGame = () => {
     luckyOrArc(comunalCard,players[0].resultNewGame.PlayerData.target1)
     setPortal(null);   
   }
+
+  function closedPortal2() {
+    setPortal(null);   
+  }
+
+  let myArr;
+  const findIdCard = (positionDices1, arr) => {
+    let aux = arr.table.filter(e => e.id === positionDices1)
+    console.log('findIdCard en DisplayGame', arr)
+    return aux;
+  }
+  function comprar() {
+    myArr = findIdCard(playerPosition.target1.box, cardReducer)
+    console.log('DisplayGame-findthe card with position', myArr[0].type, myArr[0].licenseValue)
+    console.log('DisplayGame-tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
+    console.log('DisplayGame-playerrrr',players[0].resultNewGame.PlayerData.target1)
+    gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
+    setPortal(null);   
+  }
+
   useEffect(() => {
     if (
       status.target1.box !== playerPosition.target1.box &&
@@ -268,9 +289,10 @@ const DisplayGame = () => {
           <LuckyCard data={comunalCard} />
         </Portal>
       )}
-        {status.portal === "property" && (
-        <Portal onClose={closedPortal}>
+        {portal === "property" && (
+        <Portal onClose={closedPortal2}>
           <PropertyCard data={status.cartita} />
+          <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
       <div>

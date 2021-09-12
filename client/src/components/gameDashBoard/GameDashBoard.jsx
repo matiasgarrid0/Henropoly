@@ -9,7 +9,6 @@ const GameDashBoard = () => {
   const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const cardReducer = useSelector((state) => state.reducerInfo.info);
-  const [render, setRender] = useState("")
   let myArr;
   /**
    *
@@ -91,14 +90,13 @@ const GameDashBoard = () => {
       }
     };
   };
-  const compra = (player) => {
-    myArr = findIdCard(playerPosition.target1.box, cardReducer)
-    console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
-    console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
-    gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
-    console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
-    setRender('compra')
-  }
+  // const compra = (player) => {
+  //   myArr = findIdCard(playerPosition.target1.box, cardReducer)
+  //   console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
+  //   console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
+  //   gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
+  //   console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+  // }
 
   const vender = (player) => {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
@@ -106,7 +104,6 @@ const GameDashBoard = () => {
     console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
     console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
      gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
-     setRender('venta')
   }
   // const hardcodeo = (player) => {
   //   myArr = findIdCard(playerPosition.target1.box, cardReducer);
@@ -121,7 +118,7 @@ const GameDashBoard = () => {
         <div className="box-row">
           <label className="label-game">player1:</label>
           <button onClick={movePlayer("target1")}>Roll</button>
-           <button onClick={compra}> comprar</button>
+           {/* <button onClick={compra}> comprar</button> */}
           <button onClick={vender}> vender</button>
          {playerPosition.target1.box}
 

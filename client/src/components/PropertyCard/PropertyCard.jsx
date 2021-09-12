@@ -4,7 +4,7 @@ import './PropertyCard.css';
 
 //{ name, versionAlpha, versionOne, versionTwo, versionThree, versionFour, versionPremium, aditional, commonVersion, premiumVersion, licenseValue }
 const PropertyCard = ({ data }) => {
-    return (
+        return (
         <div className="luckyCard-background-initial">
             <div className={`propertyCard-div-title propertyCard-color-card-${data.color}`}>
                 <div className="luckyCard-background">
@@ -22,8 +22,7 @@ const PropertyCard = ({ data }) => {
                     <p className="pgame"><span className="card-span-bold">Version Comun:</span> {data.commonVersion}$</p>
                     <p className="pgame"><span className="card-span-bold">Version Premium:</span> {data.premiumVersion}$</p>
                     <p className="pgame"><span className="card-span-bold">Valor de la Licencia:</span> {data.licenseValue}$</p>
-                    <button>comprar</button>
-                    <button>cancelar</button>
+                    {/* <button onClick={comprar}>comprar</button> */}
                 </div>
             </div>
 
