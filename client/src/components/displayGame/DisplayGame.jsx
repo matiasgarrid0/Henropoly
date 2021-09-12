@@ -5,16 +5,15 @@ import {
   setDefault,
   resetTable,
   changeValueTable,
-  getInfoDb,
   changeValueTarget,
   filterLuckyRandom,
   filterComunalRandom,
 } from "./../../redux/actions";
 
-import { Board, Dices, PlayerProps, Portal, LuckyCard,PropertyCard  } from "./../";
+import { Board, Dices, PlayerProps, Portal, LuckyCard, PropertyCard,RailwayCard,ServiceCard } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-import { luckyOrArc } from '../playerProps/switchBoxBoard' 
+import { luckyOrArc } from '../playerProps/switchBoxBoard'
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -30,10 +29,12 @@ const DisplayGame = () => {
   ); //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
-  const [portal, setPortal]= useState(null)
+  const [portal, setPortal] = useState(null)
   const [status, setStatus] = useState({
     mouseActive: false,
-    cartita:null,
+    properyCard: null,
+    railwayCard: null,
+    serviceCard: null,
     clientX: null,
     clientY: null,
     targetMove: false,
@@ -97,14 +98,14 @@ const DisplayGame = () => {
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor(valueY / 5))
       );
-       await moveTime(20);
+      await moveTime(20);
       dispatch(
         changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 2))
       );
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 2))
       );
-       await moveTime(20);
+      await moveTime(20);
       dispatch(
         changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 3))
       );
@@ -118,10 +119,10 @@ const DisplayGame = () => {
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-       await moveTime(20);
+      await moveTime(20);
       dispatch(changeValueTarget(player, "x", initialX + valueX)); //2
       dispatch(changeValueTarget(player, "y", initialY + valueY)); //2
-       await moveTime(20);
+      await moveTime(20);
       setStatus({
         ...status,
         [player]: {
@@ -142,31 +143,43 @@ const DisplayGame = () => {
     if (tableGame.table[playerPosition[player].box].type) {
       if (tableGame.table[playerPosition[player].box].type === "comunal") {
         dispatch(filterComunalRandom());
-        setPortal("comunal" );
+        setPortal("comunal");
       }
       if (tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterLuckyRandom());
         setStatus({ ...status, portal: "lucky" });
         setPortal("lucky");
-      } 
+      }
       if (tableGame.table[playerPosition[player].box].type === "property") {
         //|| tableGame.table[playerPosition[player].box].type === "railway" || tableGame.table[playerPosition[player].box].type === "service"
-        setStatus({ ...status, cartita:tableGame.table[playerPosition[player].box] , portal: "property" });
+        setStatus({ ...status, properyCard: tableGame.table[playerPosition[player].box], portal: "property" });
         setPortal("property");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "railway") {
+        setStatus({ ...status, railwayCard: tableGame.table[playerPosition[player].box], portal: "railway" });
+        setPortal("railway");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "service") {
+        setStatus({ ...status, serviceCard: tableGame.table[playerPosition[player].box], portal: "service" });
+        setPortal("service");
       }
     }
   };
   function closedPortal() {
     //luqui luckyCard, comunalCard
     //tableGame.table[playerPosition[player].box
-    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box] )
-    setPortal(null) 
+    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
+    setPortal(null)
   }
 
   function closedPortal1() {
     //comunal
-    luckyOrArc(comunalCard,players[0].resultNewGame.PlayerData.target1)
-    setPortal(null);   
+    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1)
+    setPortal(null);
+  }
+  function closedPortal2() {
+    //propertis
+    setPortal(null);
   }
   useEffect(() => {
     if (
@@ -268,18 +281,28 @@ const DisplayGame = () => {
           <LuckyCard data={comunalCard} />
         </Portal>
       )}
-        {status.portal === "property" && (
-        <Portal onClose={closedPortal}>
-          <PropertyCard data={status.cartita} />
+      {portal === "property" && (
+        <Portal onClose={closedPortal2}>
+          <PropertyCard data={status.properyCard}/>
+        </Portal>
+      )}
+      {portal === "railway" && (
+        <Portal onClose={closedPortal2}>
+          <RailwayCard data={status.railwayCard}/>
+        </Portal>
+      )}
+            {portal === "service" && (
+        <Portal onClose={closedPortal2}>
+          <ServiceCard data={status.serviceCard}/>
         </Portal>
       )}
       <div>
-        <PlayerProps 
-          target1={playerPosition.target1.box} 
+        <PlayerProps
+          target1={playerPosition.target1.box}
           target2={playerPosition.target2.box}
           target3={playerPosition.target3.box}
           target4={playerPosition.target4.box}
-           />
+        />
       </div>
       <div className="body-display no-select">
         {statusTable === "complete" ? (
