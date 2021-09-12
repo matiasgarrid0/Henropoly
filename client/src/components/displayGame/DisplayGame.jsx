@@ -22,11 +22,7 @@ import {
 } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-<<<<<<< Updated upstream
 import { luckyOrArc, gameActionsBoard } from '../playerProps/switchBoxBoard' 
-=======
-import { luckyOrArc } from "../playerProps/switchBoxBoard";
->>>>>>> Stashed changes
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -345,12 +341,8 @@ const DisplayGame = () => {
       )}        
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
-<<<<<<< Updated upstream
           <PropertyCard data={status.properyCard}/>
           <button onClick={comprar}>Comprar</button>
-=======
-          <PropertyCard data={status.properyCard} />
->>>>>>> Stashed changes
         </Portal>
       )}
       {portal === "railway" && (
