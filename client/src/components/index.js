@@ -16,6 +16,7 @@ import LuckyCard from './luckyCard/LuckyCard.jsx';
 import PropertyCard from './PropertyCard/PropertyCard.jsx';
 import RailwayCard from './railwayCard/RailwayCard'
 import ServiceCard  from './serviceCard/ServiceCard'
+import TaxCard from './taxCard/TaxCard'
 
 export {
     Loggin,
@@ -35,5 +36,6 @@ export {
     LuckyCard,
     PropertyCard,
     RailwayCard,
-    ServiceCard
+    ServiceCard,
+    TaxCard,
 }

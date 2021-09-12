@@ -10,10 +10,23 @@ import {
   filterComunalRandom,
 } from "./../../redux/actions";
 
-import { Board, Dices, PlayerProps, Portal, LuckyCard, PropertyCard,RailwayCard,ServiceCard } from "./../";
+import {
+  Board,
+  Dices,
+  PlayerProps,
+  Portal,
+  LuckyCard,
+  PropertyCard,
+  RailwayCard,
+  ServiceCard,
+} from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
+<<<<<<< Updated upstream
 import { luckyOrArc, gameActionsBoard } from '../playerProps/switchBoxBoard' 
+=======
+import { luckyOrArc } from "../playerProps/switchBoxBoard";
+>>>>>>> Stashed changes
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -30,7 +43,7 @@ const DisplayGame = () => {
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const cardReducer = useSelector((state) => state.reducerInfo.info);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
-  const [portal, setPortal] = useState(null)
+  const [portal, setPortal] = useState(null);
   const [status, setStatus] = useState({
     mouseActive: false,
     properyCard: null,
@@ -153,29 +166,61 @@ const DisplayGame = () => {
       }
       if (tableGame.table[playerPosition[player].box].type === "property") {
         //|| tableGame.table[playerPosition[player].box].type === "railway" || tableGame.table[playerPosition[player].box].type === "service"
-        setStatus({ ...status, properyCard: tableGame.table[playerPosition[player].box], portal: "property" });
+        setStatus({
+          ...status,
+          properyCard: tableGame.table[playerPosition[player].box],
+          portal: "property",
+        });
         setPortal("property");
       }
       if (tableGame.table[playerPosition[player].box].type === "railway") {
-        setStatus({ ...status, railwayCard: tableGame.table[playerPosition[player].box], portal: "railway" });
+        setStatus({
+          ...status,
+          railwayCard: tableGame.table[playerPosition[player].box],
+          portal: "railway",
+        });
         setPortal("railway");
       }
       if (tableGame.table[playerPosition[player].box].type === "service") {
-        setStatus({ ...status, serviceCard: tableGame.table[playerPosition[player].box], portal: "service" });
+        setStatus({
+          ...status,
+          serviceCard: tableGame.table[playerPosition[player].box],
+          portal: "service",
+        });
         setPortal("service");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "tax") {
+        setStatus({
+          ...status,
+          serviceCard: tableGame.table[playerPosition[player].box],
+          portal: "tax",
+        });
+        setPortal("tax");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "taxVip") {
+        setStatus({
+          ...status,
+          serviceCard: tableGame.table[playerPosition[player].box],
+          portal: "taxVip",
+        });
+        setPortal("taxVip");
       }
     }
   };
   function closedPortal() {
     //luqui luckyCard, comunalCard
     //tableGame.table[playerPosition[player].box
-    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
-    setPortal(null)
+    luckyOrArc(
+      luckyCard,
+      players[0].resultNewGame.PlayerData.target1,
+      tableGame.table[playerPosition.target1.box]
+    );
+    setPortal(null);
   }
 
   function closedPortal1() {
     //comunal
-    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1)
+    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1);
     setPortal(null);
   }
   function closedPortal2() {
@@ -300,18 +345,22 @@ const DisplayGame = () => {
       )}        
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
+<<<<<<< Updated upstream
           <PropertyCard data={status.properyCard}/>
           <button onClick={comprar}>Comprar</button>
+=======
+          <PropertyCard data={status.properyCard} />
+>>>>>>> Stashed changes
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal2}>
-          <RailwayCard data={status.railwayCard}/>
+          <RailwayCard data={status.railwayCard} />
         </Portal>
       )}
-            {portal === "service" && (
+      {portal === "service" && (
         <Portal onClose={closedPortal2}>
-          <ServiceCard data={status.serviceCard}/>
+          <ServiceCard data={status.serviceCard} />
         </Portal>
       )}
       <div>
