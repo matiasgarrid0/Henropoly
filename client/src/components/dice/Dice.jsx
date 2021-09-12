@@ -24,7 +24,6 @@ function Dices({ rollOne, rollTwo }) {
       let randomNumberDiceOne = rollOne;
       let randomNumberDiceTwo = rollTwo;
 
-      console.log( "log del random Dice  " + randomNumberDiceOne +"  "+ randomNumberDiceTwo);
       switch (randomNumberDiceOne) {
         case 1:
           diceOne.current.style.transform = ` rotateX(3600deg) rotateY(3600deg) rotateZ(3600deg)`;

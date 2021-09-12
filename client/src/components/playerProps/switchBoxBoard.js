@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterCardsRandom } from "../../redux/actions";
 
 //
+export function positionToBug(pos) {
+  return pos
+}
 export function gameActionsBoard(player, action, type, card) {
   switch (type) {
     case "property":
       if (action === "comprar") {
         //cuando comprar la propiedad básica
         // card.owner= player.ID
-       //console.log('lo que estra para filter', player.properties[0][0].id, card[0].id)    
+       //console.log('lo que estra para filter', player.properties[0][0].id, card[0].id)
+       card[0].owner= player.username    
         player.henryCoins = player.henryCoins - card[0].licenseValue
         return (player = {
           ...player,
@@ -40,6 +44,7 @@ export function gameActionsBoard(player, action, type, card) {
       }
     case "service":
         if (action === "comprar") {
+          card[0].owner= player.username 
           player.henryCoins = player.henryCoins - card[0].licenseValue
           return (player = {
             ...player,
@@ -59,6 +64,7 @@ export function gameActionsBoard(player, action, type, card) {
         }
     case "railway":
       if (action === "comprar") {
+        card[0].owner= player.username 
         player.henryCoins = player.henryCoins - card[0].takeCheckpoint
         return (player = {
           ...player,

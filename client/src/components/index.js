@@ -35,5 +35,5 @@ export {
     LuckyCard,
     PropertyCard,
     RailwayCard,
-    ServiceCard
+    ServiceCard,
 }

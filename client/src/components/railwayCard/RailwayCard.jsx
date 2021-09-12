@@ -10,10 +10,6 @@ const RailwayCard = ({data}) => {
                 <span className = "card-span-bold">Dos checkpoint:{data.twoCheckpoint}</span>
                 <span className = "card-span-bold" >Tres checkpoint:{data.threeCheckpoint}</span>
                 <span className = "card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}</span>
-                <div>
-                    <button>Comprar</button>
-                    <button>Cancelar</button>
-                </div>
             </div>
         </div>
     )

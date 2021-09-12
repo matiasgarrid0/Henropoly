@@ -13,7 +13,7 @@ import {
 import { Board, Dices, PlayerProps, Portal, LuckyCard, PropertyCard,RailwayCard,ServiceCard } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-import { luckyOrArc, gameActionsBoard } from '../playerProps/switchBoxBoard' 
+import { luckyOrArc, gameActionsBoard , positionToBug } from '../playerProps/switchBoxBoard' 
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -24,18 +24,17 @@ const DisplayGame = () => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
   const dispatch = useDispatch();
-  const { statusTable, tableGame, view, playerPosition } = useSelector(
-    (state) => state.game  );
+  const { statusTable, tableGame, view, playerPosition } = useSelector((state) => state.game  );
    //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const cardReducer = useSelector((state) => state.reducerInfo.info);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const [portal, setPortal] = useState(null)
+  const [property, setProperty] = useState(null)
+  const [train, setTrain] = useState(null)
+  const [service, setService] = useState(null)
   const [status, setStatus] = useState({
     mouseActive: false,
-    properyCard: null,
-    railwayCard: null,
-    serviceCard: null,
     clientX: null,
     clientY: null,
     targetMove: false,
@@ -64,7 +63,6 @@ const DisplayGame = () => {
     setStatus({ ...status, targetMove: true });
 
     let num = Math.floor(Math.random() * 6 + 2);
-    console.log("log del random DisplayGame   " + num);
 
     var actualBox = status[player].box; //0
     var finalBox = playerPosition[player].box; //5
@@ -148,27 +146,23 @@ const DisplayGame = () => {
       }
       if (tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterLuckyRandom());
-        setStatus({ ...status, portal: "lucky" });
         setPortal("lucky");
       }
       if (tableGame.table[playerPosition[player].box].type === "property") {
-        //|| tableGame.table[playerPosition[player].box].type === "railway" || tableGame.table[playerPosition[player].box].type === "service"
-        setStatus({ ...status, properyCard: tableGame.table[playerPosition[player].box], portal: "property" });
+        setProperty(tableGame.table[playerPosition[player].box])
         setPortal("property");
       }
       if (tableGame.table[playerPosition[player].box].type === "railway") {
-        setStatus({ ...status, railwayCard: tableGame.table[playerPosition[player].box], portal: "railway" });
+        setTrain(tableGame.table[playerPosition[player].box])
         setPortal("railway");
       }
       if (tableGame.table[playerPosition[player].box].type === "service") {
-        setStatus({ ...status, serviceCard: tableGame.table[playerPosition[player].box], portal: "service" });
+        setService(tableGame.table[playerPosition[player].box])
         setPortal("service");
       }
     }
   };
   function closedPortal() {
-    //luqui luckyCard, comunalCard
-    //tableGame.table[playerPosition[player].box
     luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
     setPortal(null)
   }
@@ -180,20 +174,19 @@ const DisplayGame = () => {
   }
   function closedPortal2() {
     //propertis
-    setPortal(null);
+    //luckyOrArc(null, null)
+     setPortal(null);
+   //  return positionToBug(tableGame.table[playerPosition.target1.box])
+   
   }
 
   let myArr;
   const findIdCard = (positionDices1, arr) => {
     let aux = arr.table.filter(e => e.id === positionDices1)
-    console.log('findIdCard en DisplayGame', arr)
     return aux;
   }
   function comprar() {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
-    console.log('DisplayGame-findthe card with position', myArr[0].type, myArr[0].licenseValue)
-    console.log('DisplayGame-tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
-    console.log('DisplayGame-playerrrr',players[0].resultNewGame.PlayerData.target1)
     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
     setPortal(null);   
   }
@@ -300,18 +293,20 @@ const DisplayGame = () => {
       )}        
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
-          <PropertyCard data={status.properyCard}/>
+          <PropertyCard data={property}/>
           <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal2}>
-          <RailwayCard data={status.railwayCard}/>
+          <RailwayCard data={train}/>
+          <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
-            {portal === "service" && (
+      {portal === "service" && (
         <Portal onClose={closedPortal2}>
-          <ServiceCard data={status.serviceCard}/>
+          <ServiceCard data={service}/>
+          <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
       <div>
