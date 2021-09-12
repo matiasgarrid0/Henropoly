@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useState} from "react";
 import "./GameDashBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValueTarget } from "./../../redux/actions";
@@ -9,6 +9,7 @@ const GameDashBoard = () => {
   const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const cardReducer = useSelector((state) => state.reducerInfo.info);
+  const [render, setRender] = useState("")
   let myArr;
   /**
    *
@@ -17,7 +18,6 @@ const GameDashBoard = () => {
    * @returns
    */
   const findIdCard = (positionDices1, arr) => {
-
     let aux = arr.table.filter(e => e.id === positionDices1)
     console.log('AUXXXXXXXX', arr)
     return aux;
@@ -40,12 +40,7 @@ const GameDashBoard = () => {
                 "box",
                 playerPosition.target1.box + num - 40
               )
-            );
-            // myArr = findIdCard(playerPosition.target1.box,cardReducer)
-            // console.log(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr)
-            // gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr)
-            // console.log('2222222kjsnjsdajnsadjnsdjkjsdjakds', gameActionsBoard(players[0].resultNewGame.PlayerData.target1,'comprar',myArr.type, myArr))           
-                       
+            );                    
           }
 
           break;
@@ -100,16 +95,25 @@ const GameDashBoard = () => {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
     console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
     console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
-    return gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
+    gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
+    console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+    setRender('compra')
   }
 
   const vender = (player) => {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
     console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
     console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
-    return gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
-
+    console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
+     setRender('venta')
   }
+  // const hardcodeo = (player) => {
+  //   myArr = findIdCard(playerPosition.target1.box, cardReducer);
+  //   console.log("findthe card with position",myArr[0].type,myArr[0].licenseValue);
+  //   gameActionsBoard(players[0].resultNewGame.PlayerData.target1,"comprar", myArr[0].type,myArr);
+  //   console.log("111111111kjsnjsdajnsadjnsdjkjsdjakds", gameActionsBoard(players[0].resultNewGame.PlayerData.target1,"comprar",myArr.type,myArr));
+  // };
 
   return (
     <div className="body-dashboard box-row no-select">
@@ -117,9 +121,9 @@ const GameDashBoard = () => {
         <div className="box-row">
           <label className="label-game">player1:</label>
           <button onClick={movePlayer("target1")}>Roll</button>
-          {playerPosition.target1.box}
-          <button onClick={compra}> comprar</button>
+           <button onClick={compra}> comprar</button>
           <button onClick={vender}> vender</button>
+         {playerPosition.target1.box}
 
         </div>
         <div className="box-row">
