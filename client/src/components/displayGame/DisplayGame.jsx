@@ -10,7 +10,16 @@ import {
   filterComunalRandom,
 } from "./../../redux/actions";
 
-import { Board, Dices, PlayerProps, Portal, LuckyCard, PropertyCard,RailwayCard,ServiceCard } from "./../";
+import {
+  Board,
+  Dices,
+  PlayerProps,
+  Portal,
+  LuckyCard,
+  PropertyCard,
+  RailwayCard,
+  ServiceCard,
+} from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 import { luckyOrArc, gameActionsBoard , positionToBug } from '../playerProps/switchBoxBoard' 
@@ -160,6 +169,22 @@ const DisplayGame = () => {
         setService(tableGame.table[playerPosition[player].box])
         setPortal("service");
       }
+      if (tableGame.table[playerPosition[player].box].type === "tax") {
+        setStatus({
+          ...status,
+          serviceCard: tableGame.table[playerPosition[player].box],
+          portal: "tax",
+        });
+        setPortal("tax");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "taxVip") {
+        setStatus({
+          ...status,
+          serviceCard: tableGame.table[playerPosition[player].box],
+          portal: "taxVip",
+        });
+        setPortal("taxVip");
+      }
     }
   };
   function closedPortal() {
@@ -169,7 +194,7 @@ const DisplayGame = () => {
 
   function closedPortal1() {
     //comunal
-    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1)
+    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1);
     setPortal(null);
   }
   function closedPortal2() {
@@ -278,7 +303,7 @@ const DisplayGame = () => {
   const handleOnMouseUpEvent = (e) => {
     setStatus({ ...status, mouseActive: false });
   };
-
+  
   return (
     <div className="border">
       {portal === "lucky" && (

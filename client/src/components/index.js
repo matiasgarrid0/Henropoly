@@ -16,6 +16,8 @@ import LuckyCard from './luckyCard/LuckyCard.jsx';
 import PropertyCard from './PropertyCard/PropertyCard.jsx';
 import RailwayCard from './railwayCard/RailwayCard'
 import ServiceCard  from './serviceCard/ServiceCard'
+import TaxCard from './taxCard/TaxCard'
+import CreateGame from './createGame/CreateGame'
 
 export {
     Loggin,
@@ -36,4 +38,6 @@ export {
     PropertyCard,
     RailwayCard,
     ServiceCard,
+    TaxCard,
+    CreateGame,
 }
