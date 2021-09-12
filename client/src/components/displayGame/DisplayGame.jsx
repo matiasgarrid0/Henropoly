@@ -326,7 +326,7 @@ const DisplayGame = () => {
   const handleOnMouseUpEvent = (e) => {
     setStatus({ ...status, mouseActive: false });
   };
-
+  
   return (
     <div className="border">
       {portal === "lucky" && (
