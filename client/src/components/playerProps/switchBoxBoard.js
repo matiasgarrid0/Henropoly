@@ -25,7 +25,6 @@ export function gameActionsBoard(player, action, type, card) {
       if (action === "vender") {
         //cuando vendes al banco, se le suma el precio base y fin.
         player.henryCoins= player.henryCoins + card[0].versionAlpha
-                                             //  [0, 1, 2]
         player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
         return player
       }
@@ -39,14 +38,6 @@ export function gameActionsBoard(player, action, type, card) {
       } else {
         return player;
       }
-    case "comunal":
-        return player;
-      //dispatch(fiterrandom) -----> card id
-      // otra switch (id) ----> return el playercambiado segun carta
-    case "lucky":
-      //dispatch(fiterrandom) -----> card id
-      // otra switch (id) ----> return el playercambiado segun carta
-      return player;
     case "service":
         if (action === "comprar") {
           player.henryCoins = player.henryCoins - card[0].licenseValue
@@ -62,11 +53,9 @@ export function gameActionsBoard(player, action, type, card) {
           });
         }
         if (action === "vender") {
-          player.henryCoins= player.henryCoinsn + 90
-          player.properties= player.properties.filter((e) => e.id !== e.id)
-          return (player = {
-            ...player
-          });
+          player.henryCoins= player.henryCoins + card[0].versionAlpha
+          player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
+          return player
         }
     case "railway":
       if (action === "comprar") {
@@ -83,11 +72,9 @@ export function gameActionsBoard(player, action, type, card) {
         });
       }
       if (action === "vender") {
-        player.henryCoins= player.henryCoins +  40
-        return (player = {
-          ...player,
-          properties:player.properties.filter((e) => e[0].id !== card[0].id)
-        });
+        player.henryCoins= player.henryCoins + card[0].versionAlpha
+        player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
+        return player
       }
       // player.henryCoins= player.henryCoins - 500
       // return (player = {
@@ -112,6 +99,33 @@ export function gameActionsBoard(player, action, type, card) {
   }
 }
 
+export function luckyOrArc(card, player, position) {
+  switch (card[0].type) {
+    case "pagas":
+  player.henryCoins = player.henryCoins - card[0].value
+        return player 
+    case "cobras":
+      player.henryCoins= player.henryCoins + card[0].value
+        return player 
+    case "migras"://cambiar de position
+      return player
+    case "pasas":
+      return (player = {
+        ...player,
+        cards: player.cards.push(card)
+      });
+      
+    default:
+     return player;
+
+     
+  }
+}
+
+
+
+
+
 function Action() {
   const dispatch = useDispatch();
   const { info, infoGame } = useSelector((state) => state.reducerInfo);
@@ -127,7 +141,7 @@ function Action() {
   return (
     <div className="">
       <div>
-        <span>Hola gente</span>
+        <span></span>
       </div>
     </div>
   );

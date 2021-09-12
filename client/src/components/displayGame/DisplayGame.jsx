@@ -12,6 +12,7 @@ import {
 import { Board, Dices, PlayerProps, Portal, LuckyCard } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
+import { luckyOrArc } from '../playerProps/switchBoxBoard' 
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -25,13 +26,14 @@ const DisplayGame = () => {
   const { statusTable, tableGame, view, playerPosition } = useSelector(
     (state) => state.game
   ); //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  const players = useSelector((state) => state.reducerInfo.infoGame);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
+  const [portal, setPortal]= useState(null)
   const [status, setStatus] = useState({
     mouseActive: false,
     clientX: null,
     clientY: null,
     targetMove: false,
-    portal: null,
     target1: {
       box: playerPosition.target1.box,
     },
@@ -92,31 +94,31 @@ const DisplayGame = () => {
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor(valueY / 5))
       );
-      await moveTime(120);
+       await moveTime(20);
       dispatch(
         changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 2))
       );
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 2))
       );
-      await moveTime(120);
+       await moveTime(20);
       dispatch(
         changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 3))
       );
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 3))
       );
-      await moveTime(120);
+      await moveTime(20);
       dispatch(
         changeValueTarget(player, "x", initialX + Math.floor((valueX / 5) * 4))
       );
       dispatch(
         changeValueTarget(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime(120);
+       await moveTime(20);
       dispatch(changeValueTarget(player, "x", initialX + valueX)); //2
       dispatch(changeValueTarget(player, "y", initialY + valueY)); //2
-      await moveTime(120);
+       await moveTime(20);
       setStatus({
         ...status,
         [player]: {
@@ -137,16 +139,25 @@ const DisplayGame = () => {
     if (tableGame.table[playerPosition[player].box].type) {
       if (tableGame.table[playerPosition[player].box].type === "comunal") {
         dispatch(filterComunalRandom());
-        setStatus({ ...status, portal: "comunal" });
+        setPortal("comunal" );
       }
       if (tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterLuckyRandom());
-        setStatus({ ...status, portal: "lucky" });
+        setPortal("lucky" );
       }
     }
   };
   function closedPortal() {
-    setStatus({ ...status, portal: null });
+    //luqui luckyCard, comunalCard
+    //tableGame.table[playerPosition[player].box
+    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box] )
+    setPortal(null) 
+  }
+
+  function closedPortal1() {
+    //comunal
+    luckyOrArc(comunalCard,players[0].resultNewGame.PlayerData.target1)
+    setPortal(null);   
   }
   useEffect(() => {
     if (
@@ -238,18 +249,23 @@ const DisplayGame = () => {
 
   return (
     <div className="border">
-      {status.portal === "lucky" && (
+      {portal === "lucky" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={luckyCard} />
         </Portal>
       )}
-      {status.portal === "comunal" && (
-        <Portal onClose={closedPortal}>
+      {portal === "comunal" && (
+        <Portal onClose={closedPortal1}>
           <LuckyCard data={comunalCard} />
         </Portal>
       )}
       <div>
-        <PlayerProps target1={playerPosition.target1.box} />
+        <PlayerProps 
+          target1={playerPosition.target1.box} 
+          target2={playerPosition.target2.box}
+          target3={playerPosition.target3.box}
+          target4={playerPosition.target4.box}
+           />
       </div>
       <div className="body-display no-select">
         {statusTable === "complete" ? (

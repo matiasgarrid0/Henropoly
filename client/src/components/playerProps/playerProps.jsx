@@ -9,8 +9,8 @@ import './playerProps.css'
 
 
 
-function PlayerProps({idsala, target1}) {
-  const dispatch = useDispatch();
+function PlayerProps({idsala, target1, target2, target3, target4}) {
+  // const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
   let playerRedux = useSelector((state) => state.game.playerPosition)
 
@@ -33,7 +33,7 @@ function PlayerProps({idsala, target1}) {
           <label> Tecnologias: </label>
           <span>{ players[0].resultNewGame.PlayerData.target1.properties.length >0?  players[0].resultNewGame.PlayerData.target1.properties.map((e)=> e[0].name) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
-          <span>{ players[0].resultNewGame.PlayerData.target1.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target1.cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
+          <span>{ players[0].resultNewGame.PlayerData.target1.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target1.cards.map((e)=> e[0].name): <div>Aún no tenés cartas </div>} </span>
           <label> Posicion: </label>
          <span>{target1 } </span> 
           
@@ -49,7 +49,7 @@ function PlayerProps({idsala, target1}) {
           <label> Cartas: </label>
           <span>{players[0].resultNewGame.PlayerData.target2.cards.length > 0 ? players[0].resultNewGame.PlayerData.target2.cards.map((e)=> e): <div>Aún no tenés cartas</div>} </span>
           <label> Posicion: </label>
-          {players[0].resultNewGame.playerPosition.target2.y? <span>0</span> : <div><span>otra</span></div>} 
+          <span>{target2 } </span> 
         </div>  
 
          <div className="playerProps-box"> 
@@ -61,9 +61,8 @@ function PlayerProps({idsala, target1}) {
           <span>{ players[0].resultNewGame.PlayerData.target3.properties.length > 0 ? players[0].resultNewGame.PlayerData.target3.properties.map((e)=> <div>e</div>) : <div>Aún no tenés propiedades</div>} </span>
           <label> Cartas: </label>
           <span>{ players[0].resultNewGame.PlayerData.target3.cards.length > 0 ?  players[0].resultNewGame.PlayerData.target3.cards.map((e)=> e): <div>Aún no tenés cartas</div>} </span>
-          <label> Color: (por ahoritas) </label>
           <label> Posicion: </label>
-          {players[0].resultNewGame.playerPosition.target3.y? <span>0</span> : <div><span>otra</span></div>} 
+          <span>{target3 } </span> 
        </div>
 
         <div className="playerProps-box">
@@ -75,6 +74,8 @@ function PlayerProps({idsala, target1}) {
           <span>{players[0].resultNewGame.PlayerData.target4 .properties.length >0? players[0].resultNewGame.PlayerData.target4 .properties.map((e)=> e) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
           <span>{players[0].resultNewGame.PlayerData.target4 .length > 0 ? players[0].resultNewGame.PlayerData.target4 .cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
+          <label> Posicion: </label>
+          <span>{target4 } </span> 
         </div>
         </div>
       )}

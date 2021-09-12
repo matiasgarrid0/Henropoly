@@ -18,6 +18,15 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      type: {
+        type: DataTypes.STRING,
+      },
+      value: {
+        type:DataTypes.INTEGER,
+      },
+      owner: {
+        type:DataTypes.STRING
+      }
     },
     { timestamps: false }
   );
