@@ -8,8 +8,7 @@ import RailwayCard from '../railwayCard/RailwayCard'
 
 const PortalCard = () => {
     const dispatch = useDispatch();
-    const luckyCard = useSelector((state) => state.reducerInfo.luckyCard);
-    const infoRail = useSelector((state) => state.reducerInfo.info);
+    const luckyCard = useSelector((state) => state.reducerInfo.luckyCard)
     console.log('ASKLDJASLDKJASLKDJSLADKJSALDK', infoRail);
     const comunalCard = useSelector((state) => state.reducerInfo.comunalCard);     
 

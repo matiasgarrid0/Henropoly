@@ -144,10 +144,6 @@ const DisplayGame = () => {
         dispatch(filterLuckyRandom());
         setStatus({ ...status, portal: "lucky" });
       }
-      if (tableGame.table[playerPosition[player].box].type === "railway") {
-        dispatch(getInfoDb());
-        setStatus({ ...status, portal: "railway" });
-      }
     }
   };
   function closedPortal() {
