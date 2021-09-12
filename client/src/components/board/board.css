@@ -14,33 +14,39 @@
 
 .board-logo{
   width: 40rem;
-  margin-left: 11rem;
-  position: absolute;
-	transform: rotateZ(-45deg) translateX(-120px) translateY(90px);
+	transform: rotateZ(-45deg) translateX(-5px) translateY(220px);
+}
+.board-logo-toniPolice{
+  width: 10rem;
+	transform: rotateZ(0deg) translateX(85px) translateY(-30px);
 	text-align: center;
-
+}
+.board-logo-toniJail{
+  width: 16rem;
+	transform: rotateZ(10.5deg) translateX(-140px) translateY(9px);
+	text-align: center;
 }
 .table {
-  background-color: #ffde59;
-  box-shadow: inset 0 0 0 7px #5f59226e;
+  background: radial-gradient(#414141, #0e0e0e);
+  box-shadow: inset 0 0 0 5px #ffffffc7;
   width: var(--total);
   height: var(--total);
-
 }
 .container-card {
   width: var(--x);
   height: var(--y);
-  box-shadow: inset 0 0 0 1px #000000;
-  color: black;
+  box-shadow: inset 0 0 0 2px #ffffff;
+  color: rgb(226, 226, 226);
+  /* background-color: blue; */
+  -webkit-text-stroke: 1px rgb(122, 122, 122);
   font-size: 20px;
   text-align: center;
-  
 }
 .container-card-cube {
   display: flex;
   width: var(--y);
   height: var(--y);
-  box-shadow: inset 0 0 0 1px #000000;
+  box-shadow: inset 0 0 0 1px #ffffff;
   color: black;
   font-size: 20px;
 }
@@ -66,12 +72,11 @@
   transform: rotate(270deg);
 }
 .div-title {
-  box-shadow: inset 0 0 0 2px #00000093;
+  box-shadow: inset 0 0 0 2px #ffffff;
   height: 20%;
   display: flex;
 }
 .div-title-empty{
-  
   height: 20%;
   display: flex;
   margin-top: 0.2rem;
@@ -90,61 +95,85 @@
   text-align: center;
   padding-top: 2rem;
 }
+/*ICONS*/
 .card-icon {
   margin-top: 20px;
   font-size: 70px;
-  color: rgba(0, 0, 0, 0.637);
+  color: rgb(226, 226, 226);
+}
+.card-icon-import-express{
+  margin-top: 3.2rem;
+  margin-bottom: 0.9rem;
+  width: 5.5rem;
+}
+.card-icon-import-Cplus{
+  margin-top: 0.9rem;
+  margin-bottom: -0.2rem;
+  width: 4.3rem;
+}
+.card-icon-import-Csharp{
+  margin-top: 0.9rem;
+  margin-bottom: -0.2rem;
+  width: 4.1rem;
+}
+.card-icon-import-Ui{
+  margin-top: 1.5rem;
+  margin-bottom: -0.2rem;
+  width: 4.2rem;
+}
+.card-icon-import-Modulos{
+  margin-top: 1.5rem;
+  margin-bottom: -0.2rem;
+  width: 4.5rem;
+}
+.card-icon-import-Sequelize{
+  margin-top: 1.1rem;
+  margin-bottom: -0.2rem;
+  width: 4.1rem;
 }
 .color-card-brown {
-  background-color: #966237;
+  background: linear-gradient(#e49f68, #966237);
 }
 .color-card-light-blue {
-  background-color: #3fa2cc;
+  background: linear-gradient(#91d6f3, #3fa2cc);
 }
 .color-card-pink {
-  background-color: violet;
+  background: linear-gradient(#fda7fd, #e060e0);
 }
 .color-card-orange {
-  background-color: #bd6422;
+  background: linear-gradient(#eb924f, #bd6422);
 }
 .color-card-red {
-  background-color: #b1342a;
+  background: linear-gradient(#ee6c62, #b1342a);
 }
 .color-card-yellow {
-  background-color: #d4c218;
+  background: linear-gradient(#f5e557, #d4c218);
 }
 .color-card-green {
-  background-color: #028730;
+  background: linear-gradient(#2ecc65, #028730);
 }
 .color-card-blue {
-  background-color: #154375;
+  background: linear-gradient(#5593d6, #154375);
+
 }
 .top{
   margin-top: 5rem;
 }
-.card-blue {
-	background: linear-gradient(#4ccaf4, #a3dff9);
-	transform: rotateZ(-45deg) translateX(50px) translateY(220px);
-  align-items: center;
-  text-align: center;
-  justify-content: center;
+.card-blue-inside{
+  transform: rotateZ(-45deg) translateX(50px) translateY(230px);
+  width: 15rem;
 }
-
-.card-orange {
-	background: linear-gradient(#f99120, #f57420);
-	transform: rotateZ(-45deg) translateX(143px) translateY(890px);
-  align-items: center;
-  text-align: center;
-  justify-content: center;
+.card-orange-inside{
+  transform: rotateZ(-45deg) translateX(370px) translateY(560px);
+  width: 15rem;
 }
-.card-box {
-	
+.card-box {	
 	width: 180px;
 	height: 9vw;
 }
 .square2 {
 	flex-grow: 1;
-	outline: 1px solid black;
+	outline: 1px solid rgb(255, 255, 255);
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -155,6 +184,7 @@
 	line-height: 2vw;
 	font-size: 1.2vw;
 	font-weight: 500;
+  color: #ffffff;
 }
 .corner1 {
   transform: rotateZ(135deg) translateX(10px) translateY(-115px);

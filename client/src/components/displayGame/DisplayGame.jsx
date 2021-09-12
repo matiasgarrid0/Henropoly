@@ -8,7 +8,7 @@ import {
   changeValueTarget,
 } from "./../../redux/actions";
 import { Board } from "./../";
-import Imagen from "./table.jpg";
+import Imagen from "./textura-madera.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGame = () => {
