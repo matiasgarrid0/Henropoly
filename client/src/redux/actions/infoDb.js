@@ -26,7 +26,6 @@ export function postPlayer(payload) {
     return dispatch({ type: POST_PLAYERS, payload: response.data });
   };
 }
-
 export const filterComunalRandom = (type) => {
   return { type: FILTER_COMUNAL_RANDOM, payload: type };
 };

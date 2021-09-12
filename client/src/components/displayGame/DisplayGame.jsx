@@ -5,6 +5,7 @@ import {
   setDefault,
   resetTable,
   changeValueTable,
+  getInfoDb,
   changeValueTarget,
   filterLuckyRandom,
   filterComunalRandom,
