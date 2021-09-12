@@ -3,8 +3,9 @@
 
 :root {
   --background-color: rgb(255, 199, 15);
-  --color-yellow: #ffec00;
+  --color-yellow: yellow;
   --color-yellowTwo: #ffde59;
+  --color-black: black;
   --color-gray: #323639;
   --color-grayTwo: #737373;
   --color-grayThree: #919191;
@@ -13,7 +14,7 @@
   --text-two: "Titillium Web", sans-serif;
 }
 body {
-  background-color: var(--color-yellowTwo);
+  background: radial-gradient(#1d1d1d, #0f0f0f);
 }
 .container-body {
   width: 100%;
@@ -36,18 +37,26 @@ body {
 }
 
 .button-one {
-  color: black;
-  background-color: var(--color-yellow);
-  border: 1px solid black;
+  border: 2px solid yellow;
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 1px 2px 2px 1px black;
+  box-shadow: 1px 2px 2px 1px rgb(41, 41, 41);
+  margin-top: 25px;
+  font-family: var(--text-one);
+  font-size: 35px;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  margin-inline: 10px;
+  background-color: transparent;
+  color: yellow;
+  cursor: pointer;
+  transition: transform 250ms ease;
 }
 .button-one:hover {
-  color: var(--color-gray);
-  background-color: var(--color-yellowTwo);
-  border: 1px solid var(--color-gray);
-  box-shadow: 0 0 3px var(--color-gray);
-  transition: 0.2s;
+  color: var(--color-black);
+  background-color: var(--color-yellow);
+  border: 1px solid var(--color-black);
+  box-shadow: 0 0 5px var(--color-yellow);
+  transform: scale(1.1);
 }

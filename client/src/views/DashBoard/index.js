@@ -1,5 +1,5 @@
 import React from "react";
-
+import Shop from "../../image/SHOP.png"
 import "./dashboard.css";
 
 const DashBoard = () => {
@@ -30,25 +30,16 @@ const DashBoard = () => {
           </div>
           <div className="contSalyImg">
             <div className="crearSala">
-              <h3 className="text-hov">crear sala</h3>
-              <h3 className="text-hov">unirse a sala</h3>
-            </div>
-            <div className="conimg">
-              <img
-                className="imgn"
-                src="https://cdn-pro.elsalvador.com/wp-content/uploads/2020/07/Ramon-Valdes.jpg"
-                alt="donramon"
-              />
+              <button className="text-hov">Crear Sala</button>
+              <button className="text-hov">Unirse a Sala</button>
+              <img className="imgn" src={Shop} alt="shop"/>
             </div>
           </div>
           <div className="ranking">
-            <h3>Mas partidas ganadas</h3>
+            <span className="game-win">Mas partidas ganadas</span>
             <div className="person">
-              <img
-                src="https://ca.slack-edge.com/TPRS7H4PN-U020K03EUHG-f49f0477ebe4-512"
-                alt="img"
-              />
-              <h4 className="dashboard-h4">senjo903</h4>
+              <img src="https://ca.slack-edge.com/TPRS7H4PN-U020K03EUHG-f49f0477ebe4-512" alt="img"/>
+              <span className="dashboard-span">senjo903</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">10</span>
@@ -59,7 +50,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RENRHB6K-19d480373bd1-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">FacuRearte</h4>
+              <span className="dashboard-h4">FacuRearte</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">7</span>
@@ -70,7 +61,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U02046U590X-519f10bc999e-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">AlanGiavino</h4>
+              <span className="dashboard-span">AlanGiavino</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">5</span>
@@ -81,7 +72,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01UZGHU3J8-8209681533eb-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">MatiGarrido</h4>
+              <span className="dashboard-span">MatiGarrido</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">4</span>
@@ -92,7 +83,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01T4MPG0BF-eadd1fea01c5-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">Sebi_elmejor</h4>
+              <span className="dashboard-span">Sebi_elmejor</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">3</span>
@@ -103,7 +94,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01V60B1T9P-0f495ba2e434-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">Moniss_94</h4>
+              <span className="dashboard-span">Moniss_94</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">2</span>
@@ -114,7 +105,7 @@ const DashBoard = () => {
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RUQXGKD0-67b4aeef2acb-512"
                 alt="img"
               />
-              <h4 className="dashboard-h4">FlorHQ_92</h4>
+              <span className="dashboard-span">FlorHQ_92</span>
               <div className="dashboard-pepito">
                 {" "}
                 <span className="number">1</span>

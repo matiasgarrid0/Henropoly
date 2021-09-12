@@ -1,10 +1,10 @@
 .nav-body {
   position: fixed;
   width: 100%;
-  background-image: linear-gradient(180deg, rgb(27, 27, 27), rgb(37, 37, 37));
+  background: radial-gradient(#000000, #141414);
   height: 100px;
-  border-bottom: 2px solid black;
-  box-shadow: 0 0 5px var(--color-grayThree);
+  border-bottom: 1px solid rgb(41, 41, 41);
+  box-shadow: 0 0 5px black;
 }
 .nav-container {
   max-width: var(--width-container);
@@ -13,28 +13,20 @@
   justify-content: space-between;
 }
 .logo-nav {
-  width: 180px;
-  height: 80px;
-  margin-top:3px;
-  
+  width: 270px;
+  height: 70px;
+  margin-top: 15px;
 }
 .nav-text-user{
   display: flex;
-  margin-top: 30px;
-  font-size: 25px;
+  margin-top: 40px;
+  font-size: 40px;
   letter-spacing: 1px;
   font-family: var(--text-one);
-  color:white;
+  color: var(--color-yellow);
+  text-shadow: 0 0 5px rgb(253, 253, 62);
 }
-.nav-btn {
-  margin-top: 18px;
-  font-family: var(--text-one);
-  padding-top: 3px;
-  font-size: 22px;
-  letter-spacing: 1px;
-  border-radius: 10px;
-  margin-right: 10px;
-}
+
 .nav-space {
-  height: 70px;
+  height: 50px;
 }
