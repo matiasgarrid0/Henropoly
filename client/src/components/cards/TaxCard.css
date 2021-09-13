@@ -1,4 +1,4 @@
-.luckyCard-background-no-repeat{
+.taxCard-background-no-repeat{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size:3rem;
     padding: 2rem;
@@ -15,7 +15,10 @@
     -moz-box-shadow: 0px 1px 13px -3px rgba(0,0,0,0.75);
     box-shadow: 0px 1px 13px -3px rgba(0,0,0,0.75);
 }
-.luckyCard-h3{
+.card-span-bold{
+font-size: 20px;
+}
+.taxCard-h3{
     text-transform: uppercase;
     text-decoration: underline;
     font-size: 1.5rem;
