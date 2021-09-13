@@ -5,9 +5,11 @@
     width: 25%;
     height: 130px;
     margin-bottom: 30px;
+    
 }
 
 .playerProps-box-big{
+    color:beige;
     width: 75%;
     display:flex;
     flex-direction: row;

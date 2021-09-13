@@ -18,5 +18,13 @@
 .RailwayCard-h3{
     text-transform: uppercase;
     text-decoration: underline;
-    font-size: 1.5rem;
+}
+
+.RailwayCard-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-span-bold{
+    padding: 3px;
 }

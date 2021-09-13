@@ -2,7 +2,6 @@ import React from 'react';
 import './LuckyCard.css';
 
 const LuckyCard = ({data}) => {
-    console.log("DATA",data[0].name)
     return (
         <div className='luckyCard-background-initial-no-repeat'>
             <div className ="luckyCard-background-no-repeat">

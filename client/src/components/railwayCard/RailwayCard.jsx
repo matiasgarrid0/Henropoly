@@ -6,10 +6,12 @@ const RailwayCard = ({data}) => {
         <div className='railway-background-initial'>
             <div className ="RailwayCard-background-no-repeat">
                 <h3 className = "RailwayCard-h3">{data.name}</h3>
-                <span className = "card-span-bold"> Checkpoint:{data.takeCheckpoint}</span>
-                <span className = "card-span-bold">Dos checkpoint:{data.twoCheckpoint}</span>
-                <span className = "card-span-bold" >Tres checkpoint:{data.threeCheckpoint}</span>
-                <span className = "card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}</span>
+                <div className= "RailwayCard-div">
+                <span className = "card-span-bold"> Checkpoint:{data.takeCheckpoint}$</span>
+                <span className = "card-span-bold">Dos checkpoint:{data.twoCheckpoint}$</span>
+                <span className = "card-span-bold" >Tres checkpoint:{data.threeCheckpoint}$</span>
+                <span className = "card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}$</span>
+                </div>
             </div>
         </div>
     )

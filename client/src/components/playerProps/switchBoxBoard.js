@@ -105,7 +105,8 @@ export function gameActionsBoard(player, action, type, card) {
   }
 }
 
-export function luckyOrArc(card, player, position) {
+export function luckyOrArc(card, player, infoGame) {
+ console.log('infoGame!!!!!!!!!', infoGame)
   switch (card[0].type) {
     case "pagas":
   player.henryCoins = player.henryCoins - card[0].value
@@ -114,6 +115,7 @@ export function luckyOrArc(card, player, position) {
       player.henryCoins= player.henryCoins + card[0].value
         return player 
     case "migras"://cambiar de position
+      infoGame[0].resultNewGame.playerPosition.target1.box= 10
       return player
     case "pasas":
       return (player = {

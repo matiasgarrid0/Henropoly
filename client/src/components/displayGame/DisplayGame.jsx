@@ -1,3 +1,4 @@
+import React, { useState, useEffect }  from "react";
 import "./DisplayGame.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +19,8 @@ import {
   PropertyCard,
   RailwayCard,
   ServiceCard,
+  TaxCard, 
+  TaxVip 
 } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
@@ -41,6 +44,16 @@ const DisplayGame = () => {
   const [property, setProperty] = useState(null)
   const [train, setTrain] = useState(null)
   const [service, setService] = useState(null)
+  const [tax, setTax] = useState(null)
+  const [taxVip, setTaxVip] = useState(null)
+  const cardCarcerLuky = [{ID:11,
+    name:"Suerte",
+    description:"Te copiaste en los checkpoints | Te vas directo a la migración",
+    type:"migras",
+    value:null,
+    owner:null,
+    tableMasterID:null}];
+
   const [status, setStatus] = useState({
     mouseActive: false,
     clientX: null,
@@ -76,6 +89,11 @@ const DisplayGame = () => {
     var finalBox = playerPosition[player].box; //5
 
     var roll = finalBox - actualBox;
+    
+    if(roll < 0){
+      roll= roll+39
+    }
+
     var rollOne;
     var rollTwo;
     if (roll === 2) {
@@ -187,21 +205,21 @@ const DisplayGame = () => {
     }
   };
   function closedPortal() {
-    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
+    luckyOrArc(cardCarcerLuky, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
     setPortal(null)
   }
 
   function closedPortal1() {
     //comunal
-    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1);
+    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1,players);
     setPortal(null);
   }
+
   function closedPortal2() {
     //propertis
     //luckyOrArc(null, null)
      setPortal(null);
    //  return positionToBug(tableGame.table[playerPosition.target1.box])
-   
   }
 
   let myArr;
@@ -331,6 +349,16 @@ const DisplayGame = () => {
         <Portal onClose={closedPortal2}>
           <ServiceCard data={service}/>
           <button onClick={comprar}>Comprar</button>
+        </Portal>
+      )}
+            {portal === "tax" && (
+        <Portal onClose={closedPortal2}>
+          <TaxCard data={tax} />
+        </Portal>
+      )}
+      {portal === "taxVip" && (
+        <Portal onClose={closedPortal2}>
+          <TaxCard data={taxVip} />
         </Portal>
       )}
       <div>

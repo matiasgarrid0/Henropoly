@@ -24,7 +24,7 @@ const GameDashBoard = () => {
   const { playerPosition } = useSelector((state) => state.game);
   const movePlayer = (player) => {
     return () => {
-      let num = Math.floor(Math.random() * 11 + 2);
+      let num = Math.floor(Math.random() * 6 + 2);
       console.log("log del random GameDashBoard   " + num);
       switch (player) {
         case "target1":
