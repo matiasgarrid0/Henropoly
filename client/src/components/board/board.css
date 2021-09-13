@@ -26,6 +26,12 @@
 	transform: rotateZ(10.5deg) translateX(-140px) translateY(9px);
 	text-align: center;
 }
+.board-logo-toniVacations{
+  width: 13.5rem;
+	transform: rotateZ(25.5deg) translateX(55px) translateY(80px);
+	text-align: center;
+}
+
 .table {
   background: radial-gradient(#414141, #0e0e0e);
   box-shadow: inset 0 0 0 5px #ffffffc7;
@@ -38,7 +44,7 @@
   box-shadow: inset 0 0 0 2px #ffffff;
   color: rgb(226, 226, 226);
   /* background-color: blue; */
-  -webkit-text-stroke: 1px rgb(122, 122, 122);
+  /* -webkit-text-stroke: 1px rgb(122, 122, 122); */
   font-size: 20px;
   text-align: center;
 }
@@ -203,6 +209,14 @@
 	transform-style: preserve-3d;
 	transform: rotateX(32deg) translateY(-52%);
 }
-.board-total-view{
+/* .board-total-view{
   position: fixed;
+} */
+.board-title-card-name{
+  width: 100%;
+  font-family: var(--text-three);
+  letter-spacing: 1px;
+  text-align: center;
+  margin: auto;
+  color: #0e0e0e;
 }
