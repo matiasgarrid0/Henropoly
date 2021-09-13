@@ -21,7 +21,7 @@ const Card = ({ data, grade, icons }) => {
         {data.type === "property" && (
           <>
             <div className={`div-title color-card-${data.color}`}>
-              <label className="title-card">{data.name}</label>
+              <label className="board-title-card-name">{data.name}</label>
             </div>
             <div className="box-column"></div>
             <div>{icons}</div>
