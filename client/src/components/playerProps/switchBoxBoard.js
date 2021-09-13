@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { filterCardsRandom } from "../../redux/actions";
+import React from "react";
 
 //
 export function goToJail(pos) {
   return pos
 }
 export function gameActionsBoard(player, action, type, card) {
-  switch (type) {
+  switch (card[0].type) {
     case "property":
       if (action === "comprar") {
         //cuando comprar la propiedad básica
@@ -82,10 +80,6 @@ export function gameActionsBoard(player, action, type, card) {
         player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
         return player
       }
-      // player.henryCoins= player.henryCoins - 500
-      // return (player = {
-      //   ...player
-      // });
     case "tax":
       player.henryCoins= player.henryCoins - 200
       return (player = {
@@ -104,6 +98,7 @@ export function gameActionsBoard(player, action, type, card) {
       return player;
   }
 }
+
 
 export function luckyOrArc(card, player, infoGame) {
 // console.log('infoGame!!!!!!!!!', infoGame)
@@ -135,8 +130,7 @@ export function luckyOrArc(card, player, infoGame) {
 
 
 function Action() {
-  const dispatch = useDispatch();
-  const { info, infoGame } = useSelector((state) => state.reducerInfo);
+  
 
   // useEffect(() => {
   //   dispatch(filterCardsRandom("Suerte"));

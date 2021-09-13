@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React from "react";
 import LogoBoard from './img/Henropoly-blanco.png'
 import Cofre from './img/cofre.png'
 import Lucky from './img/lucky.png'
@@ -37,7 +37,7 @@ import {
   FaGitSquare,
   FaReact,
   FaQuestion,
-  FaTrain,
+ // FaTrain,
   FaMoneyBillAlt
   
 } from "react-icons/fa";

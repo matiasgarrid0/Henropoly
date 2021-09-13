@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import {  useSelector } from "react-redux";
 /* import { register } from "../../redux/actions"; */
 import Action from "./switchBoxBoard";
-import { portalCard } from "./../";
 import './playerProps.css'
 
 
 
 
-
-function PlayerProps({idsala, target1, target2, target3, target4}) {
+// PlayerProps({idsala, target1, target2, target3, target4})
+function PlayerProps({target1, target2, target3, target4}) {
   // const dispatch = useDispatch();
   const players = useSelector((state) => state.reducerInfo.infoGame);
-  let playerRedux = useSelector((state) => state.game.playerPosition)
+  // let playerRedux = useSelector((state) => state.game.playerPosition)
 
 
 
@@ -67,13 +66,13 @@ function PlayerProps({idsala, target1, target2, target3, target4}) {
 
         <div className="playerProps-box">
           <label>Player 4: </label>
-          <span>{players[0].resultNewGame.PlayerData.target4 .username} </span>
+          <span>{players[0].resultNewGame.PlayerData.target4.username} </span>
           <label>HenryCoins: </label>
-          <span>{players[0].resultNewGame.PlayerData.target4 .henryCoins} </span>
+          <span>{players[0].resultNewGame.PlayerData.target4.henryCoins} </span>
           <label> Tecnologias: </label>
-          <span>{players[0].resultNewGame.PlayerData.target4 .properties.length >0? players[0].resultNewGame.PlayerData.target4 .properties.map((e)=> e) :<div>Aún no tenés propiedades</div> } </span> 
+          <span>{players[0].resultNewGame.PlayerData.target4.properties.length >0? players[0].resultNewGame.PlayerData.target4.properties.map((e)=> e) :<div>Aún no tenés propiedades</div> } </span> 
           <label> Cartas: </label>
-          <span>{players[0].resultNewGame.PlayerData.target4 .length > 0 ? players[0].resultNewGame.PlayerData.target4 .cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
+          <span>{players[0].resultNewGame.PlayerData.target4.length > 0 ? players[0].resultNewGame.PlayerData.target4.cards.map((e)=> e): <div>Aún no tenés cartas </div>} </span>
           <label> Posicion: </label>
           <span>{target4 } </span> 
         </div>

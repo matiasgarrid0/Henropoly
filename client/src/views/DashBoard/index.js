@@ -1,69 +1,19 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import "./dashboard.css";
-import { postPlayer } from "../../redux/actions";
-import { IoIosArrowForward } from "react-icons/io";
 import { CreateGame } from "../../components/index";
 import { Portal } from "../../components/index";
 import Shop from "../../image/SHOP.png"
 
 
 const DashBoard = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const [portal, setPortal] = useState(null);
-  let [input, setInput] = useState({
-    playerOne: "",
-    playerTwo: "",
-    playerThree: "",
-    playerFour: "",
-  });
-  const { user } = useSelector((state) => state.auth);
-
   function openPortal() {
     setPortal("createGame");
   }
 
   function closedPortal() {
     setPortal(null);
-  }
-
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const send = {
-      ID: "1",
-      players: [
-        { ID: "1", username: input.playerOne },
-        { ID: "2", username: input.playerTwo },
-        { ID: "3", username: input.playerThree },
-        { ID: "4", username: input.playerFour },
-      ],
-    };
-    console.log(send);
-    dispatch(postPlayer(send));
-    history.push("/game");
-  }
-
-  /**
-     * {
-    "ID": "1",
-    "players": [
-        {"ID": "1", "username":"flor"}, 
-        {"ID": "2", "username":"3"}, 
-        {"ID": null, "username":"3"}, 
-        {"ID": null, "username":"3"}
-        ]
-}
-     */
-
+  } 
 
   return (
     <div className="dashboard-todo">

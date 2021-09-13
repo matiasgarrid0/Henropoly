@@ -210,6 +210,16 @@ const DisplayGame = () => {
     setPortal(null);
   }
 
+  function closedPortal3() {
+    pagar()
+    setPortal(null);
+  }
+
+  function closedPortal4() {
+    dispatch(changeValueTarget('target1','box', 10));
+    setPortal(null);
+  }
+
   let myArr;
   const findIdCard = (positionDices1, arr) => {
     let aux = arr.table.filter(e => e.id === positionDices1)
@@ -220,6 +230,12 @@ const DisplayGame = () => {
     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
     setPortal(null);
   }
+  function pagar(){
+    myArr = findIdCard(playerPosition.target1.box, cardReducer)
+    gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'pagar', myArr[0].type, myArr)
+    setPortal(null);
+  }
+
 
   useEffect(() => {
     if (
@@ -340,12 +356,12 @@ const DisplayGame = () => {
         </Portal>
       )}
       {portal === "tax" && (
-        <Portal onClose={closedPortal2}>
+        <Portal onClose={closedPortal3}>
           <TaxCard data={tax} />
         </Portal>
       )}
       {portal === "jail" && (
-        <Portal onClose={closedPortal2}>
+        <Portal onClose={closedPortal4}>
           <Jail data={jailData} />
         </Portal>
       )}

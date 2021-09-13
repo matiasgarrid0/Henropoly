@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React from "react";
 import "./GameDashBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValueTarget } from "./../../redux/actions";
@@ -18,14 +18,14 @@ const GameDashBoard = () => {
    */
   const findIdCard = (positionDices1, arr) => {
     let aux = arr.table.filter(e => e.id === positionDices1)
-    console.log('AUXXXXXXXX', arr)
+    //console.log('AUXXXXXXXX', arr)
     return aux;
   }
   const { playerPosition } = useSelector((state) => state.game);
   const movePlayer = (player) => {
     return () => {
       let num = Math.floor(Math.random() * 6 + 2);
-      console.log("log del random GameDashBoard   " + num);
+      //console.log("log del random GameDashBoard   " + num);
       switch (player) {
         case "target1":
           if (playerPosition.target1.box + num < 40) {
@@ -100,10 +100,10 @@ const GameDashBoard = () => {
 
   const vender = (player) => {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
-    console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
-    console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
-    console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
-     gameActionsBoard('target1', 'vender', myArr[0].type, myArr)
+    // console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
+    // console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
+    // console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
   }
 /*   const vender1 = () => {
     dispatch(
