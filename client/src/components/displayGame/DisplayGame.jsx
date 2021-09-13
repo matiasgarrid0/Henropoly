@@ -22,9 +22,10 @@ import {
   TaxCard,
   Jail,
 } from "./../";
-import Imagen from "./table.jpg";
+import Imagen from "./textura-madera.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-import { luckyOrArc, gameActionsBoard, positionToBug } from '../playerProps/switchBoxBoard'
+//positionToBug
+import { luckyOrArc, gameActionsBoard } from '../playerProps/switchBoxBoard'
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -266,7 +267,7 @@ const DisplayGame = () => {
       alignTarget("target4");
   }, [playerPosition.target4.box]);
   const style = {
-    backgroundSize: "700px",
+    backgroundSize: "2500px",
     backgroundImage: `url(${Imagen})`,
     boxShadow: "inset 0 0 0 20px #00000033",
     width: "1800px",
