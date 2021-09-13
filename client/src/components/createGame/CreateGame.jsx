@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { postPlayer } from "../../redux/actions";
 import s from './CreateGame.module.css';
@@ -13,7 +13,7 @@ const CreateGame = () => {
     playerThree: "",
     playerFour: "",
   });
-  const { user } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
 
   function handleChange(e) {
     setInput({

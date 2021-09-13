@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./Background3d.css";
 import { Board } from "./../";
-import { boardData } from "./../board/data";
+// import { boardData } from "./../board/data";
 const Background3d = () => {
   const { isAuth } = useSelector((state) => state.auth);
   const { info } = useSelector(

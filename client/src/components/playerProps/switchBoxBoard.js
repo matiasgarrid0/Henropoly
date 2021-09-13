@@ -60,6 +60,7 @@ export function gameActionsBoard(player, action, type, card) {
           player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
           return player
         }
+        break;
     case "railway":
       if (action === "comprar") {
         card[0].owner= player.username 
@@ -80,6 +81,7 @@ export function gameActionsBoard(player, action, type, card) {
         player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
         return player
       }
+      break;
     case "tax":
       player.henryCoins= player.henryCoins - 200
       return (player = {

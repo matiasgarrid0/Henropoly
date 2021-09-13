@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import React, { useEffect } from 'react';
-import { Nav, Loading, ViewBoard, PlayerProps, Action,  portalCard  } from './components';
+import { Nav, Loading, ViewBoard, Action, } from './components';
 import { SwitchPage, Game, DashBoardBeta} from './views'
 
 import { useDispatch, useSelector } from "react-redux";
