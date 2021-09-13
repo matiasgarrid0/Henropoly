@@ -2,7 +2,6 @@
 import React from 'react';
 import './PropertyCard.css';
 
-//{ name, versionAlpha, versionOne, versionTwo, versionThree, versionFour, versionPremium, aditional, commonVersion, premiumVersion, licenseValue }
 const PropertyCard = ({ data }) => {
         return (
             <div className= "all">
