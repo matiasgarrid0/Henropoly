@@ -120,6 +120,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target1")}>Roll</button>
            {/* <button onClick={compra}> comprar</button> */}
           <button onClick={vender}> vender</button>
+           <button onClick={vender}> vender</button>
          {playerPosition.target1.box}
 
         </div>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterCardsRandom } from "../../redux/actions";
 
 //
-export function positionToBug(pos) {
+export function goToJail(pos) {
   return pos
 }
 export function gameActionsBoard(player, action, type, card) {
@@ -106,7 +106,7 @@ export function gameActionsBoard(player, action, type, card) {
 }
 
 export function luckyOrArc(card, player, infoGame) {
- console.log('infoGame!!!!!!!!!', infoGame)
+// console.log('infoGame!!!!!!!!!', infoGame)
   switch (card[0].type) {
     case "pagas":
   player.henryCoins = player.henryCoins - card[0].value
@@ -115,7 +115,7 @@ export function luckyOrArc(card, player, infoGame) {
       player.henryCoins= player.henryCoins + card[0].value
         return player 
     case "migras"://cambiar de position
-      infoGame[0].resultNewGame.playerPosition.target1.box= 10
+      //infoGame[0].resultNewGame.playerPosition.target1.box= 10
       return player
     case "pasas":
       return (player = {

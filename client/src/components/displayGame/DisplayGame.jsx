@@ -20,7 +20,8 @@ import {
   RailwayCard,
   ServiceCard,
   TaxCard, 
-  TaxVip 
+  TaxVip,
+  Jail
 } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
@@ -46,13 +47,14 @@ const DisplayGame = () => {
   const [service, setService] = useState(null)
   const [tax, setTax] = useState(null)
   const [taxVip, setTaxVip] = useState(null)
-  const cardCarcerLuky = [{ID:11,
-    name:"Suerte",
+  const [jail,setJail] = useState(null)
+ /*  const cardCarcerLuky = [{ID:11,
+    name:"Suerte",S
     description:"Te copiaste en los checkpoints | Te vas directo a la migración",
     type:"migras",
     value:null,
     owner:null,
-    tableMasterID:null}];
+    tableMasterID:null}]; */
 
   const [status, setStatus] = useState({
     mouseActive: false,
@@ -93,7 +95,6 @@ const DisplayGame = () => {
     if(roll < 0){
       roll= roll+39
     }
-
     var rollOne;
     var rollTwo;
     if (roll === 2) {
@@ -187,25 +188,21 @@ const DisplayGame = () => {
         setPortal("service");
       }
       if (tableGame.table[playerPosition[player].box].type === "tax") {
-        setStatus({
-          ...status,
-          serviceCard: tableGame.table[playerPosition[player].box],
-          portal: "tax",
-        });
+        setTax(tableGame.table[playerPosition[player].box])
         setPortal("tax");
       }
       if (tableGame.table[playerPosition[player].box].type === "taxVip") {
-        setStatus({
-          ...status,
-          serviceCard: tableGame.table[playerPosition[player].box],
-          portal: "taxVip",
-        });
+        setTaxVip(tableGame.table[playerPosition[player].box])
         setPortal("taxVip");
+      }
+      if (tableGame.table[playerPosition[player].box].type === "jail") {
+        setJail(tableGame.table[playerPosition[player].box])
+        setPortal("jail");
       }
     }
   };
   function closedPortal() {
-    luckyOrArc(cardCarcerLuky, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
+    luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, tableGame.table[playerPosition.target1.box])
     setPortal(null)
   }
 
@@ -359,6 +356,11 @@ const DisplayGame = () => {
       {portal === "taxVip" && (
         <Portal onClose={closedPortal2}>
           <TaxCard data={taxVip} />
+        </Portal>
+      )}
+        {portal === "jail" && (
+        <Portal onClose={closedPortal2}>
+          <Jail data={jail}/>
         </Portal>
       )}
       <div>
