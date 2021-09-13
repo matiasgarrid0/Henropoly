@@ -1,5 +1,5 @@
 import React from "react";
-import { Room, DisplayGameBeta } from "./../../components";
+import { Room, DisplayGameBeta,Chat } from "./../../components";
 import "./DashBoardBeta.css";
 import { useSelector } from "react-redux";
 
@@ -17,10 +17,13 @@ const DashBoardBeta = () => {
     );
   } else {
     return (
-      <div className="color-blanco">
-        <div className="asd"> </div>
-        <div className="asd"> </div>
+      <div className="beta-space-game color-blanco">
+        <div className="beta-box-game">
+        <div className="asd"></div>
         <Room />
+        <div className="asd"></div>
+        <Chat/>
+        </div>
       </div>
     );
   }

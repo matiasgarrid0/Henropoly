@@ -108,6 +108,14 @@ io.on("connection", async (socket) => {
   });
   socket.on("roomStatus", () => {});
   socket.on("setGame", () => {});
+  socket.on('sendGlobal', (data) => {
+    io.emit('chatGlobal', {
+      username: decoded.user.username,
+      message: data.message
+    });
+  });
+  socket.on("chatGlobal", () => {
+  });
   socket.on("disconnect", () => {});
 });
 
