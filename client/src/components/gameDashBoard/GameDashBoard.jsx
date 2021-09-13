@@ -103,8 +103,13 @@ const GameDashBoard = () => {
     console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
     console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
     console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
-     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
+     gameActionsBoard('target1', 'vender', myArr[0].type, myArr)
   }
+/*   const vender1 = () => {
+    dispatch(
+      changeValueTarget(players[0].resultNewGame.PlayerData.target1,"box", playerPosition.target2.box + 10)
+    );
+  } */
   // const hardcodeo = (player) => {
   //   myArr = findIdCard(playerPosition.target1.box, cardReducer);
   //   console.log("findthe card with position",myArr[0].type,myArr[0].licenseValue);
@@ -120,7 +125,7 @@ const GameDashBoard = () => {
           <button onClick={movePlayer("target1")}>Roll</button>
            {/* <button onClick={compra}> comprar</button> */}
           <button onClick={vender}> vender</button>
-           <button onClick={vender}> vender</button>
+         {/*   <button onClick={vender1}> AAAAAAAAAAAAAAAAAAAAAAAA</button> */}
          {playerPosition.target1.box}
 
         </div>

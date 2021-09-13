@@ -17,7 +17,6 @@ import PropertyCard from './PropertyCard/PropertyCard.jsx';
 import RailwayCard from './railwayCard/RailwayCard'
 import ServiceCard  from './serviceCard/ServiceCard'
 import TaxCard from './taxCard/TaxCard'
-import TaxVip from './taxVip/TaxVip';
 import Jail from './jail/Jail'
 import CreateGame from './createGame/CreateGame'
 import Chat from './chat/Chat.jsx'
@@ -42,7 +41,7 @@ export {
     RailwayCard,
     ServiceCard,
     TaxCard,
+    Jail,
     CreateGame,
     Chat,
-    TaxVip
 }

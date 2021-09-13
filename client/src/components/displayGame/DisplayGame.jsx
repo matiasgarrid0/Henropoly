@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import "./DisplayGame.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,13 +19,12 @@ import {
   PropertyCard,
   RailwayCard,
   ServiceCard,
-  TaxCard, 
-  TaxVip,
-  Jail
+  TaxCard,
+  Jail,
 } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
-import { luckyOrArc, gameActionsBoard , positionToBug } from '../playerProps/switchBoxBoard' 
+import { luckyOrArc, gameActionsBoard, positionToBug } from '../playerProps/switchBoxBoard'
 
 const DisplayGame = () => {
   useEffect(() => {
@@ -36,8 +35,8 @@ const DisplayGame = () => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
   const dispatch = useDispatch();
-  const { statusTable, tableGame, view, playerPosition } = useSelector((state) => state.game  );
-   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  const { statusTable, tableGame, view, playerPosition } = useSelector((state) => state.game);
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   const players = useSelector((state) => state.reducerInfo.infoGame);
   const cardReducer = useSelector((state) => state.reducerInfo.info);
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
@@ -46,15 +45,14 @@ const DisplayGame = () => {
   const [train, setTrain] = useState(null)
   const [service, setService] = useState(null)
   const [tax, setTax] = useState(null)
-  const [taxVip, setTaxVip] = useState(null)
-  const [jail,setJail] = useState(null)
- /*  const cardCarcerLuky = [{ID:11,
-    name:"Suerte",S
-    description:"Te copiaste en los checkpoints | Te vas directo a la migración",
-    type:"migras",
-    value:null,
-    owner:null,
-    tableMasterID:null}]; */
+  const [jailData, setJailData] = useState(null)
+  /*  const cardCarcerLuky = [{ID:11,
+     name:"Suerte",S
+     description:"Te copiaste en los checkpoints | Te vas directo a la migración",
+     type:"migras",
+     value:null,
+     owner:null,
+     tableMasterID:null}]; */
 
   const [status, setStatus] = useState({
     mouseActive: false,
@@ -91,9 +89,8 @@ const DisplayGame = () => {
     var finalBox = playerPosition[player].box; //5
 
     var roll = finalBox - actualBox;
-    
-    if(roll < 0){
-      roll= roll+39
+    if (roll < 0) {
+      roll = roll + 39
     }
     var rollOne;
     var rollTwo;
@@ -165,9 +162,10 @@ const DisplayGame = () => {
         box: finalBox,
       },
       targetMove: false,
-    }); //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    }); 
+    //------IF PARA RENDERIZAR PORTALES------
     if (tableGame.table[playerPosition[player].box].type) {
-      if (tableGame.table[playerPosition[player].box].type === "comunal") {
+      if (tableGame.table[playerPosition[player].box].type === "comunal" || tableGame.table[playerPosition[player].box].type === "lucky") {
         dispatch(filterComunalRandom());
         setPortal("comunal");
       }
@@ -187,16 +185,12 @@ const DisplayGame = () => {
         setService(tableGame.table[playerPosition[player].box])
         setPortal("service");
       }
-      if (tableGame.table[playerPosition[player].box].type === "tax") {
+      if (tableGame.table[playerPosition[player].box].type === "tax" || tableGame.table[playerPosition[player].box].type === "taxVip") {
         setTax(tableGame.table[playerPosition[player].box])
         setPortal("tax");
       }
-      if (tableGame.table[playerPosition[player].box].type === "taxVip") {
-        setTaxVip(tableGame.table[playerPosition[player].box])
-        setPortal("taxVip");
-      }
-      if (tableGame.table[playerPosition[player].box].type === "jail") {
-        setJail(tableGame.table[playerPosition[player].box])
+      if (tableGame.table[playerPosition[player].box].type === "jail" || tableGame.table[playerPosition[player].box].type === "goJail" ) {
+        setJailData(tableGame.table[playerPosition[player].box])
         setPortal("jail");
       }
     }
@@ -208,15 +202,12 @@ const DisplayGame = () => {
 
   function closedPortal1() {
     //comunal
-    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1,players);
+    luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1, players);
     setPortal(null);
   }
 
   function closedPortal2() {
-    //propertis
-    //luckyOrArc(null, null)
-     setPortal(null);
-   //  return positionToBug(tableGame.table[playerPosition.target1.box])
+    setPortal(null);
   }
 
   let myArr;
@@ -227,7 +218,7 @@ const DisplayGame = () => {
   function comprar() {
     myArr = findIdCard(playerPosition.target1.box, cardReducer)
     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
-    setPortal(null);   
+    setPortal(null);
   }
 
   useEffect(() => {
@@ -317,7 +308,7 @@ const DisplayGame = () => {
   const handleOnMouseUpEvent = (e) => {
     setStatus({ ...status, mouseActive: false });
   };
-  
+
   return (
     <div className="border">
       {portal === "lucky" && (
@@ -329,38 +320,33 @@ const DisplayGame = () => {
         <Portal onClose={closedPortal1}>
           <LuckyCard data={comunalCard} />
         </Portal>
-      )}        
+      )}
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
-          <PropertyCard data={property}/>
+          <PropertyCard data={property} />
           <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal2}>
-          <RailwayCard data={train}/>
+          <RailwayCard data={train} />
           <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal2}>
-          <ServiceCard data={service}/>
+          <ServiceCard data={service} />
           <button onClick={comprar}>Comprar</button>
         </Portal>
       )}
-            {portal === "tax" && (
+      {portal === "tax" && (
         <Portal onClose={closedPortal2}>
           <TaxCard data={tax} />
         </Portal>
       )}
-      {portal === "taxVip" && (
+      {portal === "jail" && (
         <Portal onClose={closedPortal2}>
-          <TaxCard data={taxVip} />
-        </Portal>
-      )}
-        {portal === "jail" && (
-        <Portal onClose={closedPortal2}>
-          <Jail data={jail}/>
+          <Jail data={jailData} />
         </Portal>
       )}
       <div>

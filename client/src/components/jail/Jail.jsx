@@ -1,17 +1,27 @@
 import React from 'react';
-import ToniPolice from './img/Toni_police.png';
-import ToniJail from './img/toniPreso.png';
+import ToniJail from '../board/img/toniPreso.png'
+import ToniPolice from '../board/img/Toni_police.png'
 import './Jail.css';
 
-
-const Jail = () => {
-    return (
-        <div className='railway-background-initial'>
-            <div className ="RailwayCard-background-no-repeat">
-                <h3 className = "RailwayCard-h3">Migracion</h3>
-                <img src={ToniJail} alt="Girl in a jacket" width="500" height="600"/>
+const Jail = ({data}) => {
+    if(data.type === "jail"){
+        return (
+            <div >
+                <div>
+                    <h3 className="Jail-Title" >Migracion</h3>
+                    <img src={ToniJail} alt="Girl in a jacket" width="400" height="350"/>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }else{
+        return (
+            <div >
+                <div>
+                    <h3 className="GoJail-Title" >Caiste en migración</h3>
+                    <img src={ToniPolice} alt="Girl in a jacket" width="400" height="350"/>
+                </div>
+            </div>
+        )
+    }
 }
 export default Jail;
