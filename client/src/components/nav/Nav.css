@@ -23,8 +23,8 @@
   font-size: 40px;
   letter-spacing: 1px;
   font-family: var(--text-one);
-  color: var(--color-yellow);
-  text-shadow: 0 0 5px rgb(253, 253, 62);
+  color: #f5f3f3;
+  text-shadow: 0 0 5px rgb(221, 221, 221);
 }
 
 .nav-space {

@@ -8,7 +8,7 @@ const Jail = ({data}) => {
         return (
             <div >
                 <div>
-                    <h3 className="Jail-Title" >Migracion</h3>
+                    <h3 className="Jail-Title" >Migración</h3>
                     <img src={ToniJail} alt="Girl in a jacket" width="400" height="350"/>
                 </div>
             </div>

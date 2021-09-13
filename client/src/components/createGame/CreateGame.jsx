@@ -38,43 +38,43 @@ const CreateGame = () => {
   }
 
   return (
-    <div>
+    <div className={s.tipografia}>
       <div className={s.divchiquito}>
-        <h3>Ingresar nombre de jugadores</h3>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <h3 className={s.h1_hero}>Ingresar nombre de jugadores</h3>
+        <form className={s.formulario} onSubmit={(e) => handleSubmit(e)}>
           <label className={s.nombres}>Jugador 1</label>
-          <input
+          <input className={s.searchBar}
             type="text"
             name="playerOne"
             value={input.playerOne}
             onChange={(e) => handleChange(e)}
-            placeholder="name player"
+            placeholder="nombre del jugador"
           />
           <label className={s.nombres}>Jugador 2</label>
-          <input
+          <input className={s.searchBar}
             type="text"
             name="playerTwo"
             value={input.playerTwo}
             onChange={(e) => handleChange(e)}
-            placeholder="name player"
+            placeholder="nombre del jugador"
           />
           <label className={s.nombres}>Jugador 3</label>
-          <input
+          <input className={s.searchBar}
             type="text"
             name="playerThree"
             value={input.playerThree}
             onChange={(e) => handleChange(e)}
-            placeholder="name player"
+            placeholder="nombre del jugador"
           />
           <label className={s.nombres}>Jugador 4</label>
-          <input
+          <input className={s.searchBar}
             type="text"
             name="playerFour"
             value={input.playerFour}
             onChange={(e) => handleChange(e)}
-            placeholder="name player"
+            placeholder="nombre del jugador"
           />
-          <button type="submit">Enviar </button>
+          <button className={s.btnsend} type="submit">Enviar </button>
         </form>
       </div>
     </div>

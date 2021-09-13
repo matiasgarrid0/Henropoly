@@ -81,16 +81,12 @@
     font-weight: 700;
     text-decoration: none;
     font-size: 1rem;
-    padding: 1rem 3rem;
-    margin-top: 2rem;
-    display: inline-block;
-    text-align: center;
     text-transform: uppercase;
     background-color: #FFEC00;
     transition: background-color .3s ease;
     border-radius:4px;
-    margin-left: 70px;
     border: none;
+   
 }
 
 .btn-send:hover {

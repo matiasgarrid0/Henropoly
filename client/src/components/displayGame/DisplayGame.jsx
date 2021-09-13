@@ -340,19 +340,19 @@ const DisplayGame = () => {
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
           <PropertyCard data={property} />
-          <button onClick={comprar}>Comprar</button>
+          <button className='displayGame-btn' onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal2}>
           <RailwayCard data={train} />
-          <button onClick={comprar}>Comprar</button>
+          <button className='displayGame-btn' onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal2}>
           <ServiceCard data={service} />
-          <button onClick={comprar}>Comprar</button>
+          <button className='displayGame-btn' onClick={comprar}>Comprar</button>
         </Portal>
       )}
       {portal === "tax" && (
