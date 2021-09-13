@@ -122,26 +122,26 @@ const GameDashBoard = () => {
       <div className="body-dashboard-table box-column">
         <div className="box-row">
           <label className="label-game">player1:</label>
-          <button onClick={movePlayer("target1")}>Roll</button>
+          <button className='roll-button' onClick={movePlayer("target1")}>Roll</button>
            {/* <button onClick={compra}> comprar</button> */}
-          <button onClick={vender}> vender</button>
+          <button className='roll-button' onClick={vender}> vender</button>
          {/*   <button onClick={vender1}> AAAAAAAAAAAAAAAAAAAAAAAA</button> */}
          {playerPosition.target1.box}
 
         </div>
         <div className="box-row">
           <label className="label-game">player2:</label>
-          <button onClick={movePlayer("target2")}>Roll</button>
+          <button className='roll-button' onClick={movePlayer("target2")}>Roll</button>
           {playerPosition.target2.box}
         </div>
         <div className="box-row">
           <label className="label-game">player3:</label>
-          <button onClick={movePlayer("target3")}>Roll</button>
+          <button className='roll-button' onClick={movePlayer("target3")}>Roll</button>
           {playerPosition.target3.box}
         </div>
         <div className="box-row">
           <label className="label-game">player4:</label>
-          <button onClick={movePlayer("target4")}>Roll</button>
+          <button className='roll-button' onClick={movePlayer("target4")}>Roll</button>
           {playerPosition.target4.box}
         </div>
       </div>

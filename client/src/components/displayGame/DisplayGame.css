@@ -72,7 +72,6 @@
   border: solid 1px #000000;
   text-shadow: 1px 1px 10px rgb(245, 255, 107);
 }
-
 .displayGame-btn:hover {
   cursor:pointer;
   color:#FFEC00;

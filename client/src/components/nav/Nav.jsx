@@ -43,7 +43,7 @@ const Nav = () => {
           <div>
             {isAuth ? (
               <>
-                <Link to='/ViewBoard'><button  className="button-one nav-btn">Tablero</button></Link> <LogOut />
+                <LogOut />
               </>
             ) : (
               <>

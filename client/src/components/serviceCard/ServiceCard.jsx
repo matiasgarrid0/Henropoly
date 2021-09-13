@@ -7,6 +7,7 @@ const ServiceCard = ({data}) => {
             <div className ='serviceCard-background-no-repeat'>
                 <h3 className="serviceCard-h3">{data.name}</h3>
                 <span>Valor de la licencia:{data.licenseValue}$</span>
+                <span>Valor de compra: {data.licenseValue}$</span>
             </div>
         </div>
     )
