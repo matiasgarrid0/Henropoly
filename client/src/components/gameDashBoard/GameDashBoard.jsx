@@ -1,19 +1,37 @@
+
 import React from "react";
 import "./GameDashBoard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValueTarget } from "./../../redux/actions";
+import { gameActionsBoard } from "../playerProps/switchBoxBoard";//
 
 const GameDashBoard = () => {
   const dispatch = useDispatch();
+  const players = useSelector((state) => state.reducerInfo.infoGame);
+  const cardReducer = useSelector((state) => state.reducerInfo.info);
+  let myArr;
+  /**
+   *
+   * @param {number} positionDices1 numero de la posición segun dados
+   * @param {array} arr son las cartas del tablero que estan en info
+   * @returns
+   */
+  const findIdCard = (positionDices1, arr) => {
+    let aux = arr.table.filter(e => e.id === positionDices1)
+    //console.log('AUXXXXXXXX', arr)
+    return aux;
+  }
   const { playerPosition } = useSelector((state) => state.game);
-  const movePlayer = (player, num) => {
+  const movePlayer = (player) => {
     return () => {
+      let num = Math.floor(Math.random() * 6 + 2);
+      //console.log("log del random GameDashBoard   " + num);
       switch (player) {
         case "target1":
           if (playerPosition.target1.box + num < 40) {
             dispatch(
               changeValueTarget(player, "box", playerPosition.target1.box + num)
-            );
+            )
           } else {
             dispatch(
               changeValueTarget(
@@ -21,8 +39,9 @@ const GameDashBoard = () => {
                 "box",
                 playerPosition.target1.box + num - 40
               )
-            );
+            );                    
           }
+
           break;
         case "target2":
           if (playerPosition.target2.box + num < 40) {
@@ -71,72 +90,58 @@ const GameDashBoard = () => {
       }
     };
   };
+  // const compra = (player) => {
+  //   myArr = findIdCard(playerPosition.target1.box, cardReducer)
+  //   console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
+  //   console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es comprar")
+  //   gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'comprar', myArr[0].type, myArr)
+  //   console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+  // }
+
+  const vender = (player) => {
+    myArr = findIdCard(playerPosition.target1.box, cardReducer)
+    // console.log('findthe card with position', myArr[0].type, myArr[0].licenseValue)
+    // console.log('tipo de propiedaddddddddddddd', myArr[0].type, "aca es vernder")
+    // console.log('playerrrr',players[0].resultNewGame.PlayerData.target1)
+     gameActionsBoard(players[0].resultNewGame.PlayerData.target1, 'vender', myArr[0].type, myArr)
+  }
+/*   const vender1 = () => {
+    dispatch(
+      changeValueTarget(players[0].resultNewGame.PlayerData.target1,"box", playerPosition.target2.box + 10)
+    );
+  } */
+  // const hardcodeo = (player) => {
+  //   myArr = findIdCard(playerPosition.target1.box, cardReducer);
+  //   console.log("findthe card with position",myArr[0].type,myArr[0].licenseValue);
+  //   gameActionsBoard(players[0].resultNewGame.PlayerData.target1,"comprar", myArr[0].type,myArr);
+  //   console.log("111111111kjsnjsdajnsadjnsdjkjsdjakds", gameActionsBoard(players[0].resultNewGame.PlayerData.target1,"comprar",myArr.type,myArr));
+  // };
 
   return (
     <div className="body-dashboard box-row no-select">
       <div className="body-dashboard-table box-column">
         <div className="box-row">
           <label className="label-game">player1:</label>
-          <button onClick={movePlayer("target1", 1)}>1</button>
-          <button onClick={movePlayer("target1", 2)}>2</button>
-          <button onClick={movePlayer("target1", 3)}>3</button>
-          <button onClick={movePlayer("target1", 4)}>4</button>
-          <button onClick={movePlayer("target1", 5)}>5</button>
-          <button onClick={movePlayer("target1", 6)}>6</button>
-          <button onClick={movePlayer("target1", 7)}>7</button>
-          <button onClick={movePlayer("target1", 8)}>8</button>
-          <button onClick={movePlayer("target1", 9)}>9</button>
-          <button onClick={movePlayer("target1", 10)}>10</button>
-          <button onClick={movePlayer("target1", 11)}>11</button>
-          <button onClick={movePlayer("target1", 12)}>12</button>
-          {playerPosition.target1.box}
+          <button onClick={movePlayer("target1")}>Roll</button>
+           {/* <button onClick={compra}> comprar</button> */}
+          <button onClick={vender}> vender</button>
+         {/*   <button onClick={vender1}> AAAAAAAAAAAAAAAAAAAAAAAA</button> */}
+         {playerPosition.target1.box}
+
         </div>
         <div className="box-row">
           <label className="label-game">player2:</label>
-          <button onClick={movePlayer("target2", 1)}>1</button>
-          <button onClick={movePlayer("target2", 2)}>2</button>
-          <button onClick={movePlayer("target2", 3)}>3</button>
-          <button onClick={movePlayer("target2", 4)}>4</button>
-          <button onClick={movePlayer("target2", 5)}>5</button>
-          <button onClick={movePlayer("target2", 6)}>6</button>
-          <button onClick={movePlayer("target2", 7)}>7</button>
-          <button onClick={movePlayer("target2", 8)}>8</button>
-          <button onClick={movePlayer("target2", 9)}>9</button>
-          <button onClick={movePlayer("target2", 10)}>10</button>
-          <button onClick={movePlayer("target2", 11)}>11</button>
-          <button onClick={movePlayer("target2", 12)}>12</button>
+          <button onClick={movePlayer("target2")}>Roll</button>
           {playerPosition.target2.box}
         </div>
         <div className="box-row">
           <label className="label-game">player3:</label>
-          <button onClick={movePlayer("target3", 1)}>1</button>
-          <button onClick={movePlayer("target3", 2)}>2</button>
-          <button onClick={movePlayer("target3", 3)}>3</button>
-          <button onClick={movePlayer("target3", 4)}>4</button>
-          <button onClick={movePlayer("target3", 5)}>5</button>
-          <button onClick={movePlayer("target3", 6)}>6</button>
-          <button onClick={movePlayer("target3", 7)}>7</button>
-          <button onClick={movePlayer("target3", 8)}>8</button>
-          <button onClick={movePlayer("target3", 9)}>9</button>
-          <button onClick={movePlayer("target3", 10)}>10</button>
-          <button onClick={movePlayer("target3", 11)}>11</button>
-          <button onClick={movePlayer("target3", 12)}>12</button>
+          <button onClick={movePlayer("target3")}>Roll</button>
           {playerPosition.target3.box}
         </div>
         <div className="box-row">
           <label className="label-game">player4:</label>
-          <button onClick={movePlayer("target4", 1)}>1</button>
-          <button onClick={movePlayer("target4", 2)}>2</button>
-          <button onClick={movePlayer("target4", 3)}>3</button>
-          <button onClick={movePlayer("target4", 4)}>4</button>
-          <button onClick={movePlayer("target4", 5)}>5</button>
-          <button onClick={movePlayer("target4", 6)}>6</button>
-          <button onClick={movePlayer("target4", 7)}>7</button>
-          <button onClick={movePlayer("target4", 8)}>8</button>
-          <button onClick={movePlayer("target4", 9)}>9</button>
-          <button onClick={movePlayer("target4", 10)}>10</button>
-          <button onClick={movePlayer("target4", 11)}>11</button>
-          <button onClick={movePlayer("target4", 12)}>12</button>
+          <button onClick={movePlayer("target4")}>Roll</button>
           {playerPosition.target4.box}
         </div>
       </div>

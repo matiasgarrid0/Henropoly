@@ -9,6 +9,16 @@ import DisplayGame from './displayGame/DisplayGame.jsx'
 import GameDashBoard from './gameDashBoard/GameDashBoard.jsx'
 import ViewBoard from './ViewBoard/ViewBoard.jsx';
 import Background3D from './background3D/Background3D.jsx'
+import Dices from './dice/Dice.jsx';
+import PlayerProps from './playerProps/playerProps.jsx';
+import Action from './playerProps/switchBoxBoard'
+import LuckyCard from './luckyCard/LuckyCard.jsx';
+import PropertyCard from './PropertyCard/PropertyCard.jsx';
+import RailwayCard from './railwayCard/RailwayCard'
+import ServiceCard  from './serviceCard/ServiceCard'
+import TaxCard from './taxCard/TaxCard'
+import Jail from './jail/Jail'
+import CreateGame from './createGame/CreateGame'
 import Chat from './chat/Chat.jsx'
 
 export {
@@ -23,5 +33,15 @@ export {
     GameDashBoard,
     ViewBoard,
     Background3D,
-    Chat
+    Dices,
+    PlayerProps, 
+    Action,
+    LuckyCard,
+    PropertyCard,
+    RailwayCard,
+    ServiceCard,
+    TaxCard,
+    Jail,
+    CreateGame,
+    Chat,
 }

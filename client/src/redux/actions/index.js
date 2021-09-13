@@ -1,3 +1,3 @@
 export { register, setLoading, setAuthenticate, setToken, setUser, logOut, login, checkToken } from "./auth";
-export { getInfoDb, setStatusInfo } from  './infoDb'
+export { getInfoDb, postPlayer ,setStatusInfo, filterComunalRandom,filterLuckyRandom } from  './infoDb'
 export { setDefault, resetTable, changeValueTable, changeValueTarget } from  './game'

@@ -65,6 +65,9 @@ module.exports = (sequelize) => {
       numberBox: {
         type: DataTypes.INTEGER,
       },
+      owner: {
+        type:DataTypes.STRING
+      }
     },
     { timestamps: false }
   );

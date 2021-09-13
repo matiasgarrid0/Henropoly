@@ -1,8 +1,19 @@
-import React from "react";
-import Shop from "../../image/SHOP.png"
+import React, { useState } from "react";
 import "./dashboard.css";
+import { CreateGame } from "../../components/index";
+import { Portal } from "../../components/index";
+import Shop from "../../image/SHOP.png"
+
 
 const DashBoard = () => {
+  const [portal, setPortal] = useState(null);
+  function openPortal() {
+    setPortal("createGame");
+  }
+
+  function closedPortal() {
+    setPortal(null);
+  } 
 
   return (
     <div className="dashboard-todo">
@@ -13,10 +24,9 @@ const DashBoard = () => {
           <div className="total">
             <h3 className="h3-total"> ¡JUEGA!</h3>
             <h4>CÓMO JUGAR A HENROPOLY</h4>
-            Muévete alrededor del tablero comprando tantas tecnologías como
-            puedas. Cuantas más poseas, más dinero podrás recibir del resto de
-            jugadores. Si eres el último jugador que queda cuando el resto de
-            jugadores están en bancarrota, ¡ganas el juego!
+            Muévete entre casillas comprando las tecnologías. Cuantas más
+            poseas, más dinero podrás recibir del resto de jugadores. Si el
+            resto de jugadores caen en bancarota, ¡ganas!.
             <h4>¿QUIÉN EMPIEZA A JUGAR EN EL HENROPOLY?</h4>
             El primer jugador en mover su pieza será seleccionado al azar al
             comiendo de cada partida
@@ -30,7 +40,13 @@ const DashBoard = () => {
           </div>
           <div className="contSalyImg">
             <div className="crearSala">
-              <button className="text-hov">Crear Sala</button>
+              <button className="text-hov" onClick={openPortal}>
+              Crear sala</button>
+              {portal === "createGame" && (
+                <Portal onClose={closedPortal}>
+                  <CreateGame />
+                </Portal>
+              )}            
               <button className="text-hov">Unirse a Sala</button>
               <img className="imgn" src={Shop} alt="shop"/>
             </div>
