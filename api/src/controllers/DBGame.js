@@ -1,8 +1,12 @@
-var playersInGame = {};
-let playersInHold = {};
-var waitingRoom = {};
-var gameRoom = {};
+const asyncRedis = require("async-redis");
+const redisConfig = {
+  host: "localhost",
+  port: "6379",
+  pass: "",
+};
+const client = asyncRedis.createClient(redisConfig);
 var timers = {};
+
 const randomArray = (arr) => {
   const newArr = arr.slice();
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -11,75 +15,134 @@ const randomArray = (arr) => {
   }
   return newArr;
 };
-const createRoom = (username) => {
-  waitingRoom[username] = {
-    host: username,
-    players: [],
-  };
-  playersInHold[username] = { username: username, host: username };
-};
-const deleteRoom = (username) => {
-  let freePlayers = waitingRoom[username].players;
-  freePlayers.push(username);
-  delete waitingRoom[username];
-  for (let i = 0; i < freePlayers.length; i++) {
-    delete playersInHold[freePlayers[i]];
+const searchStatus = async (username) => {
+  try {
+  const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
+  if (ResponsePlayersInHold!== null) {
+    const responseWaitingRoom = await client.get(`waitingRoom${ResponsePlayersInHold}`)
+    return { status: "inHold", room: JSON.parse(responseWaitingRoom) }
   }
-  return freePlayers;
-};
-const joinRoom = (username, host) => {
-  if (waitingRoom[host]) {
-    if (
-      waitingRoom[host].host !== username &&
-      waitingRoom[host].players.length < 3 &&
-      !waitingRoom[host].players.includes(username)
-    ) {
-      waitingRoom[host].players.push(username);
-      playersInHold[username] = { username: username, host: host };
-      return ["successful", waitingRoom[host]];
-    }
-  }
-  return ["fail"];
-};
-const leaveRoom = (username) => {
-  let players = waitingRoom[playersInHold[username].host].players.filter(
-    (player) => player !== username
-  );
-  waitingRoom[playersInHold[username].host].players = players;
-  let host = playersInHold[username].host;
-  delete playersInHold[username];
-  return ["successful", players, waitingRoom[host], host];
-};
-
-const searchStatus = (username) => {
-  if (playersInHold[username]) {
-    return {
-      status: "inHold",
-      room: waitingRoom[playersInHold[username].host],
-    };
-  }
-  if (playersInGame[username]) {
+  const ResponsePlayersInGame = await client.get(`playersInGame${username}`)
+  if (ResponsePlayersInGame !== null) {
+    const responseGameRoom = await client.get(`gameRoom${ResponsePlayersInGame}`)
     return {
       status: "inGame",
-      data: gameRoom[playersInGame[username].host],
-    };
+      data: JSON.parse(responseGameRoom)
+    }
   }
   return { status: "free" };
+  } catch (error) {
+    console.log(error)
+  }
 };
-const timer = (room, io) => {
-  timers[room] = setInterval(
-    () => {
+const createRoom = async (username, io) => {
+  try {
+    const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
+    const responseWaitingRoom = await client.get(`waitingRoom${ResponsePlayersInHold}`)
+    if (responseWaitingRoom === null && ResponsePlayersInHold === null) {
+      const value = JSON.stringify({
+        host: username,
+        players: [],
+      });
+      const playersInHold = await client.set(`playersInHold${username}`,username)
+      const waitingRoom = await client.set(`waitingRoom${username}`,value)
+      io.sockets.in(username).emit("roomStatus", {
+        status: "inHold",
+        room: { host: username, players: [] },
+      });
+    }
+  } catch (error) {
+    console.log(error)
+  }
+};
+const deleteRoom = async (username, io) => {
+  try {
+    const responseWaitingRoom = await client.get(`waitingRoom${username}`)
+    let playersFree = (JSON.parse(responseWaitingRoom).players)
+    playersFree.push(username)
+    await client.del(`waitingRoom${username}`)
+    playersFree.forEach(async (player) => {
+      await client.del(`playersInHold${username}`)
+      io.sockets.in(player).emit("roomStatus", {
+        status: "free",
+      });
+    });
+  } catch (error) {
+    console.log(error)
+  }
+};
+const joinRoom = async (username, host, io) => {
+  try {
+  const responseWaitingRoom = await client.get(`waitingRoom${host}`)
+  if(responseWaitingRoom !== null){
+    let roomJson = JSON.parse(responseWaitingRoom)
+    if(roomJson.host !== username &&
+      roomJson.players.length < 3 &&
+      !roomJson.players.includes(username)){
+      roomJson.players.push(username)
+      await client.set(`waitingRoom${host}`, JSON.stringify(roomJson))
+      await client.set(`playersInHold${username}`, host)
+      roomJson.players.forEach((player) => {
+        io.sockets.in(player).emit("roomStatus", {
+          status: "inHold",
+          room: roomJson
+        });
+      });
+      io.sockets.in(host).emit("roomStatus", {
+          status: "inHold",
+          room: roomJson
+        });
+    }
+  }
+    } catch (error) {
+    console.log(error)
+  }
+};
+const leaveRoom = async (username, io) => {
+  try {
+  const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
+  const responseWaitingRoom = await client.get(`waitingRoom${ResponsePlayersInHold}`)
+  let roomJson = (JSON.parse(responseWaitingRoom))
+  roomJson.players = roomJson.players.filter(
+    (player) => player !== username
+  )
+  await client.del(`playersInHold${username}`)
+  await client.set(`waitingRoom${ResponsePlayersInHold}`, JSON.stringify(roomJson))
+  roomJson.players.forEach((player) => {
+    io.sockets.in(player).emit("roomStatus", {
+      status: "inHold",
+      room: roomJson
+    });
+  });
+  io.sockets.in(roomJson.host).emit("roomStatus", {
+    status: "inHold",
+    room: roomJson
+  });
+  io.sockets.in(username).emit("roomStatus", {
+    status: "free",
+  });
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+const timer = (username, io) => {
+  timers[username] = setInterval(
+    async() => {
       console.log("cambio turno");
-      gameRoom[room].actualTurn = gameRoom[room].order[1];
-      let arrayOrder = gameRoom[room].order;
+      const responseGameRoom = await client.get(`gameRoom${username}`)
+      var roomGame = JSON.parse(responseGameRoom)
+      roomGame.actualTurn = roomGame.order[1];
+      let arrayOrder = roomGame.order;
       let playerFinal = arrayOrder.shift();
       arrayOrder.push(playerFinal);
-      gameRoom[room].order = arrayOrder;
+      roomGame.order = arrayOrder;
+      await client.set(`gameRoom${username}`,JSON.stringify(roomGame))
       arrayOrder.forEach((player) => {
         io.sockets.in(player).emit("setGame", {
           status: "setTurns",
-          actualTurn: gameRoom[room].actualTurn,
-          order: gameRoom[room].order,
+          actualTurn: roomGame.actualTurn,
+          order: roomGame.order,
         });
       });
     },
@@ -90,13 +153,17 @@ const timer = (room, io) => {
 const clearTimer = (room) => {
   clearInterval(room);
 };
-const goGame = (username, io) => {
-  let players = deleteRoom(username);
-  players.forEach((player) => {
-    playersInGame[player] = { username: player, host: username };
-  });
-  let orden = randomArray(players);
-  gameRoom[username] = {
+const goGame = async (username, io) => {
+  try {
+  const responseWaitingRoom = await client.get(`waitingRoom${username}`)
+    let playersFree = (JSON.parse(responseWaitingRoom).players)
+    playersFree.push(username)
+    await client.del(`waitingRoom${username}`)
+    playersFree.forEach(async (player) => {
+      await client.set(`playersInGame${player}`,username)
+    });
+  var orden = randomArray(playersFree);
+  var gameRoom = {
     status: "inGame",
     host: username,
     order: orden,
@@ -106,46 +173,52 @@ const goGame = (username, io) => {
       target4: { username: null, status: false, box: 0, x: 40, y: 40 },
     },
   };
-  gameRoom[username].dataPlayers.target1 = {
-    username: gameRoom[username].order[0],
+  gameRoom.dataPlayers.target1 = {
+    username: gameRoom.order[0],
     status: true,
     box: 0,
     x: 120,
     y: 120,
   };
-  gameRoom[username].dataPlayers.target2 = {
-    username: gameRoom[username].order[1],
+  gameRoom.dataPlayers.target2 = {
+    username: gameRoom.order[1],
     status: true,
     box: 0,
     x: 40,
     y: 120,
   };
-  if (gameRoom[username].order[2]) {
-    gameRoom[username].dataPlayers.target2 = {
-      username: gameRoom[username].order[2],
+  if (gameRoom.order[2]) {
+    gameRoom.dataPlayers.target2 = {
+      username: gameRoom.order[2],
       status: true,
       box: 0,
       x: 120,
       y: 40,
     };
   }
-  if (gameRoom[username].order[3]) {
-    gameRoom[username].dataPlayers.target2 = {
-      username: gameRoom[username].order[3],
+  if (gameRoom.order[3]) {
+    gameRoom.dataPlayers.target2 = {
+      username: gameRoom.order[3],
       status: true,
       box: 0,
       x: 40,
       y: 40,
     };
   }
+  await client.set(`gameRoom${username}`, JSON.stringify(gameRoom))
+  playersFree.forEach(async (player) => {
+      await client.del(`playersInHold${player}`)
+      io.sockets.in(player).emit("roomStatus", {
+          status: "inGame",
+          data: gameRoom
+      });
+  });
   timer(username, io);
-  return [orden, gameRoom[username]];
+  } catch (error) {
+    console.log(error)
+  }
 };
 module.exports = {
-  playersInGame,
-  playersInHold,
-  waitingRoom,
-  gameRoom,
   createRoom,
   deleteRoom,
   joinRoom,

@@ -29,96 +29,36 @@ io.on("connection", async (socket) => {
   } catch (err) {
     socket.disconnect();
   }
-
   io.sockets
     .in(decoded.user.username)
-    .emit("roomStatus", searchStatus(decoded.user.username));
+    .emit("roomStatus", await searchStatus(decoded.user.username));
 
-  socket.on("setRoom", (data) => {
+  socket.on("setRoom", async(data) => {
     if (data.type === "create") {
-      createRoom(decoded.user.username);
-      io.sockets.in(decoded.user.username).emit("roomStatus", {
-        status: "inHold",
-        room: { host: decoded.user.username, players: [] },
-      });
+      await createRoom(decoded.user.username, io);
     } else if (data.type === "delete") {
-      const arrayFree = deleteRoom(decoded.user.username);
-      arrayFree.forEach((player) => {
-        io.sockets.in(player).emit("roomStatus", {
-          status: "free",
-        });
-      });
+      await deleteRoom(decoded.user.username, io);
     } else if (data.type === "join") {
-      const result = joinRoom(decoded.user.username, data.host);
-      if (result[0] === "successful") {
-        result[1].players.forEach((player) => {
-          io.sockets.in(player).emit("roomStatus", {
-            status: "inHold",
-            room: result[1],
-          });
-        });
-        io.sockets.in(data.host).emit("roomStatus", {
-          status: "inHold",
-          room: result[1],
-        });
-      }
+      await joinRoom(decoded.user.username, data.host, io);
     } else if (data.type === "leaveRoom") {
-      const result = leaveRoom(decoded.user.username);
-      if (result[0] === "successful") {
-        result[1].forEach((player) => {
-          io.sockets.in(player).emit("roomStatus", {
-            status: "inHold",
-            room: result[2],
-          });
-        });
-        io.sockets.in(result[3]).emit("roomStatus", {
-          status: "inHold",
-          room: result[2],
-        });
-        io.sockets.in(decoded.user.username).emit("roomStatus", {
-          status: "free",
-        });
-      }
+      await leaveRoom(decoded.user.username, io);
     } else if (data.type === "kickPlayer") {
-      const result = leaveRoom(data.player);
-      if (result[0] === "successful") {
-        result[1].forEach((player) => {
-          io.sockets.in(player).emit("roomStatus", {
-            status: "inHold",
-            room: result[2],
-          });
-        });
-        io.sockets.in(result[3]).emit("roomStatus", {
-          status: "inHold",
-          room: result[2],
-        });
-        io.sockets.in(data.player).emit("roomStatus", {
-          status: "free",
-        });
-      }
+      await leaveRoom(data.player, io);
     } else if (data.type === "goGame") {
-      const result = goGame(decoded.user.username, io);
-      result[0].forEach((player) => {
-        io.sockets.in(player).emit("roomStatus", {
-          status: "inGame",
-          data: result[1],
-        });
-      });
+      await goGame(decoded.user.username, io);
     }
   });
   socket.on("roomStatus", () => {});
   socket.on("setGame", () => {});
-  socket.on('sendGlobal', (data) => {
-    io.emit('chatGlobal', {
+  socket.on("sendGlobal", (data) => {
+    io.emit("chatGlobal", {
       username: decoded.user.username,
-      message: data.message
+      message: data.message,
     });
   });
-  socket.on("chatGlobal", () => {
-  });
+  socket.on("chatGlobal", () => {});
   socket.on("disconnect", () => {});
 });
-
 server.name = "API";
 // si funca deployear
 //server.use(cors());

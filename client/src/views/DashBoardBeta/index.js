@@ -9,8 +9,8 @@ const DashBoardBeta = () => {
     return (
       <div className="beta-space-game color-blanco">
         <div className="beta-box-game">
-        <div className="asd"> </div>
-        <div className="asd"> </div>
+        <div className="asd"></div>
+        <div className="asd"></div>
           <DisplayGameBeta />
         </div>
       </div>

@@ -13,6 +13,7 @@ const Room = () => {
   const [input, setInput] = useState({
     unirse: "",
   });
+
   socket.on("roomStatus", (data) => {
     if (data.status === "inHold") {
       setStatusRoom({ ...statusRoom, room: data.room, status: "inHold" });
