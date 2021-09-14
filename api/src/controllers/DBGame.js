@@ -60,6 +60,7 @@ const createRoom = async (username, io) => {
     console.log(error);
   }
 };
+
 const deleteRoom = async (username, io) => {
   try {
     const responseWaitingRoom = await client.get(`waitingRoom${username}`);
