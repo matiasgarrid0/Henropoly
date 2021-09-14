@@ -4,7 +4,11 @@ const redisConfig = {
   port: process.env.REDIS_PORT || "6379",
   pass: process.env.REDIS_PASSWORD || "",
 };
-const client = asyncRedis.createClient(redisConfig);
+const client = asyncRedis.createClient(redisConfig, {
+  tls: {
+    rejectUnauthorized: false
+}
+});
 var timers = {};
 const randomArray = (arr) => {
   const newArr = arr.slice();
