@@ -25,7 +25,7 @@ const { preloadData } = require('./preloadData')
 // Syncing all the models at once.
 conn.sync({ force: false }).then(async() => {
   await preloadData()
-  server.listen(process.env.PORT, () => {
+  server.listen(process.env.REDIS_PORT || process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
