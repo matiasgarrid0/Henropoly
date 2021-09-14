@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setView, setTargetValue, setTurns } from "./../../redux/actions";
-import { Board } from "./../";
+import { Board, Turns } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
-  const { status, dataPlayers, order, actualTurn } = useSelector(
+  const { status, dataPlayers } = useSelector(
     (state) => state.henropolyGame
   );
   const { info } = useSelector((state) => state.reducerInfo);
@@ -157,11 +157,16 @@ const DisplayGameBeta = () => {
   const handleOnMouseUpEvent = (e) => {
     setDataGame({ ...dataGame, mouseActive: false });
   };
-  socket.on("setGame", (data) => {
-    if (data.status === "setTurns") {
-      dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
-    }
-  });
+  useEffect(() => {
+    socket.on("setGame", (data) => {
+      if (data.status === "setTurns") {
+        dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
+      }
+    });
+    return () => {
+      socket.off('setGame');
+    };
+  }, []);
   return (
     <div className="border">
       <div className="body-display no-select">
@@ -222,12 +227,7 @@ const DisplayGameBeta = () => {
         )}
       </div>
       <div className="turns box-column color-negro">
-        Turno Actual:
-        <label>{actualTurn}</label>
-        Orden:
-        {order.map((player) => {
-          return <label>{player}</label>;
-        })}
+        <Turns/>
       </div>
       <div
         className="touch"

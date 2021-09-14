@@ -22,7 +22,7 @@ import CreateGame from "./createGame/CreateGame";
 import Chat from "./chat/Chat.jsx";
 import Room from "./room/Room.jsx";
 import DisplayGameBeta from "./displayGameBeta/DisplayGameBeta.jsx";
-
+import Turns from "./turns/Turns.jsx";
 export {
   Loggin,
   RegisterForm,
@@ -48,4 +48,5 @@ export {
   Chat,
   Room,
   DisplayGameBeta,
+  Turns,
 };

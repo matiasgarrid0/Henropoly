@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setGame } from "./../../redux/actions";
 import "./Room.css";
@@ -13,22 +13,28 @@ const Room = () => {
   const [input, setInput] = useState({
     unirse: "",
   });
-
-  socket.on("roomStatus", (data) => {
-    if (data.status === "inHold") {
-      setStatusRoom({ ...statusRoom, room: data.room, status: "inHold" });
-    }
-    if (data.status === "free") {
-      setStatusRoom({
-        ...statusRoom,
-        room: { host: user.username, players: [] },
-        status: "free",
-      });
-    }
-    if (data.status === "inGame") {
-      dispatch(setGame(data.data));
-    }
+  
+  useEffect(() => {
+    socket.on("roomStatus", (data) => {
+      if (data.status === "inHold") {
+        setStatusRoom({ ...statusRoom, room: data.room, status: "inHold" });
+      }
+      if (data.status === "free") {
+        setStatusRoom({
+          ...statusRoom,
+          room: { host: user.username, players: [] },
+          status: "free",
+        });
+      }
+      if (data.status === "inGame") {
+        dispatch(setGame(data.data));
+      }
+    });
+    return () => {
+      socket.off('roomStatus');
+    };
   });
+
   const setRoom = (data) => {
     return () => {
       socket.emit("setRoom", data);

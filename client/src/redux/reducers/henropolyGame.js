@@ -2,11 +2,6 @@ import { SET_GAME, SET_TARGET_VALUE, SET_TURNS } from "../constants";
 
 const initialState = {
   status: "free",
-  view: {
-    scale: 0.6,
-    high: 70,
-    angle: 0,
-  },
   host: null,
   order: [],
   actualTurn: null,

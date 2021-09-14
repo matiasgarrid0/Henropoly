@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { BiSend } from "react-icons/bi";
 import "./Chat.css";
@@ -8,9 +8,15 @@ const Chat = ({ room }) => {
   const [mensaje, setMensaje] = useState("");
   const [mensajes, setMensajes] = useState([]);
 
-  socket.on(`chatGlobal`, (msj) => {
-    setMensajes([...mensajes, msj]);
-  });
+  useEffect(() => {
+    socket.on(`chatGlobal`, (msj) => {
+      setMensajes([...mensajes, msj]);
+    });
+    return () => {
+      socket.off('chatGlobal');
+    };
+    /* eslint-disable react-hooks/exhaustive-deps */
+  },[mensajes])
   const submit = (e) => {
     e.preventDefault();
     socket.emit(`sendGlobal`, { message: mensaje });
