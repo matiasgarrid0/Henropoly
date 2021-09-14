@@ -8,9 +8,7 @@ import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
-  const { status, dataPlayers } = useSelector(
-    (state) => state.henropolyGame
-  );
+  const { status, dataPlayers } = useSelector((state) => state.henropolyGame);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
@@ -99,21 +97,21 @@ const DisplayGameBeta = () => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [dataPlayers.target1.box]);
   const style = {
-    backgroundSize: "700px",
+    backgroundSize: "2500px",
     backgroundImage: `url(${Imagen})`,
     boxShadow: "inset 0 0 0 20px #00000033",
     width: "1800px",
     height: "1800px",
     position: "absolute",
     transform: `scale(${view.scale}) rotateX(${view.high}deg) rotateZ(${view.angle}deg)`,
-    marginLeft: `-300px`,
+    marginLeft: `-250px`,
     marginTop: `-250px`,
   };
   const handleWheelEvent = (e) => {
-    if (e.deltaY === -100 && view.scale > 0.4) {
-      dispatch(setView("scale", view.scale - 0.02));
-    } else if (e.deltaY === 100 && view.scale < 0.85) {
-      dispatch(setView("scale", view.scale + 0.02));
+    if (e.deltaY === 100 && view.scale > 0.55) {
+      dispatch(setView("scale", view.scale - 0.03));
+    } else if (e.deltaY === -100 && view.scale < 1.28) {
+      dispatch(setView("scale", view.scale + 0.03));
     }
   };
   const handleMousedownEvent = (e) => {
@@ -164,19 +162,19 @@ const DisplayGameBeta = () => {
       }
     });
     return () => {
-      socket.off('setGame');
+      socket.off("setGame");
     };
   }, []);
   return (
-    <div className="border">
-      <div className="body-display no-select">
+    <div className="display-beta-border">
+      <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
-          <div className="container-gametable">
-            <div className="container-gametable-cube">
+          <div className="display-beta-container-gametable">
+            <div className="display-beta-container-gametable-cube">
               <div style={style}>
-                <div className="align-game">
-                  <Board className="board-position" cards={info.table} />
-                  <div className="game-box">
+                <div className="display-beta-align-game">
+                  <Board className="display-beta-board-position" cards={info.table} />
+                  <div className="display-beta-game-box">
                     {dataPlayers.target1.status && (
                       <div
                         style={{
@@ -184,7 +182,7 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
-                        className="target"
+                        className="display-beta-target"
                       ></div>
                     )}
                     {dataPlayers.target2.status && (
@@ -194,7 +192,7 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target2.x}px`,
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
-                        className="target"
+                        className="display-beta-target"
                       ></div>
                     )}
                     {dataPlayers.target3.status && (
@@ -204,7 +202,7 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target3.x}px`,
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
-                        className="target"
+                        className="display-beta-target"
                       ></div>
                     )}
                     {dataPlayers.target4.status && (
@@ -214,7 +212,7 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target4.x}px`,
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
-                        className="target"
+                        className="display-beta-target"
                       ></div>
                     )}
                   </div>
@@ -226,11 +224,11 @@ const DisplayGameBeta = () => {
           <div>error</div>
         )}
       </div>
-      <div className="turns box-column color-negro">
-        <Turns/>
+      <div className="display-beta-components">
+        <Turns />
       </div>
       <div
-        className="touch"
+        className="display-beta-touch"
         onWheel={handleWheelEvent}
         onMouseDown={handleMousedownEvent}
         onMouseMove={handleOnMouseMoveEvent}

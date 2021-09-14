@@ -60,3 +60,6 @@ body {
   box-shadow: 0 0 5px var(--color-yellow);
   transform: scale(1.1);
 }
+.index-space {
+  height: 50px;
+}
