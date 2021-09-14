@@ -1,6 +1,6 @@
 const asyncRedis = require("async-redis");
 const redisConfig = {
-  host: process.env.REDIS_URL || "localhost",
+  host: process.env.REDIS_TLS_URL || process.env.REDIS_URL || "localhost",
   port: process.env.REDIS_PORT || "6379",
   pass: process.env.REDIS_PASSWORD || "",
 };
