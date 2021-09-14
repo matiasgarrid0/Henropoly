@@ -6,14 +6,14 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const routes = require("./routes/index.js");
-const {
-  createRoom,
-  deleteRoom,
-  joinRoom,
-  leaveRoom,
-  goGame,
-  searchStatus,
-} = require("./controllers/DBGame");
+// const {
+//   createRoom,
+//   deleteRoom,
+//   joinRoom,
+//   leaveRoom,
+//   goGame,
+//   searchStatus,
+// } = require("./controllers/DBGame");
 const server = express();
 const http = require("http").createServer(server);
 const io = require("socket.io")(http, {
@@ -29,26 +29,26 @@ io.on("connection", async (socket) => {
   } catch (err) {
     socket.disconnect();
   }
-  io.sockets
-    .in(decoded.user.username)
-    .emit("roomStatus", await searchStatus(decoded.user.username));
+  // io.sockets
+  //   .in(decoded.user.username)
+  //   .emit("roomStatus", await searchStatus(decoded.user.username));
 
-  socket.on("setRoom", async(data) => {
-    if (data.type === "create") {
-      await createRoom(decoded.user.username, io);
-    } else if (data.type === "delete") {
-      await deleteRoom(decoded.user.username, io);
-    } else if (data.type === "join") {
-      await joinRoom(decoded.user.username, data.host, io);
-    } else if (data.type === "leaveRoom") {
-      await leaveRoom(decoded.user.username, io);
-    } else if (data.type === "kickPlayer") {
-      await leaveRoom(data.player, io);
-    } else if (data.type === "goGame") {
-      await goGame(decoded.user.username, io);
-    }
-  });
-  socket.on("roomStatus", () => {});
+  // socket.on("setRoom", async(data) => {
+  //   if (data.type === "create") {
+  //     await createRoom(decoded.user.username, io);
+  //   } else if (data.type === "delete") {
+  //     await deleteRoom(decoded.user.username, io);
+  //   } else if (data.type === "join") {
+  //     await joinRoom(decoded.user.username, data.host, io);
+  //   } else if (data.type === "leaveRoom") {
+  //     await leaveRoom(decoded.user.username, io);
+  //   } else if (data.type === "kickPlayer") {
+  //     await leaveRoom(data.player, io);
+  //   } else if (data.type === "goGame") {
+  //     await goGame(decoded.user.username, io);
+  //   }
+  // });
+  // socket.on("roomStatus", () => {});
   socket.on("setGame", () => {});
   socket.on("sendGlobal", (data) => {
     io.emit("chatGlobal", {
