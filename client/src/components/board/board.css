@@ -14,7 +14,7 @@
 
 .board-logo{
   width: 40rem;
-	transform: rotateZ(-45deg) translateX(-5px) translateY(220px);
+	transform: rotateZ(-45deg) translateX(35px) translateY(200px);
 }
 .board-logo-toniPolice{
   width: 10rem;
@@ -160,17 +160,16 @@
 }
 .color-card-blue {
   background: linear-gradient(#5593d6, #154375);
-
 }
 .top{
   margin-top: 5rem;
 }
 .card-blue-inside{
-  transform: rotateZ(-45deg) translateX(50px) translateY(230px);
+  transform: rotateZ(-45deg) translateX(40px) translateY(230px);
   width: 15rem;
 }
 .card-orange-inside{
-  transform: rotateZ(-45deg) translateX(370px) translateY(560px);
+  transform: rotateZ(-45deg) translateX(390px) translateY(560px);
   width: 15rem;
 }
 .card-box {	

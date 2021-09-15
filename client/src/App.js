@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import React, { useEffect } from 'react';
-import { Nav, Loading, ViewBoard, Action, } from './components';
+import { Nav, Loading, Action, } from './components';
 import { SwitchPage, Game, DashBoardBeta} from './views'
 
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +36,6 @@ const App = () => {
         <Route path="/" exact component={SwitchPage} />
         <Route path="/game" exact component={Game} />
         <Route path="/PLAYERS" exact component={Action} />
-        <Route path="/ViewBoard" exact component={ViewBoard} />
         <Route path="/beta" exact component={DashBoardBeta} />
       </Switch>
     </div>

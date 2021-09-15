@@ -6,7 +6,7 @@ const TaxCard = ({data}) => {
         return (
             <div className='railway-background-initial'>
                 <div className ="RailwayCard-background-no-repeat">
-                    <h3 className = "RailwayCard-h3">Tax</h3>
+                    <h3 className = "taxCard-h3">Impuesto</h3>
                     <span className = "card-span-bold">Se te cobrará $200</span>
                 </div>
             </div>
@@ -15,7 +15,7 @@ const TaxCard = ({data}) => {
         return (
             <div className='railway-background-initial'>
                 <div className ="RailwayCard-background-no-repeat">
-                    <h3 className = "RailwayCard-h3">Tax-Vip</h3>
+                    <h3 className = "taxCard-h3">Impuesto-Vip</h3>
                     <span className = "card-span-bold">Se te cobrará $400</span>
                 </div>
             </div>

@@ -1,0 +1,107 @@
+.cnt {
+    margin: 10px 30px -15px 30px;
+    padding: 5px;
+    background-color:rgba(255, 255, 255, 0.9);
+    width: 17rem;
+    height: 32rem;
+    border-radius: 5px;
+    border: solid 2px rgb(0, 0, 0);
+}
+
+.card-title-card{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  font-family: var(--text-three);
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: auto;
+  color: #ffffff;
+  text-shadow: -2px 2px 0 #000,
+  2px 2px 0 #000,
+  2px -2px 0 #000,
+ -2px -2px 0 #000;
+}
+.all{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  text-align: center;
+}
+
+.h1{
+  display: flex;
+  justify-content: center;
+    font-family: monospace;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+  /* .pgame{
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+  } */
+  .card-gameNav{
+    font-size:3rem;
+    margin: auto;
+    margin-top: 2rem;
+    width: 30rem;
+    height: 35rem;
+    background-color:rgba(221, 221, 221, 0.9);
+    font-size:1rem;
+    padding:2rem;
+  }
+  .listStile-none{
+    list-style: none;
+    align-items: center;
+    margin-left: -1.9rem;
+  }
+  .propertyCard-div-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    box-shadow: inset 0 0 0 4px #00000093;
+    height: 20%;
+    display: flex;
+  }
+  .line-card{
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+  }
+  .alignItemsssssss{
+    align-items: center;
+    text-align: center;
+  }
+  .card-span-bold{
+    font-weight: 700;
+  }
+  .card-span-bold-compra{
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .pgame-compra{
+      margin-bottom:25px;
+  }
+  .propertyCard-color-card-brown {
+    background: linear-gradient(#e49f68, #966237);
+  }
+  .propertyCard-color-card-light-blue {
+    background: linear-gradient(#91d6f3, #3fa2cc);
+  }
+  .propertyCard-color-card-pink {
+    background: linear-gradient(#fda7fd, #e060e0);
+  }
+  .propertyCard-color-card-orange {
+    background: linear-gradient(#eb924f, #bd6422);
+  }
+  .propertyCard-color-card-red {
+    background: linear-gradient(#ee6c62, #b1342a);
+  }
+  .propertyCard-color-card-yellow {
+    background: linear-gradient(#f5e557, #d4c218);
+  }
+  .propertyCard-color-card-green {
+    background: linear-gradient(#2ecc65, #028730);
+  }
+  .propertyCard-color-card-blue {
+    background: linear-gradient(#5593d6, #154375);
+  }

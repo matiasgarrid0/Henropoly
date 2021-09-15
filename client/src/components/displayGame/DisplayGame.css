@@ -54,3 +54,27 @@
   height: 40px;
   position: absolute;
 }
+.displayGame-btn {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000000;
+  font-weight: 700;
+  margin-left: 5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 1rem 3rem;
+  margin-top: 1.3rem;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #FFEC00;
+  transition: background-color .3s ease;
+  border-radius:4px;
+  border: solid 1px #000000;
+  text-shadow: 1px 1px 10px rgb(245, 255, 107);
+}
+.displayGame-btn:hover {
+  cursor:pointer;
+  color:#FFEC00;
+  background-color:#000000;
+  border: solid 1px #FFEC00;
+}
