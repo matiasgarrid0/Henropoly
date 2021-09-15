@@ -122,7 +122,7 @@ export const logOut = () => {
     localStorage.removeItem("access_token");
   };
 };
-
+  //SI LEVANTAMOS EN LOCAL HOST PONER  "http://localhost:3001" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const connectSocket = (token) => {
   const socket = io('https://henropoly-grupo6.herokuapp.com/', { query: { token } });
   return {
