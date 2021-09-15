@@ -1,7 +1,7 @@
 .chat-cuadro-general {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 1rem;
-  background: linear-gradient(#375d83, #2A3846);
+  background: linear-gradient(#f0f0f0, #b9b9b9);
   height: 26rem;
   width: 20rem;
   text-align: center;
@@ -15,18 +15,15 @@
 .chat-h1 {
   margin-top: 0.8rem;
   text-transform: uppercase;
-  background: linear-gradient(#26627c, #063b52);
+  background: linear-gradient(#fff12a, #b4a910);
   padding: 0.2rem;
-  border:groove 1px #ffffff;
+  border:groove 1px #FFEC00;
   border-radius: 8px;
-  color: #f3f3f3;
+  color: #141414;
 }
-/* .chat-flex {
-  display: flex;
-  text-align: center;
-} */
+
 .chat-btn-enviar {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 700;
   text-decoration: none;
   font-size: 1rem;
@@ -43,7 +40,7 @@
   text-align: center;
 }
 .chat-textarea {
-  background-color: rgb(27, 32, 39);
+  background-color: rgb(215, 219, 224);
   align-items: center;
   justify-content: center;
   color: #ffffff;
@@ -77,8 +74,8 @@
   border: solid 1px #818181;
 }
 .chat-username {
-  background-color: #0097a7;
-  color: #ffffff;
+  background-color: #FFEC00;
+  color: #000000;
   display: inline-block;
   padding: 0.3rem;
   margin-top: 1rem;
@@ -87,14 +84,14 @@
   margin-right: 12rem;
 }
 .chat-message {
-  background-color: #08223b;
+  background-color: #273644;
   text-align: start;
   padding: 0.3rem;
   margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
 }
 .background-chat-textarea{
-  background: linear-gradient(#15395d, #122c46);
+   background: linear-gradient(#fff134, #b4a910);
   border-radius: 0 0 1.125rem 1.125rem;
   border: solid 1px #818181;
 }
