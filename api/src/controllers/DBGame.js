@@ -1,15 +1,10 @@
 const asyncRedis = require("async-redis");
-import redis from "redis";
-// const redisConfig = {
-//   host: process.env.REDIS_URL || "localhost",
-//   port: process.env.REDIS_PORT || "6379",
-//   pass: process.env.REDIS_PASSWORD || "",
-// };
-const client = asyncRedis.createClient(process.env.REDIS_URL, {
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+const redisConfig = {
+  host: "localhost",
+  port: "6379",
+  pass: "",
+};
+const client = asyncRedis.createClient(redisConfig);
 var timers = {};
 const randomArray = (arr) => {
   const newArr = arr.slice();
@@ -21,7 +16,7 @@ const randomArray = (arr) => {
 };
 const searchStatus = async (username) => {
   try {
-    const ResponsePlayersInHold = await client.get(`playersInHold${username}`);
+    const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
     if (ResponsePlayersInHold !== null) {
       const responseWaitingRoom = await client.get(
         `waitingRoom${ResponsePlayersInHold}`
