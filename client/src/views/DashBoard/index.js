@@ -38,6 +38,7 @@ const DashBoard = () => {
             completes tu tercer turno. Finalizar tu turno hará que no puedas
             hacer cambios PIENSALO BIEN
           </div>
+  {/* /////////////////////////////////////////////////////////////////////////////////// */}
           <div className="contSalyImg">
             <div className="crearSala">
               <button className="text-hov" onClick={openPortal}>
@@ -51,6 +52,7 @@ const DashBoard = () => {
               <img className="imgn" src={Shop} alt="shop"/>
             </div>
           </div>
+  {/* /////////////////////////////////////////////////////////////////////////////////// */}
           <div className="ranking">
             <span className="game-win">Mas partidas ganadas</span>
             <div className="person">
@@ -58,9 +60,10 @@ const DashBoard = () => {
               <span className="dashboard-span">senjo903</span>
               <div className="dashboard-pepito">
                 {" "}
-                <span className="number">10</span>
+                <span className="number">100</span>
               </div>
             </div>
+            <div className='ranking-devide-line'></div>
             <div className="person">
               <img
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RENRHB6K-19d480373bd1-512"
@@ -105,6 +108,7 @@ const DashBoard = () => {
                 <span className="number">3</span>
               </div>
             </div>
+            <div className='ranking-devide-line'></div>
             <div className="person">
               <img
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01V60B1T9P-0f495ba2e434-512"
@@ -116,6 +120,7 @@ const DashBoard = () => {
                 <span className="number">2</span>
               </div>
             </div>
+            <div className='ranking-devide-line'></div>
             <div className="person">
               <img
                 src="https://ca.slack-edge.com/TPRS7H4PN-U01RUQXGKD0-67b4aeef2acb-512"

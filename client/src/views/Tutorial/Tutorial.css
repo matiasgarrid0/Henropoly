@@ -1,0 +1,36 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css");
+.tutorial-total {
+    display:flex;
+    flex-direction: column;
+    max-width: 500px;
+    max-height: 700px;
+    width: 400px;
+    background: rgba(0, 0, 0, 0.418);
+    border-radius: 10px;
+    box-shadow: 0 14px 24px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(251, 255, 0, 0.22);
+    padding: .65rem;
+    color:rgb(251, 255, 6);
+    font-size: 23px;
+}
+
+.tutorial-texto {
+    margin-top: 10px;
+    margin-bottom: -3%;
+}
+
+.tutorial-position {
+    margin:auto;
+    font-family: var(--text-one);
+    font-size: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+}
+.tutorial-todo{
+    display: flex;
+    width: 100%;
+    margin-top: 3px;
+}
+.tutorial-hijo{
+    margin:auto;
+}

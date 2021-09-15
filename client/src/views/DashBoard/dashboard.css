@@ -1,37 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css");
-.total {
-    display:flex;
-    flex-direction: column;
-    max-width: 500px;
-    max-height: 700px;
-    width: 400px;
-    background: rgba(0, 0, 0, 0.418);
-    border-radius: 10px;
-    box-shadow: 0 14px 24px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(251, 255, 0, 0.22);
-    padding: .65rem;
-    color:rgb(251, 255, 6);
-    font-size: 23px;
-}
 
-.h3-total {
-    margin-top: 10px;
-    margin-bottom: -3%;
-}
-.crearSala {
-    align-items: center;
-    max-width: 500px;
-    max-height: 700px;
-    width: 400px;
-    height: 700px;
-    margin-left: 100px;
-    padding: .65rem;
-    display:flex;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.767);
-    border-radius: 10px;
-    box-shadow: 0 14px 24px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(251, 255, 0, 0.22);
-    color:rgb(251, 255, 6);
-}
 .position {
     margin:auto;
     font-family: var(--text-one);
@@ -51,7 +19,6 @@
 .asd {
     height: 45px;
 }
-
 .text-hov {
     border: 2px solid var(--color-yellow);
     width: 300px;
@@ -67,25 +34,22 @@
     cursor: pointer;
     transition: transform 250ms ease;
   }
-  .text-hov:hover {
+.text-hov:hover {
     color: var(--color-yellow);
     background-color: transparent;
     border: 1px solid var(--color-black);
     box-shadow: 0 0 5px var(--color-yellow);
     transform: scale(1.1);
-  }
-
+}
 .imgn {
     margin-top: 80px;
     height: 220px;
     width:240px;
 }
-
 .contSalyImg{
     display: flex;
     flex-direction: column;
 }
-
 .conimg{
     align-items: center;
     margin-left: 50px;
@@ -104,8 +68,9 @@
     padding: .65rem;
     height: 290px;
 }
-
+/**/
 .ranking {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 28px;
     color:rgb(251, 255, 6);
     margin-left: 100px;
@@ -119,12 +84,11 @@
     box-shadow: 0 14px 24px rgba(255, 255, 255, 0.25), 0 10px 10px rgba(251, 255, 0, 0.22);
     padding: .65rem;
 }
-
 .game-win {
-    font-size: 50px;
+    font-size: 40px;
     color:rgb(251, 255, 6);
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .dashboard-span{
@@ -142,14 +106,12 @@
     margin-left: 10%;
     margin-bottom: 10%;  
 }
-
 .person img{
     height: 50px;
     width: 50px;
     border-radius: 100%; 
     margin-left: 300%;
 }
-
 .person h4{
     margin: 30%;
 }
