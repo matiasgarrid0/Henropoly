@@ -65,7 +65,6 @@ const Nav = () => {
         </div>
         <div></div>
       </header>
-      <div className="nav-space"></div>
     </>
   );
 };

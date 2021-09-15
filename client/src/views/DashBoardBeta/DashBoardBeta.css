@@ -1,0 +1,14 @@
+.beta-space-game {
+    padding-top: 70px;
+    width: 100%;
+    display: flex;
+}
+.beta-box-game{
+margin: auto;
+}
+.color-blanco{
+    color: #ffffff;
+}
+.color-negro{
+    color: #000000;
+}

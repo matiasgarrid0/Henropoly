@@ -18,8 +18,8 @@ const DashBoard = () => {
   return (
     <div className="dashboard-todo">
       <div className="dashboard-hijo">
-        <div className="asd"> </div>
-
+      <div className='index-space'></div>
+      <div className='index-space'></div>
         <div className="position">
           <div className="total">
             <h3 className="h3-total"> ¡JUEGA!</h3>

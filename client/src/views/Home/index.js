@@ -5,6 +5,7 @@ import React from "react";
 const Home = () => {
   return (
     <div className='body-home-align'>
+      <div className='index-space'></div>
       <div className="principal">
         <div className="container-home">
           <h2 classname="title-home">Bienvenido a</h2>

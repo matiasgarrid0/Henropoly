@@ -1,21 +1,31 @@
 import React from "react";
-// import { useSelector } from "react-redux";
+import { Room, DisplayGameBeta,Chat } from "./../../components";
 import "./DashBoardBeta.css";
+import { useSelector } from "react-redux";
 
 const DashBoardBeta = () => {
-  // const { socket } = useSelector((state) => state.socketIO);
-  // useEffect(() => {
-  //   socket.emit("activitie", 'hola');
-  // }, []);
-
-  // useEffect(() => {
-  //   socket.on("activitie", () => {
-
-  //   });
-  //   return () => {
-  //     socket.off();
-  //   };
-  // }, []);
-  return <div>hola</div>;
+  const { status } = useSelector((state) => state.henropolyGame);
+  if (status === "inGame") {
+    return (
+      <div className="beta-space-game color-blanco">
+        <div className="beta-box-game">
+        <div className="asd"></div>
+        <div className="asd"></div>
+          <DisplayGameBeta />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="beta-space-game color-blanco">
+        <div className="beta-box-game">
+        <div className="asd"></div>
+        <Room />
+        <div className="asd"></div>
+        <Chat/>
+        </div>
+      </div>
+    );
+  }
 };
 export default DashBoardBeta;
