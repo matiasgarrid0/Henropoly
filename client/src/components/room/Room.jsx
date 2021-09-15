@@ -48,20 +48,21 @@ const Room = () => {
     socket.emit("setRoom", { type: "join", host: input.unirse });
   };
   return (
-    <div>
+    <div className='room-background'>
       {statusRoom.status === "free" && (
         <>
-          <button onClick={setRoom({ type: "create" })}>Crear sala</button>
+          <button className='room-btn' onClick={setRoom({ type: "create" })}>Crear sala</button>
           <form onSubmit={(e) => handleSubmit(e)}>
             <input
+              className='room-searchBar'
               name="unirse"
               value={input.unirse}
               onChange={(e) => handleChange(e)}
             />
-            <button>Unirse a sala</button>
+            <button className='room-btn'>Unirse a sala</button>
           </form>
 
-          <button>Jugar</button>
+          <button className='room-btn'>Jugar</button>
         </>
       )}
       {statusRoom.status === "inHold" && (
@@ -74,6 +75,7 @@ const Room = () => {
                 {player}
                 {statusRoom.room.host === user.username && (
                   <button
+                    className='room-btn'
                     onClick={setRoom({ type: "kickPlayer", player: player })}
                   >
                     expulsar jugador
@@ -84,7 +86,7 @@ const Room = () => {
           })}
           {statusRoom.room.host === user.username ? (
             <>
-              <button onClick={setRoom({ type: "delete" })}>borrar sala</button>
+              <button className='room-btn' onClick={setRoom({ type: "delete" })}>borrar sala</button>
               {statusRoom.room.players.length !== 0 && (
                 <button onClick={setRoom({ type: "goGame" })}>
                   Iniciar Juego

@@ -38,19 +38,21 @@ const Chat = ({ room }) => {
           </div>
           <form className="chat-center" onSubmit={submit}>
             <label className="chat-flex" htmlFor=""></label>
-            <input
-              className="chat-textarea"
-              placeholder="Escriba su mensaje"
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              value={mensaje}
-              onChange={(e) => setMensaje(e.target.value)}
-            ></input>
-            <button className="chat-btn-enviar chat-btn-verde" type="submit">
-              <BiSend />
-            </button>
+            <div className='background-chat-textarea'>
+                <input
+                  className="chat-textarea"
+                  placeholder="Escriba su mensaje"
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  value={mensaje}
+                  onChange={(e) => setMensaje(e.target.value)}
+                ></input>
+                <button className="chat-btn-enviar chat-btn-verde" type="submit">
+                  <BiSend />
+                </button>
+            </div>
           </form>
         </div>
       ) : (
