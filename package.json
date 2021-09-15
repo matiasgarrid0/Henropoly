@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon -L"
   },
-  "devDependencies": {
+  "dependencies": {
+    "redis": "^3.1.2"
   }
 }

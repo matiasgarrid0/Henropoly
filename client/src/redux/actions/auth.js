@@ -8,7 +8,8 @@ import {
 } from "../constants";
 import * as AxiosApi from "./../../controllers/auth";
 import io from "socket.io-client";
-const socketURL = process.env.URL_SOCKET || "//localhost:3001";
+// const socketURL = 
+// const socketURL = process.env.URL_SOCKET || "//localhost:3001";
 
 export const register = (username, email, password) => {
   const data = {
@@ -123,7 +124,7 @@ export const logOut = () => {
 };
 
 export const connectSocket = (token) => {
-  const socket = io(socketURL, { query: { token } });
+  const socket = io('https://henropoly-grupo6.herokuapp.com/', { query: { token } });
   return {
     type: SET_SOCKET,
     payload: socket,

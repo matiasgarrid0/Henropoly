@@ -67,7 +67,7 @@ const Room = () => {
       {statusRoom.status === "inHold" && (
         <div>
           anfitrion de sala: {statusRoom.room.host}
-          mienbros:
+          miembros:
           {statusRoom.room.players.map((player) => {
             return (
               <label>
