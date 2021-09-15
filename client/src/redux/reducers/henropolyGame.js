@@ -1,4 +1,4 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS } from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER} from "../constants";
 
 const initialState = {
   status: "free",
@@ -28,6 +28,16 @@ const henropolyGame = (state = initialState, action) => {
         ...state,
         order: payload.order ,actualTurn: payload.actualTurn
       };
+      case KICK_PLAYER:
+        return {
+          ...state,
+          dataPlayers: {
+            ...state.dataPlayers,
+            [payload.player]:{...state.dataPlayers[payload.player], 
+              status:false
+            }
+          }
+        }
     default:
       return state;
   }

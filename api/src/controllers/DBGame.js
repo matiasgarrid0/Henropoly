@@ -16,6 +16,7 @@ const randomArray = (arr) => {
   }
   return newArr;
 };
+//funciones relacionadas con salas de espera y estados
 const searchStatus = async (username) => {
   try {
     const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
@@ -137,6 +138,7 @@ const leaveRoom = async (username, io) => {
     console.log(error);
   }
 };
+//funciones relacionadas con el juego y sus tiempos
 const timer = (username, io) => {
   timers[username] = setInterval(
     async () => {
@@ -161,8 +163,8 @@ const timer = (username, io) => {
     "JavaScript"
   );
 };
-const clearTimer = (room) => {
-  clearInterval(room);
+const clearTimer = (username) => {
+  clearInterval(timers[username]);
 };
 const goGame = async (username, io) => {
   try {
@@ -229,6 +231,49 @@ const goGame = async (username, io) => {
     console.log(error);
   }
 };
+const gameOver = async (username, io) => {
+  const response = await client.get(`gameRoom${username}`);
+  const listPlayer = JSON.parse(response).order;
+  listPlayer.forEach( async (player) => {
+    await client.del(`playersInGame${player}`);
+    io.sockets.in(player).emit('setGame', {
+      status: "statusGame",
+      type: "endGame",
+    });
+  });
+  clearTimer(username);
+  await client.del(`gameRoom${username}`);
+}
+ const meEnd = async (username, io) => {
+  const responseRoom = await client.get(`playersInGame${username}`);
+  const response = await client.get(`gameRoom${responseRoom}`);
+  var room = JSON.parse(response);
+  let target;
+  if(room.actualTurn === username){
+    /////// ME TOCA, ESTO FALTAAA!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ///!!!!!!!!
+  }else{
+   room.order = room.order.filter((players) => players !== username)
+   for(let i = 1 ; i < 5 ; i++){
+     if(room.dataPlayers[`target${i}`].username === username ){
+       target=`target${i}`
+       room.dataPlayers[`target${i}`].status = false
+     };
+   };
+   await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
+   room.order.forEach((player) => {
+    io.sockets.in(player).emit('setGame', {
+      status:"statusGame",
+      type:"exitPlayer",
+      info:{target:target , turn:{actualTurn:room.actualTurn,order:room.order}}
+    });
+   })
+   io.sockets.in(username).emit('setGame', {
+    status:"statusGame",
+    type:"meExit",
+  });
+  }
+}
 module.exports = {
   createRoom,
   deleteRoom,

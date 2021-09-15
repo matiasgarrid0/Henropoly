@@ -13,6 +13,8 @@ const {
   leaveRoom,
   goGame,
   searchStatus,
+  gameOver,
+  meEnd
 } = require("./controllers/DBGame");
 const server = express();
 const http = require("http").createServer(server);
@@ -23,16 +25,18 @@ const io = require("socket.io")(http, {
 });
 
 io.on("connection", async (socket) => {
+  //autentificacion:
   try {
     var decoded = await jwt.verify(socket.handshake.query.token, AUTH_SECRET);
     socket.join(decoded.user.username);
   } catch (err) {
     socket.disconnect();
   }
+  //verificacion de estado desde roomm
   io.sockets
     .in(decoded.user.username)
     .emit("roomStatus", await searchStatus(decoded.user.username));
-
+  //componente room
   socket.on("setRoom", async(data) => {
     if (data.type === "create") {
       await createRoom(decoded.user.username, io);
@@ -49,7 +53,16 @@ io.on("connection", async (socket) => {
     }
   });
   socket.on("roomStatus", () => {});
+  //gameDashboard
   socket.on("setGame", () => {});
+  socket.on("gameDashboard", async (data) => {
+    if(data.type === 'gameOver'){
+      await gameOver(decoded.user.username, io)
+    } else if (data.type === "meEnd"){
+      await meEnd(decoded.user.username, io)
+    }
+  });
+  //chat global
   socket.on("sendGlobal", (data) => {
     io.emit("chatGlobal", {
       username: decoded.user.username,
