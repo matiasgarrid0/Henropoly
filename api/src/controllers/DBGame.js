@@ -1,10 +1,12 @@
-const asyncRedis = require("async-redis");
+// const asyncRedis = require("async-redis");
+const redis = require('redis');
 const redisConfig = {
+  url: process.env.REDIS_URL,
   host: "localhost",
   port: "6379",
   pass: "",
 };
-const client = asyncRedis.createClient(redisConfig);
+const client = redis.createClient(redisConfig);
 var timers = {};
 const randomArray = (arr) => {
   const newArr = arr.slice();
