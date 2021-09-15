@@ -1,4 +1,4 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER} from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS} from "../constants";
 
 export const setGame = (data) => {
   return {
@@ -27,4 +27,11 @@ export const kickPlayer = (player) => {
     payload: player.target,
   };
  }
+};
+
+export const setGameStatus = (payload) => {
+  return {
+    type:SET_GAME_STATUS,
+    payload: payload,
+  };
 };

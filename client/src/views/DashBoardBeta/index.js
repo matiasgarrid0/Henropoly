@@ -1,9 +1,11 @@
-import React from "react";
+import React , { useEffect }from "react";
 import { Room, DisplayGameBeta,Chat } from "./../../components";
 import "./DashBoardBeta.css";
 import { useSelector } from "react-redux";
 
 const DashBoardBeta = () => {
+
+ 
   const { status } = useSelector((state) => state.henropolyGame);
   if (status === "inGame") {
     return (
@@ -15,7 +17,7 @@ const DashBoardBeta = () => {
         </div>
       </div>
     );
-  } else {
+  }
     return (
       <div className="beta-space-game color-blanco">
         <div className="beta-box-game">
@@ -26,6 +28,6 @@ const DashBoardBeta = () => {
         </div>
       </div>
     );
-  }
+  
 };
 export default DashBoardBeta;

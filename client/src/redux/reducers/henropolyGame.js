@@ -1,4 +1,4 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER} from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS} from "../constants";
 
 const initialState = {
   status: "free",
@@ -38,6 +38,11 @@ const henropolyGame = (state = initialState, action) => {
             }
           }
         }
+      case SET_GAME_STATUS:
+       return { 
+         ...state,
+        status:payload   
+       };
     default:
       return state;
   }

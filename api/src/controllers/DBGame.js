@@ -68,13 +68,13 @@ const deleteRoom = async (username, io) => {
     const responseWaitingRoom = await client.get(`waitingRoom${username}`);
     let playersFree = JSON.parse(responseWaitingRoom).players;
     playersFree.push(username);
-    await client.del(`waitingRoom${username}`);
     playersFree.forEach(async (player) => {
-      await client.del(`playersInHold${username}`);
+      await client.del(`playersInHold${player}`);
       io.sockets.in(player).emit("roomStatus", {
         status: "free",
       });
     });
+    await client.del(`waitingRoom${username}`);
   } catch (error) {
     console.log(error);
   }
@@ -159,7 +159,7 @@ const timer = (username, io) => {
         });
       });
     },
-    20000,
+    10000,
     "JavaScript"
   );
 };
@@ -234,7 +234,7 @@ const goGame = async (username, io) => {
 const gameOver = async (username, io) => {
   const response = await client.get(`gameRoom${username}`);
   const listPlayer = JSON.parse(response).order;
-  listPlayer.forEach( async (player) => {
+  listPlayer.forEach(async (player) => {
     await client.del(`playersInGame${player}`);
     io.sockets.in(player).emit('setGame', {
       status: "statusGame",
@@ -244,36 +244,50 @@ const gameOver = async (username, io) => {
   clearTimer(username);
   await client.del(`gameRoom${username}`);
 }
- const meEnd = async (username, io) => {
+const meEnd = async (username, io) => {
   const responseRoom = await client.get(`playersInGame${username}`);
   const response = await client.get(`gameRoom${responseRoom}`);
   var room = JSON.parse(response);
-  let target;
-  if(room.actualTurn === username){
-    /////// ME TOCA, ESTO FALTAAA!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ///!!!!!!!!
-  }else{
-   room.order = room.order.filter((players) => players !== username)
-   for(let i = 1 ; i < 5 ; i++){
-     if(room.dataPlayers[`target${i}`].username === username ){
-       target=`target${i}`
-       room.dataPlayers[`target${i}`].status = false
-     };
-   };
-   await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
-   room.order.forEach((player) => {
-    io.sockets.in(player).emit('setGame', {
-      status:"statusGame",
-      type:"exitPlayer",
-      info:{target:target , turn:{actualTurn:room.actualTurn,order:room.order}}
+  if (room.order.length === 2) {
+    gameOver(room.host, io)
+  } else {
+    let target;
+    let meTurn = false
+    if (room.actualTurn === username) {
+      clearTimer(username)
+      room.actualTurn = room.order[1]
+      room.order.shift()
+      meTurn = true
+    } else {
+      room.order = room.order.filter((players) => players !== username)
+    }
+    for (let i = 1; i < 5; i++) {
+      if (room.dataPlayers[`target${i}`].username === username) {
+        target = `target${i}`
+        room.dataPlayers[`target${i}`].status = false
+
+      };
+    };
+    await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
+    await client.del(`playersInGame${username}`)
+    room.order.forEach((player) => {
+      io.sockets.in(player).emit('setGame', {
+        status: "statusGame",
+        type: "exitPlayer",
+        info: { target: target, turn: { actualTurn: room.actualTurn, order: room.order } }
+      });
+    })
+    io.sockets.in(username).emit('setGame', {
+      status: "statusGame",
+      type: "meExit",
     });
-   })
-   io.sockets.in(username).emit('setGame', {
-    status:"statusGame",
-    type:"meExit",
-  });
+
+    if (meTurn) {
+      timer(room.host, io)
+    }
   }
 }
+
 module.exports = {
   createRoom,
   deleteRoom,
@@ -281,4 +295,6 @@ module.exports = {
   leaveRoom,
   goGame,
   searchStatus,
+  gameOver,
+  meEnd
 };

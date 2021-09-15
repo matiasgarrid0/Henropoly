@@ -15,6 +15,6 @@ export {
   SET_DATA_TARGET,
 } from "./game";
 
-export { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER } from "./henropolyGame";
+export { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS } from "./henropolyGame";
 
 export { SET_VIEW } from "./view";

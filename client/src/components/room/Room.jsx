@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { setGame } from "./../../redux/actions";
+import { setGame, setGameStatus } from "./../../redux/actions";
 import "./Room.css";
 
 const Room = () => {
   const dispatch = useDispatch();
   const { socket, user } = useSelector((state) => state.auth);
+  const { status } = useSelector((state) => state.henropolyGame);
   const [statusRoom, setStatusRoom] = useState({
-    status: null,
     room: { host: user.username, players: [] },
   });
   const [input, setInput] = useState({
@@ -17,14 +17,15 @@ const Room = () => {
   useEffect(() => {
     socket.on("roomStatus", (data) => {
       if (data.status === "inHold") {
-        setStatusRoom({ ...statusRoom, room: data.room, status: "inHold" });
+        setStatusRoom({ ...statusRoom, room: data.room });
+        dispatch(setGameStatus("inHold"))
       }
       if (data.status === "free") {
         setStatusRoom({
           ...statusRoom,
-          room: { host: user.username, players: [] },
-          status: "free",
+          room: { host: user.username, players: [] }
         });
+        dispatch(setGameStatus("free"))
       }
       if (data.status === "inGame") {
         dispatch(setGame(data.data));
@@ -49,7 +50,7 @@ const Room = () => {
   };
   return (
     <div>
-      {statusRoom.status === "free" && (
+      {status === "free" && (
         <>
           <button onClick={setRoom({ type: "create" })}>Crear sala</button>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -64,7 +65,7 @@ const Room = () => {
           <button>Jugar</button>
         </>
       )}
-      {statusRoom.status === "inHold" && (
+      {status === "inHold" && (
         <div>
           anfitrion de sala: {statusRoom.room.host}
           miembros:

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, setGame, kickPlayer} from "./../../redux/actions";
+import { setView, setTargetValue, setTurns, setGame, kickPlayer, setGameStatus} from "./../../redux/actions";
 import { Board, Turns } from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
+  const [rollDicesInGame, setRollDicesInGame] = useState({
+    valorOne
+  })
   const { status, dataPlayers, host} = useSelector((state) => state.henropolyGame);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user} = useSelector((state) => state.auth);
@@ -161,26 +164,21 @@ const DisplayGameBeta = () => {
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
       } else if (data.status === 'statusGame') {
         if(data.type === 'endGame'){
-        dispatch(setGame({ status: "free",
-        host: null,
-        order: [],
-        actualTurn: null,
-        dataPlayers: {},}))
+        dispatch(setGameStatus('free'))
         } else if(data.type === 'exitPlayer'){
           dispatch(kickPlayer(data.info))
         } else if(data.type === 'meExit') {
-          dispatch(setGame({ status: "free",
-          host: null,
-          order: [],
-          actualTurn: null,
-          dataPlayers: {},}))
+          dispatch(setGameStatus('free'))
         }
+      } else if (data.status === 'roll'){
+        dispatch(setGameRoll(data.info))
       }
     });
     return () => {
       socket.off("setGame");
     };
   }, []);
+ 
   return (
     <div className="display-beta-border">
       <div className="display-beta-body-display no-select">
@@ -240,12 +238,8 @@ const DisplayGameBeta = () => {
           <div>error</div>
         )}
       </div>
-      <div className="display-beta-components">
-        <Turns />
-        { user.username === host ? 
-        <button onClick= {() =>{socket.emit('gameDashboard', {type: 'gameOver'})}}>Terminar partida</button>
-        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> } 
-      </div>
+      
+      
       <div
         className="display-beta-touch"
         onWheel={handleWheelEvent}
@@ -253,7 +247,14 @@ const DisplayGameBeta = () => {
         onMouseMove={handleOnMouseMoveEvent}
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
-      ></div>
+      ></div> 
+     <div className="display-beta-components">
+        <Turns />
+        { user.username === host ? 
+        <button onClick= {() => { socket.emit('gameDashboard', {type: 'gameOver'})}}>Terminar partida</button>
+        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> }
+        <button onClick={}>Tirar Dados</button>
+      </div> 
     </div>
   );
 };
