@@ -14,8 +14,9 @@ const {
   goGame,
   searchStatus,
   gameOver,
-  meEnd
-} = require("./controllers/DBGame");
+  meEnd,
+  roll
+} = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);
 const io = require("socket.io")(http, {
@@ -60,8 +61,12 @@ io.on("connection", async (socket) => {
       await gameOver(decoded.user.username, io)
     } else if (data.type === "meEnd"){
       await meEnd(decoded.user.username, io)
+    } else if (data.type === 'roll') {
+      await roll(decoded.user.username, io)
     }
   });
+  //timer
+  socket.on("timer", () => {});
   //chat global
   socket.on("sendGlobal", (data) => {
     io.emit("chatGlobal", {

@@ -8,6 +8,7 @@ const redisConfig = {
 };
 const client = asyncRedis.createClient(redisConfig);
 var timers = {};
+var timerSec = {};
 const randomArray = (arr) => {
   const newArr = arr.slice();
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -150,6 +151,7 @@ const timer = (username, io) => {
       let playerFinal = arrayOrder.shift();
       arrayOrder.push(playerFinal);
       roomGame.order = arrayOrder;
+      roomGame.move = true;
       await client.set(`gameRoom${username}`, JSON.stringify(roomGame));
       arrayOrder.forEach((player) => {
         io.sockets.in(player).emit("setGame", {
@@ -185,6 +187,7 @@ const goGame = async (username, io) => {
         target3: { username: null, status: false, box: 0, x: 120, y: 40 },
         target4: { username: null, status: false, box: 0, x: 40, y: 40 },
       },
+      move: true,
     };
     gameRoom.dataPlayers.target1 = {
       username: gameRoom.order[0],
@@ -268,6 +271,7 @@ const meEnd = async (username, io) => {
 
       };
     };
+    room.move = true;
     await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
     await client.del(`playersInGame${username}`)
     room.order.forEach((player) => {
@@ -288,6 +292,42 @@ const meEnd = async (username, io) => {
   }
 }
 
+const roll = async (username, io) => {
+  let target;
+  const responseRoom = await client.get(`playersInGame${username}`);
+  const response = await client.get(`gameRoom${responseRoom}`);
+  var room = JSON.parse(response);
+  if (room.actualTurn === username && room.move === true ) {
+    let num1 = Math.floor(Math.random() * 6 + 1);
+    let num2 = Math.floor(Math.random() * 6 + 1);
+    
+    for (let i = 1; i < 5; i++) {
+      if (room.dataPlayers[`target${i}`].username === username) {
+        target = `target${i}`
+        room.dataPlayers[`target${i}`].box = room.dataPlayers[`target${i}`].box + num1 + num2
+        if (room.dataPlayers[`target${i}`].box > 39) {
+          room.dataPlayers[`target${i}`].box = room.dataPlayers[`target${i}`].box - 39
+        }
+      };
+    };
+    if(num1 !== num2){
+      room.move = false;
+    }
+    await client.set(`gameRoom${responseRoom}`, JSON.stringify(room))
+    room.order.forEach((player) => {
+      io.sockets.in(player).emit('setGame', {
+        status: "roll",
+        info: { target: target, move:room.dataPlayers[target].box },
+        one: num1,
+        two: num2,
+        usernameRoll: username
+      });
+    })
+  }
+
+}
+
+
 module.exports = {
   createRoom,
   deleteRoom,
@@ -296,5 +336,6 @@ module.exports = {
   goGame,
   searchStatus,
   gameOver,
-  meEnd
+  meEnd,
+  roll
 };
