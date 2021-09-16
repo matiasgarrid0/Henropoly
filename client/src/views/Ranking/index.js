@@ -70,7 +70,7 @@ const Ranking = () => {
               <span className="dashboard-span">Moniss_94</span>
               <div className="dashboard-pepito">
                 {" "}
-                <span className="ranking-number">2</span>
+                <span className="ranking-number">3</span>
               </div>
             </div>
             <div className="ranking-person">
