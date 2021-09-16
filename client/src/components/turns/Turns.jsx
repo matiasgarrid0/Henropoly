@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState } from 'react';
 import './Turns.css';
 
 const Turns = ({timeOn}) => {
+  const { socket } = useSelector((state) => state.auth);
   const [segundos, setSegundos] = useState(0);
   useEffect(() => {
     socket.on("timer", (data) => {
@@ -12,7 +13,7 @@ const Turns = ({timeOn}) => {
       socket.off("timer");
     };
   }, []);
-    const {order, actualTurn } = useSelector(
+    const {order } = useSelector(
         (state) => state.henropolyGame
       );
     return (<div className='turns-table'>

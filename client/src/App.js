@@ -1,8 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 
 import React, { useEffect } from 'react';
-import { Nav, Loading, Action, } from './components';
-import { SwitchPage, Game, DashBoardBeta} from './views'
+import { Nav, Loading } from './components';
+import { SwitchPage, DashBoard} from './views'
 
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, checkToken, getInfoDb } from "./redux/actions";
@@ -34,9 +34,7 @@ const App = () => {
       <Route path="/" component={Nav} />
       <Switch>
         <Route path="/" exact component={SwitchPage} />
-        <Route path="/game" exact component={Game} />
-        <Route path="/PLAYERS" exact component={Action} />
-        <Route path="/beta" exact component={DashBoardBeta} />
+        <Route path="/beto" exact component={DashBoard} />
       </Switch>
     </div>
   ); 

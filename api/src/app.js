@@ -15,7 +15,8 @@ const {
   searchStatus,
   gameOver,
   meEnd,
-  roll
+  roll,
+  passTurn
 } = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);
@@ -63,6 +64,8 @@ io.on("connection", async (socket) => {
       await meEnd(decoded.user.username, io)
     } else if (data.type === 'roll') {
       await roll(decoded.user.username, io)
+    }else if (data.type === "passTurn"){
+      await passTurn(decoded.user.username, io)
     }
   });
   //timer

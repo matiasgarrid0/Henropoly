@@ -9,6 +9,7 @@ const redisConfig = {
 const client = asyncRedis.createClient(redisConfig);
 var timers = {};
 var timerSec = {};
+var seconds ={}
 const randomArray = (arr) => {
   const newArr = arr.slice();
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -140,9 +141,29 @@ const leaveRoom = async (username, io) => {
   }
 };
 //funciones relacionadas con el juego y sus tiempos
+const sendTimer = async (username,io) => {
+  const responseGameRoom = await client.get(`gameRoom${username}`);
+  const roomGame = JSON.parse(responseGameRoom);
+  roomGame.order.forEach((player) => {
+    io.sockets.in(player).emit("timer", seconds[username]);
+  });
+}
 const timer = (username, io) => {
+  seconds[username] = 120
+  sendTimer(username, io);
+  timerSec[username] = setInterval( async () => {
+    seconds[username] =seconds[username]-1;
+    sendTimer(username, io)
+  }, 1000);
   timers[username] = setInterval(
     async () => {
+      seconds[username] = 120
+      clearInterval(timerSec[username]);
+      sendTimer(username, io);
+      timerSec[username] = setInterval( async () => {
+        seconds[username] =seconds[username]-1;
+        sendTimer(username, io)
+      }, 1000);
       console.log("cambio turno");
       const responseGameRoom = await client.get(`gameRoom${username}`);
       var roomGame = JSON.parse(responseGameRoom);
@@ -161,12 +182,14 @@ const timer = (username, io) => {
         });
       });
     },
-    10000,
+    120000,
     "JavaScript"
   );
 };
+
 const clearTimer = (username) => {
   clearInterval(timers[username]);
+  clearInterval(timerSec[username]);
 };
 const goGame = async (username, io) => {
   try {
@@ -324,8 +347,32 @@ const roll = async (username, io) => {
       });
     })
   }
-
 }
+
+const passTurn = async (username, io) => {
+  const host = await client.get(`playersInGame${username}`) 
+  const responseGameRoom = await client.get(`gameRoom${host}`);
+  var roomGame = JSON.parse(responseGameRoom);
+  if(username === roomGame.actualTurn){
+    clearTimer(host)
+    roomGame.actualTurn = roomGame.order[1];
+    let arrayOrder = roomGame.order;
+    let playerFinal = arrayOrder.shift();
+    arrayOrder.push(playerFinal);
+    roomGame.order = arrayOrder;
+    roomGame.move = true;
+    await client.set(`gameRoom${host}`, JSON.stringify(roomGame));
+    arrayOrder.forEach((player) => {
+      io.sockets.in(player).emit("setGame", {
+        status: "setTurns",
+        actualTurn: roomGame.actualTurn,
+        order: roomGame.order,
+      });
+    });
+    timer(host,io)
+  }
+}
+
 
 
 module.exports = {
@@ -337,5 +384,6 @@ module.exports = {
   searchStatus,
   gameOver,
   meEnd,
-  roll
+  roll,
+  passTurn
 };

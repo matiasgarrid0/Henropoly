@@ -191,10 +191,6 @@ const DisplayGameBeta = () => {
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
-        setSegundos(120)
-        intervalo = setInterval(() => {
-          setSegundos(segundos => segundos - 1);
-        }, 1000);
       } else if (data.status === 'statusGame') {
         if(data.type === 'endGame'){
         dispatch(setGameStatus('free'))
@@ -287,6 +283,9 @@ const DisplayGameBeta = () => {
         : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> }
         {user.username === actualTurn &&
         <button onClick= {() => {socket.emit('gameDashboard', {type:'roll'})}}>Tirar Dados</button>}
+        {user.username === actualTurn &&
+        <button onClick={() => {socket.emit('gameDashboard', {type:'passTurn'})}}>Pasar turno</button>
+        }
       </div> 
     </div>
   );
