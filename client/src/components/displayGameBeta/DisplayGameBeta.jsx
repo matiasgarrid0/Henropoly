@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll} from "./../../redux/actions";
-import { Board, Turns} from "./../";
+import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll,filterComunalRandom,filterLuckyRandom } from "./../../redux/actions";
+import { 
+  Board, 
+  Turns, 
+  Dices,
+  Portal,
+  LuckyCard,
+  PropertyCard,
+  RailwayCard,
+  ServiceCard,
+  TaxCard,
+  Jail
+} from "./../";
+
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
-  const [rollDicesInGame, setRollDicesInGame] = useState({
-    valorOne: null,
-    valorTwo: null,
-    username: null,
-  })
-  const { status, dataPlayers, host, actualTurn} = useSelector((state) => state.henropolyGame);
+  const { status, dataPlayers, host, actualTurn } = useSelector((state) => state.henropolyGame);
+  //random Lucky y comunal cards
+  const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
-  const { socket, user} = useSelector((state) => state.auth);
+  const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
   const [dataGame, setDataGame] = useState({
     mouseActive: false,
@@ -35,11 +44,29 @@ const DisplayGameBeta = () => {
       box: dataPlayers.target4.box,
     },
   });
+  //--Dados--
+  const [roll, setRoll] = useState(false)
+  const [rollDicesInGame, setRollDicesInGame] = useState({
+    valorOne: null,
+    valorTwo: null,
+    username: null,
+  })
+  //----portales---
+  const [portal, setPortal] = useState(null)
+  const [property, setProperty] = useState(null)
+  const [train, setTrain] = useState(null)
+  const [service, setService] = useState(null)
+  const [tax, setTax] = useState(null)
+  const [jailData, setJailData] = useState(null)
+
   const moveTime = () => {
     return new Promise((resolve) => setTimeout(resolve, 80));
   };
+
   const alignTarget = async (player) => {
     setDataGame({ ...dataGame, targetMove: true });
+    setRoll(true)
+    await moveTime(88000);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
     while (finalBox !== actualBox) {
@@ -84,6 +111,7 @@ const DisplayGameBeta = () => {
         },
       });
     }
+    setRoll(false)
     setDataGame({
       ...dataGame,
       [player]: {
@@ -92,7 +120,65 @@ const DisplayGameBeta = () => {
       },
       targetMove: false,
     });
+
+    //------IF PARA RENDERIZAR PORTALES------
+    if (info.table[dataPlayers[player].box].type) {
+      if (info.table[dataPlayers[player].box].type === "comunal") {
+        dispatch(filterComunalRandom());
+        setPortal("comunal");
+      }
+      if (info.table[dataPlayers[player].box].type === "lucky") {
+        dispatch(filterLuckyRandom());
+        setPortal("lucky");
+      }
+      if (info.table[dataPlayers[player].box].type === "property") {
+        setProperty(info.table[dataPlayers[player].box])
+        setPortal("property");
+      }
+      if (info.table[dataPlayers[player].box].type === "railway") {
+        setTrain(info.table[dataPlayers[player].box])
+        setPortal("railway");
+      }
+      if (info.table[dataPlayers[player].box].type === "service") {
+        setService(info.table[dataPlayers[player].box])
+        setPortal("service");
+      }
+      if (info.table[dataPlayers[player].box].type === "tax" || info.table[dataPlayers[player].box].type === "taxVip") {
+        setTax(info.table[dataPlayers[player].box])
+        setPortal("tax");
+      }
+      if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
+        setJailData(info.table[dataPlayers[player].box])
+        setPortal("jail");
+      }
+    }
   };
+
+  function closedPortal() {
+    // luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, info.table[dataPlayers.target1.box])
+    setPortal(null)
+  }
+
+  function closedPortal1() {
+    //comunal
+    // luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1, players);
+    setPortal(null);
+  }
+
+  function closedPortal2() {
+    setPortal(null);
+  }
+
+  function closedPortal3() {
+    // pagar()
+    setPortal(null);
+  }
+
+  function closedPortal4() {
+    // dispatch(changeValueTarget('target1', 'box', 10));
+    setPortal(null);
+  }
+
   useEffect(() => {
     if (
       dataGame.target1.box !== dataPlayers.target1.box &&
@@ -192,15 +278,15 @@ const DisplayGameBeta = () => {
       if (data.status === "setTurns") {
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
       } else if (data.status === 'statusGame') {
-        if(data.type === 'endGame'){
-        dispatch(setGameStatus('free'))
-        } else if(data.type === 'exitPlayer'){
+        if (data.type === 'endGame') {
+          dispatch(setGameStatus('free'))
+        } else if (data.type === 'exitPlayer') {
           dispatch(kickPlayer(data.info))
-        } else if(data.type === 'meExit') {
+        } else if (data.type === 'meExit') {
           dispatch(setGameStatus('free'))
         }
-      } else if (data.status === 'roll'){
-        setRollDicesInGame({...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username:data.usernameRoll})
+      } else if (data.status === 'roll') {
+        setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
         dispatch(setGameRoll(data.info))
       }
     });
@@ -208,9 +294,47 @@ const DisplayGameBeta = () => {
       socket.off("setGame");
     };
   }, []);
- 
+
   return (
     <div className="display-beta-border">
+      {portal === "lucky" && (
+        <Portal onClose={closedPortal}>
+          <LuckyCard data={luckyCard} />
+        </Portal>
+      )}
+      {portal === "comunal" && (
+        <Portal onClose={closedPortal1}>
+          <LuckyCard data={comunalCard} />
+        </Portal>
+      )}
+      {portal === "property" && (
+        <Portal onClose={closedPortal2}>
+          <PropertyCard data={property} />
+          {/* <button className='displayGame-btn' onClick={comprar}>Comprar</button> */}
+        </Portal>
+      )}
+      {portal === "railway" && (
+        <Portal onClose={closedPortal2}>
+          <RailwayCard data={train} />
+          {/* <button className='displayGame-btn' onClick={comprar}>Comprar</button> */}
+        </Portal>
+      )}
+      {portal === "service" && (
+        <Portal onClose={closedPortal2}>
+          <ServiceCard data={service} />
+          {/* <button className='displayGame-btn' onClick={comprar}>Comprar</button> */}
+        </Portal>
+      )}
+      {portal === "tax" && (
+        <Portal onClose={closedPortal3}>
+          <TaxCard data={tax} />
+        </Portal>
+      )}
+      {portal === "jail" && (
+        <Portal onClose={closedPortal4}>
+          <Jail data={jailData} />
+        </Portal>
+      )}
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
           <div className="display-beta-container-gametable">
@@ -275,18 +399,21 @@ const DisplayGameBeta = () => {
         onMouseMove={handleOnMouseMoveEvent}
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
-      ></div> 
-     <div className="display-beta-components">
+      ></div>
+      <div className="display-beta-components">
         <Turns />
-        { user.username === host ? 
-        <button onClick= {() => { socket.emit('gameDashboard', {type: 'gameOver'})}}>Terminar partida</button>
-        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> }
+        {user.username === host ?
+          <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>
+          : <button onClick={() => { socket.emit('gameDashboard', { type: 'meEnd' }) }}>Salir del juego </button>}
         {user.username === actualTurn &&
-        <button onClick= {() => {socket.emit('gameDashboard', {type:'roll'})}}>Tirar Dados</button>}
+          <button onClick={() => { socket.emit('gameDashboard', { type: 'roll' }) }}>Tirar Dados</button>}
         {user.username === actualTurn &&
-        <button onClick={() => {socket.emit('gameDashboard', {type:'passTurn'})}}>Pasar turno</button>
+          <button onClick={() => { socket.emit('gameDashboard', { type: 'passTurn' }) }}>Pasar turno</button>
         }
-      </div> 
+        {roll && (
+          <Dices rollOne={rollDicesInGame.valorOne} rollTwo={rollDicesInGame.valorTwo} username={rollDicesInGame.username} />
+        )}
+      </div>
     </div>
   );
 };

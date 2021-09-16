@@ -33,11 +33,12 @@ const henropolyGame = (state = initialState, action) => {
           ...state,
           dataPlayers: {
             ...state.dataPlayers,
-            [payload.player]:{...state.dataPlayers[payload.player], 
-              status:false
-            }
-          }
-        }
+            [payload]: {
+              ...state.dataPlayers[payload],
+              [payload]: false,
+            },
+          },
+        };
       case SET_GAME_STATUS:
        return { 
          ...state,

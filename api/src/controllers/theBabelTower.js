@@ -21,14 +21,14 @@ const randomArray = (arr) => {
 //funciones relacionadas con salas de espera y estados
 const searchStatus = async (username) => {
   try {
-    const ResponsePlayersInHold = await client.get(`playersInHold${username}`)
+    const ResponsePlayersInHold = await client.get(`playersInHold${username}`)//reset aqui
     if (ResponsePlayersInHold !== null) {
       const responseWaitingRoom = await client.get(
         `waitingRoom${ResponsePlayersInHold}`
       );
       return { status: "inHold", room: JSON.parse(responseWaitingRoom) };
     }
-    const ResponsePlayersInGame = await client.get(`playersInGame${username}`);
+    const ResponsePlayersInGame = await client.get(`playersInGame${username}`);//reset aqui
     if (ResponsePlayersInGame !== null) {
       const responseGameRoom = await client.get(
         `gameRoom${ResponsePlayersInGame}`
@@ -226,8 +226,8 @@ const goGame = async (username, io) => {
       x: 40,
       y: 120,
     };
-    if (gameRoom.order[2]) {
-      gameRoom.dataPlayers.target2 = {
+    if(gameRoom.order.length > 2) {
+      gameRoom.dataPlayers.target3 = {
         username: gameRoom.order[2],
         status: true,
         box: 0,
@@ -235,8 +235,8 @@ const goGame = async (username, io) => {
         y: 40,
       };
     }
-    if (gameRoom.order[3]) {
-      gameRoom.dataPlayers.target2 = {
+    if(gameRoom.order.length > 3) {
+      gameRoom.dataPlayers.target4 = {
         username: gameRoom.order[3],
         status: true,
         box: 0,
@@ -291,7 +291,7 @@ const meEnd = async (username, io) => {
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`
         room.dataPlayers[`target${i}`].status = false
-
+  
       };
     };
     room.move = true;
