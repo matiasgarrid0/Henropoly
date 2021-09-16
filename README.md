@@ -12,15 +12,15 @@ Henropoly es un juego de mesa traido al internet, este se basa en la compra y la
 3- Los impuestos que debe pagar cada jugador por caer en una casilla adquirida por otro jugador, se determina por la cantidad de edificaciones hechas y por el tipo.
 
 ### api ENV:
-- `DB_USER`
-- `DB_PASSWORD`
-- `DB_HOST`
-- `DB_PORT`
-- `DB_NAME`
-- `PORT=3001`
-- `AUTH_SECRET=hola1234`
-- `AUTH_EXPIRES=24h`
-- `AUTH_ROUNDS=10`
+DB_USER=postgres
+DB_PASSWORD=  
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=
+AUTH_SECRET=hola1234
+AUTH_EXPIRES=24h
+AUTH_ROUNDS=10
+PORT=3001 
 
 #### client ENV
 - `URL_API=http://localhost:3001`

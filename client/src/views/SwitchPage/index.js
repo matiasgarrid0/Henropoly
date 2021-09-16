@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import { Home, DashBoard } from './../'
+import { Home, DashBoardBeta } from './../'
 const SwitchPage = () => {
     const { isAuth } = useSelector((state) => state.auth);
     if(isAuth) {
-        return(<DashBoard />)
+        return(<DashBoardBeta />)
     } else {
         return(<Home />)
     } 

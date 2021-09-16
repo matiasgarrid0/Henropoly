@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns } from "./../../redux/actions";
-import { Board, Turns } from "./../";
+import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll} from "./../../redux/actions";
+import { Board, Turns} from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
-  const { status, dataPlayers } = useSelector((state) => state.henropolyGame);
+  const [rollDicesInGame, setRollDicesInGame] = useState({
+    valorOne: null,
+    valorTwo: null,
+    username: null,
+  })
+  const { status, dataPlayers, host, actualTurn} = useSelector((state) => state.henropolyGame);
   const { info } = useSelector((state) => state.reducerInfo);
-  const { socket } = useSelector((state) => state.auth);
+  const { socket, user} = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
   const [dataGame, setDataGame] = useState({
     mouseActive: false,
@@ -96,6 +101,33 @@ const DisplayGameBeta = () => {
       alignTarget("target1");
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [dataPlayers.target1.box]);
+  useEffect(() => {
+    if (
+      dataGame.target2.box !== dataPlayers.target2.box &&
+      dataGame.targetMove === false
+    )
+      alignTarget("target2");
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [dataPlayers.target2.box]);
+
+  useEffect(() => {
+    if (
+      dataGame.target3.box !== dataPlayers.target3.box &&
+      dataGame.targetMove === false
+    )
+      alignTarget("target3");
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [dataPlayers.target3.box]);
+
+  useEffect(() => {
+    if (
+      dataGame.target4.box !== dataPlayers.target4.box &&
+      dataGame.targetMove === false
+    )
+      alignTarget("target4");
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [dataPlayers.target4.box]);
+
   const style = {
     backgroundSize: "2500px",
     backgroundImage: `url(${Imagen})`,
@@ -159,12 +191,24 @@ const DisplayGameBeta = () => {
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
+      } else if (data.status === 'statusGame') {
+        if(data.type === 'endGame'){
+        dispatch(setGameStatus('free'))
+        } else if(data.type === 'exitPlayer'){
+          dispatch(kickPlayer(data.info))
+        } else if(data.type === 'meExit') {
+          dispatch(setGameStatus('free'))
+        }
+      } else if (data.status === 'roll'){
+        setRollDicesInGame({...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username:data.usernameRoll})
+        dispatch(setGameRoll(data.info))
       }
     });
     return () => {
       socket.off("setGame");
     };
   }, []);
+ 
   return (
     <div className="display-beta-border">
       <div className="display-beta-body-display no-select">
@@ -224,9 +268,6 @@ const DisplayGameBeta = () => {
           <div>error</div>
         )}
       </div>
-      <div className="display-beta-components">
-        <Turns />
-      </div>
       <div
         className="display-beta-touch"
         onWheel={handleWheelEvent}
@@ -234,7 +275,18 @@ const DisplayGameBeta = () => {
         onMouseMove={handleOnMouseMoveEvent}
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
-      ></div>
+      ></div> 
+     <div className="display-beta-components">
+        <Turns />
+        { user.username === host ? 
+        <button onClick= {() => { socket.emit('gameDashboard', {type: 'gameOver'})}}>Terminar partida</button>
+        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> }
+        {user.username === actualTurn &&
+        <button onClick= {() => {socket.emit('gameDashboard', {type:'roll'})}}>Tirar Dados</button>}
+        {user.username === actualTurn &&
+        <button onClick={() => {socket.emit('gameDashboard', {type:'passTurn'})}}>Pasar turno</button>
+        }
+      </div> 
     </div>
   );
 };
