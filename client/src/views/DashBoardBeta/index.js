@@ -15,8 +15,6 @@ const DashBoardBeta = () => {
      
       <div className="beta-space-game color-blanco">
         <div className="beta-box-game">
-          <div className="asd"></div>
-          <div className="asd"></div>
           <DisplayGameBeta />
         </div>
       </div>
@@ -50,6 +48,9 @@ const DashBoardBeta = () => {
       //     </div>
       //   </div>
       <div className="dashBoard-beta-margin">
+        <div className="asd"></div>
+        <div className="asd"></div>
+        <div className="asd"></div>
         <div className="repeat-total">
           <div > 
             <Tutorial />

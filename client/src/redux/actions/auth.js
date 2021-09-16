@@ -125,7 +125,7 @@ export const logOut = () => {
 //'https://henropoly-grupo6.herokuapp.com/'
   //SI LEVANTAMOS EN LOCAL HOST PONER  "http://localhost:3001" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const connectSocket = (token) => {
-  const socket = io("http://localhost:3001", { query: { token } });
+  const socket = io('https://henropoly-grupo6.herokuapp.com/', { query: { token } });
   return {
     type: SET_SOCKET,
     payload: socket,
