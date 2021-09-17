@@ -2,12 +2,12 @@
 /**"property","service","lucky","comunal","railway","exit","jail","goJail","stop" */
 const cardpropertiesData = [
     {
-        id:0,
-        type:"exit",
+        id: 0,
+        type: "exit",
     },
     {
-        id:1,
-        type:"property",
+        id: 1,
+        type: "property",
         name: " CSS",
         versionAlpha: 2,
         versionOne: 10,
@@ -24,12 +24,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:2,
-        type:"comunal",
+        id: 2,
+        type: "comunal",
     },
     {
-        id:3,
-        type:"property",
+        id: 3,
+        type: "property",
         name: "HTML",
         versionAlpha: 4,
         versionOne: 20,
@@ -46,12 +46,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:4,
-        type:"tax",
+        id: 4,
+        type: "tax",
     },
     {
-        id:5,
-        type:"railway",
+        id: 5,
+        type: "railway",
         name: "HENRY M1",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -62,8 +62,8 @@ const cardpropertiesData = [
         licenseValue: 200
     },
     {
-        id:6,
-        type:"property",
+        id: 6,
+        type: "property",
         name: "Postgres",
         versionAlpha: 6,
         versionOne: 30,
@@ -75,17 +75,17 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color:"light-blue",
+        color: "light-blue",
         owner: null,
         actualPrice: "versionAlpha"
     },
     {
-        id:7,
-        type:"lucky",
+        id: 7,
+        type: "lucky",
     },
     {
-        id:8,
-        type:"property",
+        id: 8,
+        type: "property",
         name: "SQLITE",
         versionAlpha: 6,
         versionOne: 30,
@@ -97,13 +97,13 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 50,
-        color:"light-blue",
+        color: "light-blue",
         owner: null,
         actualPrice: "versionAlpha"
     },
     {
-        id:9,
-        type:"property",
+        id: 9,
+        type: "property",
         name: "MySQL",
         versionAlpha: 8,
         versionOne: 40,
@@ -115,17 +115,17 @@ const cardpropertiesData = [
         commonVersion: 50,
         premiumVersion: 50,
         licenseValue: 60,
-        color:"light-blue",
+        color: "light-blue",
         owner: null,
         actualPrice: "versionAlpha"
     },
     {
-        id:10,
-        type:"jail",
+        id: 10,
+        type: "jail",
     },
     {
-        id:11,
-        type:"property",
+        id: 11,
+        type: "property",
         name: "C#",
         versionAlpha: 10,
         versionOne: 50,
@@ -142,15 +142,15 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:12,
-        type:"service",
-        name:"ELECTRICITY COMPANY",
-        licenseValue:"75",
+        id: 12,
+        type: "service",
+        name: "ELECTRICITY COMPANY",
+        licenseValue: "75",
         owner: null,
     },
     {
-        id:13,
-        type:"property",
+        id: 13,
+        type: "property",
         name: "C++",
         versionAlpha: 10,
         versionOne: 50,
@@ -167,8 +167,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:14,
-        type:"property",
+        id: 14,
+        type: "property",
         name: "C",
         versionAlpha: 12,
         versionOne: 60,
@@ -185,8 +185,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:15,
-        type:"railway",
+        id: 15,
+        type: "railway",
         name: "HENRY M2",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -197,8 +197,8 @@ const cardpropertiesData = [
         licenseValue: 200
     },
     {
-        id:16,
-        type:"property",
+        id: 16,
+        type: "property",
         name: "BootStrap",
         versionAlpha: 14,
         versionOne: 70,
@@ -215,12 +215,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:17,
-        type:"comunal",
+        id: 17,
+        type: "comunal",
     },
     {
-        id:18,
-        type:"property",
+        id: 18,
+        type: "property",
         name: "Diseño UI/UX",
         versionAlpha: 14,
         versionOne: 70,
@@ -237,8 +237,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:19,
-        type:"property",
+        id: 19,
+        type: "property",
         name: "Express",
         versionAlpha: 16,
         versionOne: 80,
@@ -255,12 +255,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:20,
-        type:"stop",
+        id: 20,
+        type: "stop",
     },
     {
-        id:21,
-        type:"property",
+        id: 21,
+        type: "property",
         name: "Vue",
         versionAlpha: 18,
         versionOne: 90,
@@ -277,12 +277,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:22,
-        type:"lucky",
+        id: 22,
+        type: "lucky",
     },
     {
-        id:23,
-        type:"property",
+        id: 23,
+        type: "property",
         name: "Angular",
         versionAlpha: 18,
         versionOne: 90,
@@ -299,8 +299,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:24,
-        type:"property",
+        id: 24,
+        type: "property",
         name: "Node",
         versionAlpha: 20,
         versionOne: 100,
@@ -317,8 +317,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:25,
-        type:"railway",
+        id: 25,
+        type: "railway",
         name: "HENRY M3",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -329,8 +329,8 @@ const cardpropertiesData = [
         licenseValue: 200
     },
     {
-        id:26,
-        type:"property",
+        id: 26,
+        type: "property",
         name: "Python",
         versionAlpha: 22,
         versionOne: 110,
@@ -347,8 +347,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:27,
-        type:"property",
+        id: 27,
+        type: "property",
         name: "Java",
         versionAlpha: 22,
         versionOne: 110,
@@ -365,15 +365,15 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:28,
-        type:"service",
-        name:"INTERNET COMPANY",
-        licenseValue:"75",
+        id: 28,
+        type: "service",
+        name: "INTERNET COMPANY",
+        licenseValue: "75",
         owner: null,
-    }, 
+    },
     {
-        id:29,
-        type:"property",
+        id: 29,
+        type: "property",
         name: "JavaScript",
         versionAlpha: 22,
         versionOne: 110,
@@ -390,12 +390,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:30,
-        type:"goJail",
+        id: 30,
+        type: "goJail",
     },
     {
-        id:31,
-        type:"property",
+        id: 31,
+        type: "property",
         name: "Sequelize",
         versionAlpha: 26,
         versionOne: 130,
@@ -412,8 +412,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:32,
-        type:"property",
+        id: 32,
+        type: "property",
         name: "GitHub",
         versionAlpha: 26,
         versionOne: 130,
@@ -430,12 +430,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:33,
-        type:"comunal",
+        id: 33,
+        type: "comunal",
     },
     {
-        id:34,
-        type:"property",
+        id: 34,
+        type: "property",
         name: "Git",
         versionAlpha: 28,
         versionOne: 150,
@@ -452,8 +452,8 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:35,
-        type:"railway",
+        id: 35,
+        type: "railway",
         name: "HENRY M4",
         takeCheckpoint: 25,
         twoCheckpoint: 50,
@@ -464,12 +464,12 @@ const cardpropertiesData = [
         licenseValue: 200
     },
     {
-        id:36,
-        type:"lucky",
+        id: 36,
+        type: "lucky",
     },
     {
-        id:37,
-        type:"property",
+        id: 37,
+        type: "property",
         name: "Redux",
         versionAlpha: 35,
         versionOne: 175,
@@ -486,12 +486,12 @@ const cardpropertiesData = [
         actualPrice: "versionAlpha"
     },
     {
-        id:38,
-        type:"taxVip",
+        id: 38,
+        type: "taxVip",
     },
     {
-        id:39,
-        type:"property",
+        id: 39,
+        type: "property",
         name: "React",
         versionAlpha: 50,
         versionOne: 200,
