@@ -22,6 +22,9 @@ import Chat from "./chat/Chat.jsx";
 import Room from "./room/Room.jsx";
 import DisplayGameBeta from "./displayGameBeta/DisplayGameBeta.jsx";
 import Turns from "./turns/Turns.jsx";
+import GameOptions from "./gameOptions/GameOptions.jsx";
+import ChatGame from "./chatGame/ChatGame";
+import TurnsOptions from "./turnsOptions/TurnsOptions.jsx";
 export {
   Loggin,
   RegisterForm,
@@ -47,5 +50,8 @@ export {
   Room,
   DisplayGameBeta,
   Turns,
+  GameOptions,
+  ChatGame,
+  TurnsOptions
 };
 

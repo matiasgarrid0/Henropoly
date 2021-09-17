@@ -22,7 +22,7 @@ import {
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
-const DisplayGameBeta = () => {
+const DisplayGameOmega = () => {
   const dispatch = useDispatch();
   const { status, dataPlayers, host, actualTurn } = useSelector((state) => state.henropolyGame);
   //random Lucky y comunal cards
@@ -340,12 +340,12 @@ const DisplayGameBeta = () => {
         </Portal>
       )}
       <div>
-      {/* <PlayerProps
+      <PlayerProps
           target1={dataPlayers.target1.box}
           target2={dataPlayers.target2.box}
           target3={dataPlayers.target3.box}
           target4={dataPlayers.target4.box}
-        /> */}
+        />
       </div>
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
@@ -429,18 +429,7 @@ const DisplayGameBeta = () => {
           <Dices rollOne={rollDicesInGame.valorOne} rollTwo={rollDicesInGame.valorTwo} username={rollDicesInGame.username} /></div>
         )}
       </div>
-      <div className="display-beta-align-gameturnsoptions">
-            <TurnsOptions
-              turn={user.username === actualTurn}
-              roll={() => {
-                socket.emit("gameDashboard", { type: "roll" });
-              }}
-              pass={() => {
-                socket.emit("gameDashboard", { type: "passTurn" });
-              }}
-            />
-          </div>
-      {/*<div className="display-beta-components">
+      <div className="display-beta-components">
         {user.username === host ?
           <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>
           : <button onClick={() => { socket.emit('gameDashboard', { type: 'meEnd' }) }}>Salir del juego </button>}
@@ -449,9 +438,9 @@ const DisplayGameBeta = () => {
         {user.username === actualTurn &&
           <button onClick={() => { socket.emit('gameDashboard', { type: 'passTurn' }) }}>Pasar turno</button>
         }
-      </div>*/}
+      </div>
     </div>
   );
 };
 
-export default DisplayGameBeta;
+export default DisplayGameOmega;

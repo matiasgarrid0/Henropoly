@@ -20,7 +20,7 @@ const cardpropertiesData = [
         premiumVersion: 50,
         licenseValue: 30,
         color: "brown",
-        owner: null
+        owner: null,
     },
     {
         id:2,

@@ -16,7 +16,9 @@ const {
   gameOver,
   meEnd,
   roll,
-  passTurn
+  passTurn,
+  luckyOrArc,
+  gameActionsBoard
 } = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);
