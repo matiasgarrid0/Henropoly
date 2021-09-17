@@ -375,7 +375,7 @@ const DisplayGameBeta = () => {
                         className="display-beta-target"
                       ></div>
                     )}
-                    {dataPlayers.target3.status && (
+                    {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
                           backgroundColor: "rgb(0, 255, 234)",
@@ -383,9 +383,9 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
-                    )}
-                    {dataPlayers.target4.status && (
+                      ></div> 
+                    ): <></>}
+                    {dataPlayers.target4.status !== false  && (
                       <div
                         style={{
                           backgroundColor: "rgb(255, 0, 255)",
