@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import './RailwayCard.css';
 
 const RailwayCard = ({ data, username, buy }) => {
-    console.log(username)
     const { user } = useSelector((state) => state.auth);
     return (
         <div className='railway-background-initial'>

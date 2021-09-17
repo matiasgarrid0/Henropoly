@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction } from "./../../redux/actions";
+import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction, buyRailwayAction } from "./../../redux/actions";
+//buyServiceAction,  actions
 import {
   Board,
   Turns,
@@ -186,28 +187,7 @@ const DisplayGameBeta = () => {
   };
 
   function closedPortal() {
-    // luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, info.table[dataPlayers.target1.box])
     setPortal(null)
-  }
-
-  function closedPortal1() {
-    //comunal
-    // luckyOrArc(comunalCard, players[0].resultNewGame.PlayerData.target1, players);
-    setPortal(null);
-  }
-
-  function closedPortal2() {
-    setPortal(null);
-  }
-
-  function closedPortal3() {
-    // pagar()
-    setPortal(null);
-  }
-
-  function closedPortal4() {
-    // dispatch(changeValueTarget('target1', 'box', 10));
-    setPortal(null);
   }
 
   useEffect(() => {
@@ -319,10 +299,21 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'roll') {
         setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
         dispatch(setGameRoll(data.info))
-      } else if (data.status === 'buyProperty'){
+      } else if (data.status === 'buyProperty'){  
         dispatch(buyPropertyAction(data))
       }
-    });
+      else if (data.status === 'buyRailway'){
+        dispatch(buyPropertyAction(data))
+      } else if (data.status === 'buyService'){  
+         dispatch(buyPropertyAction(data))
+      }
+      // else if (data.status === 'buyRailway'){  
+      //   dispatch(buyRailwayAction(data))
+      // } else if (data.status === 'buyService'){  
+      //   dispatch(buyServiceAction(data))
+      // }
+    })
+    
     return () => {
       socket.off("setGame");
     };
@@ -336,36 +327,35 @@ const DisplayGameBeta = () => {
         </Portal>
       )}
       {portal === "comunal" && (
-        <Portal onClose={closedPortal1}>
+        <Portal onClose={closedPortal}>
           <LuckyCard data={comunalCard} />
         </Portal>
       )}
       {portal === "property" && (
-        <Portal onClose={closedPortal2}>
+        <Portal onClose={closedPortal}>
           <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
         </Portal>
       )}
       {portal === "railway" && (
-        <Portal onClose={closedPortal2}>
+        <Portal onClose={closedPortal}>
           <RailwayCard data={train} username={meBox.username} buy={meBox.buy}/>
         </Portal>
       )}
       {portal === "service" && (
-        <Portal onClose={closedPortal2}>
+        <Portal onClose={closedPortal}>
           <ServiceCard data={service} username={meBox.username} buy={meBox.buy}/>
         </Portal>
       )}
       {portal === "tax" && (
-        <Portal onClose={closedPortal3}>
+        <Portal onClose={closedPortal}>
           <TaxCard data={tax} />
         </Portal>
       )}
       {portal === "jail" && (
-        <Portal onClose={closedPortal4}>
+        <Portal onClose={closedPortal}>
           <Jail data={jailData} />
         </Portal>
       )}
-
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
           <div className="display-beta-container-gametable">

@@ -486,7 +486,7 @@ const buyRailway= async(username, box, io) => {
   };
   if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue && room.table[box].owner === null) {
     room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
-    room.table[box].owner = username
+    room.table[box].owner = username;
     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
     room.order.forEach((player) => {
     io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 

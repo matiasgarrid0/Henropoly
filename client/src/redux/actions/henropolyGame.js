@@ -1,4 +1,5 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL, BUY_PROPERTY_ACTION} from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL, BUY_PROPERTY_ACTION, BUY_RAILWAY_ACTION } from "../constants";
+//BUY_SERVICE_ACTION, 
 
 export const setGame = (data) => {
   return {
@@ -48,3 +49,16 @@ export const buyPropertyAction = (payload) =>{
     payload: payload,
   };
 }
+ export const buyRailwayAction = (payload) =>{
+   console.log(payload)
+   return {
+     type: BUY_RAILWAY_ACTION,
+     payload: payload,
+   };
+ }
+// export const buyServiceAction = (payload) =>{
+//   return {
+//     type: BUY_SERVICE_ACTION,
+//     payload: payload,
+//   };
+// }
