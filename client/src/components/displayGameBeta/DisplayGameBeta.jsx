@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom } from "./../../redux/actions";
+import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction } from "./../../redux/actions";
 import {
   Board,
   Turns,
@@ -24,7 +24,7 @@ import { targetX, targetY } from "./calculatorTargetPosition";
 
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
-  const { status, dataPlayers, host, actualTurn } = useSelector((state) => state.henropolyGame);
+  const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
   //random Lucky y comunal cards
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
@@ -62,7 +62,10 @@ const DisplayGameBeta = () => {
   const [service, setService] = useState(null)
   const [tax, setTax] = useState(null)
   const [jailData, setJailData] = useState(null)
-
+  const [meBox, setMeBox] = useState({
+    username: null,
+    buy: null
+  })
   const moveTime = () => {
     return new Promise((resolve) => setTimeout(resolve, 80));
   };
@@ -135,8 +138,16 @@ const DisplayGameBeta = () => {
         dispatch(filterLuckyRandom());
         setPortal("lucky");
       }
-      if (info.table[dataPlayers[player].box].type === "property") {
+       if (info.table[dataPlayers[player].box].type === "property") {
         setProperty(info.table[dataPlayers[player].box])
+        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+           setMeBox({...meBox,
+            username: dataPlayers[player].username,
+            buy: ()=>{socket.emit("TradeDashboard", { type: "buyProperty",box:dataPlayers[player].box })},
+          }) 
+        } else {
+          setMeBox({...meBox, username: null})
+        }
         setPortal("property");
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
@@ -292,6 +303,8 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'roll') {
         setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
         dispatch(setGameRoll(data.info))
+      } else if (data.status === 'buyProperty'){
+        dispatch(buyPropertyAction(data))
       }
     });
     return () => {
@@ -313,7 +326,7 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
-          <PropertyCard data={property} />
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
           {/* <button className='displayGame-btn' onClick={() => { socket.emit('gameDashboard', { type: 'gameActionsBoard' }) }}>Comprar</button> */}
         </Portal>
       )}

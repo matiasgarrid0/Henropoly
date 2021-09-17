@@ -67,6 +67,9 @@ module.exports = (sequelize) => {
       },
       owner: {
         type:DataTypes.STRING
+      },
+      actualPrice: {
+        type:DataTypes.STRING
       }
     },
     { timestamps: false }

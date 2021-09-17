@@ -29,8 +29,9 @@ const {
   meEnd,
   roll,
   passTurn,
-  luckyOrArc,
-  gameActionsBoard
+  buyProperty
+  /*luckyOrArc,
+  gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);
@@ -49,6 +50,7 @@ io.on("connection", async (socket) => {
     socket.disconnect();
   }
   //verificacion de estado desde roomm
+  try{
   io.sockets
     .in(decoded.user.username)
     .emit("roomStatus", await searchStatus(decoded.user.username));
@@ -85,6 +87,12 @@ io.on("connection", async (socket) => {
     //   await gameActionsBoard(decoded.user.username, io)
     // } 
   });
+  //TradeDashboard
+  socket.on('TradeDashboard', async(data)=>{
+    if(data.type === 'buyProperty'){
+      buyProperty(decoded.user.username, data.box, io)
+    }
+  })
   //timer
   socket.on("timer", () => { });
   //chat global
@@ -94,9 +102,13 @@ io.on("connection", async (socket) => {
       message: data.message,
     });
   });
-  socket.on("chatGlobal", () => { });
-  socket.on("disconnect", () => { });
+  socket.on("chatGlobal", () => {});
+  socket.on("disconnect", () => {});
+} catch (err) {
+  console.log(err)
+}
 });
+
 server.name = "API";
 // si funca deployear
 //server.use(cors());

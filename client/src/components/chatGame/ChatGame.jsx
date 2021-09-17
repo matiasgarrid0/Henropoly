@@ -6,7 +6,7 @@ import { HiChatAlt, HiOutlineMinusSm } from "react-icons/hi";
 
 const ChatGame = () => {
     const { socket } = useSelector((state) => state.auth);
-    const [minimizar, setMinimizar] = useState(true);
+    const [minimizar, setMinimizar] = useState(false);
     const [mensaje, setMensaje] = useState("");
     const [mensajes, setMensajes] = useState([]);
     const submit = (e) => {
