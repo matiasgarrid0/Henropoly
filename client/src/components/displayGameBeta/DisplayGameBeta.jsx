@@ -416,7 +416,7 @@ const DisplayGameBeta = () => {
           }} />
         </div>
         <div className="display-beta-align-gameturns">
-          <div>
+          <div className="display-beta-align">
             <PlayerProps
               target1={dataPlayers.target1.box}
               target2={dataPlayers.target2.box}
