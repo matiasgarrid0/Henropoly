@@ -1,4 +1,4 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL} from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL, BUY_PROPERTY_ACTION } from "../constants";
 
 const initialState = {
   status: "free",
@@ -44,6 +44,14 @@ const henropolyGame = (state = initialState, action) => {
          ...state,
         status:payload   
        };
+       case BUY_PROPERTY_ACTION:
+         let newTable= state.table
+         newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username
+        return { 
+          ...state,
+         table: newTable,
+         dataPlayers:{...state.dataPlayers, [payload.newProperty]:{...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase }}
+        };
        case SET_GAME_ROLL: {
         return { 
           ...state,

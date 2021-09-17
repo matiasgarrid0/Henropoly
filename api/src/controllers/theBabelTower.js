@@ -1,3 +1,4 @@
+const { CardProperty } = require("./../db");
 const asyncRedis = require("async-redis");
 // const redis = require('redis');
 const redisConfig = {
@@ -31,17 +32,25 @@ const searchStatus = async (username) => {
       const responseWaitingRoom = await client.get(
         `waitingRoom${ResponsePlayersInHold}`
       );
-      return { status: "inHold", room: JSON.parse(responseWaitingRoom) };
+      if (responseWaitingRoom !== null){
+        return { status: "inHold", room: JSON.parse(responseWaitingRoom) };
+      } else {
+        await client.del(`playersInHold${username}`)
+      }
     }
     const ResponsePlayersInGame = await client.get(`playersInGame${username}`);//reset aqui
     if (ResponsePlayersInGame !== null) {
       const responseGameRoom = await client.get(
         `gameRoom${ResponsePlayersInGame}`
       );
-      return {
-        status: "inGame",
-        data: JSON.parse(responseGameRoom),
-      };
+      if (responseGameRoom !== null){
+        return {
+          status: "inGame",
+          data: JSON.parse(responseGameRoom),
+        };
+      } else {
+        await client.del(`playersInGame${username}`)
+      }
     }
     return { status: "free" };
   } catch (error) {
@@ -156,7 +165,6 @@ const sendTimer = async (username, io) => {
     io.sockets.in(player).emit("timer", seconds[username]);
   });
   } else {
-   
      clearTimer(username)
   }
 } catch (error) {
@@ -184,6 +192,7 @@ const timer = (username, io) => {
       }, 1000);
       console.log("cambio turno");
       const responseGameRoom = await client.get(`gameRoom${username}`);
+      if (responseGameRoom !== null){
       var roomGame = JSON.parse(responseGameRoom);
       roomGame.actualTurn = roomGame.order[1];
       let arrayOrder = roomGame.order;
@@ -199,6 +208,9 @@ const timer = (username, io) => {
           order: roomGame.order,
         });
       });
+      } else {
+        clearTimer(username)
+      }
     },
     120000,
     "JavaScript"
@@ -223,55 +235,18 @@ const goGame = async (username, io) => {
       await client.set(`playersInGame${player}`, username);
     });
     var orden = randomArray(playersFree);
+    const responseProperty = await CardProperty.findAll();
     var gameRoom = {
       status: "inGame",
       host: username,
       order: orden,
       actualTurn: orden[0],
-      table: [
-        { ID: 0, type: "exit", username: null },
-        { ID: 1, type: "property", username: null },
-        { ID: 2, type: "comunal", username: null },
-        { ID: 3, type: "property", username: null },
-        { ID: 4, type: "tax", username: null },
-        { ID: 5, type: "railway", username: null },
-        { ID: 6, type: "property", username: null },
-        { ID: 7, type: "lucky", username: null },
-        { ID: 8, type: "property", username: null },
-        { ID: 9, type: "property", username: null },
-        { ID: 10, type: "jail", username: null },
-        { ID: 11, type: "property", username: null },
-        { ID: 12, type: "service", username: null },
-        { ID: 13, type: "property", username: null },
-        { ID: 14, type: "property", username: null },
-        { ID: 15, type: "railway", username: null },
-        { ID: 16, type: "property", username: null },
-        { ID: 17, type: "comunal", username: null },
-        { ID: 18, type: "property", username: null },
-        { ID: 19, type: "property", username: null },
-        { ID: 20, type: "stop", username: null },
-        { ID: 21, type: "property", username: null },
-        { ID: 22, type: "lucky", username: null },
-        { ID: 23, type: "property", username: null },
-        { ID: 24, type: "property", username: null },
-        { ID: 25, type: "railway", username: null },
-        { ID: 26, type: "property", username: null },
-        { ID: 27, type: "property", username: null },
-        { ID: 28, type: "service", username: null },
-        { ID: 29, type: "property", username: null },
-        { ID: 30, type: "goJail", username: null },
-        { ID: 31, type: "property", username: null },
-        { ID: 32, type: "property", username: null },
-        { ID: 33, type: "comunal", username: null },
-        { ID: 34, type: "property", username: null },
-        { ID: 35, type: "railway", username: null },
-        { ID: 36, type: "lucky", username: null },
-        { ID: 37, type: "property", username: null },
-        { ID: 38, type: "taxVip", username: null },
-        { ID: 39, type: "property", username: null }],
+      table: responseProperty,
       dataPlayers: {
-        target3: { username: null, status: false, box: 0, x: 120, y: 40 },
-        target4: { username: null, status: false, box: 0, x: 40, y: 40 },
+        target3: { username: null,henryCoin: 1500,
+          cards: [], status: false, box: 0, x: 120, y: 40 },
+        target4: { username: null,henryCoin: 1500,
+          cards: [], status: false, box: 0, x: 40, y: 40 },
       },
       move: true,
     };
@@ -413,6 +388,18 @@ const roll = async (username, io) => {
         }
       };
     };
+    let buyAlquiler = false;
+    let targetProperty;
+    if (room.table[room.dataPlayers[target].box].owner !== null && room.table[room.dataPlayers[target].box].owner !== username){
+      buyAlquiler = true;
+      for (let i = 1; i < 5; i++) {
+        if (room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          targetProperty = `target${i}`
+        };
+      };
+      room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[room.dataPlayers[target].box][room.table[room.dataPlayers[target].box].actualPrice]
+      room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + room.table[room.dataPlayers[target].box][room.table[room.dataPlayers[target].box].actualPrice]
+    }
     if (num1 !== num2) {
       room.move = false;
     }
@@ -423,7 +410,8 @@ const roll = async (username, io) => {
         info: { target: target, move: room.dataPlayers[target].box },
         one: num1,
         two: num2,
-        usernameRoll: username
+        usernameRoll: username,
+        buyAlquiler: { status: buyAlquiler, target:target, secondTarget: targetProperty }
       });
     })
   }
@@ -461,10 +449,34 @@ const passTurn = async (username, io) => {
 }
 
 ///////////////////////////////////////////////////////// --SWITCH-BOX-BOARD-- //////////////////////////////////////////////////////////
-
+const buyProperty = async(username, box, io)=>{
+  const host = await client.get(`playersInGame${username}`)
+  const responseGameRoom = await client.get(`gameRoom${host}`);
+  let target;
+  var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+  for (let i = 1; i < 5; i++) {
+    if (room.dataPlayers[`target${i}`].username === username) {
+      target = `target${i}`
+    };
+  };
+  if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue && room.table[box].owner === null) {
+    room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+    room.table[box].owner = username
+    await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+    room.order.forEach((player) => {
+    io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+      status: "buyProperty",
+      box: box,
+      newProperty: target,
+      newbalase: room.dataPlayers[target].henryCoin
+    });
+  });
+  }
+}
+/*
 //(username, io)
 const gameActionsBoard = async (player, action, type, card) => {
-  //const host = await client.get(`playersInGame${username}`) ----> ENCUANTRA LA PARTIDA CON EL USARIO
+  //const host = await client.get(`playersInGame${username}`) ----> ENCUENTRA LA PARTIDA CON EL USUARIO
   switch (card[0].type) { 
     case "property": 
       if (action === "comprar") {
@@ -583,7 +595,7 @@ const luckyOrArc = async (card, player, infoGame) =>{
   }
 }
 
-
+*/
 module.exports = {
   createRoom,
   deleteRoom,
@@ -595,6 +607,7 @@ module.exports = {
   meEnd,
   roll,
   passTurn,
-  luckyOrArc,
-  gameActionsBoard
+  buyProperty,
+  /*luckyOrArc,
+  gameActionsBoard*/
 };

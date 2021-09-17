@@ -21,6 +21,7 @@ const cardpropertiesData = [
         licenseValue: 30,
         color: "brown",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:2,
@@ -42,6 +43,7 @@ const cardpropertiesData = [
         licenseValue: 30,
         color: "brown",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:4,
@@ -56,6 +58,7 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
+        actualPrice: "takeCheckpoint"
     },
     {
         id:6,
@@ -73,6 +76,7 @@ const cardpropertiesData = [
         licenseValue: 50,
         color:"light-blue",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:7,
@@ -94,6 +98,7 @@ const cardpropertiesData = [
         licenseValue: 50,
         color:"light-blue",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:9,
@@ -111,6 +116,7 @@ const cardpropertiesData = [
         licenseValue: 60,
         color:"light-blue",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:10,
@@ -132,6 +138,7 @@ const cardpropertiesData = [
         licenseValue: 70,
         color: "pink",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:12,
@@ -156,6 +163,7 @@ const cardpropertiesData = [
         licenseValue: 70,
         color: "pink",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:14,
@@ -173,6 +181,7 @@ const cardpropertiesData = [
         licenseValue: 80,
         color: "pink",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:15,
@@ -183,6 +192,7 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
+        actualPrice: "takeCheckpoint"
     },
     {
         id:16,
@@ -200,6 +210,7 @@ const cardpropertiesData = [
         licenseValue: 90,
         color: "orange",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:17,
@@ -221,6 +232,7 @@ const cardpropertiesData = [
         licenseValue: 90,
         color: "orange",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:19,
@@ -238,6 +250,7 @@ const cardpropertiesData = [
         licenseValue: 100,
         color: "orange",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:20,
@@ -259,6 +272,7 @@ const cardpropertiesData = [
         licenseValue: 110,
         color: "red",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:22,
@@ -280,6 +294,7 @@ const cardpropertiesData = [
         licenseValue: 110,
         color: "red",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:24,
@@ -297,6 +312,7 @@ const cardpropertiesData = [
         licenseValue: 120,
         color: "red",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:25,
@@ -307,6 +323,7 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
+        actualPrice: "takeCheckpoint"
     },
     {
         id:26,
@@ -324,6 +341,7 @@ const cardpropertiesData = [
         licenseValue: 130,
         color: "yellow",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:27,
@@ -341,6 +359,7 @@ const cardpropertiesData = [
         licenseValue: 130,
         color: "yellow",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:28,
@@ -365,6 +384,7 @@ const cardpropertiesData = [
         licenseValue: 130,
         color: "yellow",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:30,
@@ -386,6 +406,7 @@ const cardpropertiesData = [
         licenseValue: 150,
         color: "green",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:32,
@@ -403,6 +424,7 @@ const cardpropertiesData = [
         licenseValue: 150,
         color: "green",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:33,
@@ -424,6 +446,7 @@ const cardpropertiesData = [
         licenseValue: 160,
         color: "green",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:35,
@@ -434,6 +457,7 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
+        actualPrice: "takeCheckpoint"
     },
     {
         id:36,
@@ -455,6 +479,7 @@ const cardpropertiesData = [
         licenseValue: 175,
         color: "blue",
         owner: null,
+        actualPrice: "versionAlpha"
     },
     {
         id:38,
@@ -476,6 +501,7 @@ const cardpropertiesData = [
         licenseValue: 200,
         color: "blue",
         owner: null,
+        actualPrice: "versionAlpha"
     },
 ]
 
