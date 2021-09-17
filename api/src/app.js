@@ -29,7 +29,9 @@ const {
   meEnd,
   roll,
   passTurn,
-  buyProperty
+  buyProperty,
+  buyRailway,
+  buyService
   /*luckyOrArc,
   gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
@@ -91,6 +93,10 @@ io.on("connection", async (socket) => {
   socket.on('TradeDashboard', async(data)=>{
     if(data.type === 'buyProperty'){
       buyProperty(decoded.user.username, data.box, io)
+    } else if(data.type === 'buyRailway'){
+      buyRailway(decoded.user.username, data.box, io)
+    } else if(data.type === 'buyService'){
+      buyService(decoded.user.username, data.box, io)
     }
   })
   //timer

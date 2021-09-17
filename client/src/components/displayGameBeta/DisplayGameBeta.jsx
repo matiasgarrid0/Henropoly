@@ -152,10 +152,26 @@ const DisplayGameBeta = () => {
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
         setTrain(info.table[dataPlayers[player].box])
+        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+          setMeBox({...meBox,
+           username: dataPlayers[player].username,
+           buy: ()=>{socket.emit("TradeDashboard", { type: "buyRailway",box:dataPlayers[player].box })},
+         }) 
+       } else {
+         setMeBox({...meBox, username: null})
+       }
         setPortal("railway");
       }
       if (info.table[dataPlayers[player].box].type === "service") {
         setService(info.table[dataPlayers[player].box])
+        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+          setMeBox({...meBox,
+           username: dataPlayers[player].username,
+           buy: ()=>{socket.emit("TradeDashboard", { type: "buyService",box:dataPlayers[player].box })},
+         }) 
+       } else {
+         setMeBox({...meBox, username: null})
+       }
         setPortal("service");
       }
       if (info.table[dataPlayers[player].box].type === "tax" || info.table[dataPlayers[player].box].type === "taxVip") {
@@ -327,19 +343,16 @@ const DisplayGameBeta = () => {
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
           <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
-          {/* <button className='displayGame-btn' onClick={() => { socket.emit('gameDashboard', { type: 'gameActionsBoard' }) }}>Comprar</button> */}
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal2}>
-          <RailwayCard data={train} />
-          {/* <button className='displayGame-btn' onClick={comprar}>Comprar</button> */}
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy}/>
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal2}>
-          <ServiceCard data={service} />
-          {/* <button className='displayGame-btn' onClick={comprar}>Comprar</button> */}
+          <ServiceCard data={service} username={meBox.username} buy={meBox.buy}/>
         </Portal>
       )}
       {portal === "tax" && (
@@ -428,7 +441,7 @@ const DisplayGameBeta = () => {
        <div className="display-beta-align-chatgame">
             <ChatGame />
           </div>
-        <div className="display-beta-align-gameoptions">
+        <div className="display-beta-align-gameoptions">  
       <GameOptions host={user.username === host} gameOver={() => {
         socket.emit("gameDashboard", { type: "gameOver" });
       }} meEnd={() => {
