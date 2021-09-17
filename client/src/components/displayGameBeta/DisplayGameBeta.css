@@ -77,8 +77,11 @@
   right: 20px;
 }
 .display-beta-align-gameturns {
-  position: absolute;
-  left: 50%;
+  /* position: absolute; */
+  /* left: 50%; */
+  /* margin: 0 30rem; */
+  display: flex;
+  justify-content: center;
   top: 120px;
 }
 .display-beta-align-gameturnsoptions {

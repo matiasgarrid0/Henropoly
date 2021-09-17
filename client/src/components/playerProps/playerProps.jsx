@@ -13,11 +13,6 @@ function PlayerProps({ target1, target2, target3, target4 }) {
 
   return (
     <div>
-      {/* {players[0] === undefined ? (
-        <div>
-          ......... LOADING
-        </div>
-      ) : ( */}
         <div className='playerProps-box-big'>
           <div className="playerProps-box">
             <label className='playerProps-label-player'>Player 1: </label>
@@ -56,12 +51,12 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players.dataPlayers.target2.cards.length > 0 ? players.dataPlayers.target1.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
+            <span>{players.dataPlayers.target2.cards.length > 0 ? players.dataPlayers.target2.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
             <span>{target2}</span>
           </div>
-
-          <div className="playerProps-box">
+          { players.order.length > 2 &&
+            <div className="playerProps-box">
             <label className='playerProps-label-player'>Player 3: </label>
             <span>{players.dataPlayers.target3.username} </span>
             <label className='playerProps-label'>HenryCoins: </label>
@@ -69,7 +64,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
             <label className='playerProps-label'> Tecnologías: </label>
             <span>{
               players.table.map((e) => {
-                if (e.username === players.dataPlayers.target.username && e.type === "property") {
+                if (e.username === players.dataPlayers.target3.username && e.type === "property") {
                   return `${table[e.ID].name}`
                 } else {
                   <div>Aún no tenés propiedades</div>
@@ -77,11 +72,13 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players[0].resultNewGame.PlayerData.target3.cards.length > 0 ? players[0].resultNewGame.PlayerData.target3.cards.map((e) => e) : <div>Aún no tenés cartas</div>} </span>
+            <span>{players.dataPlayers.target3.cards.length > 0 ? players.dataPlayers.target3.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
+
             <label className='playerProps-label'> Posición: </label>
             <span>{target3}</span>
           </div>
-
+          }
+          {players.order.length > 3 &&
           <div className="playerProps-box">
             <label className='playerProps-label-player'>Player 4: </label>
             <span>{players.dataPlayers.target4.username} </span>
@@ -98,10 +95,11 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players[0].resultNewGame.PlayerData.target4.length > 0 ? players[0].resultNewGame.PlayerData.target4.cards.map((e) => e) : <div>Aún no tenés cartas </div>} </span>
+            <span>{players.dataPlayers.target4.cards.length > 0 ? players.dataPlayers.target4.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
             <span>{target4}</span>
           </div>
+          }
         </div>
       {/* )} */}
       <Action players={players} />
