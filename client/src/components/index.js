@@ -22,6 +22,11 @@ import Chat from "./chat/Chat.jsx";
 import Room from "./room/Room.jsx";
 import DisplayGameBeta from "./displayGameBeta/DisplayGameBeta.jsx";
 import Turns from "./turns/Turns.jsx";
+import MenuDesplegable from "./menuDesplegable/MenuDesplegable.jsx";
+import MenuTurnos from './menuTurnos/MenuTurnos.jsx'
+import MenuPlayers from './menuPlayers/MenuPlayers.js'
+import ChatDesplegable from "./chatDesplegable/ChatDesplegable.jsx";
+
 export {
   Loggin,
   RegisterForm,
@@ -47,5 +52,9 @@ export {
   Room,
   DisplayGameBeta,
   Turns,
+  MenuDesplegable,
+  MenuTurnos,
+  MenuPlayers,
+  ChatDesplegable
 };
 

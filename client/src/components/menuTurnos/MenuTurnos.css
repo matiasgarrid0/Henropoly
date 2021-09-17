@@ -1,0 +1,56 @@
+/*GENERAL*/
+.menuTurnos-div-general{
+    background: linear-gradient(#ffffff,#adafb1, #6b7279);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-left: 0.2rem;
+    border-radius: 5px;
+    height: 8rem;
+    width: 18rem;
+}
+/*BUTTONS*/
+.manuTurnos-btn-dados{
+    margin-top: 1.8rem;
+    margin-right: 1rem;
+    background: linear-gradient(#fff1db,#7fb3dd, #263746);
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+    border: solid 1px rgb(27, 21, 17);
+    border: none;
+}
+.manuTurnos-btn-dados:hover{
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
+.menuTuros-icon-dice{
+    height: 3rem;
+    width: 3rem;
+}
+.manuTurnos-btn-turno{
+    background: linear-gradient(#fff1db,#7fb3dd, #263746);
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+    border: solid 1px rgb(27, 21, 17);
+    border: none;
+    font-weight: 700;
+}
+.manuTurnos-btn-turno:hover{
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
+/*ESPERAR*/
+.menuTurnos-div-esperar{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(245, 22, 22);
+    padding: 0.1rem 2rem;
+    border-radius: 5px;
+    border:solid 2px black;
+}
+.menuTurnos-esperar{
+    text-align: center;
+    font-size: 1.6rem;
+   font-weight: 700;
+   color: #f0f0f0;
+}

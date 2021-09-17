@@ -1,0 +1,25 @@
+.chatDesplegable-show{
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+ transition: .5s;
+ 
+}
+.chatDesplegable-btn-hide-v{
+    font-weight: 700;
+    display: flex;
+    background-color: rgb(204, 204, 236);
+    font-size: 2rem;
+    padding: 0.2rem 6rem;
+}
+.chatDesplegable-span{
+    margin-left: 1rem;
+}
+.chatDesplegable-totop{
+    bottom: -100%;
+    right: 0;
+    width: 100%;
+    padding: 2rem 1.5rem 4rem;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0,.15);
+    border-radius: 1.5rem 1.5rem 0 0;
+    transition: .5s;
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll} from "./../../redux/actions";
-import { Board, Turns} from "./../";
+import { Board, Turns, MenuDesplegable, MenuTurnos, MenuPlayers, ChatDesplegable} from "./../";
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 
@@ -277,15 +277,19 @@ const DisplayGameBeta = () => {
         onMouseOut={handleOnMouseUpEvent}
       ></div> 
      <div className="display-beta-components">
+        <MenuPlayers />
         <Turns />
-        { user.username === host ? 
+        <MenuDesplegable host={user.username === host} endGame={user.username === host ? () => { socket.emit('gameDashboard', {type: 'gameOver'})} : () => {socket.emit('gameDashboard', {type: 'meEnd'})}}/>
+        <MenuTurnos actualTurn={user.username === actualTurn}  roll={user.username === actualTurn ? () => {socket.emit('gameDashboard', {type:'roll'})}  :null} passTurn={user.username === actualTurn? () => {socket.emit('gameDashboard', {type:'passTurn'})} :null}/>
+        {/* { user.username === host ? 
         <button onClick= {() => { socket.emit('gameDashboard', {type: 'gameOver'})}}>Terminar partida</button>
-        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> }
+        : <button onClick= {() => {socket.emit('gameDashboard', {type: 'meEnd'})}}>Salir del juego </button> } */}
+        {/* {user.username === actualTurn &&
+        <button onClick= {() => {socket.emit('gameDashboard', {type:'roll'})}}>.</button>}
         {user.username === actualTurn &&
-        <button onClick= {() => {socket.emit('gameDashboard', {type:'roll'})}}>Tirar Dados</button>}
-        {user.username === actualTurn &&
-        <button onClick={() => {socket.emit('gameDashboard', {type:'passTurn'})}}>Pasar turno</button>
-        }
+        <button onClick={() => {socket.emit('gameDashboard', {type:'passTurn'})}}>.</button>
+        } */}
+        <ChatDesplegable/>
       </div> 
     </div>
   );

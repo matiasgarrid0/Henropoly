@@ -1,0 +1,79 @@
+/*MENU HIDE*/
+.menuDesplegable-div-hide{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 0.2rem;
+    display: flex;
+}
+
+.menuDesplegable-menu-icon-hide{
+    color: rgb(37, 34, 34);
+    width: 2rem;
+    height: 2rem;
+    margin-left: 2rem;
+}
+.menuDesplegable-btn-hide{
+    display: flex;
+    background: linear-gradient(#fae1b9,#ffc250, #ff7301);
+    border-radius: 5px;
+    padding: 0.5rem 3rem;
+}
+.menuDesplegable-btn-hide:hover{
+    cursor: pointer;
+}
+.menuDesplegable-span-hide{
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+/*MENU SHOW*/
+.menuDesplegable-menu-show{
+    margin-left: 0.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    width: 15rem;
+    height: 10rem;
+    background: linear-gradient(#f8c86e, #fa7a11);
+    border-radius: 5px;
+}
+.menuDesplegable-btn-show{
+    display: flex;
+    background: linear-gradient(#ffc250, #fab882);
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 0.5rem;
+}
+.menuDesplegable-btn-salir{
+    display: flex;
+    background: linear-gradient(#fff1db,#ffc250, #ff7300);
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+    border: none;
+    margin-left: 3.5rem;
+}
+.menuDesplegable-btn-salir:hover{
+    background: linear-gradient(#fadcab,#ffc250, #ff7300);
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
+.menuDesplegable-icon-sound-show{
+    color: rgb(248, 0, 0);
+    width: 2rem;
+    height: 2rem;
+    font-weight: bold;
+}
+.menuDesplegable-btn-sound{
+    display: flex;
+    background: linear-gradient(#fff1db,#ffc250, #ff7300);
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+    border: solid 1px rgb(27, 21, 17);
+    margin-top: 0.3rem;
+    margin-left: 5.8rem;
+    border: none;
+}
+.menuDesplegable-btn-sound:hover{
+    background: linear-gradient(#fadcab,#ffc250, #ff7300);
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+}
