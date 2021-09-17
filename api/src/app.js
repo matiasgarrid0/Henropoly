@@ -6,7 +6,19 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const routes = require("./routes/index.js");
+/* const { searchStatus,
+  createRoom,
+  deleteRoom,
+  joinRoom,
+  leaveRoom } = require('./theBabelTower/room');
 const {
+  goGame,
+  gameOver,
+  meEnd,
+  roll,
+  passTurn
+} = require('./theBabelTower/basicGame'); */
+ const {
   createRoom,
   deleteRoom,
   joinRoom,
@@ -41,7 +53,7 @@ io.on("connection", async (socket) => {
     .in(decoded.user.username)
     .emit("roomStatus", await searchStatus(decoded.user.username));
   //componente room
-  socket.on("setRoom", async(data) => {
+  socket.on("setRoom", async (data) => {
     if (data.type === "create") {
       await createRoom(decoded.user.username, io);
     } else if (data.type === "delete") {
@@ -56,22 +68,25 @@ io.on("connection", async (socket) => {
       await goGame(decoded.user.username, io);
     }
   });
-  socket.on("roomStatus", () => {});
+  socket.on("roomStatus", () => { });
   //gameDashboard
-  socket.on("setGame", () => {});
+  socket.on("setGame", () => { });
   socket.on("gameDashboard", async (data) => {
-    if(data.type === 'gameOver'){
+    if (data.type === 'gameOver') {
       await gameOver(decoded.user.username, io)
-    } else if (data.type === "meEnd"){
+    } else if (data.type === "meEnd") {
       await meEnd(decoded.user.username, io)
     } else if (data.type === 'roll') {
       await roll(decoded.user.username, io)
-    }else if (data.type === "passTurn"){
+    } else if (data.type === "passTurn") {
       await passTurn(decoded.user.username, io)
     }
+    // }else if (data.type === "gameActionsBoard"){
+    //   await gameActionsBoard(decoded.user.username, io)
+    // } 
   });
   //timer
-  socket.on("timer", () => {});
+  socket.on("timer", () => { });
   //chat global
   socket.on("sendGlobal", (data) => {
     io.emit("chatGlobal", {
@@ -79,8 +94,8 @@ io.on("connection", async (socket) => {
       message: data.message,
     });
   });
-  socket.on("chatGlobal", () => {});
-  socket.on("disconnect", () => {});
+  socket.on("chatGlobal", () => { });
+  socket.on("disconnect", () => { });
 });
 server.name = "API";
 // si funca deployear

@@ -6,10 +6,9 @@ const redisConfig = {
   port: process.env.REDIS_PORT || "6379",
   pass: process.env.REDIS_PASSWORD || "",
 };
-const callbackTest = (value) => {
-  return new Promise((resolve) => setTimeout(resolve, value));
-}
+
 const client = asyncRedis.createClient(redisConfig);
+
 var timers = {};
 var timerSec = {};
 var seconds = {}
@@ -21,6 +20,9 @@ const randomArray = (arr) => {
   }
   return newArr;
 };
+const callbackTest = (value) => {
+  return new Promise((resolve) => setTimeout(resolve, value));
+}
 //funciones relacionadas con salas de espera y estados
 const searchStatus = async (username) => {
   try {
@@ -145,14 +147,26 @@ const leaveRoom = async (username, io) => {
 };
 //funciones relacionadas con el juego y sus tiempos
 const sendTimer = async (username, io) => {
+  try {
   const responseGameRoom = await client.get(`gameRoom${username}`);
   const roomGame = JSON.parse(responseGameRoom);
-
-  roomGame.order.forEach((player) => {
+  if(roomGame !== null) {
+ 
+     roomGame.order.forEach((player) => {
     io.sockets.in(player).emit("timer", seconds[username]);
   });
+  } else {
+   
+     clearTimer(username)
+  }
+} catch (error) {
+  console.log(error);
 }
+};
+
+
 const timer = (username, io) => {
+  try{
   seconds[username] = 120
   sendTimer(username, io);
   timerSec[username] = setInterval(async () => {
@@ -189,6 +203,9 @@ const timer = (username, io) => {
     120000,
     "JavaScript"
   );
+} catch (error) {
+  console.log(error);
+}
 };
 
 const clearTimer = (username) => {
@@ -312,19 +329,20 @@ const goGame = async (username, io) => {
   }
 };
 const gameOver = async (username, io) => {
- clearTimer(username); 
-await callbackTest(1500);
  const response = await client.get(`gameRoom${username}`);
   const listPlayer = JSON.parse(response).order;
   listPlayer.forEach(async (player) => {
     await client.del(`playersInGame${player}`);
+  });
+  clearTimer(username); 
+  await callbackTest(1500);
+  await client.del(`gameRoom${username}`);
+  listPlayer.forEach(async (player) => {
     io.sockets.in(player).emit('setGame', {
       status: "statusGame",
       type: "endGame",
     });
   });
-  
-  await client.del(`gameRoom${username}`);
 }
 const meEnd = async (username, io) => {
   try {
@@ -349,7 +367,7 @@ const meEnd = async (username, io) => {
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`
         room.dataPlayers[`target${i}`].status = false
-        console.log(room.dataPlayers[`target${i}`].status)
+      
       };
     };
     room.move = true;
@@ -377,6 +395,7 @@ const meEnd = async (username, io) => {
 }
 
 const roll = async (username, io) => {
+  try{
   let target;
   const responseRoom = await client.get(`playersInGame${username}`);
   const response = await client.get(`gameRoom${responseRoom}`);
@@ -408,9 +427,13 @@ const roll = async (username, io) => {
       });
     })
   }
+} catch (error) {
+  console.log(error);
+}
 }
 
 const passTurn = async (username, io) => {
+  try{
   const host = await client.get(`playersInGame${username}`) //trae data de un player
   const responseGameRoom = await client.get(`gameRoom${host}`);
   var roomGame = JSON.parse(responseGameRoom);
@@ -432,6 +455,9 @@ const passTurn = async (username, io) => {
     });
     timer(host, io)
   }
+} catch (error) {
+  console.log(error);
+}
 }
 
 ///////////////////////////////////////////////////////// --SWITCH-BOX-BOARD-- //////////////////////////////////////////////////////////

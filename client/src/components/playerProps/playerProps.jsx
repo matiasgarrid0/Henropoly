@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 /* import { register } from "../../redux/actions"; */
 import Action from "./switchBoxBoard";
@@ -56,7 +56,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players.dataPlayers.target2.cards.length > 0 ? players.dataPlayers.target1.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
+            <span>{players.dataPlayers.target2.cards.length > 0 ? players.dataPlayers.target2.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
             <span>{target2}</span>
           </div>
@@ -77,7 +77,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players[0].resultNewGame.PlayerData.target3.cards.length > 0 ? players[0].resultNewGame.PlayerData.target3.cards.map((e) => e) : <div>Aún no tenés cartas</div>} </span>
+            <span>{players.dataPlayers.target3.cards.length > 0 ? players.dataPlayers.target3.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
             <span>{target3}</span>
           </div>
@@ -98,7 +98,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
               })}
             </span>
             <label className='playerProps-label'> Cartas: </label>
-            <span>{players[0].resultNewGame.PlayerData.target4.length > 0 ? players[0].resultNewGame.PlayerData.target4.cards.map((e) => e) : <div>Aún no tenés cartas </div>} </span>
+            <span>{players.dataPlayers.target4.cards.length > 0 ? players.dataPlayers.target4.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
             <span>{target4}</span>
           </div>
