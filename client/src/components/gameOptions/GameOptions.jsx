@@ -32,7 +32,6 @@ const GameOptions = ({ host, gameOver, meEnd }) => {
           {host ? "Terminar Partida" : "Salir Del Juego"}
         </button>
       </div>
-      <div>hola2</div>
     </div>
   );
 };

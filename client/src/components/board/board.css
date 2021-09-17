@@ -31,7 +31,11 @@
 	transform: rotateZ(25.5deg) translateX(55px) translateY(80px);
 	text-align: center;
 }
-
+.board-logo-salida{
+  width: 11.5rem;
+	transform: rotateZ(-46deg) translateX(-45px) translateY(25px);
+	text-align: center;
+}
 .table {
   background: radial-gradient(#414141, #0e0e0e);
   box-shadow: inset 0 0 0 5px #ffffffc7;
@@ -201,6 +205,9 @@
 .corner3 {
   transform: rotateZ(30deg) translateX(100px) translateY(5px);
 }
+/* .corner4{
+  transform: rotateZ(30deg) translateX(100px) translateY(5px);
+} */
 .board-square-3d{
 	perspective: 900px;
 }

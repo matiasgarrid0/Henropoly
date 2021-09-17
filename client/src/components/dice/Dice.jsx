@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import "./Dice.css";
+import {Sonido} from './sonido.mp3'
 
 function Dices({ rollOne, rollTwo }) {
   const diceOne = useRef();
   const diceTwo = useRef();
-
   useEffect(() => {
     rollDice();
   });

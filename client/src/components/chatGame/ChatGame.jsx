@@ -48,7 +48,7 @@ const ChatGame = () => {
                 </div>
             </div>
             <div className='chatgame-div-box'>
-                <div className="chatgame-title">chat general</div>
+                <div className="chatgame-title">CHAT GENERAL</div>
                 <div className="chatgame-chat-container">
                     {mensajes.map((e, i) => (
                         <div key={i}>

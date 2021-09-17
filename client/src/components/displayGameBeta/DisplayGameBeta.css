@@ -91,3 +91,8 @@
   left: 50%;
   top:50%;
 }
+.display-beta-align-dataplayer{
+  position: absolute;
+  top: 120px;
+  left: 20px;
+}

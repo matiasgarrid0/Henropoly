@@ -1,9 +1,10 @@
 .chatgame-div-minor {
-    background-color: #0f1417;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    border: 2px solid #ffff00;
+    border: 2px solid #000000;
     padding: 10px;
-  }
+    transition: .5s;
+}
   .chatgame-btn {
     background-color: #0f1417;
     border-radius: 10px;
@@ -16,6 +17,7 @@
     background-color: #162229;
     border: 2px solid #f8990c;
     color: #f8990c;
+    cursor: pointer;
   }
   .chatgame-icon {
     font-size: 25px;
@@ -27,7 +29,11 @@
     height: 5px;
   }
   .chatgame-div-box {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0,.15);
+    border-radius: 1.5rem 1.5rem 0 0;
+    transition: .4s;
   }
   .chatgame-icontwo {
     color: #ffff00;
@@ -39,6 +45,7 @@
   .chatgame-icontwo:hover {
     color: #f8990c;
     border: 2px solid #f8990c;
+    cursor: pointer;
   }
   .chatgame-iconthree {
     position: absolute;
@@ -48,7 +55,7 @@
     right: -10px;
   }
   .chatgame-title {
-    background-color: #ffff00;
+    background-color: rgba(238, 255, 0, 0.8);
     margin-bottom: 5px;
     height: 20px;
     border-radius: 15px;
@@ -62,7 +69,7 @@
   }
   .chatgame-chat-btn-enviar {
     background-color: #ffff00;
-    border: 2px solid #f8990c;
+    border: 2px solid #000000;
     border-radius: 25px;
     padding: 5px;
     margin-right: 5px;
@@ -81,21 +88,22 @@
   .chatgame-chat-btn-enviar:hover {
       background-color: #f8990c;
       border: 2px solid #ffff00;
+      cursor: pointer;
   }
   
   .chatgame-chat-container {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
     border: solid 0px #000;
     margin: 0;
     padding: 0 10px 10px;
     height: 13rem;
     max-height: 80vh;
-    max-width: 70vh;
+    max-width: 60vh;
     overflow-x: hidden;
   }
   .chatgame-chat-username {
-    background-color: #0097a7;
+    background-color: #029bac;
     color: #ffffff;
     display: inline-block;
     padding: 0.3rem;
@@ -105,7 +113,7 @@
     margin-left: -12rem;
   }
   .chatgame-chat-message {
-    background-color: #e4e4e4;
+    background-color: #c7c5c5;
     text-align: start;
     padding: 0.3rem;
     margin-bottom: 0.4rem;

@@ -1,21 +1,23 @@
 .gameoptions-div-minor {
-    background-color: #0f1417;
-    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
     border: 2px solid #ffff00;
     padding: 10px;
-  }
+}
   .gameoptions-btn {
-    background-color: #0f1417;
-    border-radius: 10px;
-    border: 2px solid #ffff00;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    border: 2px solid #000000;
     padding: 6px;
     padding-bottom: 4px;
-    color: #ffff00;
+    color: #000000;
   }
   .gameoptions-btn:hover {
     background-color: #162229;
     border: 2px solid #f8990c;
     color: #f8990c;
+    cursor: pointer;
   }
   .gameoptions-icon {
     font-size: 25px;
@@ -36,6 +38,7 @@
   .gameoptions-icontwo:hover {
     color: #f8990c;
     border: 2px solid #f8990c;
+    cursor: pointer;
   }
   .gameoptions-iconthree {
     position: absolute;
