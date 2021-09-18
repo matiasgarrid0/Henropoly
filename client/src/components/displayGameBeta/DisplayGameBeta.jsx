@@ -301,8 +301,7 @@ const DisplayGameBeta = () => {
         dispatch(setGameRoll(data.info))
       } else if (data.status === 'buyProperty'){  
         dispatch(buyPropertyAction(data))
-      }
-      else if (data.status === 'buyRailway'){
+      } else if (data.status === 'buyRailway'){
         dispatch(buyPropertyAction(data))
       } else if (data.status === 'buyService'){  
          dispatch(buyPropertyAction(data))
