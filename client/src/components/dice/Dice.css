@@ -1,6 +1,6 @@
 .contenedor {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin-left: -50%;
     margin-top: -50%;
     perspective: 100%;
@@ -29,19 +29,19 @@
   }
   
   .front {
-    transform: translateZ(35px);
+    transform: translateZ(40px);
   }
   
   .back {
-    transform: rotateY(180deg) translateZ(35px);
+    transform: rotateY(180deg) translateZ(40px);
   }
   
   .left {
-    transform: rotateY(-90deg) translateZ(35px);
+    transform: rotateY(-90deg) translateZ(40px);
   }
   
   .right {
-    transform: rotateY(90deg) translateZ(35px);
+    transform: rotateY(90deg) translateZ(40px);
   }
   
   .top {
@@ -49,7 +49,7 @@
   }
   
   .bottom {
-    transform: rotateX(-90deg) translateZ(35px);
+    transform: rotateX(-90deg) translateZ(40px);
   }
   
   .inside {

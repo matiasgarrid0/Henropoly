@@ -8,6 +8,7 @@ import {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
+  GO_TO_JAIL
 } from "../constants";
 
 const initialState = {
@@ -92,12 +93,59 @@ const henropolyGame = (state = initialState, action) => {
             ...state.dataPlayers[payload.target],
             box: payload.move,
           },
-        },
+        }
+      }
+      }
+    // case BUY_PROPERTY_ACTION:
+    //   let newTable = state.table
+    //   newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
+    //   return {
+    //     ...state,
+    //     table: newTable,
+    //     dataPlayers: { ...state.dataPlayers, [payload.newProperty]: { ...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase } }
+    //   };
+    case GO_TO_JAIL:
+      return {
+        ...state,
+        dataPlayers: {
+          ...state.dataPlayers,
+          [payload.newProperty]: { ...state.dataPlayers[payload.newProperty], box: [payload.newPosition] }
+        }
       };
-    }
+
+
+    // case SET_GAME_STATUS:
+    //  return { 
+    //    ...state,
+    //   status:payload   
+    //  }
+    //  case BUY_PROPERTY_ACTION:
+    //    let newTable= state.table
+    //    newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
+    //   return { 
+    //     ...state,
+    //    table: newTable,
+    //    dataPlayers:{...state.dataPlayers, [payload.newProperty]:{...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase }}
+    //   };
+    //  case SET_GAME_ROLL: {
+    //   return { 
+    //     ...state,
+    //    dataPlayers:{
+    //      ...state.dataPlayers,
+    //    [payload.target]:{...state.dataPlayers[payload.target], box: payload.move}}
+    //   }
+    // }
+    // case GO_TO_JAIL:
+    //   return { 
+    //     ...state,
+    //     dataPlayers:{
+    //       ...state.dataPlayers,
+    //     [payload.newProperty]:{...state.dataPlayers[payload.newProperty], box: [payload.newPosition]}}
+    //   };
+
     default:
       return state;
-  }
-};
+  };
+}
 
 export default henropolyGame;

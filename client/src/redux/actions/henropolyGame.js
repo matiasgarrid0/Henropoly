@@ -8,6 +8,7 @@ import {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
+  GO_TO_JAIL
 } from "../constants";
 
 export const setGame = (data) => {
@@ -54,7 +55,14 @@ export const buyPropertyAction = (payload) => {
     type: BUY_PROPERTY_ACTION,
     payload: payload,
   };
-};
+}
+
+ export const goToJail= (payload) => {
+  return {
+    type: GO_TO_JAIL,
+    payload: payload,
+  };
+ }
 export const setMoveTurn = (payload) => {
   return {
     type: SET_MOVE_TURN,

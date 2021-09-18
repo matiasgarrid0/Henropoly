@@ -13,7 +13,7 @@ import {
 import {
   Board,
   Dices,
-  PlayerProps,
+  //PlayerProps,
   Portal,
   LuckyCard,
   PropertyCard,
@@ -367,12 +367,12 @@ const DisplayGame = () => {
         </Portal>
       )}
       <div>
-        <PlayerProps
+        {/* <PlayerProps
           target1={playerPosition.target1.box}
           target2={playerPosition.target2.box}
           target3={playerPosition.target3.box}
           target4={playerPosition.target4.box}
-        />
+        /> */}
       </div>
       <div className="body-display no-select">
         {statusTable === "complete" ? (

@@ -58,7 +58,8 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
-        actualPrice: "takeCheckpoint"
+        actualPrice: "takeCheckpoint",
+        licenseValue: 200
     },
     {
         id: 6,
@@ -192,7 +193,8 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
-        actualPrice: "takeCheckpoint"
+        actualPrice: "takeCheckpoint",
+        licenseValue: 200
     },
     {
         id: 16,
@@ -323,7 +325,8 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
-        actualPrice: "takeCheckpoint"
+        actualPrice: "takeCheckpoint",
+        licenseValue: 200
     },
     {
         id: 26,
@@ -457,7 +460,8 @@ const cardpropertiesData = [
         threeCheckpoint: 100,
         fourCheckpoint: 200,
         owner: null,
-        actualPrice: "takeCheckpoint"
+        actualPrice: "takeCheckpoint",
+        licenseValue: 200
     },
     {
         id: 36,

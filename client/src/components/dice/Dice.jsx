@@ -11,10 +11,10 @@ function Dices({ rollOne, rollTwo }) {
 
   function rollDice() {
     const time = 1;
-      diceOne.current.style.transition = "";
-      diceOne.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-      diceTwo.current.style.transition = "";
-      diceTwo.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+    diceOne.current.style.transition = "";
+    diceOne.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+    diceTwo.current.style.transition = "";
+    diceTwo.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     diceOne.current.style.transition = `transform ${time}s`;
     diceTwo.current.style.transition = `transform ${time}s`;
     let randomNumberDiceOne = rollOne;

@@ -21,7 +21,8 @@ export {
   SET_GAME_ROLL,
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
-  SET_BALANCE
+  SET_BALANCE,
+  GO_TO_JAIL
 } from "./henropolyGame";
 export { SET_VIEW } from "./view";
 export { STATUS_TRADING } from "./henryTrading";
