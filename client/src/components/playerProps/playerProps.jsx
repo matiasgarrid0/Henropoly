@@ -44,7 +44,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
           <label className='playerProps-label'> Tecnologías: </label>
           <span>{
             players.table.map((e) => {
-              if (e.owner === players.dataPlayers.target2.username && e.type === "property") {
+              if (e.owner === players.dataPlayers.target2.username &&  (e.type === "property" || e.type === "service" || e.type === "railway")) {
                 return `${players.table[e.id].name}` + " "
               } else {
                 <div>Aún no tenés propiedades</div>
@@ -66,7 +66,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
             <label className='playerProps-label'> Tecnologías: </label>
             <span>{
               players.table.map((e) => {
-                if (e.owner === players.dataPlayers.target3.username && e.type === "property") {
+                if (e.owner === players.dataPlayers.target3.username && (e.type === "property" || e.type === "service" || e.type === "railway")) {
                   return `${players.table[e.id].name}` + " "
                 } else {
                   <div>Aún no tenés propiedades</div>
@@ -89,7 +89,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
             <label className='playerProps-label'> Tecnologías: </label>
             <span>{
               players.table.map((e) => {
-                if (e.owner === players.dataPlayers.target4.username && e.type === "property") {
+                if (e.owner === players.dataPlayers.target4.username && (e.type === "property" || e.type === "service" || e.type === "railway")) {
                   return `${players.table[e.id].name}` + " "
                 } else {
                   <div>Aún no tenés propiedades</div>
