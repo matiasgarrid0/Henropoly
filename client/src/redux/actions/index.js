@@ -21,5 +21,6 @@ export {
   changeValueTable,
   changeValueTarget,
 } from "./game";
-export { setGame, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll } from "./henropolyGame";
+export { setGame, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, buyPropertyAction, setMoveTurn, setBalance } from "./henropolyGame";
 export { setView } from "./view";
+export { statusTrading } from "./HenryTrading";

@@ -1,0 +1,48 @@
+.gameoptions-div-minor {
+    background-color: #0f1417;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 10px;
+  }
+  .gameoptions-btn {
+    background-color: #0f1417;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+  }
+  .gameoptions-btn:hover {
+    background-color: #162229;
+    border: 2px solid #f8990c;
+    color: #f8990c;
+    cursor: pointer;
+  }
+  .gameoptions-icon {
+    font-size: 25px;
+  }
+  .gameoptions-div-btn-icon {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    height: 5px;
+  }
+  .gameoptions-icontwo {
+    color: #ffff00;
+    border: 2px solid #ffff00;
+    padding: 2px;
+    border-radius: 5px;
+    display: flex;
+  }
+  .gameoptions-icontwo:hover {
+    color: #f8990c;
+    border: 2px solid #f8990c;
+    cursor: pointer;
+  }
+  .gameoptions-iconthree {
+    position: absolute;
+    background-color: #162229;
+    border-radius: 5px;
+    top: -10px;
+    right: -10px;
+  }

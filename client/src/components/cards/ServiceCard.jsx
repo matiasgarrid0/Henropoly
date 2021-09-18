@@ -1,5 +1,6 @@
 import React from 'react';
 import './ServiceCard.css';
+import { FcWiFiLogo,FcIdea } from "react-icons/fc";
 
 const ServiceCard = ({data}) => {
     return (

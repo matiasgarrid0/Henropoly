@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React  from "react";
 import "./Ranking.css";
-import { CreateGame } from "../../components/index";
-import { Portal } from "../../components/index";
+
 
 const Ranking = () => {
 

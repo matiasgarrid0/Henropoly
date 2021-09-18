@@ -2,10 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@1,200&display=swap");
 
 :root {
-  --background-color: rgb(255, 199, 15);
   --color-yellow: yellow;
   --color-yellowTwo: #ffde59;
-  --color-black: black;
+  --color-white: #FFFBE3;
+  --color-black: #000000;
   --color-gray: #323639;
   --color-grayTwo: #737373;
   --color-grayThree: #919191;
@@ -14,7 +14,7 @@
   --text-two: "Titillium Web", sans-serif;
 }
 body {
-  background: radial-gradient(#1d1d1d, #0f0f0f);
+  background: radial-gradient(#242424, #1b1b1b);
 }
 .container-body {
   width: 100%;
@@ -41,17 +41,17 @@ body {
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 1px 2px 2px 1px rgb(41, 41, 41);
+  box-shadow: 1px 8px 7px 2px #111111;
   margin-top: 25px;
   font-family: var(--text-one);
   font-size: 35px;
   letter-spacing: 1px;
   border-radius: 8px;
-  margin-inline: 10px;
   background-color: transparent;
   color: yellow;
   cursor: pointer;
   transition: transform 250ms ease;
+  margin-left: 1rem;
 }
 .button-one:hover {
   color: var(--color-black);

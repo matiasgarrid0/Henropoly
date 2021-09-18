@@ -51,7 +51,69 @@
   height: 40px;
   position: absolute;
 }
+/*temporal component beta*/
 .display-beta-components {
   padding-top: 120px;
   position: absolute;
+}
+.display-beta-touch-absolute {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+.display-beta-touch {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+.display-beta-align-chatgame {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.display-beta-align-gameoptions {
+  position: absolute;
+  top: 120px;
+  right: 20px;
+}
+.display-beta-align-gameturns {
+  position: absolute;
+  left: 50%; 
+  margin: 0 auto; 
+  top: 120px;
+}
+.display-beta-align-playerprops{
+  position: absolute;
+  left: 50%;
+  top: 250px;
+}
+.display-beta-align-gameturnsoptions {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+}
+.display-beta-align-dices {
+  position: absolute;
+  left: 50%;
+  top:50%;
+}
+.display-beta-align-log {
+  position: absolute;
+  left: 20px;
+  top:50%;
+}
+.display-beta-bajo-touch{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+.display-beta-align-dataplayer{
+  position: absolute;
+  top: 120px;
+  left: 20px;
+}
+.display-beta-align-trading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }

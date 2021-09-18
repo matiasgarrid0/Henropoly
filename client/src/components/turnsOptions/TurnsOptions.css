@@ -1,0 +1,47 @@
+.turnsoptions-div-minor {
+    margin-left: -50%;
+}
+.turnsoptions-btn {
+    background-color: #0f1417;
+    border-radius: 10px;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+    margin: 10px;
+    position: relative;
+}
+.turnsoptions-btn:hover {
+    background-color: #162229;
+    color: #f8990c;
+    cursor: pointer;
+}
+.turnsoptions-icon {
+font-size: 70px;
+}
+.turnsoptions-btn-disabled {
+    background-color: #0f141750;
+    border-radius: 10px;
+    border: 2px solid #ffff0050;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff0050;
+    margin: 10px;
+}
+.turnsoptions-label{
+    font-size: 14px;
+    font-family: var(--text-three);
+    position: absolute;
+    background-color: #0f1417;
+    border-radius: 10px ;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+    text-align:center;
+    height: 18px;
+    width: 50px;
+    user-select: none;
+    top: -30px;
+    left: 8px;
+}

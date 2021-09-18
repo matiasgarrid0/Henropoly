@@ -31,6 +31,11 @@
 	transform: rotateZ(25.5deg) translateX(55px) translateY(80px);
 	text-align: center;
 }
+.board-logo-salida{
+  width: 11.3rem;
+	transform: rotateZ(-75deg) translateX(-65px) translateY(-70px);
+	text-align: center;
+}
 
 .table {
   background: radial-gradient(#414141, #0e0e0e);

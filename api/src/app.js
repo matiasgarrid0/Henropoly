@@ -6,7 +6,19 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const routes = require("./routes/index.js");
+/* const { searchStatus,
+  createRoom,
+  deleteRoom,
+  joinRoom,
+  leaveRoom } = require('./theBabelTower/room');
 const {
+  goGame,
+  gameOver,
+  meEnd,
+  roll,
+  passTurn
+} = require('./theBabelTower/basicGame'); */
+ const {
   createRoom,
   deleteRoom,
   joinRoom,
@@ -16,7 +28,10 @@ const {
   gameOver,
   meEnd,
   roll,
-  passTurn
+  passTurn,
+  buyProperty
+  /*luckyOrArc,
+  gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);
@@ -35,11 +50,12 @@ io.on("connection", async (socket) => {
     socket.disconnect();
   }
   //verificacion de estado desde roomm
+  try{
   io.sockets
     .in(decoded.user.username)
     .emit("roomStatus", await searchStatus(decoded.user.username));
   //componente room
-  socket.on("setRoom", async(data) => {
+  socket.on("setRoom", async (data) => {
     if (data.type === "create") {
       await createRoom(decoded.user.username, io);
     } else if (data.type === "delete") {
@@ -54,22 +70,32 @@ io.on("connection", async (socket) => {
       await goGame(decoded.user.username, io);
     }
   });
-  socket.on("roomStatus", () => {});
+  socket.on("roomStatus", () => { });
   //gameDashboard
-  socket.on("setGame", () => {});
+  socket.on("log", () => { });
+  socket.on("setGame", () => { });
   socket.on("gameDashboard", async (data) => {
-    if(data.type === 'gameOver'){
+    if (data.type === 'gameOver') {
       await gameOver(decoded.user.username, io)
-    } else if (data.type === "meEnd"){
+    } else if (data.type === "meEnd") {
       await meEnd(decoded.user.username, io)
     } else if (data.type === 'roll') {
       await roll(decoded.user.username, io)
-    }else if (data.type === "passTurn"){
+    } else if (data.type === "passTurn") {
       await passTurn(decoded.user.username, io)
     }
+    // }else if (data.type === "gameActionsBoard"){
+    //   await gameActionsBoard(decoded.user.username, io)
+    // } 
   });
+  //TradeDashboard
+  socket.on('TradeDashboard', async(data)=>{
+    if(data.type === 'buyProperty'){
+      buyProperty(decoded.user.username, data.box, io)
+    }
+  })
   //timer
-  socket.on("timer", () => {});
+  socket.on("timer", () => { });
   //chat global
   socket.on("sendGlobal", (data) => {
     io.emit("chatGlobal", {
@@ -79,7 +105,11 @@ io.on("connection", async (socket) => {
   });
   socket.on("chatGlobal", () => {});
   socket.on("disconnect", () => {});
+} catch (err) {
+  console.log(err)
+}
 });
+
 server.name = "API";
 // si funca deployear
 //server.use(cors());

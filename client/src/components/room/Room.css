@@ -1,3 +1,145 @@
-.room-total{
-    color:blanchedalmond;
+.room-dashboard-box {
+    background: black;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    
+    margin-left: 2rem;
+    max-width: 30rem;
+    max-height: 18rem;
+    width: 30rem;
+    height: 20rem;
+    border-radius: 1.5rem;
+    border: solid 2px rgb(56, 56, 56);
+    padding: .65rem;
 }
+
+.room-total {
+  color: white;
+  background: black;
+  display: block;
+  margin-left: .3rem;
+  max-width: 30rem;
+  max-height: 18rem;
+  width: 30rem;
+  height: 20rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  padding: .65rem;
+}
+
+.room-dashboard-form {
+    padding: .2rem;
+    height: 2.1rem;
+    width: 10rem;
+    margin-right: 1rem;
+    border: .2rem solid var(--color-black);
+    border-radius: .4rem;
+}
+
+.button-two {
+    border: 3px solid black;
+    padding: 2px;
+    height: 3.2rem;
+    width: 10rem;
+    box-shadow: 1px 8px 7px 2px #111111;
+    margin-top: 2rem;
+    font-family: var(--text-one);
+    font-size: 35px;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    background-color: var(--color-yellow);
+    color: black;
+    cursor: pointer;
+    transition: transform 250ms ease;
+  }
+  .button-two:hover {
+    color: var(--color-black);
+    background-color: rgb(250, 250, 74);
+    border: 1px solid var(--color-black);
+    box-shadow: 0 0 5px var(--color-black);
+    transform: scale(1.1);
+  }
+
+  .room-buttoner {
+    display: flex;
+    align-items: center;
+  }
+
+  .button-three {
+    position: inherit ;
+    border: 3px solid black;
+    padding: 2px;
+    height: 3.2rem;
+    width: 10rem;
+    margin-left: 3.2rem;
+    box-shadow: 1px 8px 7px 2px #111111;
+    margin-top: 5rem;
+    font-family: var(--text-one);
+    font-size: 35px;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    background-color: var(--color-yellow);
+    color: black;
+    cursor: pointer;
+    transition: transform 250ms ease;
+  }
+  .button-three:hover {
+    color: var(--color-black);
+    background-color: rgb(250, 250, 74);
+    border: 1px solid var(--color-black);
+    box-shadow: 0 0 5px var(--color-black);
+    transform: scale(1.1);
+  }
+
+  .button-expulsar {
+    border: 3px solid black;
+    padding: 1px;
+    height: 3rem;
+    width: 10rem;
+    margin-left: 2rem;
+    box-shadow: 1px 8px 7px 2px #111111;
+    margin-top: 2rem;
+    font-family: var(--text-one);
+    font-size: 20px bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    background-color: var(--color-yellow);
+    color: black;
+    cursor: pointer;
+    transition: transform 250ms ease;
+  }
+
+  .button-expulsar:hover {
+    color: var(--color-black);
+    background-color: rgb(250, 250, 74);
+    border: 1px solid var(--color-black);
+    box-shadow: 0 0 5px var(--color-black);
+    transform: scale(1.1);
+  }
+
+  .button-leave {
+    border: 3px solid black;
+    padding: 1px;
+    height: 3rem;
+    width: 10rem;
+    margin-left: 2rem;
+    box-shadow: 1px 8px 7px 2px #111111;
+    margin-top: 2rem;
+    font-family: var(--text-one);
+    font-size: 20px bold;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    background-color: var(--color-yellow);
+    color: black;
+    cursor: pointer;
+    transition: transform 250ms ease;
+  }
+
+  .button-leave:hover {
+    color: var(--color-black);
+    background-color: rgb(250, 250, 74);
+    border: 1px solid var(--color-black);
+    box-shadow: 0 0 5px var(--color-black);
+    transform: scale(1.1);
+  }

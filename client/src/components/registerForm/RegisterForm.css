@@ -1,14 +1,15 @@
 .container-register {
     background-color: black;
-    margin:1rem 1rem;
+    
     display: flex;
 	flex-direction: column;
-	align-items: center;
+	
     height:400px;
     width: 350px;
     border: solid black 2px;
     border-radius: 5px;
     color:white;
+    user-select: none;
 }
 
 .logo-register {
@@ -81,15 +82,22 @@
     font-weight: 700;
     text-decoration: none;
     font-size: 1rem;
+    padding: 1rem 3rem;
+    margin-top: 3.5rem;
+    display: inline-block;
+    align-items: center;
+    text-align: center;
     text-transform: uppercase;
     background-color: #FFEC00;
-    transition: background-color .3s ease;
+    transition: .3s ease;
     border-radius:4px;
     border: none;
-   
+    margin-left: 3.2rem;
 }
 
 .btn-send:hover {
     cursor:pointer;
-    border: solid 1px black;
+    border: solid 1px yellow;
+    background-color: transparent;
+    color: yellow;
 }

@@ -1,8 +1,8 @@
 .contenedor {
     width: 70px;
     height: 70px;
-    margin-top: 100px;
-    margin-left: 100px;
+    margin-left: -50%;
+    margin-top: -50%;
     perspective: 100%;
   }
   

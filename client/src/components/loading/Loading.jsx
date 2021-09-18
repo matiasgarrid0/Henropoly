@@ -1,7 +1,7 @@
 import React from "react";
 import "./Loading.css";
-import background from "./loading-card.png";
-import logo from "./loading-card-two.png";
+import background from "./Henrycoin-loading.png";
+import logo from "./LOADING.png";
 
 const Loading = () => {
   return (
