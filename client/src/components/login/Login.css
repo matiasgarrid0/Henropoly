@@ -9,6 +9,7 @@
     border: solid black 2px;
     border-radius: 5px;
     color:white;
+    user-select: none;
 }
 
 .logo-register {
@@ -54,7 +55,7 @@
     text-align: center;
     text-transform: uppercase;
     background-color: #FFEC00;
-    transition: background-color .3s ease;
+    transition: .3s ease;
     border-radius:4px;
     border: none;
 }

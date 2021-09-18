@@ -7,7 +7,7 @@
     margin-bottom: 30px; */
     display: flex;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    flex-direction:column;
+    flex-direction: column;
     background: linear-gradient(#272626, #000000);
     width: min(60rem, 100%);
     margin: 1rem;

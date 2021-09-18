@@ -13,7 +13,7 @@ const Room = () => {
   const [input, setInput] = useState({
     unirse: "",
   });
-  
+
   useEffect(() => {
     socket.on("roomStatus", (data) => {
       if (data.status === "inHold") {
@@ -51,31 +51,31 @@ const Room = () => {
   return (
     <div>
       {status === "free" && (
-        <>
-          <button onClick={setRoom({ type: "create" })}>Crear sala</button>
+        <div className="room-dashboard-box">
           <form onSubmit={(e) => handleSubmit(e)}>
             <input
+              className="room-dashboard-form"
               name="unirse"
               value={input.unirse}
               onChange={(e) => handleChange(e)}
             />
-            <button>Unirse a sala</button>
+            <button className="button-two">Unirse a sala</button>
           </form>
-
-          <button>Jugar</button>
-        </>
+          <button className="button-two" onClick={setRoom({ type: "create" })}>Crear sala</button>
+          <button className="button-two">Jugar</button>
+        </div>
       )}
       {status === "inHold" && (
         <div className='room-total'>
-          anfitrion de sala: {statusRoom.room.host}
-          miembros:
-          {statusRoom.room.players.map((player) => {
+          Anfitrion de sala: {statusRoom.room.host}
+          <div></div>
+          Miembros: {statusRoom.room.players.map((player) => {
             return (
               <label>
                 {player}
                 {statusRoom.room.host === user.username && (
                   <button
-                    onClick={setRoom({ type: "kickPlayer", player: player })}
+                  className="button-expulsar" onClick={setRoom({ type: "kickPlayer", player: player })}
                   >
                     expulsar jugador
                   </button>
@@ -84,17 +84,17 @@ const Room = () => {
             );
           })}
           {statusRoom.room.host === user.username ? (
-            <>
-              <button onClick={setRoom({ type: "delete" })}>borrar sala</button>
+            <div className="room-buttoner">
+              <button className="button-three" onClick={setRoom({ type: "delete" })}>borrar sala</button>
               {statusRoom.room.players.length !== 0 && (
-                <button onClick={setRoom({ type: "goGame" })}>
+                <button className="button-three" onClick={setRoom({ type: "goGame" })}>
                   Iniciar Juego
                 </button>
               )}
-            </>
+            </div>
           ) : (
-            <button onClick={setRoom({ type: "leaveRoom" })}>
-              abandonar sala
+            <button className="button-leave" onClick={setRoom({ type: "leaveRoom" })}>
+              Abandonar sala
             </button>
           )}
         </div>

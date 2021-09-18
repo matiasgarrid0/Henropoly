@@ -13,11 +13,6 @@ function PlayerProps({action}) {
 
   return (
     <div>
-      {/* {players[0] === undefined ? (
-        <div>
-          ......... LOADING
-        </div>
-      ) : ( */}
         <div className='playerProps-box-big'>
           <div className="playerProps-box" onClick={action(true, 'target1')}>
             <label className='playerProps-label-player'>Player 1: </label>
@@ -69,7 +64,7 @@ function PlayerProps({action}) {
             {/* <label className='playerProps-label'> Tecnologías: </label>
             <span>{
               players.table.map((e) => {
-                if (e.username === players.dataPlayers.target.username && e.type === "property") {
+                if (e.username === players.dataPlayers.target3.username && e.type === "property") {
                   return `${table[e.ID].name}`
                 } else {
                   <div>Aún no tenés propiedades</div>
@@ -102,6 +97,7 @@ function PlayerProps({action}) {
             <label className='playerProps-label'> Posición: </label>
             <span>{target4}</span> */}
           </div>
+      {/*     } */}
         </div>
       {/* )} */}
       <Action players={players} />

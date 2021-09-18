@@ -21,32 +21,6 @@ const DashBoardBeta = () => {
     );
   }
     return (
-      // <div className="DashBoardBeta-todo">
-      //   <div >
-      //     <div className="DashBoardBeta-hijo">
-      //       <div className='index-space'></div>
-      //         <div className='index-space'></div>
-      //           <div className="DashBoardBeta-position">
-      //             <div className="DashBoardBeta-total">
-      //               <Tutorial />
-      //             </div>
-      //           </div>
-      //           <div className="beta-space-game color-blanco">
-      //             <div className="beta-box-game">
-      //               <div className="asd"></div>
-      //                   <div className="asd"></div>
-      //                    <Room />
-      //                     <Chat />
-      //                   </div>
-      //               </div>
-      //               <div>
-      //             <div>
-      //               <Ranking />
-      //             </div>
-      //           </div>
-      //       </div>
-      //     </div>
-      //   </div>
       <div className="dashBoard-beta-margin">
         <div className="asd"></div>
         <div className="asd"></div>
@@ -57,10 +31,10 @@ const DashBoardBeta = () => {
           </div>
           <div className="">
             <Room />
-            <Chat />
           </div>
           <div>
-            <Ranking />
+            <Chat />
+            {/* <Ranking /> */}
           </div>
         </div>
       </div>

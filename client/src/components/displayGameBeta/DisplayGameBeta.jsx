@@ -567,16 +567,6 @@ const DisplayGameBeta = () => {
           <Trading />
         </div>
       )}
-      {/*<div className="display-beta-components">
-        {user.username === host ?
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>
-          : <button onClick={() => { socket.emit('gameDashboard', { type: 'meEnd' }) }}>Salir del juego </button>}
-        {user.username === actualTurn &&
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'roll' }) }}>Tirar Dados</button>}
-        {user.username === actualTurn &&
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'passTurn' }) }}>Pasar turno</button>
-        }
-      </div>*/}
     </div>
   );
 };

@@ -17,9 +17,14 @@
   animation: lds-dual-ring 3s linear infinite;
   position: absolute;
   margin: auto;
+  width: 400px;
+  height: 400px;
 }
 .loading-img {
+  text-align: center;
   position: absolute;
+  margin-top: 25rem;
+  margin-left: 4rem;
 }
 @keyframes lds-dual-ring {
   0% {
