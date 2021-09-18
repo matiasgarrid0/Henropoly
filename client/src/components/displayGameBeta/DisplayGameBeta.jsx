@@ -249,7 +249,10 @@ const DisplayGameBeta = () => {
     setPortal(null)
   }
 
-
+  // function closedPortal4() {
+  //   dispatch(changeValueTarget('target1','box', 10));
+  //   setPortal(null);
+  // }
 
   function closedPortal2() {
     // setRender(`status closed`)
