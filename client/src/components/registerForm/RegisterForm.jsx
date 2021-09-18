@@ -100,7 +100,7 @@ function handleSubmit(e) {
                     {errors.password && (<p className='b'>{errors.password}</p>)}
                 </div>
 
-              <button className='btn-send' type="submit">Registrar</button>
+              <button className='btn-send' type="submit">Registrarse</button>
 
             </form>  
           </div>

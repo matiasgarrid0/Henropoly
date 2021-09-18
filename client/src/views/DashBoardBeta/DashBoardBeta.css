@@ -1,35 +1,5 @@
-/* .DashBoardBeta-position {
-    margin:auto;
-    font-family: var(--text-one);
-    font-size: 20px;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-}
-.DashBoardBeta-hijo{
-    margin:auto;
-}
-.beta-space-game {
-    padding-top: 70px;
-    width: 100%;
-    display: flex;
-}
-.beta-box-game{
-margin: auto;
-}
-.color-blanco{
-    color: #ffffff;
-}
-.color-negro{
-    color: #000000;
-} */
-/* .DashBoardBeta-todo {
-    display: flex;
-} */
 .repeat-total{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-}
-.dashBoard-beta-margin{
-    margin-top: 1rem;
+    user-select: none;
 }

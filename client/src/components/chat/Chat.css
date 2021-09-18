@@ -1,27 +1,32 @@
 .chat-cuadro-general {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 1rem;
-  background-color: rgb(246, 246, 246);
-  height: 21rem;
+  /* margin-top: .2rem; */
+  max-width: 400px;
+  max-height: 700px;
+  width: 400px;
+  height: 620px;
   text-align: center;
-  border-radius: 10px;
-  padding: 2rem;
-  border: solid 1px #000;
+  
+  margin-left: 3.2rem;
+  background: black;
+  border-radius: 1.5rem;
+  padding: 10px;
 }
 .chat-h1 {
   margin-top: 1rem;
   text-transform: uppercase;
-  background-color: rgb(47, 174, 224);
+  background-color:yellow;
   padding: 0.6rem;
   border-radius: 10px;
-  color: #ffffff;
+  color: #000000;
+  box-shadow: 1px 8px 7px 2px #111111;
 }
 .chat-flex {
   display: flex;
   text-align: center;
 }
 .chat-btn-enviar {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 700;
   text-decoration: none;
   font-size: 1rem;
@@ -38,47 +43,58 @@
   text-align: center;
 }
 .chat-textarea {
-  margin-top: 1rem;
+  margin-top: 2rem;
   border-radius: 15px;
-  height: 1.5rem;
+  height: 2rem;
   width: 17rem;
   outline: none;
 }
 .chat-btn-enviar:hover {
-  background-color: #ffffff;
-  color: rgb(47, 174, 224);
-  border: solid 1px #0097a7;
+  background-color: transparent;
+  color: white;
+  border: solid 1px white;
+  padding: 10px;
+  box-shadow: 1px 8px 7px 2px #111111;
 }
 .chat-btn-verde {
-  background-color: rgb(47, 174, 224);
-  color: white;
-  border: 1px solid #0097a7;
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+  padding: 10px;
+  margin-left: .5rem;
+  box-shadow: 1px 8px 7px 2px #111111;
 }
 .chat-container {
-  background: #ffffff;
+  background: #424242;
   border-radius: 5px;
-  border: solid 0px #000;
+  /* border: solid 2px rgb(0, 0, 0); */
   margin: 0;
   padding: 0 10px 10px;
-  height: 13rem;
+  height: 27rem;
   max-height: 80vh;
   max-width: 70vh;
   overflow-x: hidden;
 }
 .chat-username {
-  background-color: #0097a7;
-  color: #ffffff;
+  background-color: rgb(255, 255, 42);
+  box-shadow: 1px 8px 7px 2px #111111;
+  color: black;
   display: inline-block;
-  padding: 0.3rem;
+  padding: 0.4rem;
   margin-top: 1rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
-  margin-left: -12rem;
+  margin-left: -17rem;
 }
 .chat-message {
-  background-color: #e4e4e4;
+  margin-top: .5rem;
+  background-color: rgb(146, 146, 146);
+  box-shadow: 1px 8px 7px 2px #111111;
   text-align: start;
-  padding: 0.3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  padding: 0.5rem;
   margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
 }

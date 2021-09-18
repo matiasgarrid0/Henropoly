@@ -17,6 +17,7 @@
   width: 270px;
   height: 70px;
   margin-top: 15px;
+  margin-left: -4rem;
 }
 .nav-text-user{
   display: flex;
