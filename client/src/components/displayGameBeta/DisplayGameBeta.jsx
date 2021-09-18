@@ -30,6 +30,7 @@ import {
   TurnsOptions,
   GamingLog,
   DataPlayerInfo,
+  Trading,
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -44,6 +45,7 @@ const DisplayGameBeta = () => {
   const { status, dataPlayers, host, actualTurn, table } = useSelector(
     (state) => state.henropolyGame
   );
+  const { tradeStatus } = useSelector((state) => state.henryTrading);
   //random Lucky y comunal cards
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
@@ -560,6 +562,11 @@ const DisplayGameBeta = () => {
           }}
         />
       </div>
+      {tradeStatus && (
+        <div className="display-beta-align-trading">
+          <Trading />
+        </div>
+      )}
       {/*<div className="display-beta-components">
         {user.username === host ?
           <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>

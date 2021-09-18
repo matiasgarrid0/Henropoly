@@ -1,7 +1,7 @@
 import { STATUS_TRADING } from "../constants";
 
 const initialState = {
-  status: false,
+  tradeStatus: false,
 };
 const henryTrading = (state = initialState, action) => {
   const { type, payload } = action;
@@ -9,7 +9,7 @@ const henryTrading = (state = initialState, action) => {
     case STATUS_TRADING:
       return {
         ...state,
-        status: payload
+        tradeStatus: payload
       };
     default:
       return state;

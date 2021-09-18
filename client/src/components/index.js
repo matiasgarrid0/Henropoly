@@ -27,6 +27,7 @@ import ChatGame from "./chatGame/ChatGame";
 import TurnsOptions from "./turnsOptions/TurnsOptions.jsx";
 import GamingLog from "./gamingLog/GamingLog.jsx";
 import DataPlayerInfo from "./dataPlayerInfo/DataPlayerInfo.jsx";
+import Trading from "./trading/Trading.jsx";
 export {
   Loggin,
   RegisterForm,
@@ -56,6 +57,7 @@ export {
   ChatGame,
   TurnsOptions,
   GamingLog,
-  DataPlayerInfo
+  DataPlayerInfo,
+  Trading
 };
 

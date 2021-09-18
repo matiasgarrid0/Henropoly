@@ -111,3 +111,8 @@
   top: 120px;
   left: 20px;
 }
+.display-beta-align-trading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
