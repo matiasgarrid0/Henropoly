@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 import "./ChatGame.css";
 import { GrSend } from "react-icons/gr";
 import { HiChatAlt, HiOutlineMinusSm } from "react-icons/hi";
-
+import Sonido from './windows-notificacion.mp3';
 const ChatGame = () => {
+    const sonidoOne = new Audio(Sonido)
+    sonidoOne.volumen =0.5
+    sonidoOne.loop = false;
     const { socket } = useSelector((state) => state.auth);
-    const [minimizar, setMinimizar] = useState(false);
+    const [minimizar, setMinimizar] = useState(true);
+    const [notificacion, setNotificacion] = useState(false);
     const [mensaje, setMensaje] = useState("");
     const [mensajes, setMensajes] = useState([]);
     const submit = (e) => {
@@ -16,6 +20,8 @@ const ChatGame = () => {
     };
     useEffect(() => {
         socket.on(`chatGlobal`, (msj) => {
+            setNotificacion(true)
+            sonidoOne.play()
             setMensajes([...mensajes, msj]);
         });
         return () => {
@@ -29,9 +35,10 @@ const ChatGame = () => {
                 className="chatgame-btn"
                 onClick={() => {
                     setMinimizar(false);
+                    setNotificacion(false);
                 }}
             >
-                <HiChatAlt className="chatgame-icon" />
+                <HiChatAlt className={notificacion ? "chatgame-icon-active" :"chatgame-icon"} />
             </button>
         );
     }
@@ -43,6 +50,7 @@ const ChatGame = () => {
                         className="chatgame-icontwo"
                         onClick={() => {
                             setMinimizar(true);
+                            setNotificacion(false);
                         }}
                     />
                 </div>

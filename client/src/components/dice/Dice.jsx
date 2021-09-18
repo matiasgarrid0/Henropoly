@@ -4,11 +4,9 @@ import "./Dice.css";
 function Dices({ rollOne, rollTwo }) {
   const diceOne = useRef();
   const diceTwo = useRef();
-
   useEffect(() => {
     rollDice();
   });
-
   // const [vuelta, setVuelta] = useState(true);
 
   function rollDice() {

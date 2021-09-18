@@ -12,6 +12,7 @@ import Cicon from './img/c.png'
 import Ui from './img/ui.png'
 import Modulos from './img/modulos.png'
 import Sequelize from './img/sequelize.png'
+import Salida from './img/salida.png'
 import "./board.css";
 import Card from "./Card";
 import CardComunal from "./CardComunal";
@@ -109,7 +110,9 @@ const Board = ({cards}) => {
           <Card data={cards[3]} grade="0" icons={<DiHtml5  className='card-icon'/>} />
           <CardComunal data={cards[2]} grade="0" icons={<GiLockedChest  className='card-icon'/>} />
           <Card data={cards[1]} grade="0" icons={<SiCss3  className='card-icon'/>} />
-          <Card data={cards[0]} grade="0" icons={<FaReact  className='card-icon'/>} />
+          <div className="square2"><span className="corner corner3"><img className='board-logo-salida' src={Salida} alt='img'/></span>
+          <Card data={cards[0]} grade="0" icons={<SiCss3 className='card-icon' />} />
+          </div>
         </div>
       </div>
     </div>

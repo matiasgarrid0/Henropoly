@@ -75,6 +75,7 @@ io.on("connection", async (socket) => {
   });
   socket.on("roomStatus", () => { });
   //gameDashboard
+  socket.on("log", () => { });
   socket.on("setGame", () => { });
   socket.on("gameDashboard", async (data) => {
     if (data.type === 'gameOver') {

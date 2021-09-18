@@ -5,7 +5,7 @@ import Action from "./switchBoxBoard";
 import './playerProps.css'
 
 // PlayerProps({idsala, target1, target2, target3, target4})
-function PlayerProps({ target1, target2, target3, target4 }) {
+function PlayerProps({action}) {
   // const dispatch = useDispatch();
   const players = useSelector((state) => state.henropolyGame);
   // let playerRedux = useSelector((state) => state.game.playerPosition)
@@ -76,7 +76,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
             <label className='playerProps-label'> Cartas: </label>
             <span>{players.dataPlayers.target3.cards.length > 0 ? players.dataPlayers.target3.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
-            <span>{target3}</span>
+            <span>{target3}</span> 
           </div>
         }
 {/*|||||||||||||||||||||||||||||||||||||||||||||| PLAYER 4 |||||||||||||||||||||||||||||||||||||||||||||||| */}
@@ -99,7 +99,7 @@ function PlayerProps({ target1, target2, target3, target4 }) {
             <label className='playerProps-label'> Cartas: </label>
             <span>{players.dataPlayers.target4.cards.length > 0 ? players.dataPlayers.target4.cards.map((e) => e.description) : <div>Aún no tenés cartas</div>}</span>
             <label className='playerProps-label'> Posición: </label>
-            <span>{target4}</span>
+            <span>{target4}</span> 
           </div>
         }
       </div>

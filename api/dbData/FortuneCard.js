@@ -9,13 +9,13 @@ const luckyCards = [
         name: "Suerte",
         description: "No creaste bien tu rama | Pagas $25",
         type: "pagas",
-        value:25
+        value: 25
     },
     {
         name: "Suerte",
         description: "Te aceptaron de TA | Cobra un bonus de $20",
         type: "cobras",
-        value:20
+        value: 20
     },
     {
         name: "Suerte",
@@ -27,15 +27,15 @@ const luckyCards = [
         name: "Suerte",
         description: "Te cortaron la luz, perdiste 3 dias en el PI | Pagas $40",
         type: "pagas",
-        value:40
-    
+        value: 40
+
     },
 
     {
         name: "Suerte",
         description: "Te encontraron muteado en el Pair-Programming | Paga $40",
         type: "pagas",
-        value:40
+        value: 40
     },
     {
         name: "Suerte",
@@ -47,19 +47,19 @@ const luckyCards = [
         name: "Suerte",
         description: "Te pasó la 4x4 de Diego | Paga $10",
         type: "pagas",
-        value:10
+        value: 10
     },
     {
         name: "Suerte",
         description: "Conseguiste el buda de la suerte en el repo | Cobras $100",
         type: "cobras",
-        value:100
+        value: 100
     },
     {
         name: "Suerte",
         description: "Aprobaste el Proyecto Final | Cobras $50",
         type: "cobras",
-        value:50 
+        value: 50
     },
     {
         name: "Suerte",
@@ -70,7 +70,7 @@ const luckyCards = [
         name: "Suerte",
         description: "No te conectaste a las clases ni al stand-up | Pagas $5 ",
         type: "pagas",
-        value:5
+        value: 5
     }
 ]
 

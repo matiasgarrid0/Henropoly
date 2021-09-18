@@ -16,6 +16,7 @@
     background-color: #162229;
     border: 2px solid #f8990c;
     color: #f8990c;
+    cursor: pointer;
   }
   .chatgame-icon {
     font-size: 25px;
@@ -39,6 +40,7 @@
   .chatgame-icontwo:hover {
     color: #f8990c;
     border: 2px solid #f8990c;
+    cursor: pointer;
   }
   .chatgame-iconthree {
     position: absolute;
@@ -81,6 +83,7 @@
   .chatgame-chat-btn-enviar:hover {
       background-color: #f8990c;
       border: 2px solid #ffff00;
+      cursor: pointer;
   }
   
   .chatgame-chat-container {
@@ -113,4 +116,20 @@
   }
   .chatgame-icon-chat {
     font-size: 22px;
+  }
+  .chatgame-icon-active {
+    font-size: 22px;
+    animation: new-msj 0.8s linear infinite;
+  }
+  @keyframes new-msj {
+    0% {
+      font-size: 22px;
+      color: #d41717;
+      transform: rotate(-20deg);
+    }
+    100% {
+      font-size: 22px;
+      color: #ce8019;
+      transform: rotate(20deg);
+    }
   }

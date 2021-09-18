@@ -1,0 +1,8 @@
+.trading-table {
+    width: 500px;
+    height: 500px;
+    background-color: aqua;
+    border-radius: 20px;
+    margin-top: -50%;
+    margin-left: -50%;
+}

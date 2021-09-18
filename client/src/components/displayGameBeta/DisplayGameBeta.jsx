@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction,goToJail } from "./../../redux/actions";
-//buyRailwayAction,ACTION
+
+import {
+  setView,
+  setTargetValue,
+  setTurns,
+  kickPlayer,
+  setGameStatus,
+  setGameRoll,
+  filterComunalRandom,
+  filterLuckyRandom,
+  buyPropertyAction,
+  setMoveTurn,
+  goToJail,
+  setBalance,
+} from "./../../redux/actions";
 import {
   Board,
   Turns,
@@ -14,22 +27,34 @@ import {
   ServiceCard,
   TaxCard,
   Jail,
-  PlayerProps,
   GameOptions,
   ChatGame,
-  TurnsOptions
+  TurnsOptions,
+  GamingLog,
+  DataPlayerInfo,
+  Trading,
 } from "./../";
 
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
+import SonidoFranco from "./shake-and-roll-dice.mp3";
 
 const DisplayGameBeta = () => {
+  const sonidoOne = new Audio(SonidoFranco);
+  sonidoOne.volumen = 0.5;
+  sonidoOne.loop = false;
   const dispatch = useDispatch();
   const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
+  const { tradeStatus } = useSelector((state) => state.henryTrading);
+  //random Lucky y comunal cards
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
+  const [minimizarPlayers, setMinimizarPlayers] = useState({
+    status: false,
+    target: null,
+  });
   const [dataGame, setDataGame] = useState({
     mouseActive: false,
     clientX: null,
@@ -49,12 +74,12 @@ const DisplayGameBeta = () => {
     },
   });
   //--Dados--
-  const [roll, setRoll] = useState(false)
+  const [roll, setRoll] = useState(false);
   const [rollDicesInGame, setRollDicesInGame] = useState({
     valorOne: null,
     valorTwo: null,
     username: null,
-  })
+  });
   //----portales---
   const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
@@ -65,15 +90,16 @@ const DisplayGameBeta = () => {
   const [jailData, setJailData] = useState(null)
   const [meBox, setMeBox] = useState({
     username: null,
-    buy: null
-  })
+    buy: null,
+  });
   const moveTime = () => {
     return new Promise((resolve) => setTimeout(resolve, 80));
   };
 
   const alignTarget = async (player) => {
     setDataGame({ ...dataGame, targetMove: true });
-    setRoll(true)
+    setRoll(true);
+    sonidoOne.play();
     await moveTime(88000);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
@@ -119,7 +145,7 @@ const DisplayGameBeta = () => {
         },
       });
     }
-    setRoll(false)
+    setRoll(false);
     setDataGame({
       ...dataGame,
       [player]: {
@@ -130,7 +156,11 @@ const DisplayGameBeta = () => {
     });
 
     //------IF PARA RENDERIZAR PORTALES------
-    if (info.table[dataPlayers[player].box].type && dataPlayers[player].username === user.username) {
+    if (
+      info.table[dataPlayers[player].box].type &&
+      dataPlayers[player].username === user.username
+    ) {
+      /*
       if (info.table[dataPlayers[player].box].type === "comunal") {
         dispatch(filterComunalRandom());
         setPortal("comunal");
@@ -139,15 +169,25 @@ const DisplayGameBeta = () => {
         dispatch(filterLuckyRandom());
         setPortal("lucky");
       }
-       if (info.table[dataPlayers[player].box].type === "property") {
-        setProperty(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-           setMeBox({...meBox,
+      */
+      if (info.table[dataPlayers[player].box].type === "property") {
+        setProperty(info.table[dataPlayers[player].box]);
+        if (
+          dataPlayers[player].username === user.username &&
+          table[dataPlayers[player].box].owner === null
+        ) {
+          setMeBox({
+            ...meBox,
             username: dataPlayers[player].username,
-            buy: ()=>{socket.emit("TradeDashboard", { type: "buyProperty",box:dataPlayers[player].box })},
-          }) 
+            buy: () => {
+              socket.emit("TradeDashboard", {
+                type: "buyProperty",
+                box: dataPlayers[player].box,
+              });
+            },
+          });
         } else {
-          setMeBox({...meBox, username: null})
+          setMeBox({ ...meBox, username: null });
         }
         setPortal("property");
       }
@@ -175,8 +215,11 @@ const DisplayGameBeta = () => {
        }
         setPortal("service");
       }
-      if (info.table[dataPlayers[player].box].type === "tax" || info.table[dataPlayers[player].box].type === "taxVip") {
-        setTax(info.table[dataPlayers[player].box])
+      if (
+        info.table[dataPlayers[player].box].type === "tax" ||
+        info.table[dataPlayers[player].box].type === "taxVip"
+      ) {
+        setTax(info.table[dataPlayers[player].box]);
         setPortal("tax");
       }
       if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
@@ -191,6 +234,15 @@ const DisplayGameBeta = () => {
       }
     }
   };
+  function closeAndOpen(booleans, target) {
+    return () => {
+      setMinimizarPlayers({
+        ...minimizarPlayers,
+        status: booleans,
+        target: target,
+      });
+    };
+  }
 
   function closedPortal() {
     setRender(`status closed`)
@@ -309,21 +361,38 @@ const DisplayGameBeta = () => {
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
-      } else if (data.status === 'statusGame') {
-        if (data.type === 'endGame') {
-          dispatch(setGameStatus('free'))
-        } else if (data.type === 'exitPlayer') {
-          dispatch(kickPlayer(data.info))
-        } else if (data.type === 'meEnd') {
-          dispatch(setGameStatus('free'))
+        dispatch(setMoveTurn(true));
+      } else if (data.status === "statusGame") {
+        if (data.type === "endGame") {
+          dispatch(setGameStatus("free"));
+        } else if (data.type === "exitPlayer") {
+          console.log("paso por aqui");
+          dispatch(
+            setTurns({
+              actualTurn: data.info.turn.altulTurn,
+              order: data.info.turn.order,
+            })
+          );
+          dispatch(kickPlayer(data.info.target));
+        } else if (data.type === "meEnd") {
+          dispatch(setGameStatus("free"));
         }
-      } else if (data.status === 'roll') {
-        setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
-        dispatch(setGameRoll(data.info))
-        setRender(`status:${data.status}`)
-      } else if (data.status === 'buyProperty'){  
-        dispatch(buyPropertyAction(data))
-      } else if (data.status === 'buyRailway'){
+      } else if (data.status === "roll") {
+        if (data.move) {
+          dispatch(setMoveTurn(true));
+        }
+        setRollDicesInGame({
+          ...rollDicesInGame,
+          valorOne: data.one,
+          valorTwo: data.two,
+          username: data.usernameRoll,
+        });
+        dispatch(setGameRoll(data.info));
+      } else if (data.status === "buyProperty") {
+        dispatch(buyPropertyAction(data));
+      } else if (data.status === "setBalance") {
+        dispatch(setBalance(data.info));
+      }else if (data.status === 'buyRailway'){
         dispatch(buyPropertyAction(data))
         setRender(`status:${data.status}`)
       } else if (data.status === 'buyService'){  
@@ -382,13 +451,24 @@ const DisplayGameBeta = () => {
           <Jail data={jailData} />
         </Portal>
       )}
+      <div>
+        {/* <PlayerProps
+          target1={dataPlayers.target1.box}
+          target2={dataPlayers.target2.box}
+          target3={dataPlayers.target3.box}
+          target4={dataPlayers.target4.box}
+        /> */}
+      </div>
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
           <div className="display-beta-container-gametable">
             <div className="display-beta-container-gametable-cube">
               <div style={style}>
                 <div className="display-beta-align-game">
-                  <Board className="display-beta-board-position" cards={info.table} />
+                  <Board
+                    className="display-beta-board-position"
+                    cards={info.table}
+                  />
                   <div className="display-beta-game-box">
                     {dataPlayers.target1.status && (
                       <div
@@ -410,7 +490,7 @@ const DisplayGameBeta = () => {
                         className="display-beta-target"
                       ></div>
                     )}
-                    {dataPlayers.target3.status && (
+                    {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
                           backgroundColor: "rgb(0, 255, 234)",
@@ -419,8 +499,10 @@ const DisplayGameBeta = () => {
                         }}
                         className="display-beta-target"
                       ></div>
+                    ) : (
+                      <></>
                     )}
-                    {dataPlayers.target4.status && (
+                    {dataPlayers.target4.status !== false && (
                       <div
                         style={{
                           backgroundColor: "rgb(255, 0, 255)",
@@ -438,6 +520,11 @@ const DisplayGameBeta = () => {
         ) : (
           <div>error</div>
         )}
+      </div>
+      <div className="display-beta-bajo-touch">
+        <div className="display-beta-align-log">
+          <GamingLog />
+        </div>
       </div>
       <div
         className="display-beta-touch"
@@ -463,48 +550,57 @@ const DisplayGameBeta = () => {
           <ChatGame />
         </div>
         <div className="display-beta-align-gameoptions">
-          <GameOptions host={user.username === host} gameOver={() => {
-            socket.emit("gameDashboard", { type: "gameOver" });
-          }} meEnd={() => {
-            socket.emit("gameDashboard", { type: "meEnd" });
-          }} />
+          <GameOptions
+            host={user.username === host}
+            gameOver={() => {
+              socket.emit("gameDashboard", { type: "gameOver" });
+            }}
+            meEnd={() => {
+              socket.emit("gameDashboard", { type: "meEnd" });
+            }}
+          />
         </div>
         <div className="display-beta-align-gameturns">
-          <div className="display-beta-align">
-            <PlayerProps
-              target1={dataPlayers.target1.box}
-              target2={dataPlayers.target2.box}
-              target3={dataPlayers.target3.box}
-              target4={dataPlayers.target4.box}
+          <Turns action={closeAndOpen} />
+        </div>
+        {/* <div  className="display-beta-align-playerprops">
+        <PlayerProps action={closeAndOpen}/>
+        </div> */}
+        <div className="display-beta-align-dataplayer">
+          {/* <Turns /> */}
+          <DataPlayerInfo
+            action={closeAndOpen}
+            status={minimizarPlayers.status}
+            target={minimizarPlayers.target}
+          />
+        </div>
+        {roll && (
+          <div className="display-beta-align-dices">
+            <Dices
+              rollOne={rollDicesInGame.valorOne}
+              rollTwo={rollDicesInGame.valorTwo}
+              username={rollDicesInGame.username}
             />
           </div>
-        </div>
-        {roll && (<div className='display-beta-align-dices'>
-          <Dices rollOne={rollDicesInGame.valorOne} rollTwo={rollDicesInGame.valorTwo} username={rollDicesInGame.username} /></div>
         )}
       </div>
       <div className="display-beta-align-gameturnsoptions">
         <TurnsOptions
           turn={user.username === actualTurn}
           roll={() => {
+            dispatch(setMoveTurn(false));
             socket.emit("gameDashboard", { type: "roll" });
           }}
           pass={() => {
             socket.emit("gameDashboard", { type: "passTurn" });
           }}
         />
-
       </div>
-      {/*<div className="display-beta-components">
-        {user.username === host ?
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>
-          : <button onClick={() => { socket.emit('gameDashboard', { type: 'meEnd' }) }}>Salir del juego </button>}
-        {user.username === actualTurn &&
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'roll' }) }}>Tirar Dados</button>}
-        {user.username === actualTurn &&
-          <button onClick={() => { socket.emit('gameDashboard', { type: 'passTurn' }) }}>Pasar turno</button>
-        }
-      </div>*/}
+      {tradeStatus && (
+        <div className="display-beta-align-trading">
+          <Trading />
+        </div>
+      )}
     </div>
   );
 };
