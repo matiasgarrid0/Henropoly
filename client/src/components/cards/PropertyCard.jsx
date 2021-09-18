@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import './PropertyCard.css';
 
-
 const PropertyCard = ({ data, username , buy }) => {
     const { user } = useSelector((state) => state.auth);
         return (

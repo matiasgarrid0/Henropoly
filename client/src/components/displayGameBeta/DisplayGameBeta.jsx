@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction, buyRailwayAction } from "./../../redux/actions";
-//buyServiceAction,  actions
+import { setView, setTargetValue, setTurns, kickPlayer, setGameStatus, setGameRoll, filterComunalRandom, filterLuckyRandom, buyPropertyAction,goToJail } from "./../../redux/actions";
+//buyRailwayAction,ACTION
 import {
   Board,
   Turns,
@@ -26,7 +26,6 @@ import { targetX, targetY } from "./calculatorTargetPosition";
 const DisplayGameBeta = () => {
   const dispatch = useDispatch();
   const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
-  //random Lucky y comunal cards
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
@@ -182,6 +181,12 @@ const DisplayGameBeta = () => {
       }
       if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
         setJailData(info.table[dataPlayers[player].box])
+        if(info.table[dataPlayers[player].box].type === "goJail"){
+          setMeBox({...meBox,
+            username: dataPlayers[player].username,
+            buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box })},
+          }) 
+        }
         setPortal("jail");
       }
     }
@@ -189,6 +194,11 @@ const DisplayGameBeta = () => {
 
   function closedPortal() {
     setRender(`status closed`)
+    setPortal(null)
+  }
+
+  function closedPortal2() {
+    setRender(`status closed`)    
     setPortal(null)
   }
 
@@ -310,6 +320,9 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'buyService'){  
          dispatch(buyPropertyAction(data))
          setRender(`status:${data.status}`)
+      }else if (data.status === 'goToJail'){  
+        dispatch(goToJail(data))
+        setRender(`status:${data.status}`)
       }
       // else if (data.status === 'buyRailway'){  
       //   dispatch(buyRailwayAction(data))
@@ -356,7 +369,7 @@ const DisplayGameBeta = () => {
         </Portal>
       )}
       {portal === "jail" && (
-        <Portal onClose={closedPortal}>
+        <Portal onClose={closedPortal2}>
           <Jail data={jailData} />
         </Portal>
       )}

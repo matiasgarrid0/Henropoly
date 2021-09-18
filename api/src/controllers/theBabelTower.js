@@ -524,6 +524,29 @@ const buyService= async(username, box, io) => {
   }
 }
 
+const goToJail= async(username, box, io) => {
+  const host = await client.get(`playersInGame${username}`)
+  const responseGameRoom = await client.get(`gameRoom${host}`);
+  let target;
+  var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+  for (let i = 1; i < 5; i++) {
+    if (room.dataPlayers[`target${i}`].username === username) {
+      target = `target${i}`
+    };
+  };
+    room.dataPlayers[target].box = 10;    
+    await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+    room.order.forEach((player) => {
+    io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+      status: "goToJail",
+      box: box,
+      newProperty: target,
+      newPosition: room.dataPlayers[target].box
+    });
+  });
+  
+}
+
 /*
 //(username, io)
 const gameActionsBoard = async (player, action, type, card) => {
@@ -660,7 +683,8 @@ module.exports = {
   passTurn,
   buyProperty,
   buyRailway,
-  buyService
+  buyService,
+  goToJail
   /*luckyOrArc,
   gameActionsBoard*/
 };

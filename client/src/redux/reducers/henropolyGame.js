@@ -1,4 +1,4 @@
-import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL, BUY_PROPERTY_ACTION, BUY_RAILWAY_ACTION, BUY_SERVICE_ACTION } from "../constants";
+import { SET_GAME, SET_TARGET_VALUE, SET_TURNS, KICK_PLAYER, SET_GAME_STATUS, SET_GAME_ROLL, BUY_PROPERTY_ACTION, GO_TO_JAIL } from "../constants";
 
 const initialState = {
   status: "free",
@@ -52,14 +52,14 @@ const henropolyGame = (state = initialState, action) => {
          table: newTable,
          dataPlayers:{...state.dataPlayers, [payload.newProperty]:{...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase }}
         };
-        case BUY_RAILWAY_ACTION:
-           let newTable2= state.table
-           newTable2[payload.box].owner = state.dataPlayers[payload.newRailway].username
-          return { 
-           ...state,
-           table: newTable2,
-           dataPlayers:{...state.dataPlayers, [payload.newRailway]:{...state.dataPlayers[payload.newRailway], henryCoin: payload.newbalase }}
-          };
+        // case BUY_RAILWAY_ACTION:
+        //    let newTable2= state.table
+        //    newTable2[payload.box].owner = state.dataPlayers[payload.newRailway].username
+        //   return { 
+        //    ...state,
+        //    table: newTable2,
+        //    dataPlayers:{...state.dataPlayers, [payload.newRailway]:{...state.dataPlayers[payload.newRailway], henryCoin: payload.newbalase }}
+        //   };
         // case BUY_SERVICE_ACTION:
         //   let newTableOne= state.table
         //   newTableOne[payload.box].owner = state.dataPlayers[payload.newService].username
@@ -82,11 +82,19 @@ const henropolyGame = (state = initialState, action) => {
          dataPlayers:{
            ...state.dataPlayers,
          [payload.target]:{...state.dataPlayers[payload.target], box: payload.move}}
-        } 
+        }
       }
-    default:
-      return state;
-  }
+      case GO_TO_JAIL :
+        return { 
+          ...state,
+          dataPlayers:{
+            ...state.dataPlayers,
+          [payload.newProperty]:{...state.dataPlayers[payload.newProperty], box: [payload.newPosition]}}
+        };
+  
+  default:
+    return state;
 };
+}
 
 export default henropolyGame;
