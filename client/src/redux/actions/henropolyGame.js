@@ -49,12 +49,6 @@ export const buyPropertyAction = (payload) =>{
     payload: payload,
   };
 }
-//  export const buyRailwayAction = (payload) =>{
-//    return {
-//      type: BUY_RAILWAY_ACTION,
-//      payload: payload,
-//    };
-//  }
 
  export const goToJail= (payload) => {
   return {
@@ -62,9 +56,3 @@ export const buyPropertyAction = (payload) =>{
     payload: payload,
   };
  }
-// export const buyServiceAction = (payload) =>{
-//   return {
-//     type: BUY_SERVICE_ACTION,
-//     payload: payload,
-//   };
-// }

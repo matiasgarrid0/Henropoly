@@ -130,7 +130,7 @@ const DisplayGameBeta = () => {
     });
 
     //------IF PARA RENDERIZAR PORTALES------
-    if (info.table[dataPlayers[player].box].type) {
+    if (info.table[dataPlayers[player].box].type && dataPlayers[player].username === user.username) {
       if (info.table[dataPlayers[player].box].type === "comunal") {
         dispatch(filterComunalRandom());
         setPortal("comunal");
@@ -184,7 +184,7 @@ const DisplayGameBeta = () => {
         if(info.table[dataPlayers[player].box].type === "goJail"){
           setMeBox({...meBox,
             username: dataPlayers[player].username,
-            buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box })},
+            buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box})},
           }) 
         }
         setPortal("jail");
@@ -197,8 +197,17 @@ const DisplayGameBeta = () => {
     setPortal(null)
   }
 
+
+
   function closedPortal2() {
-    setRender(`status closed`)    
+    // setRender(`status closed`)
+    // meBox.buy()
+    // // socket.on("setGame", (data) => {
+    // // if (data.status === 'goToJail'){  
+    // //   dispatch(goToJail(data))
+    // //   setRender(`status:${data.status}`)
+    // //  }
+    // // })
     setPortal(null)
   }
 
@@ -320,7 +329,7 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'buyService'){  
          dispatch(buyPropertyAction(data))
          setRender(`status:${data.status}`)
-      }else if (data.status === 'goToJail'){  
+      } else if (data.status === 'goToJail'){  
         dispatch(goToJail(data))
         setRender(`status:${data.status}`)
       }
