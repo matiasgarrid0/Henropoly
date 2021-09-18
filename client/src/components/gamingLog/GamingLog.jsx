@@ -9,7 +9,7 @@ const GamingLog = () => {
 
   useEffect(() => {
     socket.on(`log`, (msj) => {
-      if(mensajes.length >20){
+      if(mensajes.length >10){
         let newArray = mensajes;
         mensajes.shift()
         setMensajes(newArray)
