@@ -13,6 +13,7 @@
 .turnsoptions-btn:hover {
     background-color: #162229;
     color: #f8990c;
+    cursor: pointer;
 }
 .turnsoptions-icon {
 font-size: 70px;

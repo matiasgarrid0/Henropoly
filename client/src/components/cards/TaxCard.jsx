@@ -1,6 +1,7 @@
 import React from 'react';
 import './TaxCard.css';
 
+
 const TaxCard = ({data}) => {
     if(data.type === "tax"){
         return (
