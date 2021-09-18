@@ -57,6 +57,7 @@ const DisplayGameBeta = () => {
     username: null,
   })
   //----portales---
+  const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
   const [property, setProperty] = useState(null)
   const [train, setTrain] = useState(null)
@@ -187,6 +188,7 @@ const DisplayGameBeta = () => {
   };
 
   function closedPortal() {
+    setRender(`status closed`)
     setPortal(null)
   }
 
@@ -299,12 +301,15 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'roll') {
         setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
         dispatch(setGameRoll(data.info))
+        setRender(`status:${data.status}`)
       } else if (data.status === 'buyProperty'){  
         dispatch(buyPropertyAction(data))
       } else if (data.status === 'buyRailway'){
         dispatch(buyPropertyAction(data))
+        setRender(`status:${data.status}`)
       } else if (data.status === 'buyService'){  
          dispatch(buyPropertyAction(data))
+         setRender(`status:${data.status}`)
       }
       // else if (data.status === 'buyRailway'){  
       //   dispatch(buyRailwayAction(data))
