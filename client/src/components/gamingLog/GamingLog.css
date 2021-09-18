@@ -1,0 +1,37 @@
+.gaminglog-table{
+margin-top:-50%;
+}
+.gaminglog-target1{
+    font-family: var(--text-one);
+    color: rgb(252, 78, 78);
+    font-size: 16px;
+}
+.gaminglog-target2{
+    font-family: var(--text-one);
+    color: rgb(9, 255, 0);
+    font-size: 16px;
+}
+.gaminglog-target3{
+    font-family: var(--text-one);
+    color: rgb(0, 255, 234);
+    font-size: 16px;
+}
+.gaminglog-target4{
+    font-family: var(--text-one);
+    color: rgb(255, 0, 255);
+    font-size: 16px;
+}
+.gaminglog-text{
+    font-family: var(--text-one);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: flex;
+}
+.gaminglog-line{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    display: flex;
+    margin-top: 3px;
+    padding: 0 5px;
+}

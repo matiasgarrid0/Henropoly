@@ -25,6 +25,8 @@ import Turns from "./turns/Turns.jsx";
 import GameOptions from "./gameOptions/GameOptions.jsx";
 import ChatGame from "./chatGame/ChatGame";
 import TurnsOptions from "./turnsOptions/TurnsOptions.jsx";
+import GamingLog from "./gamingLog/GamingLog.jsx";
+import DataPlayerInfo from "./dataPlayerInfo/DataPlayerInfo.jsx";
 export {
   Loggin,
   RegisterForm,
@@ -52,6 +54,8 @@ export {
   Turns,
   GameOptions,
   ChatGame,
-  TurnsOptions
+  TurnsOptions,
+  GamingLog,
+  DataPlayerInfo
 };
 

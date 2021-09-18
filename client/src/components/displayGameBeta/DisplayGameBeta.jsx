@@ -16,13 +16,19 @@ import {
   PlayerProps,
   GameOptions,
   ChatGame,
-  TurnsOptions
+  TurnsOptions,
+  GamingLog,
+  DataPlayerInfo
 } from "./../";
 
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
+import SonidoFranco from './shake-and-roll-dice.mp3';
 
 const DisplayGameBeta = () => {
+  const sonidoOne = new Audio(SonidoFranco)
+  sonidoOne.volumen =0.5
+  sonidoOne.loop = false;
   const dispatch = useDispatch();
   const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
   //random Lucky y comunal cards
@@ -30,6 +36,10 @@ const DisplayGameBeta = () => {
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
+  const [minimizarPlayers, setMinimizarPlayers] = useState({
+    status: false,
+    target: null,
+  });
   const [dataGame, setDataGame] = useState({
     mouseActive: false,
     clientX: null,
@@ -73,6 +83,7 @@ const DisplayGameBeta = () => {
   const alignTarget = async (player) => {
     setDataGame({ ...dataGame, targetMove: true });
     setRoll(true)
+    sonidoOne.play()
     await moveTime(88000);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
@@ -138,15 +149,16 @@ const DisplayGameBeta = () => {
         dispatch(filterLuckyRandom());
         setPortal("lucky");
       }
-       if (info.table[dataPlayers[player].box].type === "property") {
+      if (info.table[dataPlayers[player].box].type === "property") {
         setProperty(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-           setMeBox({...meBox,
+        if (dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+          setMeBox({
+            ...meBox,
             username: dataPlayers[player].username,
-            buy: ()=>{socket.emit("TradeDashboard", { type: "buyProperty",box:dataPlayers[player].box })},
-          }) 
+            buy: () => { socket.emit("TradeDashboard", { type: "buyProperty", box: dataPlayers[player].box }) },
+          })
         } else {
-          setMeBox({...meBox, username: null})
+          setMeBox({ ...meBox, username: null })
         }
         setPortal("property");
       }
@@ -168,6 +180,13 @@ const DisplayGameBeta = () => {
       }
     }
   };
+  function closeAndOpen (booleans, target){
+    return () => {
+      setMinimizarPlayers({
+        ...minimizarPlayers, status: booleans, target: target
+      })
+    } 
+  }
 
   function closedPortal() {
     // luckyOrArc(luckyCard, players[0].resultNewGame.PlayerData.target1, info.table[dataPlayers.target1.box])
@@ -296,14 +315,16 @@ const DisplayGameBeta = () => {
         if (data.type === 'endGame') {
           dispatch(setGameStatus('free'))
         } else if (data.type === 'exitPlayer') {
-          dispatch(kickPlayer(data.info))
+          console.log('paso por aqui')
+          dispatch(setTurns({ actualTurn: data.info.turn.altulTurn, order: data.info.turn.order }));
+          dispatch(kickPlayer(data.info.target))
         } else if (data.type === 'meEnd') {
           dispatch(setGameStatus('free'))
         }
       } else if (data.status === 'roll') {
         setRollDicesInGame({ ...rollDicesInGame, valorOne: data.one, valorTwo: data.two, username: data.usernameRoll })
         dispatch(setGameRoll(data.info))
-      } else if (data.status === 'buyProperty'){
+      } else if (data.status === 'buyProperty') {
         dispatch(buyPropertyAction(data))
       }
     });
@@ -326,7 +347,7 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal2}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} />
           {/* <button className='displayGame-btn' onClick={() => { socket.emit('gameDashboard', { type: 'gameActionsBoard' }) }}>Comprar</button> */}
         </Portal>
       )}
@@ -353,7 +374,7 @@ const DisplayGameBeta = () => {
         </Portal>
       )}
       <div>
-      {/* <PlayerProps
+        {/* <PlayerProps
           target1={dataPlayers.target1.box}
           target2={dataPlayers.target2.box}
           target3={dataPlayers.target3.box}
@@ -396,9 +417,9 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div> 
-                    ): <></>}
-                    {dataPlayers.target4.status !== false  && (
+                      ></div>
+                    ) : <></>}
+                    {dataPlayers.target4.status !== false && (
                       <div
                         style={{
                           backgroundColor: "rgb(255, 0, 255)",
@@ -418,6 +439,11 @@ const DisplayGameBeta = () => {
         )}
       </div>
       <div
+        className="display-beta-bajo-touch"
+      ><div className='display-beta-align-log'><GamingLog /></div>
+
+      </div>
+      <div
         className="display-beta-touch"
         onWheel={handleWheelEvent}
         onMouseDown={handleMousedownEvent}
@@ -425,34 +451,45 @@ const DisplayGameBeta = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       >
-       <div className="display-beta-align-chatgame">
-            <ChatGame />
-          </div>
+        <div className="display-beta-align-chatgame">
+          <ChatGame />
+        </div>
         <div className="display-beta-align-gameoptions">
-      <GameOptions host={user.username === host} gameOver={() => {
-        socket.emit("gameDashboard", { type: "gameOver" });
-      }} meEnd={() => {
-        socket.emit("gameDashboard", { type: "meEnd" });
-      }}/>
-    </div>  
-    <div className="display-beta-align-gameturns">
-            <Turns />
+          <GameOptions host={user.username === host} gameOver={() => {
+            socket.emit("gameDashboard", { type: "gameOver" });
+          }} meEnd={() => {
+            socket.emit("gameDashboard", { type: "meEnd" });
+          }} />
+        </div>
+        <div className="display-beta-align-gameturns">
+          <Turns action={closeAndOpen} />
+        </div>
+        {/* <div  className="display-beta-align-playerprops">
+        <PlayerProps action={closeAndOpen}/>
+        </div> */}
+        <div className="display-beta-align-dataplayer">
+          {/* <Turns /> */}
+          <DataPlayerInfo action={closeAndOpen} status={minimizarPlayers.status} target={minimizarPlayers.target} />
+        </div>
+        {roll && (<div className='display-beta-align-dices'>
+          <Dices 
+          rollOne={rollDicesInGame.valorOne} 
+          rollTwo={rollDicesInGame.valorTwo} 
+          username={rollDicesInGame.username} />
           </div>
-          {roll && (<div className='display-beta-align-dices'>
-          <Dices rollOne={rollDicesInGame.valorOne} rollTwo={rollDicesInGame.valorTwo} username={rollDicesInGame.username} /></div>
         )}
       </div>
       <div className="display-beta-align-gameturnsoptions">
-            <TurnsOptions
-              turn={user.username === actualTurn}
-              roll={() => {
-                socket.emit("gameDashboard", { type: "roll" });
-              }}
-              pass={() => {
-                socket.emit("gameDashboard", { type: "passTurn" });
-              }}
-            />
-          </div>
+        <TurnsOptions
+          turn={user.username === actualTurn}
+          roll={() => {
+            socket.emit("gameDashboard", { type: "roll" });
+          }}
+          pass={() => {
+            socket.emit("gameDashboard", { type: "passTurn" });
+          }}
+        />
+      </div>
       {/*<div className="display-beta-components">
         {user.username === host ?
           <button onClick={() => { socket.emit('gameDashboard', { type: 'gameOver' }) }}>Terminar partida</button>

@@ -29,15 +29,9 @@ const henropolyGame = (state = initialState, action) => {
         order: payload.order ,actualTurn: payload.actualTurn
       };
       case KICK_PLAYER:
-        return {
+        return { 
           ...state,
-          dataPlayers: {
-            ...state.dataPlayers,
-            [payload]: {
-              ...state.dataPlayers[payload],
-              [payload]: false,
-            },
-          },
+         dataPlayers:{...state.dataPlayers, [payload]:{...state.dataPlayers[payload], status: false }}
         };
       case SET_GAME_STATUS:
        return { 

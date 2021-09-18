@@ -20,13 +20,10 @@ export const setTurns = (payload) => {
 };
 
 export const kickPlayer = (player) => {
-  return (dispatch) => {
-  dispatch(setTurns(player.turn))
   return {
     type: KICK_PLAYER,
-    payload: player.target,
+    payload: player,
   };
- }
 };
 
 export const setGameStatus = (payload) => {

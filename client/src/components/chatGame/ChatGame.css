@@ -114,3 +114,19 @@
   .chatgame-icon-chat {
     font-size: 22px;
   }
+  .chatgame-icon-active {
+    font-size: 22px;
+    animation: new-msj 0.8s linear infinite;
+  }
+  @keyframes new-msj {
+    0% {
+      font-size: 22px;
+      color: #d41717;
+      transform: rotate(-20deg);
+    }
+    100% {
+      font-size: 22px;
+      color: #ce8019;
+      transform: rotate(20deg);
+    }
+  }
