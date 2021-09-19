@@ -4,6 +4,8 @@ import "./PropertyCard.css";
 
 const PropertyCard = ({ data, username, buy }) => {
   const { user } = useSelector((state) => state.auth);
+  const  table  = useSelector((state) => state.henropolyGame);
+ 
   return (
     <div className="all">
       <div className="cnt">
@@ -61,7 +63,8 @@ const PropertyCard = ({ data, username, buy }) => {
             {data.licenseValue}$
           </p>
         </div>
-        {username === user.username && <button className='propertycard-button' onClick={buy}>comprar</button>}
+        {username === user.username && <button className='modulos-button' onClick={buy}>comprar</button>}
+        {username !== user.username && <p>{table.owner}</p>}
       </div>
     </div>
   );

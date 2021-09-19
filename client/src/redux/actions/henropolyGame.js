@@ -8,7 +8,8 @@ import {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
-  GO_TO_JAIL
+  GO_TO_JAIL,
+  SET_BUY_BOX
 } from "../constants";
 
 export const setGame = (data) => {
@@ -69,9 +70,15 @@ export const setMoveTurn = (payload) => {
     payload: payload,
   };
 };
+export const setBuyBox = (payload) => {
+  return {
+    type: SET_BUY_BOX,
+    payload: payload, //{box:1, target: 'target1',}
+  };
+};
 export const setBalance = (payload) => {
   return {
     type: SET_BALANCE,
-    payload: payload,
+    payload: payload, //{target:"target1",henryCoin:1700,}
   };
 };

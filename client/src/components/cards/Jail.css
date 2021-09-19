@@ -1,3 +1,7 @@
+.card-jail-divtotal{
+    padding-top: -10rem;
+    margin-bottom: -5rem;
+}
 .Jail-Title{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
@@ -5,6 +9,9 @@
     font-size: 50px;
     color: orange;
     -webkit-text-stroke: 1px black;
+    margin-top: 0.1rem;
+    margin-right: -0.4rem;
+    margin-bottom: 0.5rem;
 }
 .GoJail-Title{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

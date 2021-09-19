@@ -6,7 +6,7 @@ import './Jail.css';
 const Jail = ({data}) => {
     if(data.type === "jail"){
         return (
-            <div >
+            <div className='card-jail-divtotal' >
                 <div>
                     <h3 className="Jail-Title" >Migración</h3>
                     <img src={ToniJail} alt="Girl in a jacket" width="400" height="350"/>

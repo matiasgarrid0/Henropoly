@@ -28,3 +28,19 @@
 .card-span-bold{
     padding: 3px;
 }
+.modulos-button {
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fbff18;
+    border: solid 2px #fbff18;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    margin-top: -2rem;
+  }
+  .modulos-button:hover {
+    cursor: pointer;
+    background-color: #fbff18;
+    color: #000;
+    border: solid 2px #000000;
+    transition: 0.3s;
+  }

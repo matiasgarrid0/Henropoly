@@ -15,6 +15,7 @@ import {
   setMoveTurn,
   goToJail,
   setBalance,
+  setBuyBox
 } from "./../../redux/actions";
 import {
   Board,
@@ -92,15 +93,15 @@ const DisplayGameBeta = () => {
     username: null,
     buy: null,
   });
-  const moveTime = () => {
-    return new Promise((resolve) => setTimeout(resolve, 80));
+  const moveTime = (value) => {
+    return new Promise((resolve) => setTimeout(resolve, value));
   };
 
   const alignTarget = async (player) => {
     setDataGame({ ...dataGame, targetMove: true });
     setRoll(true);
     sonidoOne.play();
-    await moveTime(88000);
+    await moveTime(500);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
     while (finalBox !== actualBox) {
@@ -112,31 +113,31 @@ const DisplayGameBeta = () => {
       let valueY = targetY(player, actualBox) - initialY;
       dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
       dispatch(setTargetValue(player, "y", initialY + Math.floor(valueY / 5)));
-      await moveTime();
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 2))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 2))
       );
-      await moveTime();
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 3))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 3))
       );
-      await moveTime();
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 4))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime();
+      await moveTime(50);
       dispatch(setTargetValue(player, "x", initialX + valueX));
       dispatch(setTargetValue(player, "y", initialY + valueY));
-      await moveTime();
+      await moveTime(50);
       setDataGame({
         ...dataGame,
         [player]: {
@@ -243,46 +244,37 @@ const DisplayGameBeta = () => {
       });
     };
   }
-
   function closedPortal() {
     setRender(`status closed`)
     setPortal(null)
   }
-
   // function closedPortal4() {
   //   dispatch(changeValueTarget('target1','box', 10));
   //   setPortal(null);
   // }
 
-  function closedPortal2() {
-    // setRender(`status closed`)
-    // meBox.buy()
-    // // socket.on("setGame", (data) => {
-    // // if (data.status === 'goToJail'){  
-    // //   dispatch(goToJail(data))
-    // //   setRender(`status:${data.status}`)
-    // //  }
-    // // })
+  function closedPortal2() { // que estas buscando? a miii?? siiiiii
+   socket.emit("gameDashboard", { type: "goToJail" });
     setPortal(null)
-  }
+};
 
   useEffect(() => {
     if (
       dataGame.target1.box !== dataPlayers.target1.box &&
       dataGame.targetMove === false
-    )
-      alignTarget("target1");
+    ) alignTarget("target1");
+    /**src\components\displayGameBeta\DisplayGameBeta.jsx
+     Line 270:3:  Expected an assignment or function call and instead saw an expression */
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [dataPlayers.target1.box]);
+
   useEffect(() => {
-    if (
-      dataGame.target2.box !== dataPlayers.target2.box &&
+    if (dataGame.target2.box !== dataPlayers.target2.box &&
       dataGame.targetMove === false
-    )
-      alignTarget("target2");
+    ) alignTarget("target2");
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [dataPlayers.target2.box]);
-
+  
   useEffect(() => {
     if (
       dataGame.target3.box !== dataPlayers.target3.box &&
@@ -396,14 +388,19 @@ const DisplayGameBeta = () => {
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
       }else if (data.status === 'buyRailway'){
-        dispatch(buyPropertyAction(data))
-        setRender(`status:${data.status}`)
+        dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
+        dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
+        // dispatch(buyPropertyAction(data))
+        // setRender(`status:${data.status}`)
+        // console.log("Raiwlwayyy ",data)
       } else if (data.status === 'buyService'){  
          dispatch(buyPropertyAction(data))
          setRender(`status:${data.status}`)
-      } else if (data.status === 'goToJail'){  
+         console.log("Serviceeee ",data)
+      } else if (data.status === 'goToJail'){ 
+        console.log('dataStatusJail', data.status) 
         dispatch(goToJail(data))
-        setRender(`status:${data.status}`)
+       // setRender(`status:${data.status}`)
       }
       // else if (data.status === 'buyRailway'){  
       //   dispatch(buyRailwayAction(data))

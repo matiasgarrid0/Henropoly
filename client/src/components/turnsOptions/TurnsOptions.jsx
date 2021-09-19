@@ -5,13 +5,13 @@ import { GiPlayerNext, GiTrade } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { statusTrading } from './../../redux/actions'
 const TurnsOptions = ({ turn, roll, pass }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { move, table } = useSelector((state) => state.henropolyGame);
-  const { user } = useSelector((state) => state.auth);
-  const tradeEnabled =table.filter( card=> card.owner === user.username )
-  const comercio =()=>{
-    dispatch(statusTrading(true))
-  }
+  // const { user } = useSelector((state) => state.auth);
+  // const tradeEnabled =table.filter( card=> card.owner === user.username )
+  // const comercio =()=>{
+  //   dispatch(statusTrading(true))
+  // }
   return (
     <div className="turnsoptions-div-minor box-row">
       <button
@@ -34,14 +34,14 @@ const TurnsOptions = ({ turn, roll, pass }) => {
               <label>Pasar</label>
         </div>}
       </button>
-      <button
+      {/* <button
         className={turn && tradeEnabled.length !== 0 ? "turnsoptions-btn" : "turnsoptions-btn-disabled"}
         onClick={turn && tradeEnabled.length !== 0 && comercio }>
         <GiTrade className="turnsoptions-icon" />
         {turn && tradeEnabled.length !== 0 &&<div className="turnsoptions-label">
               <label>Comercio</label>
         </div>}
-      </button>
+      </button> */}
     </div>
   );
 };
