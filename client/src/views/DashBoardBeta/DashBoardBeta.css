@@ -2,4 +2,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     user-select: none;
+    position: fixed;
+    max-width: 93rem;
 }

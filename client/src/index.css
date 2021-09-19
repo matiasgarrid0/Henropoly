@@ -38,13 +38,13 @@ body {
 
 .button-one {
   border: 2px solid yellow;
-  padding: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 2px;
+  height: 2.8rem;
+  width: 8rem;
   box-shadow: 1px 8px 7px 2px #111111;
   margin-top: 25px;
   font-family: var(--text-one);
-  font-size: 35px;
+  font-size: 20px;
   letter-spacing: 1px;
   border-radius: 8px;
   background-color: transparent;
@@ -52,6 +52,7 @@ body {
   cursor: pointer;
   transition: transform 250ms ease;
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 .button-one:hover {
   color: var(--color-black);

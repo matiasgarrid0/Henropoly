@@ -49,7 +49,7 @@ const Room = () => {
     socket.emit("setRoom", { type: "join", host: input.unirse });
   };
   return (
-    <div>
+    <div className="room-dashboard-total">
       {status === "free" && (
         <div className="room-dashboard-box">
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -59,15 +59,19 @@ const Room = () => {
               value={input.unirse}
               onChange={(e) => handleChange(e)}
             />
-            <button className="button-two">Unirse a sala</button>
+            <button className="button-unirse">Unirse</button>
           </form>
-          <button className="button-two" onClick={setRoom({ type: "create" })}>Crear sala</button>
-          <button className="button-two">Jugar</button>
+          <div>
+            <button className="button-two" onClick={setRoom({ type: "create" })}>Crear sala</button>
+            <button className="button-two">Jugar</button>
+          </div>
         </div>
       )}
       {status === "inHold" && (
         <div className='room-total'>
+          <div className='room-sala'>
           Anfitrion de sala: {statusRoom.room.host}
+          </div>
           <div></div>
           Miembros: {statusRoom.room.players.map((player) => {
             return (
@@ -75,7 +79,7 @@ const Room = () => {
                 {player}
                 {statusRoom.room.host === user.username && (
                   <button
-                  className="button-expulsar" onClick={setRoom({ type: "kickPlayer", player: player })}
+                    className="button-expulsar" onClick={setRoom({ type: "kickPlayer", player: player })}
                   >
                     expulsar jugador
                   </button>
@@ -85,17 +89,19 @@ const Room = () => {
           })}
           {statusRoom.room.host === user.username ? (
             <div className="room-buttoner">
-              <button className="button-three" onClick={setRoom({ type: "delete" })}>borrar sala</button>
+              <button className="button-three" onClick={setRoom({ type: "delete" })}>Borrar Sala</button>
               {statusRoom.room.players.length !== 0 && (
-                <button className="button-three" onClick={setRoom({ type: "goGame" })}>
+                <button className="button-four" onClick={setRoom({ type: "goGame" })}>
                   Iniciar Juego
                 </button>
               )}
             </div>
           ) : (
-            <button className="button-leave" onClick={setRoom({ type: "leaveRoom" })}>
-              Abandonar sala
-            </button>
+            <div>
+              <button className="button-leave" onClick={setRoom({ type: "leaveRoom" })}>
+                Abandonar sala
+              </button>
+            </div>
           )}
         </div>
       )}

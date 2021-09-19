@@ -24,7 +24,7 @@ const Chat = ({ room }) => {
   };
 
   return (
-    <>
+    <div className="chat-padre">
       {isAuth ? (
         <div className="chat-cuadro-general">
           <h1 className="chat-h1">chat general</h1>
@@ -56,7 +56,7 @@ const Chat = ({ room }) => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 

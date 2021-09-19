@@ -1,29 +1,31 @@
 .nav-body {
-  position: fixed;
+  position: grid;
+  max-width: 1280px;
   width: 100%;
   background: radial-gradient(#000000, #141414);
-  height: 100px;
+  height: 6rem;
   border-bottom: 1px solid rgb(41, 41, 41);
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 5px #000000;
   z-index: 10;
 }
 .nav-container {
   max-width: var(--width-container);
+  max-height: 6rem;
   margin: auto;
   display: flex;
   justify-content: space-between;
 }
 .logo-nav {
-  width: 270px;
-  height: 70px;
+  width: 15rem;
+  height: 4rem;
   margin-top: 15px;
-  margin-left: -4rem;
+  margin-left: 1rem;
 }
 .nav-text-user{
-  display: flex;
-  margin-top: 40px;
-  font-size: 40px;
-  letter-spacing: 1px;
+  display: grid;
+  margin-top: 2.5rem;
+  font-size: 2.5rem;
+  letter-spacing: .06rem;
   font-family: var(--text-one);
   color: #f5f3f3;
   text-shadow: 0 0 5px rgb(221, 221, 221);
