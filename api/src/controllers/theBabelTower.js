@@ -455,8 +455,10 @@ const roll = async (username, io) => {
         room.dataPlayers[target].box
       );
       let buyAlquiler = false;
+      let tax = false      
       let targetProperty;
       let cost;
+
       if (
         room.table[room.dataPlayers[target].box].owner !== null &&
         room.table[room.dataPlayers[target].box].owner !== username && 
@@ -518,7 +520,7 @@ const roll = async (username, io) => {
         room.table[room.dataPlayers[target].box].owner !== username && 
         room.table[room.dataPlayers[target].box].type === "tax"
       ){
-        buyAlquiler = true;
+        buyTax = true;
         for (let i = 1; i < 5; i++) {
           if (
             room.dataPlayers[`target${i}`].username ===
@@ -536,7 +538,7 @@ const roll = async (username, io) => {
         room.table[room.dataPlayers[target].box].owner !== username && 
         room.table[room.dataPlayers[target].box].type === "taxVip"
       ){
-        buyAlquiler = true;
+        buyTax = true;
         for (let i = 1; i < 5; i++) {
           if (
             room.dataPlayers[`target${i}`].username ===
@@ -584,6 +586,23 @@ const roll = async (username, io) => {
             text: `paga por licencia a ${room.dataPlayers[targetProperty].username} ${cost} henryCoins.`,
           });
         });
+        io.sockets.in(player).emit("setGame", {
+          status: "setBalance",
+          info: {
+            target: target,
+            henryCoin: room.dataPlayers[target].henryCoin,
+          },
+        });
+      }
+      if (buyTax) {
+        room.order.forEach(async (player) => {
+          await callbackTest(100);
+          io.sockets.in(player).emit("log", {
+            target: target,
+            text: `paga por impuesto ${cost} henryCoins.`,
+          });
+        })
+        buyTax = false //Linea para falsear el buy tax si no sigue cobrando undefined
         io.sockets.in(player).emit("setGame", {
           status: "setBalance",
           info: {
@@ -799,12 +818,14 @@ const gameActionsBoard = async (player, action, type, card) => {
         player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
         return player
       }
-      if (action === "mejorar") {
-        //comprar una casita u hotel de mejora
-        player.henryCoins= player.henryCoins - card[0].versionAlpha
-        return (player = {
-          ...player //le resta el valor para mejorar.         
-        });
+      ////////////////////////////////PARA EL FINAL////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // if (action === "mejorar") {
+      //   //comprar una casita u hotel de mejora
+      //   player.henryCoins= player.henryCoins - card[0].versionAlpha
+      //   return (player = {
+      //     ...player //le resta el valor para mejorar.         
+      //   });
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Si entra aca... Filtramos las cartas que conincidan con la posicion 1 en este caso y pusheamos esa carta al array de jugador
       } else {
         return player;
@@ -861,36 +882,37 @@ const gameActionsBoard = async (player, action, type, card) => {
       return (player = {
           ...player
       });
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     case "exit" || "jail" || "goJail" || "stop":
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       return player;
 
     default:
       return player;
   }
 }
-const luckyOrArc = async (card, player, infoGame) =>{
-// console.log('infoGame!!!!!!!!!', infoGame)
-  switch (card[0].type) {
-    case "pagas":
-  player.henryCoins = player.henryCoins - card[0].value
-        return player 
-    case "cobras":
-      player.henryCoins= player.henryCoins + card[0].value
-        return player 
-    case "migras"://cambiar de position
-      //infoGame[0].resultNewGame.playerPosition.target1.box= 10
-      return player
-    case "pasas":
-      return (player = {
-        ...player,
-        cards: player.cards.push(card)
-      });
-      
-    default:
-     return player;
-  }
-}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// const luckyOrArc = async (card, player, infoGame) =>{
+// // console.log('infoGame!!!!!!!!!', infoGame)
+//   switch (card[0].type) {
+//     case "pagas":// te descuenta plata
+//   player.henryCoins = player.henryCoins - card[0].value
+//         return player 
+//     case "cobras":// ta aunmenta plata
+//       player.henryCoins= player.henryCoins + card[0].value
+//         return player 
+//     case "migras":// te lleva directo a la carcel sea cual sea la posición q estes y no cobras al pasr por salida
+//       //infoGame[0].resultNewGame.playerPosition.target1.box= 10
+//       return player
+//     case "pasas":// esta se tiene q guardar e array cards para poder usar en cualquier momento q caes en la carcel
+//       return (player = {
+//         ...player,
+//         cards: player.cards.push(card)
+//       });
+//     default:
+//      return player;
+//   }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 */
 module.exports = {

@@ -101,7 +101,7 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, targetMove: true });
     setRoll(true);
     sonidoOne.play();
-    await moveTime(500);
+    await moveTime(1000);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
     while (finalBox !== actualBox) {
