@@ -1,8 +1,64 @@
-.trading-table {
-    width: 500px;
-    height: 500px;
-    background-color: aqua;
-    border-radius: 20px;
-    margin-top: -50%;
-    margin-left: -50%;
+.trading-conteiner {
+  margin-top: -50%;
+  margin-left: -50%;
+  display: flex;
+}
+.trading-table-select {
+  background-color: #0f1417;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  padding: 10;
+  color: #ffff00;
+}
+.trading-table-box {
+  background-color: #0f1417;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  padding: 8px;
+  color: #ffff00;
+  margin: 10px;
+  width: 110px;
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+.trading-table-box:hover{
+    cursor:pointer;
+    box-shadow: 0 0 10px 5px rgba(133, 143, 0, 0.85);
+    user-select: none
+}
+.trading-target1 {
+  font-family: var(--text-three);
+  color: rgb(255, 0, 0);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.trading-target2 {
+  font-family: var(--text-three);
+  color: rgb(9, 255, 0);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.trading-target3 {
+  font-family: var(--text-three);
+  color: rgb(0, 255, 234);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.trading-target4 {
+  font-family: var(--text-three);
+  color: rgb(255, 0, 255);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.trading-title {
+  font-family: var(--text-three);
+  font-size: 20;
+  letter-spacing: 3px;
+}
+.trading-coin {
+  font-family: var(--text-three);
+  font-size: 20;
+  letter-spacing: 3px;
+  color: #ff9900;
 }
