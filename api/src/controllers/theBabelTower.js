@@ -470,6 +470,7 @@ const roll = async (username, io) => {
       room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
       room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
       let buyAlquiler = false;
+    //  let buyTax = false      
       let targetProperty;
       let cardChoice = null;
       let cost;
@@ -659,14 +660,19 @@ const roll = async (username, io) => {
             target: target,
             text: `paga por licencia a ${room.dataPlayers[targetProperty].username} ${cost} henryCoins.`,
           });
-          io.sockets.in(player).emit("setGame", {
-            status: "setBalance",
-            info: {
-              target: target,
-              henryCoin: room.dataPlayers[target].henryCoin,
-            },
-          })
         });
+
+        room.order.forEach( async (e) => { 
+          await callbackTest(100);
+          io.sockets.in(e).emit("setGame", {
+          status: "setBalance",
+          info: {
+            target: target,
+            henryCoin: room.dataPlayers[target].henryCoin,
+          },
+          });
+        })
+       
       }
       if (buyTax) {
         room.order.forEach(async (player) => {
@@ -683,7 +689,6 @@ const roll = async (username, io) => {
             },
           })
         })
-          ;
       }
       if (buyLuckyCard) {
         room.order.forEach(async (player) => {
@@ -825,11 +830,15 @@ const buyProperty = async (username, box, io) => {
           newProperty: target,
           newbalase: room.dataPlayers[target].henryCoin,
         });
-        io.sockets.in(player).emit("log", {
+      });
+       
+      room.order.forEach(e => {
+         io.sockets.in(e).emit("log", {
           target: target,
           text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
+      
     }
   } catch (error) {
     console.log(error);
@@ -857,6 +866,8 @@ const buyRailway = async (username, box, io) => {
         newProperty: target,
         newbalase: room.dataPlayers[target].henryCoin
       });
+    });
+    room.order.forEach((player) => {
       io.sockets.in(player).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
@@ -886,11 +897,14 @@ const buyService = async (username, box, io) => {
         newProperty: target,
         newbalase: room.dataPlayers[target].henryCoin
       });
-      io.sockets.in(player).emit("log", {
+     
+    });
+  room.order.forEach((e) => {
+     io.sockets.in(e).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
-    });
+  })
   }
 }
 
@@ -940,131 +954,45 @@ const buyService = async (username, box, io) => {
 // }
 
 const goToJail = async (username, io) => {
+  try {
+   // console.log(io)
   const host = await client.get(`playersInGame${username}`)
   const responseGameRoom = await client.get(`gameRoom${host}`);
   let target;
   var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+  if (room.actualTurn === username) {
   for (let i = 1; i < 5; i++) {
     if (room.dataPlayers[`target${i}`].username === username) {
       target = `target${i}`
-      if (room.dataPlayers[`target${i}`].box === 30) {
-        room.dataPlayers[`target${i}`].box = room.dataPlayers[`target${i}`].box - 20
-      }
-    };
-  };
-  await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
-  room.order.forEach((player) => {
+    }
+  }
+  room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
+  room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+     // console.log('log in carcer',   room.dataPlayers[target].box)
+      if(room.dataPlayers[target].box === 30) {
+        room.dataPlayers[target].box = room.dataPlayers[target].box - 20
+       
+        console.log('pos changed', room.dataPlayers[target].box)
+    // console.log(io)
+     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+   room.order.forEach((player) => {
     io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
       status: "goToJail",
       info: { target: target, move: room.dataPlayers[target].box },
       box: room.dataPlayers[target].box,
       newProperty: target,
     });
-  });
+  }); 
+
+
+      }
+    };
+  } catch (error) {
+  console.log(error);
+} 
 }
 
-/*
-//(username, io)
-const gameActionsBoard = async (player, action, type, card) => {
-  //const host = await client.get(`playersInGame${username}`) ----> ENCUENTRA LA PARTIDA CON EL USUARIO
-  switch (card[0].type) { 
-    case "property": 
-      if (action === "comprar") {
-        //cuando comprar la propiedad básica
-        // card.owner= player.ID
-       //console.log('lo que estra para filter', player.properties[0][0].id, card[0].id)
-       card[0].owner= player.username    
-        player.henryCoins = player.henryCoins - card[0].licenseValue
-        return (player = {
-          ...player,
-          properties: player.properties.push(card)
-        });
-      }
-      if (action === "pagar") { //ver logica porq solo se paga si tiene dueño
-        player.henryCoins= player.henryCoins - card[0].versionAlpha
-        return (player = {
-          ...player
-        });
-      }
-      if (action === "vender") {
-        //cuando vendes al banco, se le suma el precio base y fin.
-        player.henryCoins= player.henryCoins + card[0].versionAlpha
-        player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
-        return player
-      }
-      ////////////////////////////////PARA EL FINAL////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      // if (action === "mejorar") {
-      //   //comprar una casita u hotel de mejora
-      //   player.henryCoins= player.henryCoins - card[0].versionAlpha
-      //   return (player = {
-      //     ...player //le resta el valor para mejorar.         
-      //   });
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //Si entra aca... Filtramos las cartas que conincidan con la posicion 1 en este caso y pusheamos esa carta al array de jugador
-      } else {
-        return player;
-      }
-    case "service":
-        if (action === "comprar") {
-          card[0].owner= player.username 
-          player.henryCoins = player.henryCoins - card[0].licenseValue
-          return (player = {
-            ...player,
-            properties: player.properties.push(card)
-          });
-        }
-        if (action === "pagar") {//ver logica porq solo se paga si tiene dueño
-          player.henryCoins= player.henryCoins - 15
-          return (player = {
-            ...player
-          });
-        }
-        if (action === "vender") {
-          player.henryCoins= player.henryCoins + card[0].versionAlpha
-          player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
-          return player
-        }
-        break;
-    case "railway":
-      if (action === "comprar") {
-        card[0].owner= player.username 
-        player.henryCoins = player.henryCoins - card[0].takeCheckpoint
-        return (player = {
-          ...player,
-          properties: player.properties.push(card)
-        });
-      }
-      if (action === "pagar") {//ver logica porq solo se paga si tiene dueño
-        player.henryCoins= player.henryCoins - 10
-        return (player = {
-          ...player
-        });
-      }
-      if (action === "vender") {
-        player.henryCoins= player.henryCoins + card[0].versionAlpha
-        player.properties= player.properties.filter((e) => e[0].id !== card[0].id)
-        return player
-      }
-      break;
-    case "tax":
-      player.henryCoins= player.henryCoins - 200
-      return (player = {
-        ...player
-      });
-    case "taxVip":
-      player.henryCoins= player.henryCoins - 400
-      return (player = {
-          ...player
-      });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    case "exit" || "jail" || "goJail" || "stop":
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      return player;
 
-    default:
-      return player;
-  }
-}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const luckyOrArc = async (card, player, infoGame) =>{
 // // console.log('infoGame!!!!!!!!!', infoGame)
@@ -1088,7 +1016,7 @@ const gameActionsBoard = async (player, action, type, card) => {
 //   }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-*/
+
 module.exports = {
   createRoom,
   deleteRoom,

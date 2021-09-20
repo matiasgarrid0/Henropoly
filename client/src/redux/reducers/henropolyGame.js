@@ -96,54 +96,27 @@ const henropolyGame = (state = initialState, action) => {
         }
       }
       }
-    // case BUY_PROPERTY_ACTION:
-    //   let newTable = state.table
-    //   newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
-    //   return {
-    //     ...state,
-    //     table: newTable,
-    //     dataPlayers: { ...state.dataPlayers, [payload.newProperty]: { ...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase } }
-    //   };
-    // case GO_TO_JAIL:
-    //   return {
-    //     ...state,
-    //     dataPlayers: {
-    //       ...state.dataPlayers,
-    //       [payload.newProperty]: { ...state.dataPlayers[payload.newProperty], box: [payload.newPosition] }
-    //     }
-    //   };
-    // case SET_GAME_STATUS:
-    //  return { 
-    //    ...state,
-    //   status:payload   
-    //  }
-    //  case BUY_PROPERTY_ACTION:
-    //    let newTable= state.table
-    //    newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
-    //   return { 
-    //     ...state,
-    //    table: newTable,
-    //    dataPlayers:{...state.dataPlayers, [payload.newProperty]:{...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase }}
-    //   };
-    //  case SET_GAME_ROLL: {
-    //   return { 
-    //     ...state,
-    //    dataPlayers:{
-    //      ...state.dataPlayers,
-    //    [payload.target]:{...state.dataPlayers[payload.target], box: payload.move}}
-    //   }
-    // }
+ 
     case GO_TO_JAIL:
       return { 
         ...state,
         dataPlayers:{
-          ...state.dataPlayers,
-        [payload.newProperty]:{...state.dataPlayers[payload.newProperty], box: [payload.newPosition]}}
+          ...state.dataPlayers,        
+        [payload.info.target]: {...state.dataPlayers[payload.info.target], box: payload.box}}
       };
 
     default:
       return state;
   };
 }
+/*
+ box: 10
+info:
+move: 10
+target: "target2"
+[[Prototype]]: Object
+newProperty: "target2"
+status: "goToJail"
+[[Prototype]]: Object */
 
 export default henropolyGame;

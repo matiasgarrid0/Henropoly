@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./PropertyCard.css";
 
-const PropertyCard = ({ data, username, buy }) => {
+const PropertyCard = ({ data, username, buy, close }) => {
   const { user } = useSelector((state) => state.auth);
   const  table  = useSelector((state) => state.henropolyGame);
- 
+
   return (
     <div className="all">
       <div className="cnt">
@@ -53,18 +53,13 @@ const PropertyCard = ({ data, username, buy }) => {
             <span className="card-span-bold">Version Premium:</span>{" "}
             {data.premiumVersion}$
           </p>
-          <p className="pgame">
-            <span className="card-span-bold">Valor de la Licencia:</span>{" "}
-            {data.licenseValue}$
-          </p>
           <div className="line-card"></div>
           <p className="pgame-compra">
             <span className="card-span-bold">Valor de compra:</span>{" "}
             {data.licenseValue}$
           </p>
         </div>
-        {username === user.username && <button className='modulos-button' onClick={buy}>comprar</button>}
-        {username !== user.username && <p>{table.owner}</p>}
+        {username === user.username && <button className='propertycard-button' onClick={buy}>comprar</button>}
       </div>
     </div>
   );

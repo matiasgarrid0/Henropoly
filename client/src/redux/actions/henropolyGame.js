@@ -58,7 +58,7 @@ export const buyPropertyAction = (payload) => {
   };
 }
 
- export const goToJail= (payload) => {
+ export const moveToJail= (payload) => {
   return {
     type: GO_TO_JAIL,
     payload: payload,
