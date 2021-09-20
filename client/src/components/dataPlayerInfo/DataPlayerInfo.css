@@ -56,14 +56,26 @@
     color: seashell;
   }
   .dataplayerindfo-p-properties {
+    text-align: center;
     font-weight: 700;
     font-size: 1rem;
+    text-decoration: underline;
+  }
+  .dataplayerinfo-p-cardname{
+    background-color: rgba(190, 190, 190, 0.5);
+    font-weight: 700;
+    border-radius: 5px;
   }
   .dataplayerinfo-div-name{
       color: rgb(250, 250, 250);
       margin-top: -12px;
       border-radius: 5px;
       text-align: center;
+      align-items: center;
+  }
+  .dataplayerinfo-username{
+    font-weight: 700;
+    font-size:2rem;
   }
   .dataplayerinfo-color-pink {
     background-color: rgb(230, 86, 255);

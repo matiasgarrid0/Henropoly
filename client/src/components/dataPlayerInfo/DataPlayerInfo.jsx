@@ -19,7 +19,7 @@ const DataPlayerInfo = ({ action, status, target }) => {
       </div>
       <div>
         <div className="dataplayerindfo-div-properties dataplayerInfo-div-minor">
-          <label>{dataPlayers[target].username}</label>
+          <label className='dataplayerinfo-username'>{dataPlayers[target].username}</label>
           <p className="dataplayerindfo-p-properties">Tecnologías: </p>
           {info.table.map((card) => {
             if (
@@ -39,22 +39,39 @@ const DataPlayerInfo = ({ action, status, target }) => {
           })}
         </div>
         <div className="dataplayerindfo-div-properties dataplayerInfo-div-minor">
-          <label>{dataPlayers[target].username}</label>
-          <p className="dataplayerindfo-p-properties">Otros: </p>
+           <p className="dataplayerindfo-p-properties">Servicios: </p>
           {info.table.map((card) => {
             if (
-              (card.type === "railway" || card.type === "service" ) &&
-              table[card.id].owner === dataPlayers[target].username
-            ) {
+              ( card.type === "service" ) &&
+              table[card.id].owner === dataPlayers[target].username) {
               return (
                 <div className="dataplayerinfo-div-name">
-                  <p className={`dataplayerinfo-color-${table[card.id].color}`}>
+                  <p className='dataplayerinfo-p-cardname'>
                     {card.name}
                   </p>
                 </div>
               );
             } else {
-              <p>No posees módulos o servicios aún</p>;
+              <p>No posees servicios aún</p>
+            }
+          })}
+        </div>
+        <div className="dataplayerindfo-div-properties dataplayerInfo-div-minor">
+          <p className="dataplayerindfo-p-properties">Módulos: </p>
+          {info.table.map((card) => {
+            if (
+              ( card.type === "railway" ) &&
+              table[card.id].owner === dataPlayers[target].username   
+            ) {
+              return (
+                <div className="dataplayerinfo-div-name">
+                  <p className='dataplayerinfo-p-cardname'>
+                    {card.name}
+                  </p>
+                </div>
+              );
+            } else {
+              <p>No posees módulos aún</p>;
             }
           })}
         </div>

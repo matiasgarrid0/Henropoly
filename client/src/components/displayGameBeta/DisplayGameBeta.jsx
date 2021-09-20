@@ -180,12 +180,7 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
-            buy: () => {
-              socket.emit("TradeDashboard", {
-                type: "buyProperty",
-                box: dataPlayers[player].box,
-              });
-            },
+            buy: () => {socket.emit("TradeDashboard", {type: "buyProperty", box: dataPlayers[player].box})},
           });
         } else {
           setMeBox({ ...meBox, username: null });
@@ -223,15 +218,18 @@ const DisplayGameBeta = () => {
         setTax(info.table[dataPlayers[player].box]);
         setPortal("tax");
       }
-      if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
+      if (info.table[dataPlayers[player].box].type === "jail")
+      {
         setJailData(info.table[dataPlayers[player].box])
-        if(info.table[dataPlayers[player].box].type === "goJail"){
+        setPortal("jail");
+      } 
+      if(info.table[dataPlayers[player].box].type === "goJail") {
+        setJailData(info.table[dataPlayers[player].box])
           setMeBox({...meBox,
             username: dataPlayers[player].username,
             buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box})},
-          }) 
-        }
-        setPortal("jail");
+          })
+          setPortal("goToJail");  
       }
     }
   };
@@ -253,9 +251,16 @@ const DisplayGameBeta = () => {
   //   setPortal(null);
   // }
 
-  function closedPortal2() { // que estas buscando? a miii?? siiiiii
-   socket.emit("gameDashboard", { type: "goToJail" });
-    setPortal(null)
+  function closedPortal2(meBox, type) { 
+    if(type === 'goToJail') {
+      console.log('console.log en portal')
+       meBox.buy()
+   
+    }
+    else {
+       setPortal(null)
+    }
+  
 };
 
   useEffect(() => {
@@ -361,7 +366,7 @@ const DisplayGameBeta = () => {
         if (data.type === "endGame") {
           dispatch(setGameStatus("free"));
         } else if (data.type === "exitPlayer") {
-          console.log("paso por aqui");
+          //console.log("paso por aqui");
           dispatch(
             setTurns({
               actualTurn: data.info.turn.altulTurn,
@@ -384,23 +389,31 @@ const DisplayGameBeta = () => {
         });
         dispatch(setGameRoll(data.info));
       } else if (data.status === "buyProperty") {
-        dispatch(buyPropertyAction(data));
-      } else if (data.status === "setBalance") {
-        dispatch(setBalance(data.info));
-      }else if (data.status === 'buyRailway'){
         dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
         dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
-        // dispatch(buyPropertyAction(data))
-        // setRender(`status:${data.status}`)
+        dispatch(buyPropertyAction(data));
+        console.log('buy prperty', data)
+       // setRender(`status:${data.status}`)
+      } else if (data.status === "setBalance") {
+        dispatch(setBalance(data.info));
+        setRender(`status:${data.status}`)
+        console.log('setBalance', data.info)
+      }else if (data.status === 'buyRailway'){
+         dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
+         dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
+         dispatch(buyPropertyAction(data))
+        setRender(`status:${data.status}`)
         // console.log("Raiwlwayyy ",data)
       } else if (data.status === 'buyService'){  
+        dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
+        dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
          dispatch(buyPropertyAction(data))
          setRender(`status:${data.status}`)
-         console.log("Serviceeee ",data)
+       //  console.log("Serviceeee ",data)
       } else if (data.status === 'goToJail'){ 
         console.log('dataStatusJail', data.status) 
         dispatch(goToJail(data))
-       // setRender(`status:${data.status}`)
+        setRender(`status:${data.status}`)
       }
       // else if (data.status === 'buyRailway'){  
       //   dispatch(buyRailwayAction(data))
@@ -428,12 +441,12 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} close={setPortal}/>
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal}>
-          <RailwayCard data={train} username={meBox.username} buy={meBox.buy}/>
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} />
         </Portal>
       )}
       {portal === "service" && (
@@ -446,9 +459,14 @@ const DisplayGameBeta = () => {
           <TaxCard data={tax} />
         </Portal>
       )}
-      {portal === "jail" && (
-        <Portal onClose={closedPortal2}>
+      {portal === "goTojail" && (
+        <Portal onClose={() =>closedPortal2(meBox, 'goToJail')}>
           <Jail data={jailData} />
+        </Portal>
+      )}
+      {portal === "tax" && (
+        <Portal onClose={closedPortal3}>
+           <Jail data={jailData} />
         </Portal>
       )}
       <div>
