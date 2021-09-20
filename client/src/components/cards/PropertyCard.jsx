@@ -2,10 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./PropertyCard.css";
 
-const PropertyCard = ({ data, username, buy, onClose }) => {
+const PropertyCard = ({ data, username, buy, close }) => {
   const { user } = useSelector((state) => state.auth);
   const  table  = useSelector((state) => state.henropolyGame);
-
 
   return (
     <div className="all">
@@ -60,7 +59,7 @@ const PropertyCard = ({ data, username, buy, onClose }) => {
             {data.licenseValue}$
           </p>
         </div>
-        {username === user.username && <button className='modulos-button' onClick={onClose}>comprar</button>}
+        {username === user.username && <button className='propertycard-button' onClick={buy}>comprar</button>}
       </div>
     </div>
   );

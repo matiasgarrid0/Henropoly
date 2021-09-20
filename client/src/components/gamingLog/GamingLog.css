@@ -5,24 +5,28 @@ margin-top:-65%;
     font-family: var(--text-one);
     color: rgb(252, 78, 78);
     background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
     font-size: 18px;
 }
 .gaminglog-target2{
     font-family: var(--text-one);
     color: rgb(9, 255, 0);
     background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
     font-size: 18px;
 }
 .gaminglog-target3{
     font-family: var(--text-one);
     color: rgb(0, 255, 234);
     background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
     font-size: 18px;
 }
 .gaminglog-target4{
     font-family: var(--text-one);
     color: rgb(255, 0, 255);
     background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 1.125rem  0;
     font-size: 18px;
 }
 .gaminglog-text{

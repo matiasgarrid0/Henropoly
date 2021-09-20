@@ -1,5 +1,6 @@
 .chatgame-div-minor {
-    background-color: #0f1417;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     border: 2px solid #ffff00;
     padding: 10px;
@@ -50,7 +51,7 @@
     right: -10px;
   }
   .chatgame-title {
-    background-color: #ffff00;
+    background-color: rgba(255, 251, 0, 0.842);
     margin-bottom: 5px;
     height: 20px;
     border-radius: 15px;
@@ -87,7 +88,7 @@
   }
   
   .chatgame-chat-container {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 5px;
     border: solid 0px #000;
     margin: 0;
@@ -95,17 +96,22 @@
     height: 13rem;
     max-height: 80vh;
     max-width: 70vh;
-    overflow-x: hidden;
+    overflow-x: scroll;
   }
-  .chatgame-chat-username {
-    background-color: #0097a7;
-    color: #ffffff;
+  ::-webkit-scrollbar{
+    width: 12px;
+  }
+  ::-webkit-scrollbar-thumb{
+    background: linear-gradient(transparent, #f8990c, transparent) ;
+    border-radius: 10px;
+  }
+  .chatgame-username {
     display: inline-block;
-    padding: 0.3rem;
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
-    border-radius: 0 1.125rem 1.125rem 1.125rem;
-    margin-left: -12rem;
+    background-color: #f8990c;
+    color: #ffffff;
+    margin-bottom: 0.4rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 1.125rem 1.125rem 1.125rem 1.125rem;
   }
   .chatgame-chat-message {
     background-color: #e4e4e4;
@@ -113,6 +119,9 @@
     padding: 0.3rem;
     margin-bottom: 0.4rem;
     border-radius: 0 1.125rem 1.125rem 1.125rem;
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
   }
   .chatgame-icon-chat {
     font-size: 22px;

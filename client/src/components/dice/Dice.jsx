@@ -64,7 +64,7 @@ function Dices({ rollOne, rollTwo, username }) {
 
   return (
     <div className="contenedor">
-      <span> Dados {username} </span>
+      {/* <span> Dados {username} </span> */}
       <div ref={diceOne} className="cube">
         <div className="cube-face front">
           <div className="inside">
