@@ -117,3 +117,19 @@
   top: 50%;
   left: 50%;
 }
+.displaygame-tokens-sele{
+  border-radius: 50%;
+  border: solid 3px red;
+}
+.displaygame-tokens-toni{
+  border-radius: 50%;
+  border: solid 3px rgb(9, 255, 0);
+}
+.displaygame-tokens-martu{
+  border-radius: 50%;
+  border: solid 3px rgb(0, 255, 234);
+}
+.displaygame-tokens-mati{
+  border-radius: 50%;
+  border: solid 3px rgb(255, 0, 255);
+}

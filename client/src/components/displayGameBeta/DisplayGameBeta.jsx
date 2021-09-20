@@ -36,7 +36,10 @@ import {
   DataPlayerInfo,
   Trading,
 } from "./../";
-
+import Sele from './sele.jpg';
+import Toni from './toni.jpg';
+import Martu from './martu.jpg';
+import Mati from './mati.jpg';
 import Imagen from "./table.jpg";
 import { targetX, targetY } from "./calculatorTargetPosition";
 import SonidoFranco from "./shake-and-roll-dice.mp3";
@@ -523,44 +526,44 @@ const DisplayGameBeta = () => {
                     {dataPlayers.target1.status && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><div><img className='displaygame-tokens-sele' src={Sele} width="50" height="50"/></div></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
                         style={{
-                          backgroundColor: "rgb(9, 255, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target2.x}px`,
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><div><img className='displaygame-tokens-toni' src={Toni} width="50" height="50"/></div></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
-                          backgroundColor: "rgb(0, 255, 234)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target3.x}px`,
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><div><img className='displaygame-tokens-martu' src={Martu} width="50" height="50"/></div></div>
                     ) : (
                       <></>
                     )}
                     {dataPlayers.target4.status !== false && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 255)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target4.x}px`,
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><div><img className='displaygame-tokens-mati' src={Mati} width="50" height="50"/></div></div>
                     )}
                   </div>
                 </div>
