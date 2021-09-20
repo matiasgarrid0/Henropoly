@@ -494,14 +494,6 @@ const DisplayGameBeta = () => {
           <Jail data={jailData} />
         </Portal>
       )}
-      <div>
-        {/* <PlayerProps
-          target1={dataPlayers.target1.box}
-          target2={dataPlayers.target2.box}
-          target3={dataPlayers.target3.box}
-          target4={dataPlayers.target4.box}
-        /> */}
-      </div>
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
           <div className="display-beta-container-gametable">
@@ -589,20 +581,6 @@ const DisplayGameBeta = () => {
     </div>  
     <div className="display-beta-align-gameturns">
             <Turns /> */}
-        <div className="display-beta-align-chatgame">
-          <ChatGame />
-        </div>
-        <div className="display-beta-align-gameoptions">
-          <GameOptions
-            host={user.username === host}
-            gameOver={() => {
-              socket.emit("gameDashboard", { type: "gameOver" });
-            }}
-            meEnd={() => {
-              socket.emit("gameDashboard", { type: "meEnd" });
-            }}
-          />
-        </div>
         <div className="display-beta-align-gameturns">
           <Turns action={closeAndOpen} />
         </div>
@@ -641,6 +619,20 @@ const DisplayGameBeta = () => {
       </div>
       <div className="display-beta-align-trading">
         <Trading />
+      </div>
+      <div className="display-beta-align-chatgame">
+        <ChatGame />
+      </div>
+      <div className="display-beta-align-gameoptions">
+        <GameOptions
+          host={user.username === host}
+          gameOver={() => {
+            socket.emit("gameDashboard", { type: "gameOver" });
+          }}
+          meEnd={() => {
+            socket.emit("gameDashboard", { type: "meEnd" });
+          }}
+        />
       </div>
     </div>
   );

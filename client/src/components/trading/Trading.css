@@ -1,6 +1,6 @@
 .trading-conteiner {
-  margin-top: -50%;
   margin-left: -50%;
+  margin-top: -50%;
   display: flex;
 }
 .trading-table-select {
@@ -22,10 +22,10 @@
   position: relative;
   user-select: none;
 }
-.trading-table-box:hover{
-    cursor:pointer;
-    box-shadow: 0 0 10px 5px rgba(133, 143, 0, 0.85);
-    user-select: none
+.trading-table-box:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px 5px rgba(133, 143, 0, 0.85);
+  user-select: none;
 }
 .trading-target1 {
   font-family: var(--text-three);
@@ -61,4 +61,170 @@
   font-size: 20;
   letter-spacing: 3px;
   color: #ff9900;
+}
+.trading-fullscreem {
+  position: fixed;
+  background-color: #ffffff25;
+  backdrop-filter: blur(1px);
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.trading-conteiner-trade {
+  display: flex;
+  margin: auto;
+}
+.trading-oponente {
+  box-shadow: inset 0 0 0 3px #3f3f3f;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  margin-right: 5px;
+  text-align: center;
+}
+.trading-yo {
+  box-shadow: inset 0 0 0 3px #3f3f3f;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  margin-right: 5px;
+  text-align: center;
+}
+.trading-mepanel {
+  box-shadow: inset 0 0 0 3px #3f3f3f;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  margin-right: 5px;
+  text-align: center;
+}
+.trading-label {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  box-shadow: inset 0 0 0 5px #4d4d4dad;
+  padding: 10px 20px;
+  width: 120px;
+  font-family: var(--text-three);
+  letter-spacing: 3px;
+}
+.trading-label-box {
+  height: 35px;
+}
+.trading-space-one {
+  height: 5px;
+}
+.trading-space-two {
+  width: 10px;
+}
+.trading-space-three {
+  width: 5px;
+}
+.trading-henrycoins {
+  font-family: var(--text-three);
+  font-size: 20;
+  letter-spacing: 3px;
+  color: #ff9900;
+  height: 40px;
+  display: flex;
+}
+.trading-henrycoins-label {
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px #ffff00;
+  padding: 3px 10px 0px 10px;
+}
+.trading-card {
+  background: radial-gradient(#313131, #0e0e0e);
+  width: 80px;
+  height: 120px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 3px #ffffffc7;
+  text-align: center;
+  color: #ffffffc7;
+}
+.trading-card-contenido-icon{
+  height: 55px;
+  display: flex;
+}
+.trading-card-icon {
+  color: #ffffffc7;
+  font-size: 35px;
+  margin: auto;
+}
+.trading-card-icon-img{
+  width: 40px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.trading-card-brown {
+  background: linear-gradient(#e49f68, #966237);
+}
+.trading-card-light-blue {
+  background: linear-gradient(#91d6f3, #3fa2cc);
+}
+.trading-card-pink {
+  background: linear-gradient(#fda7fd, #e060e0);
+}
+.trading-card-orange {
+  background: linear-gradient(#eb924f, #bd6422);
+}
+.trading-card-red {
+  background: linear-gradient(#ee6c62, #b1342a);
+}
+.trading-card-yellow {
+  background: linear-gradient(#f5e557, #d4c218);
+}
+.trading-card-green {
+  background: linear-gradient(#2ecc65, #028730);
+}
+.trading-card-blue {
+  background: linear-gradient(#5593d6, #154375);
+}
+.trading-card-style-title {
+  box-shadow: inset 0 0 0 3px #ffffffc7;
+  font-family: var(--text-one);
+  height: 30px;
+  font-size: 16px;
+  display: flex;
+}
+.trading-card-style-title-label{
+  margin: auto;
+}
+.trading-card-text-two {
+  font-family: var(--text-one);
+  height: 10px;
+  font-size: 10px;
+  display: flex;
+  letter-spacing: 1px;
+}
+.trading-card-text-two-label {
+  margin: auto;
+}
+.trading-card-text-three {
+  font-family: var(--text-one);
+  height: 25px;
+  font-size: 14px;
+  display: flex;
+  letter-spacing: 1px;
+}
+.trading-card-text-three-label {
+  margin: auto;
+  color: #ff9900;
+}
+.trading-card-two {
+  background: radial-gradient(#f1f19e, #c6c648);
+  width: 80px;
+  height: 120px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 3px #fcfc5a;
+}
+.tradeing-selector-trade:hover{
+  box-shadow: inset 0 0 0 3px #00ff37c7;
 }

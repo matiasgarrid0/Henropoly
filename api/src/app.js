@@ -18,7 +18,7 @@ const {
   roll,
   passTurn
 } = require('./theBabelTower/basicGame'); */
- const {
+const {
   createRoom,
   deleteRoom,
   joinRoom,
@@ -32,7 +32,9 @@ const {
   buyProperty,
   buyRailway,
   buyService,
-  goToJail
+  goToJail,
+  initialTrade,
+  acceptTrade,
   /*luckyOrArc,
   gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
@@ -53,70 +55,79 @@ io.on("connection", async (socket) => {
     socket.disconnect();
   }
   //verificacion de estado desde roomm
-  try{
-  io.sockets
-    .in(decoded.user.username)
-    .emit("roomStatus", await searchStatus(decoded.user.username));
-  //componente room
-  socket.on("setRoom", async (data) => {
-    if (data.type === "create") {
-      await createRoom(decoded.user.username, io);
-    } else if (data.type === "delete") {
-      await deleteRoom(decoded.user.username, io);
-    } else if (data.type === "join") {
-      await joinRoom(decoded.user.username, data.host, io);
-    } else if (data.type === "leaveRoom") {
-      await leaveRoom(decoded.user.username, io);
-    } else if (data.type === "kickPlayer") {
-      await leaveRoom(data.player, io);
-    } else if (data.type === "goGame") {
-      await goGame(decoded.user.username, io);
-    }
-  });
-  socket.on("roomStatus", () => { });
-  //gameDashboard
-  socket.on("log", () => { });
-  socket.on("setGame", () => { });
-  socket.on("gameDashboard", async (data) => {
-    if (data.type === 'gameOver') {
-      await gameOver(decoded.user.username, io)
-    } else if (data.type === "meEnd") {
-      await meEnd(decoded.user.username, io)
-    } else if (data.type === 'roll') {
-      await roll(decoded.user.username, io)
-    } else if (data.type === "passTurn") {
-      await passTurn(decoded.user.username, io)
-    }
-    // }else if (data.type === "gameActionsBoard"){
-    //   await gameActionsBoard(decoded.user.username, io)
-    // } 
-  });
-  //TradeDashboard
-  socket.on('TradeDashboard', async(data)=>{
-    if(data.type === 'buyProperty'){
-      buyProperty(decoded.user.username, data.box, io)
-    } else if(data.type === 'buyRailway'){
-      buyRailway(decoded.user.username, data.box, io)
-    } else if(data.type === 'buyService'){
-      buyService(decoded.user.username, data.box, io)
-    } else if(data.type === 'goToJail'){
-      goToJail(decoded.user.username, data.box, io)
-    }
-  })
-  //timer
-  socket.on("timer", () => { });
-  //chat global
-  socket.on("sendGlobal", (data) => {
-    io.emit("chatGlobal", {
-      username: decoded.user.username,
-      message: data.message,
+  try {
+    io.sockets
+      .in(decoded.user.username)
+      .emit("roomStatus", await searchStatus(decoded.user.username));
+    //componente room
+    socket.on("setRoom", async (data) => {
+      if (data.type === "create") {
+        await createRoom(decoded.user.username, io);
+      } else if (data.type === "delete") {
+        await deleteRoom(decoded.user.username, io);
+      } else if (data.type === "join") {
+        await joinRoom(decoded.user.username, data.host, io);
+      } else if (data.type === "leaveRoom") {
+        await leaveRoom(decoded.user.username, io);
+      } else if (data.type === "kickPlayer") {
+        await leaveRoom(data.player, io);
+      } else if (data.type === "goGame") {
+        await goGame(decoded.user.username, io);
+      }
     });
-  });
-  socket.on("chatGlobal", () => {});
-  socket.on("disconnect", () => {});
-} catch (err) {
-  console.log(err)
-}
+    socket.on("roomStatus", () => {});
+    //gameDashboard
+    socket.on("log", () => {});
+    socket.on("setGame", () => {});
+    socket.on("gameDashboard", async (data) => {
+      if (data.type === "gameOver") {
+        await gameOver(decoded.user.username, io);
+      } else if (data.type === "meEnd") {
+        await meEnd(decoded.user.username, io);
+      } else if (data.type === "roll") {
+        await roll(decoded.user.username, io);
+      } else if (data.type === "passTurn") {
+        await passTurn(decoded.user.username, io);
+      }
+      // }else if (data.type === "gameActionsBoard"){
+      //   await gameActionsBoard(decoded.user.username, io)
+      // }
+    });
+    //TradeDashboard
+    socket.on("TradeDashboard", async (data) => {
+      if (data.type === "buyProperty") {
+        buyProperty(decoded.user.username, data.box, io);
+      } else if (data.type === "buyRailway") {
+        buyRailway(decoded.user.username, data.box, io);
+      } else if (data.type === "buyService") {
+        buyService(decoded.user.username, data.box, io);
+      } else if (data.type === "goToJail") {
+        goToJail(decoded.user.username, data.box, io);
+      }
+    });
+    //timer
+    socket.on("timer", () => {});
+    //chat global
+    socket.on("sendGlobal", (data) => {
+      io.emit("chatGlobal", {
+        username: decoded.user.username,
+        message: data.message,
+      });
+    });
+    socket.on("chatGlobal", () => {});
+    socket.on("disconnect", () => {});
+    //trader:
+    socket.on("sendTrade", async (data) => {
+      if (data.type === "initialTrade") {
+        await initialTrade(data.host, decoded.user.username, data.target, io);
+      } else if (data.type === 'acceptTrade'){
+        await acceptTrade(data.host, decoded.user.username, io)
+      }
+    });
+    socket.on("Trading", () => {});
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 server.name = "API";
