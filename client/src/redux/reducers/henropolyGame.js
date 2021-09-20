@@ -101,8 +101,8 @@ const henropolyGame = (state = initialState, action) => {
       return { 
         ...state,
         dataPlayers:{
-          ...state.dataPlayers,
-        [payload.info.target]: {...state.dataPlayers[payload.info.target], box: [payload.box]}}
+          ...state.dataPlayers,        
+        [payload.info.target]: {...state.dataPlayers[payload.info.target], box: payload.box}}
       };
 
     default:
