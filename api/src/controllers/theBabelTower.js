@@ -455,7 +455,7 @@ const roll = async (username, io) => {
         room.dataPlayers[target].box
       );
       let buyAlquiler = false;
-      let tax = false      
+      let buyTax = false      
       let targetProperty;
       let cost;
 
@@ -586,13 +586,18 @@ const roll = async (username, io) => {
             text: `paga por licencia a ${room.dataPlayers[targetProperty].username} ${cost} henryCoins.`,
           });
         });
-        io.sockets.in(player).emit("setGame", {
+
+        room.order.forEach( async (e) => { 
+          await callbackTest(100);
+          io.sockets.in(e).emit("setGame", {
           status: "setBalance",
           info: {
             target: target,
             henryCoin: room.dataPlayers[target].henryCoin,
           },
-        });
+          });
+        })
+       
       }
       if (buyTax) {
         room.order.forEach(async (player) => {
@@ -603,13 +608,16 @@ const roll = async (username, io) => {
           });
         })
         buyTax = false //Linea para falsear el buy tax si no sigue cobrando undefined
-        io.sockets.in(player).emit("setGame", {
+        room.order.forEach(async (e) => {
+          await callbackTest(100);
+           io.sockets.in(e).emit("setGame", {
           status: "setBalance",
           info: {
             target: target,
             henryCoin: room.dataPlayers[target].henryCoin,
           },
         });
+        })   
       }
       if (room.move) {
         room.order.forEach(async (player) => {
@@ -696,11 +704,15 @@ const buyProperty = async (username, box, io) => {
           newProperty: target,
           newbalase: room.dataPlayers[target].henryCoin,
         });
-        io.sockets.in(player).emit("log", {
+      });
+       
+      room.order.forEach(e => {
+         io.sockets.in(e).emit("log", {
           target: target,
           text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
+      
     }
   } catch (error) {
     console.log(error);
@@ -728,6 +740,8 @@ const buyRailway = async (username, box, io) => {
         newProperty: target,
         newbalase: room.dataPlayers[target].henryCoin
       });
+    });
+    room.order.forEach((player) => {
       io.sockets.in(player).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
@@ -757,11 +771,14 @@ const buyService = async (username, box, io) => {
         newProperty: target,
         newbalase: room.dataPlayers[target].henryCoin
       });
-      io.sockets.in(player).emit("log", {
+     
+    });
+  room.order.forEach((e) => {
+     io.sockets.in(e).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
-    });
+  })
   }
 }
 
