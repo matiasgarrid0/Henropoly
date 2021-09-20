@@ -63,7 +63,7 @@ const Room = () => {
           </form>
           <div>
             <button className="button-two" onClick={setRoom({ type: "create" })}>Crear sala</button>
-            <button className="button-two">Jugar</button>
+            <button className="button-jugar">Jugar</button>
           </div>
         </div>
       )}
