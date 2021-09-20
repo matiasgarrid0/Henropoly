@@ -21,7 +21,7 @@ const luckyCards = [
         name: "Suerte",
         description: "Nuevos impuestos en Argentina | Paga $20",
         type: "pagas",
-        value: 6
+        value: 20
     },
     {
         name: "Suerte",

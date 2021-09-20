@@ -81,7 +81,8 @@ const DisplayGameBeta = () => {
     valorTwo: null,
     username: null,
   });
-  //----portales---
+  //--portales--
+  const [cardBack, setCardBack] = useState(null)
   const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
   const [property, setProperty] = useState(null)
@@ -161,16 +162,16 @@ const DisplayGameBeta = () => {
       info.table[dataPlayers[player].box].type &&
       dataPlayers[player].username === user.username
     ) {
-      /*
+
       if (info.table[dataPlayers[player].box].type === "comunal") {
-        dispatch(filterComunalRandom());
+
         setPortal("comunal");
       }
       if (info.table[dataPlayers[player].box].type === "lucky") {
-        dispatch(filterLuckyRandom());
+
         setPortal("lucky");
       }
-      */
+
       if (info.table[dataPlayers[player].box].type === "property") {
         setProperty(info.table[dataPlayers[player].box]);
         if (
@@ -194,26 +195,28 @@ const DisplayGameBeta = () => {
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
         setTrain(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-          setMeBox({...meBox,
-           username: dataPlayers[player].username,
-           buy: ()=>{socket.emit("TradeDashboard", { type: "buyRailway",box:dataPlayers[player].box })},
-         }) 
-       } else {
-         setMeBox({...meBox, username: null})
-       }
+        if (dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+          setMeBox({
+            ...meBox,
+            username: dataPlayers[player].username,
+            buy: () => { socket.emit("TradeDashboard", { type: "buyRailway", box: dataPlayers[player].box }) },
+          })
+        } else {
+          setMeBox({ ...meBox, username: null })
+        }
         setPortal("railway");
       }
       if (info.table[dataPlayers[player].box].type === "service") {
         setService(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-          setMeBox({...meBox,
-           username: dataPlayers[player].username,
-           buy: ()=>{socket.emit("TradeDashboard", { type: "buyService",box:dataPlayers[player].box })},
-         }) 
-       } else {
-         setMeBox({...meBox, username: null})
-       }
+        if (dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
+          setMeBox({
+            ...meBox,
+            username: dataPlayers[player].username,
+            buy: () => { socket.emit("TradeDashboard", { type: "buyService", box: dataPlayers[player].box }) },
+          })
+        } else {
+          setMeBox({ ...meBox, username: null })
+        }
         setPortal("service");
       }
       if (
@@ -225,11 +228,12 @@ const DisplayGameBeta = () => {
       }
       if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
         setJailData(info.table[dataPlayers[player].box])
-        if(info.table[dataPlayers[player].box].type === "goJail"){
-          setMeBox({...meBox,
+        if (info.table[dataPlayers[player].box].type === "goJail") {
+          setMeBox({
+            ...meBox,
             username: dataPlayers[player].username,
-            buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box})},
-          }) 
+            buy: () => { socket.emit("TradeDashboard", { type: "goToJail", box: dataPlayers[player].box }) },
+          })
         }
         setPortal("jail");
       }
@@ -254,9 +258,9 @@ const DisplayGameBeta = () => {
   // }
 
   function closedPortal2() { // que estas buscando? a miii?? siiiiii
-   socket.emit("gameDashboard", { type: "goToJail" });
+    socket.emit("gameDashboard", { type: "goToJail" });
     setPortal(null)
-};
+  };
 
   useEffect(() => {
     if (
@@ -274,7 +278,7 @@ const DisplayGameBeta = () => {
     ) alignTarget("target2");
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [dataPlayers.target2.box]);
-  
+
   useEffect(() => {
     if (
       dataGame.target3.box !== dataPlayers.target3.box &&
@@ -382,25 +386,31 @@ const DisplayGameBeta = () => {
           valorTwo: data.two,
           username: data.usernameRoll,
         });
+        setCardBack(data.cardChoice)
         dispatch(setGameRoll(data.info));
       } else if (data.status === "buyProperty") {
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
         dispatch(buyPropertyAction(data));
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
-      }else if (data.status === 'buyRailway'){
-        dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
-        dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
-        // dispatch(buyPropertyAction(data))
-        // setRender(`status:${data.status}`)
+        setRender(`status:${data.status}`)
+      } else if (data.status === 'buyRailway') {
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(buyPropertyAction(data))
+        setRender(`status:${data.status}`)
         // console.log("Raiwlwayyy ",data)
-      } else if (data.status === 'buyService'){  
-         dispatch(buyPropertyAction(data))
-         setRender(`status:${data.status}`)
-         console.log("Serviceeee ",data)
-      } else if (data.status === 'goToJail'){ 
-        console.log('dataStatusJail', data.status) 
+      } else if (data.status === 'buyService') {
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(buyPropertyAction(data))
+        setRender(`status:${data.status}`)
+        console.log("Serviceeee ", data)
+      } else if (data.status === 'goToJail') {
+        console.log('dataStatusJail', data.status)
         dispatch(goToJail(data))
-       // setRender(`status:${data.status}`)
+        // setRender(`status:${data.status}`)
       }
       // else if (data.status === 'buyRailway'){  
       //   dispatch(buyRailwayAction(data))
@@ -408,7 +418,7 @@ const DisplayGameBeta = () => {
       //   dispatch(buyServiceAction(data))
       // }
     })
-    
+
     return () => {
       socket.off("setGame");
     };
@@ -418,27 +428,27 @@ const DisplayGameBeta = () => {
     <div className="display-beta-border">
       {portal === "lucky" && (
         <Portal onClose={closedPortal}>
-          <LuckyCard data={luckyCard} />
+          <LuckyCard data={cardBack} />
         </Portal>
       )}
       {portal === "comunal" && (
         <Portal onClose={closedPortal}>
-          <LuckyCard data={comunalCard} />
+          <LuckyCard data={cardBack} />
         </Portal>
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} />
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal}>
-          <RailwayCard data={train} username={meBox.username} buy={meBox.buy}/>
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} />
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal}>
-          <ServiceCard data={service} username={meBox.username} buy={meBox.buy}/>
+          <ServiceCard data={service} username={meBox.username} buy={meBox.buy} />
         </Portal>
       )}
       {portal === "tax" && (
@@ -534,7 +544,7 @@ const DisplayGameBeta = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       >
-       {/* <div className="display-beta-align-chatgame">
+        {/* <div className="display-beta-align-chatgame">
             <ChatGame />
           </div>
         <div className="display-beta-align-gameoptions">  
