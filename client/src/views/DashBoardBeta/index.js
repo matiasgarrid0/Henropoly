@@ -21,6 +21,8 @@ const DashBoardBeta = () => {
   return (
     <div className="dashBoard-beta-alpha">
       <div className="asd"></div>
+      <div className="asd"></div>
+      <div className="asd"></div>
       <div className="dashBoard-beta-margin">
         <div className="repeat-total">
           <div><Tutorial /></div>

@@ -1,27 +1,27 @@
 .room-dashboard-box {
     background: black;
     display: grid;
-    max-width: 24rem;
-    max-height: 12rem;
+    max-width: 40rem;
+    max-height: 20rem;
     width: 24rem;
     height:12rem;
     border-radius: 1.5rem;
     padding: .65rem;
-    margin-left: 1rem;
+    margin-left: .75rem;
 }
 
 .room-total {
   color: white;
   background: black;
   display: block;
-  max-width: 24rem;
+  max-width: 60rem;
   max-height: 20rem;
   width: 26rem;
   height:20rem;
   border-radius: 1.5rem;
   font-size: 1.2rem;
   padding: .65rem;
-  margin-left: 1rem;
+  margin-left: .8rem;
 }
 
 .room-sala {

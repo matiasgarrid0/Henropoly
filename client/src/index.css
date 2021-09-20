@@ -44,7 +44,7 @@ body {
   box-shadow: 1px 8px 7px 2px #111111;
   margin-top: 25px;
   font-family: var(--text-one);
-  font-size: 20px;
+  font-size: 26px;
   letter-spacing: 1px;
   border-radius: 8px;
   background-color: transparent;
@@ -52,13 +52,14 @@ body {
   cursor: pointer;
   transition: transform 250ms ease;
   margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 .button-one:hover {
+  font-size: 26px;
   color: var(--color-black);
   background-color: var(--color-yellow);
-  border: 1px solid var(--color-black);
-  box-shadow: 0 0 5px var(--color-yellow);
+  border: 2px solid var(--color-black);
+  box-shadow: 1px 6px 5px 0px var(--color-yellow);
   transform: scale(1.1);
 }
 .index-space {

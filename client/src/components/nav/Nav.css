@@ -1,15 +1,16 @@
 .nav-body {
-  position: grid;
-  max-width: 1280px;
+  position: fixed;
+  max-width: 120rem;
   width: 100%;
   background: radial-gradient(#000000, #141414);
   height: 6rem;
+  max-height: 6rem;
   border-bottom: 1px solid rgb(41, 41, 41);
   box-shadow: 0 0 5px #000000;
   z-index: 10;
 }
 .nav-container {
-  max-width: var(--width-container);
+  max-width:  120rem;
   max-height: 6rem;
   margin: auto;
   display: flex;
@@ -19,7 +20,7 @@
   width: 15rem;
   height: 4rem;
   margin-top: 15px;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 .nav-text-user{
   display: grid;
