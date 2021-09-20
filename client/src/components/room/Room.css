@@ -7,7 +7,6 @@
     height:12rem;
     border-radius: 1.5rem;
     padding: .65rem;
-    margin-left: .75rem;
 }
 
 .room-total {
@@ -26,6 +25,10 @@
 
 .room-sala {
   margin-top: 0.5rem;
+}
+
+.room-miembro {
+  margin-top: -.5rem;
 }
 
 .room-dashboard-form {
@@ -89,19 +92,17 @@
   }
 
   .room-buttoner {
-    display: flex;
-    align-items: center;
+    display: grid;
   }
 
   .button-three {
-    position: inherit ;
     border: 3px solid black;
     padding: 2px;
-    height: 3.2rem;
-    width: 10rem;
-    margin-left: 1rem;
+    height: 3rem;
+    width: 8rem;
+    margin-left: 9rem;
     box-shadow: 1px 8px 7px 2px #111111;
-    margin-top: 5rem;
+    margin-top: 1.5rem;
     font-family: var(--text-one);
     font-size: 25px;
     letter-spacing: 1px;
@@ -120,14 +121,13 @@
   }
 
   .button-four {
-    position: inherit ;
     border: 3px solid black;
     padding: 2px;
-    height: 3.2rem;
-    width: 10rem;
-    margin-left: 2rem;
+    height: 3rem;
+    width: 8rem;
+    margin-left: 9rem;
     box-shadow: 1px 8px 7px 2px #111111;
-    margin-top: 5rem;
+    margin-top: .5rem;
     font-family: var(--text-one);
     font-size: 25px;
     letter-spacing: 1px;

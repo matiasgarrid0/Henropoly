@@ -2,6 +2,7 @@ import './Login.css'
 import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { login }  from '../../redux/actions'
+import LogoBox from '../../image/logo-home.png'
 
 
 function Loggin (props) {
@@ -22,6 +23,7 @@ function handleSubmit(e) {
 return (
   <div className="container-login">
     <div className='box-register'>
+    <img className="home-img" src={LogoBox} alt="logo-box" />
       <form onSubmit={(e)=>handleSubmit(e)}>
         <div className="username">
         <label >Usuario: </label>

@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { useDispatch} from 'react-redux';
 import { register } from '../../redux/actions';
+import LogoBox from '../../image/logo-home.png'
 import './RegisterForm.css'
 
 
@@ -60,6 +61,7 @@ function handleSubmit(e) {
  return (
 <div className='container-register'>
           <div className='box-register'>
+            <img className="home-img" src={LogoBox} alt="logo-box" />
             <form onSubmit={(e)=>handleSubmit(e)} >
                 <div className='email'>
                   <label>Email: </label>

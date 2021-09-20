@@ -12,6 +12,12 @@
     user-select: none;
 }
 
+.home-img {
+    margin: 1rem 5rem;
+    width: 200px;
+    height: 100px;
+}
+
 .logo-register {
     margin-top: 3rem;
     text-align:center;
@@ -25,7 +31,7 @@
 .email {
     text-align: center;
     align-items:center;
-    margin-top: 6rem;
+    margin-top: 1rem;
 }
 
 .email-text {
@@ -50,11 +56,12 @@
     text-align: center;
     align-items:center;
     margin-top: 1rem;
+    margin-left: 0rem;
 }
 
 .username-text {
     height: 20px;
-    width: 230px;
+    width: 258px;
     border: none;
     border-bottom: 2px solid yellow;
     background-color: transparent;
@@ -69,7 +76,7 @@
 
 .password-text {
     height: 20px;
-    width: 230px;
+    width: 268px;
     border: none;
     border-bottom: 2px solid yellow;
     background-color: transparent;
@@ -92,7 +99,7 @@
     transition: .3s ease;
     border-radius:4px;
     border: none;
-    margin-left: 3.2rem;
+    margin-left: 4.2rem;
 }
 
 .btn-send:hover {

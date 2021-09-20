@@ -72,7 +72,7 @@ const Room = () => {
           <div className='room-sala'>
           Anfitrion de sala: {statusRoom.room.host}
           </div>
-          <div></div>
+          <div className='room-miembro'></div>
           Miembros: {statusRoom.room.players.map((player) => {
             return (
               <label>
