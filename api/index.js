@@ -20,7 +20,7 @@ require('dotenv').config();
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { preloadData } = require('./preloadData')
+const { preloadData } = require('./preloadData')  
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(async() => {

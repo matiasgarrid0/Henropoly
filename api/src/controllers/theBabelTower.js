@@ -128,11 +128,16 @@ const joinRoom = async (username, host, io) => {
 const leaveRoom = async (username, io) => {
   try {
     const ResponsePlayersInHold = await client.get(`playersInHold${username}`);
-    const responseWaitingRoom = await client.get(`waitingRoom${ResponsePlayersInHold}`);
+    const responseWaitingRoom = await client.get(
+      `waitingRoom${ResponsePlayersInHold}`
+    );
     let roomJson = JSON.parse(responseWaitingRoom);
     roomJson.players = roomJson.players.filter((player) => player !== username);
     await client.del(`playersInHold${username}`);
-    await client.set(`waitingRoom${ResponsePlayersInHold}`,JSON.stringify(roomJson));
+    await client.set(
+      `waitingRoom${ResponsePlayersInHold}`,
+      JSON.stringify(roomJson)
+    );
     roomJson.players.forEach((player) => {
       io.sockets.in(player).emit("roomStatus", {
         status: "inHold",
@@ -218,7 +223,6 @@ const timer = (username, io) => {
     console.log(error);
   }
 };
-
 
 const clearTimer = (username) => {
   //clearInterval(timers[username]);
@@ -327,7 +331,6 @@ const goGame = async (username, io) => {
   }
 };
 
-
 const gameOver = async (username, io) => {
   try {
     const response = await client.get(`gameRoom${username}`);
@@ -428,13 +431,18 @@ const roll = async (username, io) => {
         target = `target${i}`;
       }
     }
-    if (room.actualTurn === username && room.move === true && room.dataPlayers[target].jail === false) {
+    if (
+      room.actualTurn === username &&
+      room.move === true &&
+      room.dataPlayers[target].jail === false
+    ) {
       let num1 = Math.floor(Math.random() * 6 + 1);
       let num2 = Math.floor(Math.random() * 6 + 1);
       room.dataPlayers[target].box = room.dataPlayers[target].box + num1 + num2;
       if (room.dataPlayers[target].box > 39) {
         room.dataPlayers[target].box = room.dataPlayers[target].box - 39;
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + 200;
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin + 200;
         room.order.forEach((player) => {
           io.sockets.in(player).emit("log", {
             target: target,
@@ -516,8 +524,14 @@ const roll = async (username, io) => {
           //   }
         }
       }*/
-      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
-      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].x = targetX(
+        target,
+        room.dataPlayers[target].box
+      );
+      room.dataPlayers[target].y = targetY(
+        target,
+        room.dataPlayers[target].box
+      );
       let buyAlquiler = false;
       let targetProperty;
       let cardChoice = null;
@@ -525,8 +539,8 @@ const roll = async (username, io) => {
       let buyTax;
       let buyLuckyCard;
       let buyComunalCard;
-      let luckyType
-      let comunalType
+      let luckyType;
+      let comunalType;
       if (
         room.table[room.dataPlayers[target].box].owner !== null &&
         room.table[room.dataPlayers[target].box].owner !== username &&
@@ -534,13 +548,21 @@ const roll = async (username, io) => {
       ) {
         buyAlquiler = true;
         for (let i = 1; i < 5; i++) {
-          if ( room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          if (
+            room.dataPlayers[`target${i}`].username ===
+            room.table[room.dataPlayers[target].box].owner
+          ) {
             targetProperty = `target${i}`;
           }
         }
-        cost = room.table[room.dataPlayers[target].box][room.table[room.dataPlayers[target].box].actualPrice];
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + cost;
+        cost =
+          room.table[room.dataPlayers[target].box][
+            room.table[room.dataPlayers[target].box].actualPrice
+          ];
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin - cost;
+        room.dataPlayers[targetProperty].henryCoin =
+          room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== null &&
         room.table[room.dataPlayers[target].box].owner !== username &&
@@ -548,13 +570,18 @@ const roll = async (username, io) => {
       ) {
         buyAlquiler = true;
         for (let i = 1; i < 5; i++) {
-          if (room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          if (
+            room.dataPlayers[`target${i}`].username ===
+            room.table[room.dataPlayers[target].box].owner
+          ) {
             targetProperty = `target${i}`;
           }
         }
         cost = (num1 + num2) * 4;
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + cost;
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin - cost;
+        room.dataPlayers[targetProperty].henryCoin =
+          room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== null &&
         room.table[room.dataPlayers[target].box].owner !== username &&
@@ -562,61 +589,79 @@ const roll = async (username, io) => {
       ) {
         buyAlquiler = true;
         for (let i = 1; i < 5; i++) {
-          if (room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          if (
+            room.dataPlayers[`target${i}`].username ===
+            room.table[room.dataPlayers[target].box].owner
+          ) {
             targetProperty = `target${i}`;
           }
         }
-        cost = room.table[room.dataPlayers[target].box][room.table[room.dataPlayers[target].box].actualPrice];
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + cost;
+        cost =
+          room.table[room.dataPlayers[target].box][
+            room.table[room.dataPlayers[target].box].actualPrice
+          ];
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin - cost;
+        room.dataPlayers[targetProperty].henryCoin =
+          room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
         room.table[room.dataPlayers[target].box].type === "tax"
       ) {
         buyTax = true;
         for (let i = 1; i < 5; i++) {
-          if (room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          if (
+            room.dataPlayers[`target${i}`].username ===
+            room.table[room.dataPlayers[target].box].owner
+          ) {
             targetProperty = `target${i}`;
           }
         }
-        cost = 200
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + cost;
-
+        cost = 200;
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin - cost;
+        room.dataPlayers[targetProperty].henryCoin =
+          room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
         room.table[room.dataPlayers[target].box].type === "taxVip"
       ) {
         buyTax = true;
         for (let i = 1; i < 5; i++) {
-          if (room.dataPlayers[`target${i}`].username === room.table[room.dataPlayers[target].box].owner) {
+          if (
+            room.dataPlayers[`target${i}`].username ===
+            room.table[room.dataPlayers[target].box].owner
+          ) {
             targetProperty = `target${i}`;
           }
         }
-        cost = 400
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        room.dataPlayers[targetProperty].henryCoin = room.dataPlayers[targetProperty].henryCoin + cost;
-
+        cost = 400;
+        room.dataPlayers[target].henryCoin =
+          room.dataPlayers[target].henryCoin - cost;
+        room.dataPlayers[targetProperty].henryCoin =
+          room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
-        room.table[room.dataPlayers[target].box].type === 'lucky'
+        room.table[room.dataPlayers[target].box].type === "lucky"
       ) {
         buyLuckyCard = true;
-        luckyType = '';
-        let luckyCards = room.lucky
-        let numberLucky = 11//Math.floor((Math.random() * 12) + 1)
-        let luckyCard = luckyCards.filter((e) => e.ID === numberLucky)
-        cardChoice = luckyCard
-        if (luckyCard[0].type === 'pagas') {
-          luckyType = 'pagas'
-          cost = luckyCard[0].value
-          room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
-        } else if (luckyCard[0].type === 'cobras') {
-          luckyType = 'cobras'
-          cost = luckyCard[0].value
-          room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + cost;
-        } else if (luckyCard[0].type === 'pasas') {
-          luckyType = 'pasas'
+        luckyType = "";
+        let luckyCards = room.lucky;
+        let numberLucky = 11; //Math.floor((Math.random() * 12) + 1)
+        let luckyCard = luckyCards.filter((e) => e.ID === numberLucky);
+        cardChoice = luckyCard;
+        if (luckyCard[0].type === "pagas") {
+          luckyType = "pagas";
+          cost = luckyCard[0].value;
+          room.dataPlayers[target].henryCoin =
+            room.dataPlayers[target].henryCoin - cost;
+        } else if (luckyCard[0].type === "cobras") {
+          luckyType = "cobras";
+          cost = luckyCard[0].value;
+          room.dataPlayers[target].henryCoin =
+            room.dataPlayers[target].henryCoin + cost;
+        } else if (luckyCard[0].type === "pasas") {
+          luckyType = "pasas";
           room.dataPlayers[target].cards.push(luckyCard[0]);
         } //else if (luckyCard[0].type === 'migras') {
         //   luckyType = 'migras'
@@ -625,27 +670,30 @@ const roll = async (username, io) => {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
-        room.table[room.dataPlayers[target].box].type === 'comunal') {
+        room.table[room.dataPlayers[target].box].type === "comunal"
+      ) {
         buyComunalCard = true;
-        comunalType = '';
+        comunalType = "";
         let comunalCards = room.comunal;
-        const numberComunal = Math.floor((Math.random() * 8) + 1)
-        let comunalCard = comunalCards.filter((e) => e.ID === numberComunal)
-        cardChoice = comunalCard
-        if (comunalCard[0].type === 'cobras') {
-          comunalType = 'cobras'
-          cost = comunalCard[0].value
-          room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + cost;
+        const numberComunal = Math.floor(Math.random() * 8 + 1);
+        let comunalCard = comunalCards.filter((e) => e.ID === numberComunal);
+        cardChoice = comunalCard;
+        if (comunalCard[0].type === "cobras") {
+          comunalType = "cobras";
+          cost = comunalCard[0].value;
+          room.dataPlayers[target].henryCoin =
+            room.dataPlayers[target].henryCoin + cost;
         } else {
-          comunalType = 'pagas'
-          cost = comunalCard[0].value
-          room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
+          comunalType = "pagas";
+          cost = comunalCard[0].value;
+          room.dataPlayers[target].henryCoin =
+            room.dataPlayers[target].henryCoin - cost;
         }
-
-      } if(room.table[room.dataPlayers[target].box].type === "jail"){
-        room.dataPlayers[target].jail = true
       }
-       //else if (room.table[room.dataPlayers[target].box].type === 'jail') {
+      if (room.table[room.dataPlayers[target].box].type === "jail") {
+        room.dataPlayers[target].jail = true;
+      }
+      //else if (room.table[room.dataPlayers[target].box].type === 'jail') {
       //   room.dataPlayers[target].jail = true
 
       //   if (num1 !== num2) {
@@ -685,7 +733,7 @@ const roll = async (username, io) => {
       room.order.forEach(async (player) => {
         io.sockets.in(player).emit("setGame", {
           status: "roll",
-          info: { target: target, move: room.dataPlayers[target].box},
+          info: { target: target, move: room.dataPlayers[target].box },
           one: num1,
           two: num2,
           move: room.move,
@@ -699,8 +747,9 @@ const roll = async (username, io) => {
         });
         io.sockets.in(player).emit("log", {
           target: target,
-          text: `ha lanzado dado y tira : ${num1} / ${num2}. se mueve ${num1 + num2
-            } espacios.`,
+          text: `ha lanzado dado y tira : ${num1} / ${num2}. se mueve ${
+            num1 + num2
+          } espacios.`,
         });
       });
       if (buyAlquiler) {
@@ -721,8 +770,7 @@ const roll = async (username, io) => {
               henryCoin: room.dataPlayers[target].henryCoin,
             },
           });
-        })
-
+        });
       }
       if (buyTax) {
         room.order.forEach(async (player) => {
@@ -737,8 +785,8 @@ const roll = async (username, io) => {
               target: target,
               henryCoin: room.dataPlayers[target].henryCoin,
             },
-          })
-        })
+          });
+        });
       }
       if (buyLuckyCard) {
         room.order.forEach(async (player) => {
@@ -747,28 +795,26 @@ const roll = async (username, io) => {
             io.sockets.in(player).emit("log", {
               target: target,
               text: `${luckyType} unos $${cost} henryCoins por carta de suerte.`,
-            })
-          }
-          else if (cardChoice.type === 'pasas') {
+            });
+          } else if (cardChoice.type === "pasas") {
             io.sockets.in(player).emit("log", {
               target: target,
-              text: 'consiguió una carta para salvarse de migrar.',
-            })
-          }
-          else {
+              text: "consiguió una carta para salvarse de migrar.",
+            });
+          } else {
             io.sockets.in(player).emit("log", {
               target: target,
-              text: 'se va a migrar, más suerte la próxima.',
-            })
+              text: "se va a migrar, más suerte la próxima.",
+            });
           }
           io.sockets.in(player).emit("setGame", {
             status: "setBalance",
             info: {
               target: target,
               henryCoin: room.dataPlayers[target].henryCoin,
-            }
-          })
-        })
+            },
+          });
+        });
       }
       if (buyComunalCard) {
         room.order.forEach(async (player) => {
@@ -776,15 +822,15 @@ const roll = async (username, io) => {
           io.sockets.in(player).emit("log", {
             target: target,
             text: `${comunalType} unos $${cost} henryCoins por carta comunal.`,
-          })
+          });
           io.sockets.in(player).emit("setGame", {
             status: "setBalance",
             info: {
               target: target,
               henryCoin: room.dataPlayers[target].henryCoin,
-            }
-          })
-        })
+            },
+          });
+        });
       }
       // if (jail) {
       //   room.order.forEach(async (player) => {
@@ -801,10 +847,14 @@ const roll = async (username, io) => {
           io.sockets.in(player).emit("log", {
             target: target,
             text: `tira dados dobles y puede volver a tirar`,
-          })
-        })
+          });
+        });
       }
-    } else if (room.actualTurn === username && room.move === true && room.dataPlayers[target].jail === true) {
+    } else if (
+      room.actualTurn === username &&
+      room.move === true &&
+      room.dataPlayers[target].jail === true
+    ) {
       let num1 = Math.floor(Math.random() * 6 + 1);
       let num2 = Math.floor(Math.random() * 6 + 1);
       if (num1 === num2) {
@@ -812,30 +862,30 @@ const roll = async (username, io) => {
           io.sockets.in(player).emit("log", {
             target: target,
             text: `tira dados dobles y logra salir de la carcel, vuelva a tirar los dados`,
-          })
+          });
           io.sockets.in(player).emit("setGame", {
             status: "dadosJail",
             fail: false,
             target: target,
             dadoOne: num1,
-            dadoTwo: num2
-          })
-        })
+            dadoTwo: num2,
+          });
+        });
         room.dataPlayers[target].jail = false;
       } else {
         room.order.forEach(async (player) => {
           io.sockets.in(player).emit("log", {
             target: target,
             text: `tira ${num1} y ${num2}. falla y no logra salir de la carcel.`,
-          })
+          });
           io.sockets.in(player).emit("setGame", {
             status: "dadosJail",
             fail: true,
             target: target,
             dadoOne: num1,
-            dadoTwo: num2
-          })
-        })
+            dadoTwo: num2,
+          });
+        });
         room.move = false;
       }
       await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
@@ -861,7 +911,9 @@ const passTurn = async (username, io) => {
       await client.set(`gameRoom${host}`, JSON.stringify(roomGame));
       let target;
       for (let i = 1; i < 5; i++) {
-        if (roomGame.dataPlayers[`target${i}`].username === roomGame.actualTurn) {
+        if (
+          roomGame.dataPlayers[`target${i}`].username === roomGame.actualTurn
+        ) {
           target = `target${i}`;
         }
       }
@@ -898,7 +950,8 @@ const buyProperty = async (username, box, io) => {
       room.dataPlayers[target].henryCoin >= room.table[box].licenseValue &&
       room.table[box].owner === null
     ) {
-      room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+      room.dataPlayers[target].henryCoin =
+        room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
       room.table[box].owner = username;
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
       room.order.forEach((player) => {
@@ -911,42 +964,44 @@ const buyProperty = async (username, box, io) => {
         });
       });
 
-      room.order.forEach(e => {
+      room.order.forEach((e) => {
         io.sockets.in(e).emit("log", {
           target: target,
           text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
-
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const buyRailway = async (username, box, io) => {
-  const host = await client.get(`playersInGame${username}`)
+  const host = await client.get(`playersInGame${username}`);
   const responseGameRoom = await client.get(`gameRoom${host}`);
   let target;
   var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
   for (let i = 1; i < 5; i++) {
     if (room.dataPlayers[`target${i}`].username === username) {
-      target = `target${i}`
-    };
-  };
+      target = `target${i}`;
+    }
+  }
   if (
-    room.dataPlayers[target].henryCoin >= room.table[box].licenseValue
-    && room.table[box].owner === null) {
-    room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+    room.dataPlayers[target].henryCoin >= room.table[box].licenseValue &&
+    room.table[box].owner === null
+  ) {
+    room.dataPlayers[target].henryCoin =
+      room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
     room.table[box].owner = username;
 
     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
     room.order.forEach((player) => {
-      io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+      io.sockets.in(player).emit("setGame", {
+        //----> mando la repuesta x socket
         status: "buyRailway",
         box: box,
         newProperty: target,
-        newbalase: room.dataPlayers[target].henryCoin
+        newbalase: room.dataPlayers[target].henryCoin,
       });
     });
     room.order.forEach((player) => {
@@ -956,111 +1011,127 @@ const buyRailway = async (username, box, io) => {
       });
     });
   }
-}
+};
 
 const buyService = async (username, box, io) => {
-  const host = await client.get(`playersInGame${username}`)
+  const host = await client.get(`playersInGame${username}`);
   const responseGameRoom = await client.get(`gameRoom${host}`);
   let target;
   var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
   for (let i = 1; i < 5; i++) {
     if (room.dataPlayers[`target${i}`].username === username) {
-      target = `target${i}`
-    };
-  };
-  if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue && room.table[box].owner === null) {
-    room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
-    room.table[box].owner = username
+      target = `target${i}`;
+    }
+  }
+  if (
+    room.dataPlayers[target].henryCoin >= room.table[box].licenseValue &&
+    room.table[box].owner === null
+  ) {
+    room.dataPlayers[target].henryCoin =
+      room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+    room.table[box].owner = username;
     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
     room.order.forEach((player) => {
-      io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+      io.sockets.in(player).emit("setGame", {
+        //----> mando la repuesta x socket
         status: "buyService",
         box: box,
         newProperty: target,
-        newbalase: room.dataPlayers[target].henryCoin
+        newbalase: room.dataPlayers[target].henryCoin,
       });
-
     });
     room.order.forEach((e) => {
       io.sockets.in(e).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
-    })
+    });
   }
-}
+};
 
 const goToJail = async (username, io) => {
   try {
-    const host = await client.get(`playersInGame${username}`)
+    const host = await client.get(`playersInGame${username}`);
     const responseGameRoom = await client.get(`gameRoom${host}`);
     let target;
     var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
     if (room.actualTurn === username) {
       for (let i = 1; i < 5; i++) {
         if (room.dataPlayers[`target${i}`].username === username) {
-          target = `target${i}`
+          target = `target${i}`;
         }
       }
-      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
-      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].x = targetX(
+        target,
+        room.dataPlayers[target].box
+      );
+      room.dataPlayers[target].y = targetY(
+        target,
+        room.dataPlayers[target].box
+      );
       // console.log('log in carcer',   room.dataPlayers[target].box)
-      if (room.dataPlayers[target].box === 30) { // como se iteraba en un array?
-        room.dataPlayers[target].box = room.dataPlayers[target].box - 20
+      if (room.dataPlayers[target].box === 30) {
+        // como se iteraba en un array?
+        room.dataPlayers[target].box = room.dataPlayers[target].box - 20;
 
         // console.log(io)
         await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
         room.order.forEach((player) => {
-          io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+          io.sockets.in(player).emit("setGame", {
+            //----> mando la repuesta x socket
             status: "goToJail",
             info: { target: target, move: room.dataPlayers[target].box },
             box: room.dataPlayers[target].box,
             newProperty: target,
           });
         });
-
-
       }
-    };
+    }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const goToJailCard = async (username, io) => {
   try {
     // console.log(io)
-    const host = await client.get(`playersInGame${username}`)
+    const host = await client.get(`playersInGame${username}`);
     const responseGameRoom = await client.get(`gameRoom${host}`);
     let target;
     var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
     if (room.actualTurn === username) {
       for (let i = 1; i < 5; i++) {
         if (room.dataPlayers[`target${i}`].username === username) {
-          target = `target${i}`
+          target = `target${i}`;
         }
       }
-      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
-      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].x = targetX(
+        target,
+        room.dataPlayers[target].box
+      );
+      room.dataPlayers[target].y = targetY(
+        target,
+        room.dataPlayers[target].box
+      );
       // console.log('log in carcer',   room.dataPlayers[target].box)
-      room.dataPlayers[target].box = 10
-      room.dataPlayers[target].jail = true
+      room.dataPlayers[target].box = 10;
+      room.dataPlayers[target].jail = true;
 
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
       room.order.forEach((player) => {
-        io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+        io.sockets.in(player).emit("setGame", {
+          //----> mando la repuesta x socket
           status: "goToJailCard",
           info: { target: target, move: room.dataPlayers[target].box },
           box: room.dataPlayers[target].box,
           newProperty: target,
         });
       });
-    };
+    }
   } catch (error) {
     console.log(error);
   }
-}
-
+};
 
 const jail = async (username, box, io) => {
   try {
@@ -1072,12 +1143,11 @@ const jail = async (username, box, io) => {
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`;
       }
-    }
-    if (
-      room.dataPlayers[target].henryCoin >= room.table[box].licenseValue ) {
-
-        room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
-        room.dataPlayers[target].jail = false
+    } 
+    if(room.dataPlayers[target].henryCoin >= room.table[box].licenseValue) {
+      room.dataPlayers[target].henryCoin =
+        room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+      room.dataPlayers[target].jail = false;
 
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
       room.order.forEach((player) => {
@@ -1090,18 +1160,25 @@ const jail = async (username, box, io) => {
         });
       });
 
-      room.order.forEach(player => {
+      room.order.forEach((player) => {
         io.sockets.in(player).emit("log", {
           target: target,
           text: `ha pagado para salir de la carcel ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
-
+    }
+    else {
+      room.order.forEach((player) => {
+        io.sockets.in(player).emit("log", {
+          target: target,
+          text: `no le alcanza el dinero para pagar la multa.`,
+        });
+      });
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 // const jail = async (username, io) => {
 //   try {
@@ -1119,7 +1196,7 @@ const jail = async (username, box, io) => {
 
 //       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
 //       room.order.forEach((player) => {
-//         io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+//         io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket
 //           status: "jail",
 //           info: { target: target, move: room.dataPlayers[target].box },
 //           box: room.dataPlayers[target].box,
@@ -1144,10 +1221,8 @@ const jail = async (username, box, io) => {
 //   }
 // }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 module.exports = {
   createRoom,
@@ -1165,7 +1240,7 @@ module.exports = {
   buyService,
   goToJail,
   goToJailCard,
-  jail
+  jail,
   //luckyComunalCard,
   /*luckyOrArc,
   gameActionsBoard*/

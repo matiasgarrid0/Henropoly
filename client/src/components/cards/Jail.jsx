@@ -13,10 +13,11 @@ const Jail = ({ data, username, buy }) => {
                 <div>
                     <h3 className="Jail-Title" >Migración</h3>
                     <img src={ToniJail} alt="Girl in a jacket" width="300" height="300" />
-                    <span>Valor de la licencia:{data.licenseValue}$</span>
+                    <span>Se te ofrece pagar una multa por ÚNICA vez en tu temporal estadía. </span>
+                    <span>La multa vale: ${data.licenseValue} HenryCoins, ¿la pagas?.</span>
                     {username === user.username && (
                         <button className="servicecard-button" onClick={buy}>
-                            comprar
+                            Pagar
                         </button>
                     )}
                 </div>
