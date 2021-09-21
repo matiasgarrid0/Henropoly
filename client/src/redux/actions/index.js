@@ -32,6 +32,8 @@ export {
   setMoveTurn,
   setBalance,
   goToJail,
+  updateTrade,
+  serOwner
 } from "./henropolyGame";
 export { setView } from "./view";
 export {

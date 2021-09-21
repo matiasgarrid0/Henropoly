@@ -16,6 +16,7 @@ import {
   goToJail,
   setBalance,
   statusTrading,
+  updateTrade
 } from "./../../redux/actions";
 import {
   Board,
@@ -434,6 +435,8 @@ const DisplayGameBeta = () => {
       } else if (data.status === "goToJail") {
         dispatch(goToJail(data));
         setRender(`status:${data.status}`);
+      } else if (data.status === "updateTrade") {
+        dispatch(updateTrade(data.data));
       }
       // else if (data.status === 'buyRailway'){
       //   dispatch(buyRailwayAction(data))

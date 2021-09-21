@@ -8,7 +8,8 @@ import {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
-  GO_TO_JAIL
+  GO_TO_JAIL,
+  SET_OWNER
 } from "../constants";
 
 const initialState = {
@@ -69,6 +70,13 @@ const henropolyGame = (state = initialState, action) => {
         ...state,
         status: payload,
       };
+    case SET_OWNER:
+      let newOwner = state.table;
+      newOwner[payload.box].owner = state.dataPlayers[payload.target].username;
+      return {
+        ...state,
+        table: newOwner,
+      };
     case BUY_PROPERTY_ACTION:
       let newTable = state.table;
       newTable[payload.box].owner =
@@ -93,9 +101,9 @@ const henropolyGame = (state = initialState, action) => {
             ...state.dataPlayers[payload.target],
             box: payload.move,
           },
-        }
-      }
-      }
+        },
+      };
+    }
     // case BUY_PROPERTY_ACTION:
     //   let newTable = state.table
     //   newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
@@ -109,26 +117,28 @@ const henropolyGame = (state = initialState, action) => {
         ...state,
         dataPlayers: {
           ...state.dataPlayers,
-          [payload.newProperty]: { ...state.dataPlayers[payload.newProperty], box: [payload.newPosition] }
-        }
+          [payload.newProperty]: {
+            ...state.dataPlayers[payload.newProperty],
+            box: [payload.newPosition],
+          },
+        },
       };
 
-
     // case SET_GAME_STATUS:
-    //  return { 
+    //  return {
     //    ...state,
-    //   status:payload   
+    //   status:payload
     //  }
     //  case BUY_PROPERTY_ACTION:
     //    let newTable= state.table
     //    newTable[payload.box].owner = state.dataPlayers[payload.newProperty].username //propiedad dentro del payload
-    //   return { 
+    //   return {
     //     ...state,
     //    table: newTable,
     //    dataPlayers:{...state.dataPlayers, [payload.newProperty]:{...state.dataPlayers[payload.newProperty], henryCoin: payload.newbalase }}
     //   };
     //  case SET_GAME_ROLL: {
-    //   return { 
+    //   return {
     //     ...state,
     //    dataPlayers:{
     //      ...state.dataPlayers,
@@ -136,7 +146,7 @@ const henropolyGame = (state = initialState, action) => {
     //   }
     // }
     // case GO_TO_JAIL:
-    //   return { 
+    //   return {
     //     ...state,
     //     dataPlayers:{
     //       ...state.dataPlayers,
@@ -145,7 +155,7 @@ const henropolyGame = (state = initialState, action) => {
 
     default:
       return state;
-  };
-}
+  }
+};
 
 export default henropolyGame;

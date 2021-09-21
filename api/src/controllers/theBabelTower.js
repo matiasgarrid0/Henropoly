@@ -290,13 +290,43 @@ const setConfirmation = async (data, io) => {
       io.sockets.in(roomTrade.hostUsername).emit("Trading", {
         status: "closeTrade",
       });
-      //final aqui  closeTrade
       const responseGameRoom = await client.get(`gameRoom${data.host}`);
       let roomJson = JSON.parse(responseGameRoom);
+      roomJson.table.forEach((card) => {
+        roomTrade.hostTradeCardIncludes.forEach((cardHost) => {
+          if (card.name === cardHost) {
+            roomJson.table[card.id].owner = roomTrade.targetUsername;
+          }
+        });
+        roomTrade.targetTradeCardIncludes.forEach((cardTrade) => {
+          if (card.name === cardTrade) {
+            roomJson.table[card.id].owner = roomTrade.hostUsername;
+          }
+        });
+      });
+      roomJson.dataPlayers[roomTrade.hostTrading].henryCoin =
+        roomJson.dataPlayers[roomTrade.hostTrading].henryCoin +
+        roomTrade.targetHenryCoin;
+      roomJson.dataPlayers[roomTrade.targetTrading].henryCoin =
+        roomJson.dataPlayers[roomTrade.targetTrading].henryCoin +
+        roomTrade.hostHenryCoin;
+      roomJson.dataPlayers[roomTrade.hostTrading].henryCoin =
+        roomJson.dataPlayers[roomTrade.hostTrading].henryCoin -
+        roomTrade.hostHenryCoin;
+      roomJson.dataPlayers[roomTrade.targetTrading].henryCoin =
+        roomJson.dataPlayers[roomTrade.targetTrading].henryCoin -
+        roomTrade.targetHenryCoin;
       roomJson.order.forEach((player) => {
         io.sockets.in(player).emit("log", {
           target: roomTrade.hostTrading,
           text: `a finalizado exitosamente su comercio con ${roomTrade.targetUsername}`,
+        });
+      });
+      await client.set(`gameRoom${data.host}`, JSON.stringify(roomJson));
+      roomJson.order.forEach((player) => {
+        io.sockets.in(player).emit("setGame", {
+          status: "updateTrade",
+          data: roomTrade,
         });
       });
     } else {
