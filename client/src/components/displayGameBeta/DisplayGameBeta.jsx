@@ -233,18 +233,18 @@ const DisplayGameBeta = () => {
       }
       if (info.table[dataPlayers[player].box].type === "jail") {
         setJailData(info.table[dataPlayers[player].box])
-        // if (dataPlayers[player].username === user.username) {
-        //   setMeBox({
-        //     ...meBox,
-        //     username: dataPlayers[player].username,
-        //     buy: () => {
-        //       socket.emit("TradeDashboard", { type: "jail", box: dataPlayers[player].box })
-        //       setPortal(null)
-        //     },
-        //   })
-        // } else {
-        //   setMeBox({ ...meBox, username: null })
-        // }
+        if (dataPlayers[player].username === user.username) {
+          setMeBox({
+            ...meBox,
+            username: dataPlayers[player].username,
+            buy: () => {
+              socket.emit("TradeDashboard", { type: "buyJail", box: dataPlayers[player].box })
+              setPortal(null)
+            },
+          })
+        } else {
+          setMeBox({ ...meBox, username: null })
+        }
         setPortal("jail");
       }
       if (info.table[dataPlayers[player].box].type === "stop") {
@@ -462,12 +462,17 @@ const DisplayGameBeta = () => {
         dispatch(moveToJail(data))
       } else if (data.status === 'goToJailCard') {
         dispatch(moveToJail(data))
-      } else if (data.status === 'jail') {
-        dispatch(moveToJail(data))
+      } else if (data.status === 'buyJail') {
         dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
         dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
+        dispatch(buyPropertyAction(data))
+      }else if (data.status ==='dadosJail'){
+        if(data.fail){
+          dispatch(setMoveTurn(false))
+        } else {
+          dispatch(setMoveTurn(true))
+        }
       }
-      
     })
 
     return () => {
@@ -514,7 +519,7 @@ const DisplayGameBeta = () => {
       )}
       {portal === "jail" && (
         <Portal onClose={closedPortal3}>
-          <Jail data={jailData} />
+          <Jail username={meBox.username} buy={meBox.buy} data={jailData} />
         </Portal>
       )}
       {portal === "stop" && (
