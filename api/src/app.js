@@ -35,6 +35,11 @@ const {
   goToJail,
   initialTrade,
   acceptTrade,
+  addTradeOfert,
+  RemoveTradeOfert,
+  setHenryCoin,
+  setConfirmation,
+  cancelTrade
   /*luckyOrArc,
   gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
@@ -120,8 +125,18 @@ io.on("connection", async (socket) => {
     socket.on("sendTrade", async (data) => {
       if (data.type === "initialTrade") {
         await initialTrade(data.host, decoded.user.username, data.target, io);
-      } else if (data.type === 'acceptTrade'){
-        await acceptTrade(data.host, decoded.user.username, io)
+      } else if (data.type === "acceptTrade") {
+        await acceptTrade(data.host, decoded.user.username, io);
+      } else if (data.type === "addTradeOfert") {
+        await addTradeOfert(data, io);
+      } else if (data.type === "RemoveTradeOfert") {
+        await RemoveTradeOfert(data, io);
+      } else if (data.type === "setHenryCoin") {
+        await setHenryCoin(data, io);
+      } else if (data.type === "setConfirmation") {
+        await setConfirmation(data, io);
+      } else if (data.type === "cancelTrade") {
+        await cancelTrade(data, io);
       }
     });
     socket.on("Trading", () => {});

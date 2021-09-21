@@ -34,4 +34,14 @@ export {
   goToJail,
 } from "./henropolyGame";
 export { setView } from "./view";
-export { statusTrading, setHostTrader, setTradingFull } from "./HenryTrading";
+export {
+  statusTrading,
+  setHostTrader,
+  setTradingFull,
+  setTradeOfertHost,
+  setTradeOfertOponent,
+  setHostHenryCoin,
+  setTargetHenryCoin,
+  setHostConfirmation,
+  setTargetConfirmation
+} from "./HenryTrading";

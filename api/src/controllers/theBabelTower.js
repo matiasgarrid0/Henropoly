@@ -11,7 +11,6 @@ const redisConfig = {
 
 const client = asyncRedis.createClient(redisConfig);
 
-var timers = {};
 var timerSec = {};
 var seconds = {};
 const randomArray = (arr) => {
@@ -57,6 +56,8 @@ const initialTrade = async (host, username, target, io) => {
       ),
       hostTradeCard: [],
       targetTradeCard: [],
+      hostTradeCardIncludes: [],
+      targetTradeCardIncludes: [],
       hostHenryCoin: 0,
       targetHenryCoin: 0,
       hostTotalHenryCoin: gameRoom.dataPlayers[hostTrading].henryCoin,
@@ -94,8 +95,245 @@ const acceptTrade = async (host, username, io) => {
     roomJson.order.forEach((player) => {
       io.sockets.in(player).emit("log", {
         target: roomTrade.hostTrading,
-        text: `a iniciado comercio con ${roomTrade.targetTrading}`,
+        text: `a iniciado comercio con ${roomTrade.targetUsername}`,
       });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const addTradeOfert = async (data, io) => {
+  try {
+    const response = await client.get(`tradingRoom${data.hostUsername}`);
+    const roomTrade = JSON.parse(response);
+    if (data.quien === "host") {
+      if (
+        !roomTrade.hostTradeCardIncludes.includes(
+          roomTrade.hostCard[data.num].name
+        ) &&
+        roomTrade.hostTradeCardIncludes.length < 9
+      ) {
+        roomTrade.hostTradeCard.push(roomTrade.hostCard[data.num]);
+        roomTrade.hostTradeCardIncludes.push(roomTrade.hostCard[data.num].name);
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(
+          `tradingRoom${data.hostUsername}`,
+          JSON.stringify(roomTrade)
+        );
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTradeOfertHost",
+          hostTradeCard: roomTrade.hostTradeCard,
+          hostTradeCardIncludes: roomTrade.hostTradeCardIncludes,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTradeOfertHost",
+          hostTradeCard: roomTrade.hostTradeCard,
+          hostTradeCardIncludes: roomTrade.hostTradeCardIncludes,
+        });
+      }
+    } else if (data.quien === "oponent") {
+      if (
+        !roomTrade.targetTradeCardIncludes.includes(
+          roomTrade.targetCard[data.num].name
+        ) &&
+        roomTrade.targetTradeCardIncludes.length < 9
+      ) {
+        roomTrade.targetTradeCard.push(roomTrade.targetCard[data.num]);
+        roomTrade.targetTradeCardIncludes.push(
+          roomTrade.targetCard[data.num].name
+        );
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(
+          `tradingRoom${data.hostUsername}`,
+          JSON.stringify(roomTrade)
+        );
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTradeOfertOponent",
+          targetTradeCard: roomTrade.targetTradeCard,
+          targetTradeCardIncludes: roomTrade.targetTradeCardIncludes,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTradeOfertOponent",
+          targetTradeCard: roomTrade.targetTradeCard,
+          targetTradeCardIncludes: roomTrade.targetTradeCardIncludes,
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const RemoveTradeOfert = async (data, io) => {
+  try {
+    const response = await client.get(`tradingRoom${data.hostUsername}`);
+    const roomTrade = JSON.parse(response);
+    if (data.quien === "host") {
+      if (roomTrade.hostTradeCardIncludes.includes(data.name)) {
+        let newHostTradeCard = roomTrade.hostTradeCard.filter(
+          (card) => card.name !== data.name
+        );
+        roomTrade.hostTradeCard = newHostTradeCard;
+        let newhostTradeCardIncludes = roomTrade.hostTradeCardIncludes.filter(
+          (card) => card !== data.name
+        );
+        roomTrade.hostTradeCardIncludes = newhostTradeCardIncludes;
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(
+          `tradingRoom${data.hostUsername}`,
+          JSON.stringify(roomTrade)
+        );
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTradeOfertHost",
+          hostTradeCard: roomTrade.hostTradeCard,
+          hostTradeCardIncludes: roomTrade.hostTradeCardIncludes,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTradeOfertHost",
+          hostTradeCard: roomTrade.hostTradeCard,
+          hostTradeCardIncludes: roomTrade.hostTradeCardIncludes,
+        });
+      }
+    } else if (data.quien === "oponent") {
+      if (roomTrade.targetTradeCardIncludes.includes(data.name)) {
+        let newTargetTradeCard = roomTrade.targetTradeCard.filter(
+          (card) => card.name !== data.name
+        );
+        roomTrade.targetTradeCard = newTargetTradeCard;
+        let newTargetTradeCardIncludes =
+          roomTrade.targetTradeCardIncludes.filter(
+            (card) => card !== data.name
+          );
+        roomTrade.targetTradeCardIncludes = newTargetTradeCardIncludes;
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(
+          `tradingRoom${data.hostUsername}`,
+          JSON.stringify(roomTrade)
+        );
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTradeOfertOponent",
+          targetTradeCard: roomTrade.targetTradeCard,
+          targetTradeCardIncludes: roomTrade.targetTradeCardIncludes,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTradeOfertOponent",
+          targetTradeCard: roomTrade.targetTradeCard,
+          targetTradeCardIncludes: roomTrade.targetTradeCardIncludes,
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const setHenryCoin = async (data, io) => {
+  try {
+    const response = await client.get(`tradingRoom${data.host}`);
+    const roomTrade = JSON.parse(response);
+    if (data.target === "target") {
+      if (
+        roomTrade.targetTotalHenryCoin >= data.henryCoin &&
+        data.henryCoin >= 0
+      ) {
+        roomTrade.targetHenryCoin = parseInt(data.henryCoin);
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(`tradingRoom${data.host}`, JSON.stringify(roomTrade));
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTargetHenryCoin",
+          targetHenryCoin: parseInt(data.henryCoin),
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTargetHenryCoin",
+          targetHenryCoin: parseInt(data.henryCoin),
+        });
+      }
+    } else {
+      if (
+        roomTrade.hostTotalHenryCoin >= data.henryCoin &&
+        data.henryCoin >= 0
+      ) {
+        roomTrade.hostHenryCoin = parseInt(data.henryCoin);
+        roomTrade.targetStatus = false;
+        roomTrade.hostStatus = false;
+        await client.set(`tradingRoom${data.host}`, JSON.stringify(roomTrade));
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setHostHenryCoin",
+          hostHenryCoin: parseInt(data.henryCoin),
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setHostHenryCoin",
+          hostHenryCoin: parseInt(data.henryCoin),
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const setConfirmation = async (data, io) => {
+  try {
+    const response = await client.get(`tradingRoom${data.host}`);
+    const roomTrade = JSON.parse(response);
+    if (data.target === "target") {
+      roomTrade.targetStatus = data.status;
+    } else {
+      roomTrade.hostStatus = data.status;
+    }
+    if (roomTrade.targetStatus && roomTrade.hostStatus) {
+      io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+        status: "closeTrade",
+      });
+      io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+        status: "closeTrade",
+      });
+      //final aqui  closeTrade
+      const responseGameRoom = await client.get(`gameRoom${data.host}`);
+      let roomJson = JSON.parse(responseGameRoom);
+      roomJson.order.forEach((player) => {
+        io.sockets.in(player).emit("log", {
+          target: roomTrade.hostTrading,
+          text: `a finalizado exitosamente su comercio con ${roomTrade.targetUsername}`,
+        });
+      });
+    } else {
+      await client.set(`tradingRoom${data.host}`, JSON.stringify(roomTrade));
+      if (data.target === "target") {
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setTargetConfirmation",
+          targetStatus: roomTrade.targetStatus,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setTargetConfirmation",
+          targetStatus: roomTrade.targetStatus,
+        });
+      } else {
+        io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+          status: "setHostConfirmation",
+          hostStatus: roomTrade.hostStatus,
+        });
+        io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+          status: "setHostConfirmation",
+          hostStatus: roomTrade.hostStatus,
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const cancelTrade = async (data, io) => {
+  try {
+    const response = await client.get(`tradingRoom${data.host}`);
+    const roomTrade = JSON.parse(response);
+    io.sockets.in(roomTrade.targetUsername).emit("Trading", {
+      status: "closeTrade",
+    });
+    io.sockets.in(roomTrade.hostUsername).emit("Trading", {
+      status: "closeTrade",
     });
   } catch (error) {
     console.log(error);
@@ -969,6 +1207,11 @@ module.exports = {
   goToJail,
   initialTrade,
   acceptTrade,
+  addTradeOfert,
+  RemoveTradeOfert,
+  setHenryCoin,
+  setConfirmation,
+  cancelTrade,
   /*luckyOrArc,
   gameActionsBoard*/
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./Trading.css";
 import Express from "./../board/img/express.png";
 import Cplus from "./../board/img/c-plus.png";
@@ -24,7 +25,12 @@ import {
   FaGitSquare,
 } from "react-icons/fa";
 
-const Card = ({ data }) => {
+const Card = ({ data, target, box, type }) => {
+  const { socket } = useSelector((state) => state.auth);
+  const { host } = useSelector((state) => state.henropolyGame);
+  const { hostTradeCardIncludes, targetTradeCardIncludes } = useSelector(
+    (state) => state.henryTrading
+  );
   const selectoIcon = (icon) => {
     switch (icon) {
       case " CSS":
@@ -38,15 +44,11 @@ const Card = ({ data }) => {
       case "MySQL":
         return <SiMysql className="trading-card-icon" />;
       case "C#":
-        return (
-          <img src={Csharp} className="trading-card-icon-img" alt="img" />
-        );
+        return <img src={Csharp} className="trading-card-icon-img" alt="img" />;
       case "C++":
         return <img src={Cplus} className="trading-card-icon-img" alt="img" />;
       case "C":
-        return (
-          <img src={Cicon} className="trading-card-icon-img" alt="img" />
-        );
+        return <img src={Cicon} className="trading-card-icon-img" alt="img" />;
       case "BootStrap":
         return <BsFillBootstrapFill className="trading-card-icon" />;
       case "Diseño UI/UX":
@@ -69,11 +71,7 @@ const Card = ({ data }) => {
         return <SiJavascript className="trading-card-icon" />;
       case "Sequelize":
         return (
-          <img
-            src={Sequelize}
-            className="trading-card-icon-img"
-            alt="img"
-          />
+          <img src={Sequelize} className="trading-card-icon-img" alt="img" />
         );
       case "GitHub":
         return <SiGithub className="trading-card-icon" />;
@@ -85,9 +83,94 @@ const Card = ({ data }) => {
         return <DiReact className="trading-card-icon" />;
     }
   };
+  const sendOfert = () => {
+    return () => {
+      if (
+        (target === "host" && !hostTradeCardIncludes.includes(data.name)) ||
+        (target === "oponent" && !targetTradeCardIncludes.includes(data.name))
+      ) {
+        socket.emit("sendTrade", {
+          type: "addTradeOfert",
+          quien: target,
+          num: box,
+          hostUsername: host,
+        });
+      }
+    };
+  };
+  const editOfert = () => {
+    return () => {
+      if (
+        (target === "host" && hostTradeCardIncludes.includes(data.name)) ||
+        (target === "oponent" && targetTradeCardIncludes.includes(data.name))
+      ) {
+        socket.emit("sendTrade", {
+          type: "RemoveTradeOfert",
+          quien: target,
+          name: data.name,
+          hostUsername: host,
+        });
+      }
+    };
+  };
+  if (data && type === "panel") {
+    return (
+      <div
+        onClick={sendOfert()}
+        className={`${
+          target === "host"
+            ? hostTradeCardIncludes.includes(data.name)
+              ? "trading-card"
+              : hostTradeCardIncludes.length < 9
+              ? "trading-card-activo"
+              : "trading-card"
+            : targetTradeCardIncludes.includes(data.name)
+            ? "trading-card"
+            : targetTradeCardIncludes.length < 9
+            ? "trading-card-activo"
+            : "trading-card"
+        } no-select`}
+      >
+        <div className={`trading-card-${data.color} trading-card-style-title`}>
+          <label className="trading-card-style-title-label">{data.name}</label>
+        </div>
+        <div className="trading-card-contenido-icon">
+          {selectoIcon(data.name)}
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Nivel Actual:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+            {data.actualPrice}
+          </label>
+        </div>
+      </div>
+    );
+  }
+  if (data && type === "trade") {
+    return (
+      <div onClick={editOfert()} className="trading-card-activo-red no-select">
+        <div className={`trading-card-${data.color} trading-card-style-title`}>
+          <label className="trading-card-style-title-label">{data.name}</label>
+        </div>
+        <div className="trading-card-contenido-icon">
+          {selectoIcon(data.name)}
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Nivel Actual:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+            {data.actualPrice}
+          </label>
+        </div>
+      </div>
+    );
+  }
   if (data) {
     return (
-      <div className="trading-card box-column no-select">
+      <div className="trading-card no-select">
         <div className={`trading-card-${data.color} trading-card-style-title`}>
           <label className="trading-card-style-title-label">{data.name}</label>
         </div>
