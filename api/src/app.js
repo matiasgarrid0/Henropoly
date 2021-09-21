@@ -111,7 +111,7 @@ io.on("connection", async (socket) => {
       }
         //else if (data.type === 'luckyComunalCard') {
       //luckyComunalCard(decoded.user.username, data.box, io)
-      //}
+      //}//
 
     })
     //timer

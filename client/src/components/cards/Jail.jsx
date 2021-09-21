@@ -4,7 +4,7 @@ import ToniJail from '../board/img/toniPreso.png'
 import ToniPolice from '../board/img/Toni_police.png'
 import ToniVacations from '../board/img/Toni_vacaciones.png'
 import './Jail.css';
-
+//
 const Jail = ({ data, username, buy }) => {
     const { user } = useSelector((state) => state.auth);
     if (data.type === "jail") {

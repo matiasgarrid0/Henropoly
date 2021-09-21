@@ -832,7 +832,7 @@ const roll = async (username, io) => {
           });
         });
       }
-      // if (jail) {
+      // if (jail) { //
       //   room.order.forEach(async (player) => {
       //     await callbackTest(100);
       //     io.sockets.in(player).emit("log", {
