@@ -10,7 +10,8 @@ import {
   SET_BALANCE,
   GO_TO_JAIL,
   SET_BUY_BOX,
-  PLAYER_GAME_IS_OVER
+  PLAYER_GAME_IS_OVER,
+  TOKEN_PLAYERS,
 } from "../constants";
 
 export const setGame = (data) => {
@@ -91,5 +92,12 @@ export const playerGameisOver = (payload) => {
   return {
     type: PLAYER_GAME_IS_OVER,
     payload:payload
+  }
+}
+
+export const getToken =(data) => {
+  return {
+    type: TOKEN_PLAYERS,
+    payload:data
   }
 }

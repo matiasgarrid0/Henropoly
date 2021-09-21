@@ -7,14 +7,16 @@ import { SelectToken } from '..';
 const Room = () => {
   const dispatch = useDispatch();
   const { socket, user } = useSelector((state) => state.auth);
-  const { status } = useSelector((state) => state.henropolyGame);
+  const { status, tokensDataPlayers} = useSelector((state) => state.henropolyGame);
+  
+    
+
   const [statusRoom, setStatusRoom] = useState({
     room: { host: user.username, players: [] },
   });
   const [input, setInput] = useState({
     unirse: "",
   });
-
   useEffect(() => {
     socket.on("roomStatus", (data) => {
       if (data.status === "inHold") {
@@ -35,7 +37,7 @@ const Room = () => {
     return () => {
       socket.off('roomStatus');
     };
-  }, []);
+  });
 
   const setRoom = (data) => {
     return () => {
@@ -97,6 +99,8 @@ const Room = () => {
                   Iniciar Juego
                 </button>
               )}
+           {/*   { tokensDataPlayers === [] ? 
+                 <span>porfis elegi un toquens</span> : <span>{tokensDataPlayers.tokens1.owner}</span>}   */}
             </div>
           ) : (
             <button className="button-leave" onClick={setRoom({ type: "leaveRoom" })}>

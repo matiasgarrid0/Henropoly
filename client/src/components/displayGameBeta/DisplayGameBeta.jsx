@@ -53,6 +53,7 @@ const DisplayGameBeta = () => {
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
+  const {room} = useSelector((state)=> state.toekns2)
   const [minimizarPlayers, setMinimizarPlayers] = useState({
     status: false,
     target: null,
@@ -95,6 +96,7 @@ const DisplayGameBeta = () => {
     username: null,
     buy: null,
   });
+ 
   const moveTime = (value) => {
     return new Promise((resolve) => setTimeout(resolve, value));
   };

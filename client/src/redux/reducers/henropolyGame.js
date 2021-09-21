@@ -10,6 +10,8 @@ import {
   SET_BALANCE,
   GO_TO_JAIL,
   PLAYER_GAME_IS_OVER,
+  TOKEN_PLAYERS
+
 } from "../constants";
 
 const initialState = {
@@ -18,6 +20,7 @@ const initialState = {
   order: [],
   actualTurn: null,
   dataPlayers: {},
+  tokensDataPlayers:[]
 };
 const henropolyGame = (state = initialState, action) => {
   const { type, payload } = action;
@@ -105,23 +108,36 @@ const henropolyGame = (state = initialState, action) => {
           ...state.dataPlayers,        
         [payload.info.target]: {...state.dataPlayers[payload.info.target], box: payload.box}}
       };
+      case TOKEN_PLAYERS: 
+      return {
+        ...state,
+        tokensDataPlayers: payload.room
+      }
     case PLAYER_GAME_IS_OVER:{
-      return state;
-
-      
+      return state; 
     }
     default:
       return state;
   };
 }
 /*
- box: 10
-info:
-move: 10
-target: "target2"
+room:
+host: "pani"
+players: Array(1)
+0: "berenjena"
+length: 1
+[[Prototype]]: Array(0)
+tokens1:
+owner: "pani"
+token: "/static/media/toni.b38cec35.jpeg"
 [[Prototype]]: Object
-newProperty: "target2"
-status: "goToJail"
-[[Prototype]]: Object */
+tokens2:
+owner: "berenjena"
+token: "/static/media/sele.c98664e3.jpeg"
+[[Prototype]]: Object
+tokens3: [{…}]
+tokens4: [{…}]
+[[Prototype]]: Object
+*/
 
 export default henropolyGame;

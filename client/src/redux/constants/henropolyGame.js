@@ -10,3 +10,4 @@ export const SET_BALANCE = 'SET_BALANCE'
 export const GO_TO_JAIL = 'GO_TO_JAIL';
 export const SET_BUY_BOX = 'SET_BUY_BOX';
 export const PLAYER_GAME_IS_OVER='PLAYER_GAME_IS_OVER';
+export const TOKEN_PLAYERS='TOKEN_PLAYERS';

@@ -24,7 +24,8 @@ export {
   SET_BALANCE,
   GO_TO_JAIL,
   SET_BUY_BOX,
-  PLAYER_GAME_IS_OVER
+  PLAYER_GAME_IS_OVER,
+  TOKEN_PLAYERS
 } from "./henropolyGame";
 export { SET_VIEW } from "./view";
 export { STATUS_TRADING } from "./henryTrading";
