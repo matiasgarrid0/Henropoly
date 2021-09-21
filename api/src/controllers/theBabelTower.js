@@ -65,10 +65,20 @@ const createRoom = async (username, io) => {
       `waitingRoom${ResponsePlayersInHold}`
     );
     if (responseWaitingRoom === null && ResponsePlayersInHold === null) {
+     
       const value = JSON.stringify({
         host: username,
         players: [],
+        playersTotal : {
+          uno: username,
+          dos: players[0],
+          tres: players[1] ? players[1] : null,
+          cuatro:players[2] ? players[2] : null
+        }, 
+        //playersTotal.push(host),
+        tokens: [{}]
       });
+    
       await client.set(`playersInHold${username}`, username);
       await client.set(`waitingRoom${username}`, value);
       io.sockets.in(username).emit("roomStatus", {
@@ -259,6 +269,7 @@ const goGame = async (username, io) => {
           box: 0,
           x: 120,
           y: 40,
+          token:null
         },
         target4: {
           username: null,
@@ -268,6 +279,7 @@ const goGame = async (username, io) => {
           box: 0,
           x: 40,
           y: 40,
+          token:null
         },
       },
       move: true,
@@ -280,6 +292,7 @@ const goGame = async (username, io) => {
       box: 0,
       x: 120,
       y: 120,
+      token:null
     };
     gameRoom.dataPlayers.target2 = {
       username: gameRoom.order[1],
@@ -289,6 +302,7 @@ const goGame = async (username, io) => {
       box: 0,
       x: 40,
       y: 120,
+      token:null
     };
     if (gameRoom.order.length > 2) {
       gameRoom.dataPlayers.target3 = {
@@ -685,13 +699,13 @@ const roll = async (username, io) => {
           else if (luckyCard.type === 'pasas') {
             io.sockets.in(player).emit("log", {
               target: target,
-              text: 'consiguió una carta para salvarse de migrar.',
+              text: ' consiguió una carta para salvarse de migrar.',
             })
           }
           else {
             io.sockets.in(player).emit("log", {
               target: target,
-              text: 'te vas a migrar, más suerte la próxima.',
+              text: ' te vas a migrar, más suerte la próxima.',
             })
           }
           io.sockets.in(player).emit("setGame", {
@@ -708,7 +722,7 @@ const roll = async (username, io) => {
           await callbackTest(100);
           io.sockets.in(player).emit("log", {
             target: target,
-            text: `${comunalType} unos $${cost} henryCoins por carta comunal.`,
+            text: ` ${comunalType} unos $${cost} henryCoins por carta comunal.`,
           })
           io.sockets.in(player).emit("setGame", {
             status: "setBalance",
@@ -724,7 +738,7 @@ const roll = async (username, io) => {
           await callbackTest(100);
           io.sockets.in(player).emit("log", {
             target: target,
-            text: `tira dados dobles y puede volver a tirar`,
+            text: ` tira dados dobles y puede volver a tirar`,
           })
         })
       }
@@ -882,50 +896,7 @@ const buyService = async (username, box, io) => {
   }
 }
 
-// const luckyComunalCard = async (username, box, io) => {
-//   try {
-//     const host = await client.get(`playersInGame${username}`); //trae data de un player
-//     const responseGameRoom = await client.get(`gameRoom${host}`);
-//     var roomGame = JSON.parse(responseGameRoom);
-//     for (let i = 1; i < 5; i++) {
-//       if (room.dataPlayers[`target${i}`].username === username) {
-//         target = `target${i}`
-//       };
-//     };
-//     if (room.table[room.dataPlayers[target].box].type === 'lucky') {
-//       let luckyCards = roomGame.lucky;
-//       const numberLucky = Math.floor((Math.random() * 12) + 1)
-//       const luckyCard = luckyCards.filter((e) => e.ID === numberLucky)
-//       if (luckyCard === 'pagas') {
-//         room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - luckyCard.value
-//       } else if (luckyCard === 'cobras') {
-//         room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + luckyCard.value
-//       }//else if(luckyCard === 'pasas'){
-//       // Falta pushear la carta para no migrar
-//       //}
 
-//     } else if (room.table[room.dataPlayers[target].box].type === 'comunal') {
-//       let comunalCards = roomGame.comunal;
-//       const numberComunal = Math.floor((Math.random() * 12) + 1)
-//       const comunalCard = comunalCards.filter((e) => e.ID === numberComunal)
-//       if (comunalCard === 'cobras') {
-//         room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + comunalCard.value
-//       } else {
-//         room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - comunalCard.value
-//       }
-//     }
-//     await client.set(`gameRoom${host}`, JSON.stringify(room))
-//     io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
-//       status: "luckyComunalCard",
-//       box: box,
-//       newProperty: target,
-//       newbalase: room.dataPlayers[target].henryCoin
-//     });
-//   }
-//   catch (error) {
-//     console.log('Error en luckyComunalCard');
-//   }
-// }
 
 const goToJail = async (username, io) => {
   try {
@@ -951,11 +922,13 @@ const goToJail = async (username, io) => {
      await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
    room.order.forEach((player) => {
     io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
-      status: "goToJail",
+      status: "goToJail", 
       info: { target: target, move: room.dataPlayers[target].box },
       box: room.dataPlayers[target].box,
       newProperty: target,
     });
+    io.sockets.in(player)
+    .emit("log", { target: target, text: " va directo a la carcel" });
   }); 
 
 
@@ -966,29 +939,10 @@ const goToJail = async (username, io) => {
 } 
 }
 
+  
+  const playerIsLoser = () => {
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const luckyOrArc = async (card, player, infoGame) =>{
-// // console.log('infoGame!!!!!!!!!', infoGame)
-//   switch (card[0].type) {
-//     case "pagas":// te descuenta plata
-//   player.henryCoins = player.henryCoins - card[0].value
-//         return player 
-//     case "cobras":// ta aunmenta plata
-//       player.henryCoins= player.henryCoins + card[0].value
-//         return player 
-//     case "migras":// te lleva directo a la carcel sea cual sea la posición q estes y no cobras al pasr por salida
-//       //infoGame[0].resultNewGame.playerPosition.target1.box= 10
-//       return player
-//     case "pasas":// esta se tiene q guardar e array cards para poder usar en cualquier momento q caes en la carcel
-//       return (player = {
-//         ...player,
-//         cards: player.cards.push(card)
-//       });
-//     default:
-//      return player;
-//   }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  }
 
 
 module.exports = {
@@ -1006,6 +960,8 @@ module.exports = {
   buyRailway,
   buyService,
   goToJail,
+  playerIsLoser
+
   //luckyComunalCard,
   /*luckyOrArc,
   gameActionsBoard*/

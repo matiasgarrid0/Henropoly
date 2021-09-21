@@ -9,7 +9,8 @@ import {
   SET_MOVE_TURN,
   SET_BALANCE,
   GO_TO_JAIL,
-  SET_BUY_BOX
+  SET_BUY_BOX,
+  PLAYER_GAME_IS_OVER
 } from "../constants";
 
 export const setGame = (data) => {
@@ -76,9 +77,19 @@ export const setBuyBox = (payload) => {
     payload: payload, //{box:1, target: 'target1',}
   };
 };
+
 export const setBalance = (payload) => {
   return {
     type: SET_BALANCE,
     payload: payload, //{target:"target1",henryCoin:1700,}
   };
 };
+
+
+export const playerGameisOver = (payload) => {
+
+  return {
+    type: PLAYER_GAME_IS_OVER,
+    payload:payload
+  }
+}

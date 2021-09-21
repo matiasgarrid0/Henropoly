@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setGame, setGameStatus } from "./../../redux/actions";
 import "./Room.css";
+import { SelectToken } from '..';
 
 const Room = () => {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ const Room = () => {
           <div></div>
           Miembros: {statusRoom.room.players.map((player) => {
             return (
+            
               <label>
                 {player}
                 {statusRoom.room.host === user.username && (
@@ -79,8 +81,12 @@ const Room = () => {
                   >
                     expulsar jugador
                   </button>
-                )}
+
+                )}                 
+                
               </label>
+          
+              
             );
           })}
           {statusRoom.room.host === user.username ? (
@@ -97,6 +103,11 @@ const Room = () => {
               Abandonar sala
             </button>
           )}
+          
+       <div> 
+              <SelectToken />
+          </div>  
+               
         </div>
       )}
     </div>

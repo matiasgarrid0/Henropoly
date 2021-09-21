@@ -1,7 +1,12 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import "./Turns.css";
+import { playerGameisOver } from "../../redux/actions";
+
+
 const Turns = ({ action }) => {
+
+const dispatch = useDispatch();
   const reloj = (sec) => {
     let minutos = `0${Math.floor(sec / 60)}`;
     let segundos = sec % 60;
@@ -25,6 +30,22 @@ const Turns = ({ action }) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
+  useEffect(() => {
+    socket.on("setGame", (data) => {
+     if(data.status === 'playerLost') {
+       dispatch(playerGameisOver)
+     }
+      else if (data.status === 'goToJail'){ 
+        console.log('dataStatusJail', data)
+       // dispatch(moveToJail(data))
+        //dispatch(changeValueTarget(data.info.target,'box', 10));
+      }
+    })
+    return () => {
+      socket.off("setGame");
+    };
+  }, []);
+
   return (
     <div className="turns-table box-row">
       {dataPlayers.target1.status && (
@@ -37,7 +58,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target1.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target1.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target1.henryCoin > 400 ? dataPlayers.target1.henryCoin :socket.emit("TradeDashboard", { type: 'playerLost'})}</label>
           {dataPlayers.target1.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
@@ -55,7 +76,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target2.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target2.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target2.henryCoin > 400 ? dataPlayers.target2.henryCoin : socket.emit("TradeDashboard", { type: 'playerLost'})}</label>
           {dataPlayers.target2.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
@@ -72,8 +93,8 @@ const Turns = ({ action }) => {
           <label className="turns-target3">
             {dataPlayers.target3.username}
           </label>
-          <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target3.henryCoin}</label>
+          <label className="turns-title">HenryCoins:</label>                                              {/*   dispatch(playerGameIsOver) */}
+          <label className="turns-coin">{dataPlayers.target3.henryCoin > 0 ? dataPlayers.target3.henryCoin : socket.emit("TradeDashboard", { type: 'playerLost'})}</label>
           {dataPlayers.target3.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
@@ -91,7 +112,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target4.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target4.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target4.henryCoin > 0 ? dataPlayers.target4.henryCoin :socket.emit("TradeDashboard", { type: 'playerLost'})}</label>
           {dataPlayers.target4.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>

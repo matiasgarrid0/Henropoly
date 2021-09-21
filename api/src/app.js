@@ -33,6 +33,7 @@ const {
   buyRailway,
   buyService,
   goToJail,
+  playerIsLoser
   //luckyComunalCard
   /*luckyOrArc,
   gameActionsBoard*/
@@ -102,7 +103,9 @@ io.on("connection", async (socket) => {
         buyService(decoded.user.username, data.box, io)
       } else if (data.type === 'goToJail') {
         goToJail(decoded.user.username,io)
-      } //else if (data.type === 'luckyComunalCard') {
+      } else if (data.type === 'luckyComunalCard') {
+        playerIsLoser(decoded.user.username, io)
+      }
         //luckyComunalCard(decoded.user.username, data.box, io)
       //}
 
