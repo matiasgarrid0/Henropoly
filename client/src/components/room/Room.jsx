@@ -35,7 +35,7 @@ const Room = () => {
     return () => {
       socket.off('roomStatus');
     };
-  });
+  }, []);
 
   const setRoom = (data) => {
     return () => {

@@ -66,21 +66,29 @@ const createRoom = async (username, io) => {
     );
     if (responseWaitingRoom === null && ResponsePlayersInHold === null) {
      
-      const value = JSON.stringify({
+      const value = {
         host: username,
         players: [],
-        playersTotal : {
-          uno: username,
-          dos: players[0],
-          tres: players[1] ? players[1] : null,
-          cuatro:players[2] ? players[2] : null
-        }, 
         //playersTotal.push(host),
         tokens: [{}]
-      });
-    
+      };
+      if(value.players[0]){
+         value.playersTotal ={
+        one:username,
+        dos: value.players[0]
+      } }
+      if(value.players[1]){value.playersTotal ={
+        ...value.playersTotal,
+       tres: value.players[1]
+      } }
+
+      if(value.players[2]) { value.playersTotal ={
+        ...value.playersTotal,
+       cuatro: value.players[2]
+      } }
+   
       await client.set(`playersInHold${username}`, username);
-      await client.set(`waitingRoom${username}`, value);
+      await client.set(`waitingRoom${username}`, JSON.stringify(value));
       io.sockets.in(username).emit("roomStatus", {
         status: "inHold",
         room: { host: username, players: [] },
