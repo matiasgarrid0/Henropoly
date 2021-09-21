@@ -463,9 +463,9 @@ const DisplayGameBeta = () => {
       } else if (data.status === 'goToJailCard') {
         dispatch(moveToJail(data))
       } else if (data.status === 'buyJail') {
-        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
-        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
-        dispatch(buyPropertyAction(data))
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(buyPropertyAction(data));
       }else if (data.status ==='dadosJail'){
         if(data.fail){
           dispatch(setMoveTurn(false))
