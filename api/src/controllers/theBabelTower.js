@@ -470,7 +470,6 @@ const roll = async (username, io) => {
       room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
       room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
       let buyAlquiler = false;
-    //  let buyTax = false      
       let targetProperty;
       let cardChoice = null;
       let cost;
@@ -479,7 +478,6 @@ const roll = async (username, io) => {
       let buyComunalCard;
       let luckyType
       let comunalType
-      //let jail
       if (
         room.table[room.dataPlayers[target].box].owner !== null &&
         room.table[room.dataPlayers[target].box].owner !== username &&
@@ -580,7 +578,7 @@ const roll = async (username, io) => {
         buyLuckyCard = true;
         luckyType = '';
         let luckyCards = room.lucky
-        let numberLucky = 11 // Math.floor((Math.random() * 12) + 1)
+        let numberLucky = 11//Math.floor((Math.random() * 12) + 1)
         let luckyCard = luckyCards.filter((e) => e.ID === numberLucky)
         cardChoice = luckyCard
         if (luckyCard[0].type === 'pagas') {
@@ -591,16 +589,13 @@ const roll = async (username, io) => {
           luckyType = 'cobras'
           cost = luckyCard[0].value
           room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin + cost;
-        }
-        else if (luckyCard[0].type === 'pasas') {
+        } else if (luckyCard[0].type === 'pasas') {
           luckyType = 'pasas'
           room.dataPlayers[target].cards.push(luckyCard[0]);
-        } else if (luckyCard[0].type === 'migras') {
-          luckyType = 'migras'
-          //room.dataPlayers[target].box = 10
-          //oom.dataPlayers[target].cards.push(luckyCard[0]);
-          // await callbackTest(5000)
-        }
+        } //else if (luckyCard[0].type === 'migras') {
+        //   luckyType = 'migras'
+        //   goToJail(username,io)
+        // }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
@@ -620,13 +615,7 @@ const roll = async (username, io) => {
           cost = comunalCard[0].value
           room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - cost;
         }
-       }//else if (
-      //   room.table[room.dataPlayers[target].box].owner !== username &&
-      //   room.table[room.dataPlayers[target].box].type === 'goJail'){
-      //     jail = true
-      //     await callbackTest(5000)
-      //     room.dataPlayers[target].box = room.dataPlayers[target].box - 20
-      //   }
+      }
 
       if (num1 !== num2) {
         room.move = false;
@@ -662,17 +651,17 @@ const roll = async (username, io) => {
           });
         });
 
-        room.order.forEach( async (e) => { 
+        room.order.forEach(async (e) => {
           await callbackTest(100);
           io.sockets.in(e).emit("setGame", {
-          status: "setBalance",
-          info: {
-            target: target,
-            henryCoin: room.dataPlayers[target].henryCoin,
-          },
+            status: "setBalance",
+            info: {
+              target: target,
+              henryCoin: room.dataPlayers[target].henryCoin,
+            },
           });
         })
-       
+
       }
       if (buyTax) {
         room.order.forEach(async (player) => {
@@ -699,7 +688,7 @@ const roll = async (username, io) => {
               text: `${luckyType} unos $${cost} henryCoins por carta de suerte.`,
             })
           }
-          else if (cardChoice.type === 'pasas') { 
+          else if (cardChoice.type === 'pasas') {
             io.sockets.in(player).emit("log", {
               target: target,
               text: 'consiguió una carta para salvarse de migrar.',
@@ -831,14 +820,14 @@ const buyProperty = async (username, box, io) => {
           newbalase: room.dataPlayers[target].henryCoin,
         });
       });
-       
+
       room.order.forEach(e => {
-         io.sockets.in(e).emit("log", {
+        io.sockets.in(e).emit("log", {
           target: target,
           text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
-      
+
     }
   } catch (error) {
     console.log(error);
@@ -855,9 +844,12 @@ const buyRailway = async (username, box, io) => {
       target = `target${i}`
     };
   };
-  if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue && room.table[box].owner === null) {
+  if (
+    room.dataPlayers[target].henryCoin >= room.table[box].licenseValue
+    && room.table[box].owner === null) {
     room.dataPlayers[target].henryCoin = room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
     room.table[box].owner = username;
+
     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
     room.order.forEach((player) => {
       io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
@@ -897,14 +889,14 @@ const buyService = async (username, box, io) => {
         newProperty: target,
         newbalase: room.dataPlayers[target].henryCoin
       });
-     
+
     });
-  room.order.forEach((e) => {
-     io.sockets.in(e).emit("log", {
+    room.order.forEach((e) => {
+      io.sockets.in(e).emit("log", {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
-  })
+    })
   }
 }
 
@@ -955,65 +947,128 @@ const buyService = async (username, box, io) => {
 
 const goToJail = async (username, io) => {
   try {
-   // console.log(io)
-  const host = await client.get(`playersInGame${username}`)
-  const responseGameRoom = await client.get(`gameRoom${host}`);
-  let target;
-  var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
-  if (room.actualTurn === username) {
-  for (let i = 1; i < 5; i++) {
-    if (room.dataPlayers[`target${i}`].username === username) {
-      target = `target${i}`
-    }
-  }
-  room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
-  room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
-     // console.log('log in carcer',   room.dataPlayers[target].box)
-      if(room.dataPlayers[target].box === 30) {
+    const host = await client.get(`playersInGame${username}`)
+    const responseGameRoom = await client.get(`gameRoom${host}`);
+    let target;
+    var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+    if (room.actualTurn === username) {
+      for (let i = 1; i < 5; i++) {
+        if (room.dataPlayers[`target${i}`].username === username) {
+          target = `target${i}`
+        }
+      }
+      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+      // console.log('log in carcer',   room.dataPlayers[target].box)
+      if (room.dataPlayers[target].box === 30) { // como se iteraba en un array?
         room.dataPlayers[target].box = room.dataPlayers[target].box - 20
-       
-        console.log('pos changed', room.dataPlayers[target].box)
-    // console.log(io)
-     await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
-   room.order.forEach((player) => {
-    io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
-      status: "goToJail",
-      info: { target: target, move: room.dataPlayers[target].box },
-      box: room.dataPlayers[target].box,
-      newProperty: target,
-    });
-  }); 
+
+        // console.log(io)
+        await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+        room.order.forEach((player) => {
+          io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+            status: "goToJail",
+            info: { target: target, move: room.dataPlayers[target].box },
+            box: room.dataPlayers[target].box,
+            newProperty: target,
+          });
+        });
 
 
       }
     };
   } catch (error) {
-  console.log(error);
-} 
+    console.log(error);
+  }
+}
+
+const goToJailCard = async (username, io) => {
+  try {
+    // console.log(io)
+    const host = await client.get(`playersInGame${username}`)
+    const responseGameRoom = await client.get(`gameRoom${host}`);
+    let target;
+    var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+    if (room.actualTurn === username) {
+      for (let i = 1; i < 5; i++) {
+        if (room.dataPlayers[`target${i}`].username === username) {
+          target = `target${i}`
+        }
+      }
+      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+      // console.log('log in carcer',   room.dataPlayers[target].box)
+      room.dataPlayers[target].box = 10
+
+      await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+      room.order.forEach((player) => {
+        io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+          status: "goToJailCard",
+          info: { target: target, move: room.dataPlayers[target].box },
+          box: room.dataPlayers[target].box,
+          newProperty: target,
+        });
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const jail = async (username, io) => {
+  try {
+    const host = await client.get(`playersInGame${username}`)
+    const responseGameRoom = await client.get(`gameRoom${host}`);
+    let target;
+    var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+    if (room.actualTurn === username) {
+      for (let i = 1; i < 5; i++) {
+        if (room.dataPlayers[`target${i}`].username === username) {
+          target = `target${i}`
+        }
+      }
+      room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
+      room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
+
+      if (room.dataPlayers[target].box === 10) {
+        if (num1 !== num2) {
+          room.dataPlayers[target].box = room.dataPlayers[target].box
+        } else {
+          room.dataPlayers[target].box = room.dataPlayers[target].box + num1 + num2;
+        }
+      }
+
+      await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
+      room.order.forEach((player) => {
+        io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket 
+          status: "jail",
+          info: { target: target, move: room.dataPlayers[target].box },
+          box: room.dataPlayers[target].box,
+          newProperty: target,
+        });
+        //await callbackTest(100);
+        io.sockets.in(player).emit("log", {
+          target: target,
+          text: `paga 500 henryCoins por carta comunal.`,
+        })
+        io.sockets.in(player).emit("setGame", {
+          status: "setBalance",
+          info: {
+            target: target,
+            henryCoin: room.dataPlayers[target].henryCoin,
+          }
+        })
+      });
+
+
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const luckyOrArc = async (card, player, infoGame) =>{
-// // console.log('infoGame!!!!!!!!!', infoGame)
-//   switch (card[0].type) {
-//     case "pagas":// te descuenta plata
-//   player.henryCoins = player.henryCoins - card[0].value
-//         return player 
-//     case "cobras":// ta aunmenta plata
-//       player.henryCoins= player.henryCoins + card[0].value
-//         return player 
-//     case "migras":// te lleva directo a la carcel sea cual sea la posición q estes y no cobras al pasr por salida
-//       //infoGame[0].resultNewGame.playerPosition.target1.box= 10
-//       return player
-//     case "pasas":// esta se tiene q guardar e array cards para poder usar en cualquier momento q caes en la carcel
-//       return (player = {
-//         ...player,
-//         cards: player.cards.push(card)
-//       });
-//     default:
-//      return player;
-//   }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1032,6 +1087,8 @@ module.exports = {
   buyRailway,
   buyService,
   goToJail,
+  goToJailCard,
+  jail
   //luckyComunalCard,
   /*luckyOrArc,
   gameActionsBoard*/

@@ -12,6 +12,7 @@ const Jail = ({data}) => {
                 <div>
                     <h3 className="Jail-Title" >Migración</h3>
                     <img src={ToniJail} alt="Girl in a jacket" width="300" height="300"/>
+                    <button>Pagar 500 HenryCoins</button>
                 </div>
             </div>
         )
