@@ -106,8 +106,8 @@ io.on("connection", async (socket) => {
         goToJail(decoded.user.username, io)
       } else if (data.type === 'goToJailCard') {
         goToJailCard(decoded.user.username, io)
-      } else if (data.type === 'jail') {
-        jail(decoded.user.username, io)
+      } else if (data.type === 'buyJail') {
+        jail(decoded.user.username, data.box,io)
       }
         //else if (data.type === 'luckyComunalCard') {
       //luckyComunalCard(decoded.user.username, data.box, io)
