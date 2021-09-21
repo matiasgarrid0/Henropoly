@@ -33,7 +33,8 @@ const {
   buyRailway,
   buyService,
   goToJail,
-  playerIsLoser
+  playerIsLoser,
+  saveToken
   //luckyComunalCard
   /*luckyOrArc,
   gameActionsBoard*/
@@ -73,6 +74,9 @@ io.on("connection", async (socket) => {
         await leaveRoom(data.player, io);
       } else if (data.type === "goGame") {
         await goGame(decoded.user.username, io);
+      }else if (data.type === "sendToken") {
+        //console.log('console de type', data.img)
+        await saveToken(decoded.user.username,data.img, io);
       }
     });
     socket.on("roomStatus", () => { });

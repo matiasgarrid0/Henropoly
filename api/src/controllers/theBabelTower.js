@@ -70,22 +70,12 @@ const createRoom = async (username, io) => {
         host: username,
         players: [],
         //playersTotal.push(host),
-        tokens: [{}]
+       tokens1: [{owner:null, token:''}],
+       tokens2: [{owner:null, token:''}],
+       tokens3: [{owner:null, token:''}],
+       tokens4: [{owner:null, token:''}]
       };
-      if(value.players[0]){
-         value.playersTotal ={
-        one:username,
-        dos: value.players[0]
-      } }
-      if(value.players[1]){value.playersTotal ={
-        ...value.playersTotal,
-       tres: value.players[1]
-      } }
 
-      if(value.players[2]) { value.playersTotal ={
-        ...value.playersTotal,
-       cuatro: value.players[2]
-      } }
    
       await client.set(`playersInHold${username}`, username);
       await client.set(`waitingRoom${username}`, JSON.stringify(value));
@@ -98,6 +88,75 @@ const createRoom = async (username, io) => {
     console.log(error);
   }
 };
+
+const  saveToken = async(username,img, io) => {
+ // console.log(username)
+  const ResponsePlayersInHold = await client.get(`playersInHold${username}`);
+  const responseWaitingRoom = await client.get(`waitingRoom${ResponsePlayersInHold}`);
+
+  let waitingRoomJson = JSON.parse(responseWaitingRoom);
+  let cambios = false;
+/*   const value = {
+    host: username,
+    players: [],
+    //playersTotal.push(host),
+   tokens1: [{owner:null, token:''}],
+   tokens2:[{owner:null, token:''}],
+   tokens3:[{owner:null, token:''}],
+   tokens4:[{owner:null, token:''}]
+  }; */
+  
+   if(username === waitingRoomJson.host) {
+     if(waitingRoomJson.tokens2.token !== img && waitingRoomJson.tokens3.token !== img && waitingRoomJson.tokens4.token !== img){
+       cambios =true
+    waitingRoomJson.tokens1 ={ owner: username, token:img}
+     }
+    //  console.log(waitingRoomJson)
+  }
+  //console.log(waitingRoomJson.players[0])
+  if(waitingRoomJson.players[0] === username) {
+    if(waitingRoomJson.tokens1.token !== img && waitingRoomJson.tokens3.token !== img && waitingRoomJson.tokens4.token !== img){
+      cambios =true
+    waitingRoomJson.tokens2={ owner: username, token:img}
+    }
+   // console.log(waitingRoomJson) 
+  }
+  if(waitingRoomJson.players[1] === username) {
+    if(waitingRoomJson.tokens2.token !== img && waitingRoomJson.tokens1.token !== img && waitingRoomJson.tokens4.token !== img){
+      cambios =true
+    waitingRoomJson.tokens3={ owner: username, token:img}
+    }
+   // console.log(waitingRoomJson) 
+  }
+  if(waitingRoomJson.players[2] === username) {
+    if(waitingRoomJson.tokens2.token !== img && waitingRoomJson.tokens3.token !== img && waitingRoomJson.tokens1.token !== img){
+      cambios =true
+    waitingRoomJson.tokens4 ={ owner: username, token:img} 
+    }
+    //console.log(waitingRoomJson) 
+  }
+  if(cambios){
+    await client.set(`waitingRoom${ResponsePlayersInHold}`,JSON.stringify(waitingRoomJson));
+
+
+     waitingRoomJson.players.forEach((e) => {
+      io.sockets.in(e).emit("roomStatus", {
+        status: "savedToken",
+        room: waitingRoomJson,
+      });  
+    }) 
+    
+    io.sockets.in(waitingRoomJson.host).emit("roomStatus", {
+      status: "savedToken",
+      room: waitingRoomJson,
+    });
+  }
+ //console.log(waitingRoomJson)
+}
+
+
+
+
 const deleteRoom = async (username, io) => {
   try {
     const responseWaitingRoom = await client.get(`waitingRoom${username}`);
@@ -947,9 +1006,8 @@ const goToJail = async (username, io) => {
 } 
 }
 
-  
-  const playerIsLoser = () => {
-
+  const playerIsLoser  = async () => {
+    
   }
 
 
@@ -968,7 +1026,8 @@ module.exports = {
   buyRailway,
   buyService,
   goToJail,
-  playerIsLoser
+  playerIsLoser,
+  saveToken
 
   //luckyComunalCard,
   /*luckyOrArc,
