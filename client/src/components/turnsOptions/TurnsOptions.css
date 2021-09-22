@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 .turnsoptions-icon {
-font-size: 70px;
+    font-size: 70px;
 }
 .turnsoptions-btn-disabled {
     background-color: #0f141750;
@@ -44,4 +44,19 @@ font-size: 70px;
     user-select: none;
     top: -30px;
     left: 8px;
+}
+.turnsoptions-label-trade{
+    font-size: 14px;
+    font-family: var(--text-three);
+    position: absolute;
+    background-color: #0f1417;
+    border-radius: 10px ;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+    text-align:center;
+    user-select: none;
+    top: -100px;
+    left: -50%;
 }

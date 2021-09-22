@@ -1,0 +1,61 @@
+.mepanel-div-minor {
+    background-color: #0f1417;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 1px 5px 10px 10px;
+  }
+  .mepanel-btn {
+    background-color: #0f1417;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+  }
+  .mepanel-btn:hover {
+    background-color: #162229;
+    border: 2px solid #f8990c;
+    color: #f8990c;
+    cursor: pointer;
+  }
+  .mepanel-icon {
+    font-size: 25px;
+  }
+  .mepanel-div-btn-icon {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    height: 5px;
+  }
+  .mepanel-icontwo {
+    color: #ffff00;
+    border: 2px solid #ffff00;
+    padding: 2px;
+    border-radius: 5px;
+    display: flex;
+  }
+  .mepanel-icontwo:hover {
+    color: #f8990c;
+    border: 2px solid #f8990c;
+    cursor: pointer;
+  }
+  .mepanel-iconthree {
+    position: absolute;
+    background-color: #162229;
+    border-radius: 5px;
+    top: -10px;
+    right: -10px;
+  }
+  .mepanel-tablero{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 425px;
+  }
+  .mepanel-card {
+      margin-top: 5px;
+      margin-right: 5px;
+  }
+  .mepanel-tablero-two{
+    display: flex;
+    flex-wrap: wrap-reverse;
+  }

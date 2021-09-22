@@ -15,6 +15,8 @@ import {
   setMoveTurn,
   goToJail,
   setBalance,
+  statusTrading,
+  updateTrade
 } from "./../../redux/actions";
 import {
   Board,
@@ -33,6 +35,7 @@ import {
   GamingLog,
   DataPlayerInfo,
   Trading,
+  MePanel
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -44,8 +47,9 @@ const DisplayGameBeta = () => {
   sonidoOne.volumen = 0.5;
   sonidoOne.loop = false;
   const dispatch = useDispatch();
-  const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
-  const { tradeStatus } = useSelector((state) => state.henryTrading);
+  const { status, dataPlayers, host, actualTurn, table } = useSelector(
+    (state) => state.henropolyGame
+  );
   //random Lucky y comunal cards
   const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
@@ -81,13 +85,13 @@ const DisplayGameBeta = () => {
     username: null,
   });
   //----portales---
-  const [render, setRender] = useState('')
-  const [portal, setPortal] = useState(null)
-  const [property, setProperty] = useState(null)
-  const [train, setTrain] = useState(null)
-  const [service, setService] = useState(null)
-  const [tax, setTax] = useState(null)
-  const [jailData, setJailData] = useState(null)
+  const [render, setRender] = useState("");
+  const [portal, setPortal] = useState(null);
+  const [property, setProperty] = useState(null);
+  const [train, setTrain] = useState(null);
+  const [service, setService] = useState(null);
+  const [tax, setTax] = useState(null);
+  const [jailData, setJailData] = useState(null);
   const [meBox, setMeBox] = useState({
     username: null,
     buy: null,
@@ -192,27 +196,45 @@ const DisplayGameBeta = () => {
         setPortal("property");
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
-        setTrain(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-          setMeBox({...meBox,
-           username: dataPlayers[player].username,
-           buy: ()=>{socket.emit("TradeDashboard", { type: "buyRailway",box:dataPlayers[player].box })},
-         }) 
-       } else {
-         setMeBox({...meBox, username: null})
-       }
+        setTrain(info.table[dataPlayers[player].box]);
+        if (
+          dataPlayers[player].username === user.username &&
+          table[dataPlayers[player].box].owner === null
+        ) {
+          setMeBox({
+            ...meBox,
+            username: dataPlayers[player].username,
+            buy: () => {
+              socket.emit("TradeDashboard", {
+                type: "buyRailway",
+                box: dataPlayers[player].box,
+              });
+            },
+          });
+        } else {
+          setMeBox({ ...meBox, username: null });
+        }
         setPortal("railway");
       }
       if (info.table[dataPlayers[player].box].type === "service") {
-        setService(info.table[dataPlayers[player].box])
-        if(dataPlayers[player].username === user.username && table[dataPlayers[player].box].owner === null) {
-          setMeBox({...meBox,
-           username: dataPlayers[player].username,
-           buy: ()=>{socket.emit("TradeDashboard", { type: "buyService",box:dataPlayers[player].box })},
-         }) 
-       } else {
-         setMeBox({...meBox, username: null})
-       }
+        setService(info.table[dataPlayers[player].box]);
+        if (
+          dataPlayers[player].username === user.username &&
+          table[dataPlayers[player].box].owner === null
+        ) {
+          setMeBox({
+            ...meBox,
+            username: dataPlayers[player].username,
+            buy: () => {
+              socket.emit("TradeDashboard", {
+                type: "buyService",
+                box: dataPlayers[player].box,
+              });
+            },
+          });
+        } else {
+          setMeBox({ ...meBox, username: null });
+        }
         setPortal("service");
       }
       if (
@@ -222,13 +244,22 @@ const DisplayGameBeta = () => {
         setTax(info.table[dataPlayers[player].box]);
         setPortal("tax");
       }
-      if (info.table[dataPlayers[player].box].type === "jail" || info.table[dataPlayers[player].box].type === "goJail") {
-        setJailData(info.table[dataPlayers[player].box])
-        if(info.table[dataPlayers[player].box].type === "goJail"){
-          setMeBox({...meBox,
+      if (
+        info.table[dataPlayers[player].box].type === "jail" ||
+        info.table[dataPlayers[player].box].type === "goJail"
+      ) {
+        setJailData(info.table[dataPlayers[player].box]);
+        if (info.table[dataPlayers[player].box].type === "goJail") {
+          setMeBox({
+            ...meBox,
             username: dataPlayers[player].username,
-            buy: ()=>{socket.emit("TradeDashboard", { type: "goToJail", box:dataPlayers[player].box})},
-          }) 
+            buy: () => {
+              socket.emit("TradeDashboard", {
+                type: "goToJail",
+                box: dataPlayers[player].box,
+              });
+            },
+          });
         }
         setPortal("jail");
       }
@@ -245,8 +276,8 @@ const DisplayGameBeta = () => {
   }
 
   function closedPortal() {
-    setRender(`status closed`)
-    setPortal(null)
+    setRender(`status closed`);
+    setPortal(null);
   }
 
   // function closedPortal4() {
@@ -258,12 +289,12 @@ const DisplayGameBeta = () => {
     // setRender(`status closed`)
     // meBox.buy()
     // // socket.on("setGame", (data) => {
-    // // if (data.status === 'goToJail'){  
+    // // if (data.status === 'goToJail'){
     // //   dispatch(goToJail(data))
     // //   setRender(`status:${data.status}`)
     // //  }
     // // })
-    setPortal(null)
+    setPortal(null);
   }
 
   useEffect(() => {
@@ -363,6 +394,7 @@ const DisplayGameBeta = () => {
   useEffect(() => {
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
+        dispatch(statusTrading(null));
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
         dispatch(setMoveTurn(true));
       } else if (data.status === "statusGame") {
@@ -395,25 +427,29 @@ const DisplayGameBeta = () => {
         dispatch(buyPropertyAction(data));
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
-      }else if (data.status === 'buyRailway'){
-        dispatch(buyPropertyAction(data))
-        setRender(`status:${data.status}`)
-      } else if (data.status === 'buyService'){  
-         dispatch(buyPropertyAction(data))
-         setRender(`status:${data.status}`)
-      } else if (data.status === 'goToJail'){  
-        dispatch(goToJail(data))
-        setRender(`status:${data.status}`)
+      } else if (data.status === "buyRailway") {
+        dispatch(buyPropertyAction(data));
+        setRender(`status:${data.status}`);
+      } else if (data.status === "buyService") {
+        dispatch(buyPropertyAction(data));
+        setRender(`status:${data.status}`);
+      } else if (data.status === "goToJail") {
+        dispatch(goToJail(data));
+        setRender(`status:${data.status}`);
+      } else if (data.status === "updateTrade") {
+        dispatch(updateTrade(data.data));
       }
-      // else if (data.status === 'buyRailway'){  
+      // else if (data.status === 'buyRailway'){
       //   dispatch(buyRailwayAction(data))
-      // } else if (data.status === 'buyService'){  
+      // } else if (data.status === 'buyService'){
       //   dispatch(buyServiceAction(data))
       // }
-    })
-    
+    });
+    socket.on("trading", (data) => {});
+
     return () => {
       socket.off("setGame");
+      socket.off("trading");
     };
   }, []);
 
@@ -431,17 +467,25 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}/>
+          <PropertyCard
+            data={property}
+            username={meBox.username}
+            buy={meBox.buy}
+          />
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal}>
-          <RailwayCard data={train} username={meBox.username} buy={meBox.buy}/>
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} />
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal}>
-          <ServiceCard data={service} username={meBox.username} buy={meBox.buy}/>
+          <ServiceCard
+            data={service}
+            username={meBox.username}
+            buy={meBox.buy}
+          />
         </Portal>
       )}
       {portal === "tax" && (
@@ -454,14 +498,6 @@ const DisplayGameBeta = () => {
           <Jail data={jailData} />
         </Portal>
       )}
-      <div>
-        {/* <PlayerProps
-          target1={dataPlayers.target1.box}
-          target2={dataPlayers.target2.box}
-          target3={dataPlayers.target3.box}
-          target4={dataPlayers.target4.box}
-        /> */}
-      </div>
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
           <div className="display-beta-container-gametable">
@@ -537,7 +573,7 @@ const DisplayGameBeta = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       >
-       {/* <div className="display-beta-align-chatgame">
+        {/* <div className="display-beta-align-chatgame">
             <ChatGame />
           </div>
         <div className="display-beta-align-gameoptions">  
@@ -549,19 +585,8 @@ const DisplayGameBeta = () => {
     </div>  
     <div className="display-beta-align-gameturns">
             <Turns /> */}
-        <div className="display-beta-align-chatgame">
-          <ChatGame />
-        </div>
-        <div className="display-beta-align-gameoptions">
-          <GameOptions
-            host={user.username === host}
-            gameOver={() => {
-              socket.emit("gameDashboard", { type: "gameOver" });
-            }}
-            meEnd={() => {
-              socket.emit("gameDashboard", { type: "meEnd" });
-            }}
-          />
+            <div className="display-beta-align-mepanel">
+          <MePanel />
         </div>
         <div className="display-beta-align-gameturns">
           <Turns action={closeAndOpen} />
@@ -599,11 +624,23 @@ const DisplayGameBeta = () => {
           }}
         />
       </div>
-      {tradeStatus && (
-        <div className="display-beta-align-trading">
-          <Trading />
-        </div>
-      )}
+      <div className="display-beta-align-trading">
+        <Trading />
+      </div>
+      <div className="display-beta-align-chatgame">
+        <ChatGame />
+      </div>
+      <div className="display-beta-align-gameoptions">
+        <GameOptions
+          host={user.username === host}
+          gameOver={() => {
+            socket.emit("gameDashboard", { type: "gameOver" });
+          }}
+          meEnd={() => {
+            socket.emit("gameDashboard", { type: "meEnd" });
+          }}
+        />
+      </div>
     </div>
   );
 };

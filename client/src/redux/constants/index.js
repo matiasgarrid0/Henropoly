@@ -22,7 +22,18 @@ export {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
-  GO_TO_JAIL
+  GO_TO_JAIL,
+  SET_OWNER
 } from "./henropolyGame";
 export { SET_VIEW } from "./view";
-export { STATUS_TRADING } from "./henryTrading";
+export {
+  STATUS_TRADING,
+  SET_HOST_TRADER,
+  SET_TRADING_FULL,
+  SET_TRADE_OFERT_HOST,
+  SET_TRADE_OFERT_OPONENT,
+  SET_HOST_HENRY_COIN,
+  SET_OPONENT_HENRY_COIN,
+  SET_HOST_CONFIRMATION,
+  SET_TARGET_CONFIRMATION
+} from "./henryTrading";
