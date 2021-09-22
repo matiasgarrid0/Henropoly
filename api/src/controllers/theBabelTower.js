@@ -486,7 +486,6 @@ const roll = async (username, io) => {
           //   room.table[room.dataPlayers[target].box].id === 10)) {
           //   room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
           //   room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
-
           //   console.log("DADOSSSSSSSSSSSSS FUERA DEL IF", num1, num2)
           //   if (num1 !== num2) {
           //       console.log("DADOSSSSSSSSSSSSS DENTRO DEL IF DISTINTOS", num1, num2)
