@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import "./Turns.css";
+import Img from '../room/img/05.gif'
 const Turns = ({ action }) => {
   const reloj = (sec) => {
     let minutos = `0${Math.floor(sec / 60)}`;
@@ -35,6 +36,7 @@ const Turns = ({ action }) => {
           <label className="turns-title">Player1:</label>
           <label className="turns-target1">
             {dataPlayers.target1.username}
+            {/* <img src={require(`../room/img/${dataPlayers.target1.img}`).default} width='20'/> */}
           </label>
           <label className="turns-title">HenryCoins:</label>
           <label className="turns-coin">{dataPlayers.target1.henryCoin}</label>
@@ -71,6 +73,7 @@ const Turns = ({ action }) => {
           <label className="turns-title">Player3:</label>
           <label className="turns-target3">
             {dataPlayers.target3.username}
+            <img/>
           </label>
           <label className="turns-title">HenryCoins:</label>
           <label className="turns-coin">{dataPlayers.target3.henryCoin}</label>

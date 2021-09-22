@@ -121,3 +121,19 @@
   bottom: 20px;
   left: 20px;
 }
+.displaygamebeta-token-target1{
+  border-radius: 50%;
+  border: solid 2px rgb(255, 0, 0);
+}
+.displaygamebeta-token-target2{
+  border-radius: 50%;
+  border: solid 2px rgb(9, 255, 0);
+}
+.displaygamebeta-token-target3{
+  border-radius: 50%;
+  border: solid 2px rgb(0, 255, 234);
+}
+.displaygamebeta-token-target4{
+  border-radius: 50%;
+  border: solid 2px rgb(255, 0, 255);
+}

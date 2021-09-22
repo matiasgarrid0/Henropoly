@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-
+import Hola from '../room/img/01.gif'
 import {
   setView,
   setTargetValue,
@@ -104,7 +104,7 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, targetMove: true });
     setRoll(true);
     sonidoOne.play();
-    await moveTime(88000);
+    await moveTime(50);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
     while (finalBox !== actualBox) {
@@ -116,31 +116,31 @@ const DisplayGameBeta = () => {
       let valueY = targetY(player, actualBox) - initialY;
       dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
       dispatch(setTargetValue(player, "y", initialY + Math.floor(valueY / 5)));
-      await moveTime();
+      await moveTime(5);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 2))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 2))
       );
-      await moveTime();
+      await moveTime(5);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 3))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 3))
       );
-      await moveTime();
+      await moveTime(5);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 4))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime();
+      await moveTime(5);
       dispatch(setTargetValue(player, "x", initialX + valueX));
       dispatch(setTargetValue(player, "y", initialY + valueY));
-      await moveTime();
+      await moveTime(5);
       setDataGame({
         ...dataGame,
         [player]: {
@@ -512,44 +512,45 @@ const DisplayGameBeta = () => {
                     {dataPlayers.target1.status && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target1' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
+                      
                         style={{
-                          backgroundColor: "rgb(9, 255, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target2.x}px`,
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
-                          backgroundColor: "rgb(0, 255, 234)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target3.x}px`,
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target3' src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
                     ) : (
                       <></>
                     )}
                     {dataPlayers.target4.status !== false && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 255)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target4.x}px`,
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target4' src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
                     )}
                   </div>
                 </div>
