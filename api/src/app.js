@@ -39,7 +39,8 @@ const {
   RemoveTradeOfert,
   setHenryCoin,
   setConfirmation,
-  cancelTrade
+  cancelTrade,
+  selectAvatar
   /*luckyOrArc,
   gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
@@ -78,6 +79,8 @@ io.on("connection", async (socket) => {
         await leaveRoom(data.player, io);
       } else if (data.type === "goGame") {
         await goGame(decoded.user.username, io);
+      } else if (data.type === "selectAvatar") {
+        await selectAvatar(data, io);
       }
     });
     socket.on("roomStatus", () => {});

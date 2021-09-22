@@ -414,15 +414,56 @@ const createRoom = async (username, io) => {
       `waitingRoom${ResponsePlayersInHold}`
     );
     if (responseWaitingRoom === null && ResponsePlayersInHold === null) {
-      const value = JSON.stringify({
+      let room = {
         host: username,
         players: [],
-      });
+        tokens: [
+          { id: 0, img: "00.gif", name: "pepito", owner: null },
+          { id: 1, img: "01.gif", name: "fulanito", owner: null },
+          { id: 2, img: "02.gif", name: "menganito", owner: null },
+          { id: 3, img: "03.gif", name: "pepito2", owner: null },
+          { id: 4, img: "04.gif", name: "pepito3", owner: null },
+          { id: 5, img: "05.gif", name: "pepito4", owner: null },
+          { id: 6, img: "06.gif", name: "pepito5", owner: null },
+          { id: 7, img: "07.gif", name: "pepito6", owner: null },
+          { id: 8, img: "08.gif", name: "pepito6", owner: null },
+          { id: 9, img: "09.gif", name: "pepito6", owner: null },
+        ],
+      };
+      const value = JSON.stringify(room);
       await client.set(`playersInHold${username}`, username);
       await client.set(`waitingRoom${username}`, value);
-      io.sockets.in(username).emit("roomStatus", {
-        status: "inHold",
-        room: { host: username, players: [] },
+      io.sockets
+        .in(username)
+        .emit("roomStatus", { status: "inHold", room: room });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const selectAvatar = async (data, io) => {
+  try {
+    const responseWaitingRoom = await client.get(`waitingRoom${data.host}`);
+    let room = JSON.parse(responseWaitingRoom);
+    let searchOwner = room.tokens.filter(
+      (avatar) => avatar.id === data.id && avatar.owner === null
+    );
+    if (searchOwner.length === 1) {
+      let limpiarAnterior = room.tokens.filter(
+        (avatar) => avatar.owner === data.user
+      );
+      if (limpiarAnterior.length !== 0) {
+        room.tokens[limpiarAnterior[0].id].owner = null;
+      }
+      room.tokens[data.id].owner = data.user;
+      await client.set(`waitingRoom${data.host}`, JSON.stringify(room));
+      io.sockets
+        .in(room.host)
+        .emit("roomStatus", { status: "inHold", room: room });
+      room.players.forEach(async (player) => {
+        io.sockets
+          .in(player)
+          .emit("roomStatus", { status: "inHold", room: room });
       });
     }
   } catch (error) {
@@ -482,6 +523,10 @@ const leaveRoom = async (username, io) => {
     );
     let roomJson = JSON.parse(responseWaitingRoom);
     roomJson.players = roomJson.players.filter((player) => player !== username);
+    let searchOwner = roomJson.tokens.filter(
+      (avatar) => avatar.owner === username
+    );
+    roomJson.tokens[searchOwner[0].id].owner = null;
     await client.del(`playersInHold${username}`);
     await client.set(
       `waitingRoom${ResponsePlayersInHold}`,
@@ -639,7 +684,8 @@ const clearTimer = (username) => {
 const goGame = async (username, io) => {
   try {
     const responseWaitingRoom = await client.get(`waitingRoom${username}`);
-    let playersFree = JSON.parse(responseWaitingRoom).players;
+    const waitingRoom = JSON.parse(responseWaitingRoom);
+    let playersFree = waitingRoom.players;
     playersFree.push(username);
     await client.del(`waitingRoom${username}`);
     playersFree.forEach(async (player) => {
@@ -659,6 +705,7 @@ const goGame = async (username, io) => {
           henryCoin: 1500,
           cards: [],
           status: false,
+          img: null,
           box: 0,
           x: 120,
           y: 40,
@@ -668,6 +715,7 @@ const goGame = async (username, io) => {
           henryCoin: 1500,
           cards: [],
           status: false,
+          img: null,
           box: 0,
           x: 40,
           y: 40,
@@ -675,41 +723,57 @@ const goGame = async (username, io) => {
       },
       move: true,
     };
+    let searchOwner1 = waitingRoom.tokens.filter(
+      (avatar) => avatar.owner === gameRoom.order[0]
+    );
     gameRoom.dataPlayers.target1 = {
       username: gameRoom.order[0],
       henryCoin: 1500,
       cards: [],
       status: true,
+      img: searchOwner1[0].img,
       box: 0,
       x: 120,
       y: 120,
     };
+    let searchOwner2 = waitingRoom.tokens.filter(
+      (avatar) => avatar.owner === gameRoom.order[1]
+    );
     gameRoom.dataPlayers.target2 = {
       username: gameRoom.order[1],
       henryCoin: 1500,
       cards: [],
       status: true,
+      img: searchOwner2[0].img,
       box: 0,
       x: 40,
       y: 120,
     };
     if (gameRoom.order.length > 2) {
+      let searchOwner3 = waitingRoom.tokens.filter(
+        (avatar) => avatar.owner === gameRoom.order[2]
+      );
       gameRoom.dataPlayers.target3 = {
         username: gameRoom.order[2],
         henryCoin: 1500,
         cards: [],
         status: true,
+        img: searchOwner3[0].img,
         box: 0,
         x: 120,
         y: 40,
       };
     }
     if (gameRoom.order.length > 3) {
+      let searchOwner4 = waitingRoom.tokens.filter(
+        (avatar) => avatar.owner === gameRoom.order[3]
+      );
       gameRoom.dataPlayers.target4 = {
         username: gameRoom.order[3],
         henryCoin: 1500,
         cards: [],
         status: true,
+        img: searchOwner4[0].img,
         box: 0,
         x: 40,
         y: 40,
@@ -1247,6 +1311,7 @@ module.exports = {
   setHenryCoin,
   setConfirmation,
   cancelTrade,
+  selectAvatar,
   /*luckyOrArc,
   gameActionsBoard*/
 };
