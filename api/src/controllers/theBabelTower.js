@@ -256,6 +256,7 @@ const goGame = async (username, io) => {
           cards: [],
           status: false,
           jail: false,
+          bancarrota:false,
           box: 0,
           x: 120,
           y: 40,
@@ -266,6 +267,7 @@ const goGame = async (username, io) => {
           cards: [],
           status: false,
           jail: false,
+          bancarrota:false,
           box: 0,
           x: 40,
           y: 40,
@@ -279,6 +281,7 @@ const goGame = async (username, io) => {
       cards: [],
       status: true,
       jail: false,
+      bancarrota:false,
       box: 0,
       x: 120,
       y: 120,
@@ -288,6 +291,7 @@ const goGame = async (username, io) => {
       henryCoin: 1500,
       cards: [],
       status: true,
+      bancarrota:false,
       jail: false,
       box: 0,
       x: 40,
@@ -299,6 +303,7 @@ const goGame = async (username, io) => {
         henryCoin: 1500,
         cards: [],
         status: true,
+        bancarrota:false,
         jail: false,
         box: 0,
         x: 120,
@@ -312,6 +317,7 @@ const goGame = async (username, io) => {
         cards: [],
         status: true,
         jail: false,
+        bancarrota:false,
         box: 0,
         x: 40,
         y: 40,
@@ -330,6 +336,26 @@ const goGame = async (username, io) => {
     console.log(error);
   }
 };
+
+// const deletePlayer = async (username) => {
+//   try {
+//     console.log("USERNAME EN NOS VEMOS PE"+username)
+//     const response = await client.get(`gameRoom${username}`);
+//     const listPlayer = JSON.parse(response);
+//     clearTimer(username);
+//     await callbackTest(1500);
+//     console.log("NOS VEMOS PERRI")
+//     await client.del(`gameRoom${username}`);
+//     listPlayer.forEach(async (player) => {
+//       io.sockets.in(player).emit("setGame", {
+//         status: "statusGame",
+//         type: "endGame",
+//       });
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 const gameOver = async (username, io) => {
   try {
@@ -423,13 +449,48 @@ const meEnd = async (username, io) => {
 const roll = async (username, io) => {
   try {
     let target;
+    let asd;
+    let playersGame = []
     const responseRoom = await client.get(`playersInGame${username}`);
     const response = await client.get(`gameRoom${responseRoom}`);
     var room = JSON.parse(response);
     for (let i = 1; i < 5; i++) {
+      playersGame.push(`target${i}`)
+      console.log("TODOS LOS PLAYER",playersGame)
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`;
+        // playersGame.push(room.dataPlayers[`target${i}`])
+        // if( room.dataPlayers[`target${i}`].bancarrota === true){
+          //   console.log('ASDASKDLKSADLASKJDLASIKJDLASKJDNLASJDNMKLASJNDASLJD', `target${i}`)
+          //   playersGame.push(`target${i}`)
+          // }
+        }
       }
+      asd = playersGame.filter((e) => e.bancarrota === true);
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', asd);
+//FACUUUUUUUUU
+    if(asd.length === 1){
+      room.move = false
+      room.order.forEach((player) => {
+        io.sockets.in(player).emit("log", {
+          target: target,
+          text: `ganaste`,
+        });
+      });
+    }
+    //if(room.dataPlayers[target].statusInGame === "inGame" && room.dataPlayers[target].bancarrota === false){
+      
+    // }
+    if(room.dataPlayers[target].henryCoin <= 0){
+      room.dataPlayers[target].bancarrota= true
+      room.move = false
+      room.order.forEach((player) => {
+        io.sockets.in(player).emit("log", {
+          target: target,
+          text: `se quedo sin dinero esta en bancarrota`,
+        });
+      });
+      // deletePlayer(room.dataPlayers[target].username)
     }
     if (
       room.actualTurn === username &&
@@ -1145,7 +1206,7 @@ const jail = async (username, box, io) => {
     } 
     if(room.dataPlayers[target].henryCoin >= room.table[box].licenseValue) {
       room.dataPlayers[target].henryCoin =
-        room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+        room.dataPlayers[target].henryCoin - 1600;
       room.dataPlayers[target].jail = false;
 
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
