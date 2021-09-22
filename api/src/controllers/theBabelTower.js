@@ -320,6 +320,11 @@ const setConfirmation = async (data, io) => {
         io.sockets.in(player).emit("log", {
           target: roomTrade.hostTrading,
           text: `a finalizado exitosamente su comercio con ${roomTrade.targetUsername}`,
+          sonido: {
+            type: "comercio",
+            host: roomTrade.hostUsername,
+            target: roomTrade.targetUsername,
+          },
         });
       });
       await client.set(`gameRoom${data.host}`, JSON.stringify(roomJson));

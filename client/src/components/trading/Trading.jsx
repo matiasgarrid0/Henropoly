@@ -11,9 +11,20 @@ import {
   setHostConfirmation,
   setTargetConfirmation,
 } from "./../../redux/actions";
+import { ImCross } from "react-icons/im";
 import "./Trading.css";
 import Card from "./Card";
+import money from "./money.mp3";
+import desactive from './setTargetSound.mp3';
 const Trading = () => {
+  var sonidos = {
+    money: new Audio(money),
+    desactive: new Audio(desactive),
+  };
+  sonidos.money.volume = 0.8;
+  sonidos.money.loop = false;
+  sonidos.desactive.volume = 0.9
+  sonidos.desactive.loop = false
   const { dataPlayers, table, host } = useSelector(
     (state) => state.henropolyGame
   );
@@ -31,6 +42,7 @@ const Trading = () => {
     targetTotalHenryCoin,
     hostStatus,
     targetStatus,
+    hostTotalHenryCoin,
   } = useSelector((state) => state.henryTrading);
   const dispatch = useDispatch();
   const [infoTrade, setInfoTrade] = useState({
@@ -44,6 +56,13 @@ const Trading = () => {
       setInput({ ...input, [e.target.name]: targetTotalHenryCoin });
     }
   };
+  const setGoldHost = (e) => {
+    if (e.target.value < hostTotalHenryCoin) {
+      setInput({ ...input, [e.target.name]: e.target.value });
+    } else {
+      setInput({ ...input, [e.target.name]: hostTotalHenryCoin });
+    }
+  };
   useEffect(() => {
     socket.on(`Trading`, (data) => {
       if (data.status === "initialTrade") {
@@ -51,19 +70,24 @@ const Trading = () => {
         dispatch(statusTrading("petition"));
       } else if (data.status === "acceptTrade") {
         dispatch(setTradingFull(data.data));
+        setInput({ ...input, henryCoin: 0 });
       } else if (data.status === "setTradeOfertHost") {
+        sonidos.desactive.play()
         dispatch(setTargetConfirmation(false));
         dispatch(setHostConfirmation(false));
         dispatch(setTradeOfertHost(data));
       } else if (data.status === "setTradeOfertOponent") {
+        sonidos.desactive.play();
         dispatch(setTargetConfirmation(false));
         dispatch(setHostConfirmation(false));
         dispatch(setTradeOfertOponent(data));
       } else if (data.status === "setTargetHenryCoin") {
+        sonidos.money.play();
         dispatch(setTargetConfirmation(false));
         dispatch(setHostConfirmation(false));
         dispatch(setTargetHenryCoin(data));
       } else if (data.status === "setHostHenryCoin") {
+        sonidos.money.play();
         dispatch(setTargetConfirmation(false));
         dispatch(setHostConfirmation(false));
         dispatch(setHostHenryCoin(data));
@@ -72,6 +96,8 @@ const Trading = () => {
       } else if (data.status === "setTargetConfirmation") {
         dispatch(setTargetConfirmation(data.targetStatus));
       } else if (data.status === "closeTrade") {
+        dispatch(setTargetConfirmation(false));
+        dispatch(setHostConfirmation(false));
         dispatch(statusTrading(null));
       }
     });
@@ -241,9 +267,13 @@ const Trading = () => {
         <div className="trading-table-await box-column">
           <label>el jugador {hostUsername} desea comerciar</label>
           <div className="trading-table-await-label box-row">
-            <button className='trading-btn-selector' onClick={rechazar()}>rechazar</button>
-            <div className='trading-space-box'></div>
-            <button className='trading-btn-selector' onClick={aceptar()}>aceptar</button>
+            <button className="trading-btn-selector" onClick={rechazar()}>
+              rechazar
+            </button>
+            <div className="trading-space-box"></div>
+            <button className="trading-btn-selector" onClick={aceptar()}>
+              aceptar
+            </button>
           </div>
         </div>
       </div>
@@ -381,6 +411,11 @@ const Trading = () => {
               )}
             </div>
             <div className="trading-mepanel">
+              <div className="trading-mepanel-marco-cruz">
+                <div onClick={rechazar()} className="trading-mepanel-cruz">
+                  <ImCross />
+                </div>
+              </div>
               <div className="trading-label-box">
                 <label className="trading-label">{hostUsername}</label>
               </div>
@@ -429,13 +464,14 @@ const Trading = () => {
                 <div className="trading-henrycoins-trade">
                   <label>HenryCoins: </label>
                   <input
+                    className="trading-number"
                     type="number"
                     min="0"
-                    max={targetTotalHenryCoin}
+                    max={hostTotalHenryCoin}
                     name="henryCoin"
                     value={input.henryCoin}
                     onChange={(e) => {
-                      setGold(e);
+                      setGoldHost(e);
                     }}
                   />
                   <button
@@ -633,6 +669,11 @@ const Trading = () => {
               )}
             </div>
             <div className="trading-mepanel">
+              <div className="trading-mepanel-marco-cruz">
+                <div onClick={rechazar()} className="trading-mepanel-cruz">
+                  <ImCross />
+                </div>
+              </div>
               <div className="trading-label-box">
                 <label className="trading-label">{targetUsername}</label>
               </div>
@@ -756,6 +797,7 @@ const Trading = () => {
                 <div className="trading-henrycoins-trade">
                   <label>HenryCoins: </label>
                   <input
+                    className="trading-number"
                     type="number"
                     min="0"
                     max={targetTotalHenryCoin}

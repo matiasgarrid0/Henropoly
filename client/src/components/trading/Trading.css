@@ -374,3 +374,28 @@
 .trading-space-box{
   width: 10px;
 }
+.trading-number{
+width: 60px;
+}
+.trading-mepanel-marco-cruz{
+  position: relative;
+  width: 100%;
+}
+.trading-mepanel-cruz{
+  position: absolute;
+  right: -13px;
+  top: -13px;
+  background-color: #0f1417;
+  border-radius: 5px;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  display: flex;
+  padding: 5px;
+}
+
+.trading-mepanel-cruz:hover {
+  box-shadow: 0 0 0 2px #ff9900;
+  background-color: #000000;
+  border: 2px solid #000000;
+  color: #ff9900;
+}

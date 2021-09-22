@@ -116,3 +116,8 @@
   left: 50%;
   top: 50%;
 }
+.display-beta-align-mepanel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}

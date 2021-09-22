@@ -35,6 +35,7 @@ import {
   GamingLog,
   DataPlayerInfo,
   Trading,
+  MePanel
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -584,6 +585,9 @@ const DisplayGameBeta = () => {
     </div>  
     <div className="display-beta-align-gameturns">
             <Turns /> */}
+            <div className="display-beta-align-mepanel">
+          <MePanel />
+        </div>
         <div className="display-beta-align-gameturns">
           <Turns action={closeAndOpen} />
         </div>
