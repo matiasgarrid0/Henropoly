@@ -1,0 +1,36 @@
+.selecttoken-first-div{
+    font-family: "Teko", sans-serif;
+   background-color: rgba(0, 0, 0, 0.8);
+   color:white;
+   width: 21.1rem;
+   margin: 2rem;
+   padding: 2rem 2rem;
+   text-align: center;
+   border-radius: 10px;
+   border: solid 2px rgba(149, 149, 149, 0.8);
+}
+
+.selecttoken-second-div{
+    display: flex;
+}
+
+.selecttoken-img{
+    padding: 0.2rem;
+    margin: 0.1rem;
+    border-radius: 8px;
+    border: solid 2px rgb(77, 77, 77);
+}
+.selecttoken-img:hover{
+cursor:pointer;
+-webkit-box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
+-moz-box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
+box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
+border: solid 2px rgb(251, 255, 0);
+}
+
+.selecttoken-first-div{
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+}
