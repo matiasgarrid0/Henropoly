@@ -45,6 +45,7 @@ const searchStatus = async (username) => {
         `gameRoom${ResponsePlayersInGame}`
       );
       if (responseGameRoom !== null) {
+       // console.log(responseGameRoom)
         return {
           status: "inGame",
           data: JSON.parse(responseGameRoom),
@@ -70,10 +71,10 @@ const createRoom = async (username, io) => {
         host: username,
         players: [],
         //playersTotal.push(host),
-       tokens1: [{owner:null, token:''}],
-       tokens2: [{owner:null, token:''}],
-       tokens3: [{owner:null, token:''}],
-       tokens4: [{owner:null, token:''}]
+       tokens1: {owner:null, token:''},
+       tokens2: {owner:null, token:''},
+       tokens3: {owner:null, token:''},
+       tokens4: {owner:null, token:''}
       };
 
    
@@ -96,7 +97,8 @@ const  saveToken = async(username,img, io) => {
 
   let waitingRoomJson = JSON.parse(responseWaitingRoom);
   let cambios = false;
-/*   const value = {
+/* 
+  const value = {
     host: username,
     players: [],
     //playersTotal.push(host),
@@ -137,6 +139,7 @@ const  saveToken = async(username,img, io) => {
   }
   if(cambios){
     await client.set(`waitingRoom${ResponsePlayersInHold}`,JSON.stringify(waitingRoomJson));
+    await client.set(`waitingRoom${username}`, JSON.stringify(waitingRoomJson));
 
 
      waitingRoomJson.players.forEach((e) => {
@@ -306,10 +309,14 @@ const clearTimer = (username) => {
   //clearInterval(timers[username]);
   clearInterval(timerSec[username]);
 };
+
+
 const goGame = async (username, io) => {
   try {
     const responseWaitingRoom = await client.get(`waitingRoom${username}`);
+    
     let playersFree = JSON.parse(responseWaitingRoom).players;
+   // let infotot = JSON.parse(responseWaitingRoom)
     playersFree.push(username);
     await client.del(`waitingRoom${username}`);
     playersFree.forEach(async (player) => {
@@ -336,7 +343,8 @@ const goGame = async (username, io) => {
           box: 0,
           x: 120,
           y: 40,
-          token:null
+         /*  token:null,
+          img: null    */       
         },
         target4: {
           username: null,
@@ -346,7 +354,8 @@ const goGame = async (username, io) => {
           box: 0,
           x: 40,
           y: 40,
-          token:null
+         /*  token:null,
+          img: null */
         },
       },
       move: true,
@@ -359,7 +368,8 @@ const goGame = async (username, io) => {
       box: 0,
       x: 120,
       y: 120,
-      token:null
+     /*  token:null,
+      img: null */
     };
     gameRoom.dataPlayers.target2 = {
       username: gameRoom.order[1],
@@ -369,7 +379,8 @@ const goGame = async (username, io) => {
       box: 0,
       x: 40,
       y: 120,
-      token:null
+     /*  token:null,
+      img: null */
     };
     if (gameRoom.order.length > 2) {
       gameRoom.dataPlayers.target3 = {
@@ -380,6 +391,8 @@ const goGame = async (username, io) => {
         box: 0,
         x: 120,
         y: 40,
+       /*  token:null,
+        img:null */
       };
     }
     if (gameRoom.order.length > 3) {
@@ -391,8 +404,11 @@ const goGame = async (username, io) => {
         box: 0,
         x: 40,
         y: 40,
+       /*  token:null,
+        img: null */
       };
     }
+    await client.del(`gameRoom${username}`);
     await client.set(`gameRoom${username}`, JSON.stringify(gameRoom));
     playersFree.forEach(async (player) => {
       await client.del(`playersInHold${player}`);

@@ -53,7 +53,6 @@ const DisplayGameBeta = () => {
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
-  const {room} = useSelector((state)=> state.toekns2)
   const [minimizarPlayers, setMinimizarPlayers] = useState({
     status: false,
     target: null,
@@ -421,12 +420,12 @@ const DisplayGameBeta = () => {
         dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
         dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
         dispatch(buyPropertyAction(data));
-        console.log('buy prperty', data)
+       // console.log('buy prperty', data)
        // setRender(`status:${data.status}`)
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
         setRender(`status:${data.status}`)
-        console.log('setBalance', data.info)
+      //  console.log('setBalance', data.info)
       }else if (data.status === 'buyRailway'){
          dispatch(setBalance({target: data.newProperty, henryCoin: data.newbalase}))//refleja dinero de persona
          dispatch(setBuyBox({box:data.box, target:data.newProperty}))//refleja el dueño
@@ -530,7 +529,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><div></div></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
@@ -545,7 +544,7 @@ const DisplayGameBeta = () => {
                     {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
-                          backgroundColor: "rgb(0, 255, 234)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target3.x}px`,
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
@@ -557,7 +556,7 @@ const DisplayGameBeta = () => {
                     {dataPlayers.target4.status !== false && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 255)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target4.x}px`,
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}

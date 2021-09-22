@@ -35,11 +35,11 @@ const dispatch = useDispatch();
      if(data.status === 'playerLost') {
        dispatch(playerGameisOver)
      }
-      else if (data.status === 'goToJail'){ 
+    /*   else if (data.status === 'goToJail'){ 
         console.log('dataStatusJail', data)
        // dispatch(moveToJail(data))
         //dispatch(changeValueTarget(data.info.target,'box', 10));
-      }
+      } */
     })
     return () => {
       socket.off("setGame");

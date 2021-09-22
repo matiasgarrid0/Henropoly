@@ -13,17 +13,20 @@ import Toni from './toni.jpeg'
 //import { useState } from 'react';
 
 const fotis = [Antoni, Camilo, Diego, Franco, Martu, Mati, Sele, Toni]
+
 const SelectToken = () => {
     
 const dispatch = useDispatch();    
 const { socket } = useSelector((state) => state.auth);
-const [tokensToPlayer, setTokensToplayers] = useState([])
+const [tokensToPlayer, setTokensToplayers] = useState(null)
+
 
 useEffect(() => {
     socket.on("roomStatus", (data) => {
       if (data.status === "savedToken") {
-          console.log(data)
-          dispatch(getToken(data))
+         // console.log(data)
+         setTokensToplayers({...tokensToPlayer, data})
+         // dispatch(getToken(data))
       }
     });
     return () => {
@@ -50,6 +53,8 @@ useEffect(() => {
                 <div  onClick={()=>{sendToken({ type: "sendToken", img:fotis[6]})}}><img className='selecttoken-img' src={fotis[6]} width='70' width='70'/></div>
                 <div  onClick={()=>{sendToken({ type: "sendToken", img:fotis[7]})}}><img className='selecttoken-img' src={fotis[7]} width='70' width='70'/></div>
             </div>
+
+          
         </div>
     )
 }

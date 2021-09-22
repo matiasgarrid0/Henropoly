@@ -20,13 +20,15 @@ const initialState = {
   order: [],
   actualTurn: null,
   dataPlayers: {},
-  tokensDataPlayers:[]
+  tokensDataPlayers:null
 };
 const henropolyGame = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    
     case SET_GAME:
       return payload;
+
     case SET_TARGET_VALUE:
       return {
         ...state,
@@ -108,11 +110,6 @@ const henropolyGame = (state = initialState, action) => {
           ...state.dataPlayers,        
         [payload.info.target]: {...state.dataPlayers[payload.info.target], box: payload.box}}
       };
-      case TOKEN_PLAYERS: 
-      return {
-        ...state,
-        tokensDataPlayers: payload.room
-      }
     case PLAYER_GAME_IS_OVER:{
       return state; 
     }
