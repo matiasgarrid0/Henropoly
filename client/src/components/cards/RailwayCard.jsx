@@ -14,7 +14,7 @@ const RailwayCard = ({ data, username, buy }) => {
                     <span className="card-span-bold" >Tres checkpoint:{data.threeCheckpoint}$</span>
                     <span className="card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}$</span>
                 </div>
-                {username === user.username && <button onClick={buy}>comprar</button>}
+                {username === user.username && <button className='railway-button' onClick={buy}>comprar</button>}
             </div>
         </div>
     )

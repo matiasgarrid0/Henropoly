@@ -33,6 +33,10 @@ const {
   buyRailway,
   buyService,
   goToJail,
+  goToJailCard,
+  jail,
+  playerIsLoser,
+  //luckyComunalCard
   initialTrade,
   acceptTrade,
   addTradeOfert,
@@ -79,42 +83,50 @@ io.on("connection", async (socket) => {
         await leaveRoom(data.player, io);
       } else if (data.type === "goGame") {
         await goGame(decoded.user.username, io);
-      } else if (data.type === "selectAvatar") {
+      }else if (data.type === "selectAvatar") {
         await selectAvatar(data, io);
       }
     });
-    socket.on("roomStatus", () => {});
+    socket.on("roomStatus", () => { });
     //gameDashboard
-    socket.on("log", () => {});
-    socket.on("setGame", () => {});
+    socket.on("log", () => { });
+    socket.on("setGame", () => { });
     socket.on("gameDashboard", async (data) => {
-      if (data.type === "gameOver") {
-        await gameOver(decoded.user.username, io);
+      if (data.type === 'gameOver') {
+        await gameOver(decoded.user.username, io)
       } else if (data.type === "meEnd") {
-        await meEnd(decoded.user.username, io);
-      } else if (data.type === "roll") {
-        await roll(decoded.user.username, io);
+        await meEnd(decoded.user.username, io)
+      } else if (data.type === 'roll') {
+        await roll(decoded.user.username, io)
       } else if (data.type === "passTurn") {
-        await passTurn(decoded.user.username, io);
-      }
+        await passTurn(decoded.user.username, io)
+      } 
       // }else if (data.type === "gameActionsBoard"){
       //   await gameActionsBoard(decoded.user.username, io)
-      // }
+      // } 
     });
     //TradeDashboard
-    socket.on("TradeDashboard", async (data) => {
-      if (data.type === "buyProperty") {
-        buyProperty(decoded.user.username, data.box, io);
-      } else if (data.type === "buyRailway") {
-        buyRailway(decoded.user.username, data.box, io);
-      } else if (data.type === "buyService") {
-        buyService(decoded.user.username, data.box, io);
-      } else if (data.type === "goToJail") {
-        goToJail(decoded.user.username, data.box, io);
+    socket.on('TradeDashboard', async (data) => {
+      if (data.type === 'buyProperty') {
+        buyProperty(decoded.user.username, data.box, io)
+      } else if (data.type === 'buyRailway') {
+        buyRailway(decoded.user.username, data.box, io)
+      } else if (data.type === 'buyService') {
+        buyService(decoded.user.username, data.box, io)
+      } else if (data.type === 'goToJail') {
+        goToJail(decoded.user.username, io)
+      } else if (data.type === 'goToJailCard') {
+        goToJailCard(decoded.user.username, io)
+      } else if (data.type === 'buyJail') {
+        jail(decoded.user.username, data.box,io)
       }
-    });
+        //else if (data.type === 'luckyComunalCard') {
+      //luckyComunalCard(decoded.user.username, data.box, io)
+      //}//
+
+    })
     //timer
-    socket.on("timer", () => {});
+    socket.on("timer", () => { });
     //chat global
     socket.on("sendGlobal", (data) => {
       io.emit("chatGlobal", {

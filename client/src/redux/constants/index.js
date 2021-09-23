@@ -23,6 +23,8 @@ export {
   SET_MOVE_TURN,
   SET_BALANCE,
   GO_TO_JAIL,
+  SET_BUY_BOX,
+  GAME_ADIOS,
   SET_OWNER
 } from "./henropolyGame";
 export { SET_VIEW } from "./view";

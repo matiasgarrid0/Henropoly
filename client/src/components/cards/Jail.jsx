@@ -1,24 +1,44 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import ToniJail from '../board/img/toniPreso.png'
 import ToniPolice from '../board/img/Toni_police.png'
+import ToniVacations from '../board/img/Toni_vacaciones.png'
 import './Jail.css';
-
-const Jail = ({data}) => {
-    if(data.type === "jail"){
+//
+const Jail = ({ data, username, buy }) => {
+    const { user } = useSelector((state) => state.auth);
+    if (data.type === "jail") {
         return (
-            <div >
+            <div className='card-jail-divtotal' >
                 <div>
                     <h3 className="Jail-Title" >Migración</h3>
-                    <img src={ToniJail} alt="Girl in a jacket" width="400" height="350"/>
+                    <img src={ToniJail} alt="Girl in a jacket" width="300" height="300" />
+                    <span>Se te ofrece pagar una multa por ÚNICA vez en tu temporal estadía. </span>
+                    <span>La multa vale: ${data.licenseValue} HenryCoins, ¿la pagas?.</span>
+                    {username === user.username && (
+                        <button className="servicecard-button" onClick={buy}>
+                            Pagar
+                        </button>
+                    )}
                 </div>
             </div>
         )
-    }else{
+    } else if (data.type === 'goJail') {
         return (
-            <div >
+            <div className='card-jail-divtotal' >
                 <div>
                     <h3 className="GoJail-Title" >Caiste en migración</h3>
-                    <img src={ToniPolice} alt="Girl in a jacket" width="400" height="350"/>
+                    <img src={ToniPolice} alt="Girl in a jacket" width="300" height="300" />
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className='card-jail-divtotal' >
+                <div>
+                    <h3 className="GoJail-Title" >Henry Feriado</h3>
+                    <img src={ToniVacations} alt="Girl in a jacket" width="300" height="300" />
+                    <span className='card-henryferiado-span'>Hora de descansar</span>
                 </div>
             </div>
         )

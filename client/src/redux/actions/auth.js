@@ -123,7 +123,7 @@ export const logOut = () => {
   };
 };
 //'https://henropoly-grupo6.herokuapp.com/'
-  //SI LEVANTAMOS EN LOCAL HOST PONER  "http://localhost:3001" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //SI LEVANTAMOS EN LOCAL HOST PONER  "c" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const connectSocket = (token) => {
   const socket = io("https://henropoly-grupo6.herokuapp.com/", { query: { token } });
   return {

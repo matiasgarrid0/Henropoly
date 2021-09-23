@@ -56,11 +56,11 @@ const ChatGame = () => {
                 </div>
             </div>
             <div className='chatgame-div-box'>
-                <div className="chatgame-title">chat general</div>
+                <div className="chatgame-title">CHAT GENERAL</div>
                 <div className="chatgame-chat-container">
                     {mensajes.map((e, i) => (
                         <div key={i}>
-                            <div className="chatgame-chat-username">{e.username}</div>
+                            <div className="chatgame-username">{e.username}</div>
                             <div className="chatgame-chat-message">{e.message}</div>
                         </div>
                     ))}

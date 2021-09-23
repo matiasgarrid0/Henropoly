@@ -19,4 +19,33 @@
     text-transform: uppercase;
     text-decoration: underline;
     font-size: 1.5rem;
+    padding-bottom: 1rem;
 }
+.servicecard-button {
+    text-transform: uppercase;
+    background-color: #fbff18;
+    color: #000;
+    border: solid 2px #000;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    margin-top: -0.2rem;
+    text-align: center;
+  }
+  .servicecard-button:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fbff18;
+    border: solid 2px #fbff18;
+    transition: 0.3s;
+  }
+
+  .cardservice-icon{
+      text-align: center;
+    margin-top: 20px;
+    font-size: 90px; 
+  }
+  .servicecard-divtitle{
+      display:flex;
+      flex-direction: column;
+  }
+  

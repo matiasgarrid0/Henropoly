@@ -122,6 +122,7 @@ const cardpropertiesData = [
     {
         id: 10,
         type: "jail",
+        licenseValue: 500
     },
     {
         id: 11,

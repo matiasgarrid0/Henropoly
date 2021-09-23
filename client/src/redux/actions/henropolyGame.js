@@ -9,6 +9,8 @@ import {
   SET_MOVE_TURN,
   SET_BALANCE,
   GO_TO_JAIL,
+  SET_BUY_BOX,
+  GAME_ADIOS,
   SET_OWNER
 } from "../constants";
 
@@ -58,7 +60,7 @@ export const buyPropertyAction = (payload) => {
   };
 }
 
- export const goToJail= (payload) => {
+ export const moveToJail= (payload) => {
   return {
     type: GO_TO_JAIL,
     payload: payload,
@@ -70,12 +72,27 @@ export const setMoveTurn = (payload) => {
     payload: payload,
   };
 };
+export const setBuyBox = (payload) => {
+  return {
+    type: SET_BUY_BOX,
+    payload: payload, //{box:1, target: 'target1',}
+  };
+};
 export const setBalance = (payload) => {
   return {
     type: SET_BALANCE,
-    payload: payload,
+    payload: payload, //{target:"target1",henryCoin:1700,}
   };
 };
+
+export const gameAdios = (payload) => {
+  return {
+    type: GAME_ADIOS,
+    payload:payload
+  }
+}
+
+
 export const serOwner = (payload) => {
   return {
     type: SET_OWNER,

@@ -4,27 +4,35 @@ margin-top:-65%;
 .gaminglog-target1{
     font-family: var(--text-one);
     color: rgb(252, 78, 78);
-    font-size: 16px;
+    background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
+    font-size: 18px;
 }
 .gaminglog-target2{
     font-family: var(--text-one);
     color: rgb(9, 255, 0);
-    font-size: 16px;
+    background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
+    font-size: 18px;
 }
 .gaminglog-target3{
     font-family: var(--text-one);
     color: rgb(0, 255, 234);
-    font-size: 16px;
+    background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 0 0;
+    font-size: 18px;
 }
 .gaminglog-target4{
     font-family: var(--text-one);
     color: rgb(255, 0, 255);
-    font-size: 16px;
+    background-color: aliceblue;
+    border-radius: 1.25rem 1.125rem 1.125rem  0;
+    font-size: 18px;
 }
 .gaminglog-text{
     font-family: var(--text-one);
     color: rgb(0, 0, 0);
-    font-size: 16px;
+    font-size: 17px;
     letter-spacing: 1px;
     display: flex;
 }

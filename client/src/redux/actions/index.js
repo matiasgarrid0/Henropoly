@@ -30,10 +30,12 @@ export {
   setGameRoll,
   buyPropertyAction,
   setMoveTurn,
+  moveToJail,
   setBalance,
-  goToJail,
+  setBuyBox,
+  gameAdios,
   updateTrade,
-  serOwner
+  serOwner,
 } from "./henropolyGame";
 export { setView } from "./view";
 export {
@@ -45,5 +47,5 @@ export {
   setHostHenryCoin,
   setTargetHenryCoin,
   setHostConfirmation,
-  setTargetConfirmation
+  setTargetConfirmation,
 } from "./HenryTrading";
