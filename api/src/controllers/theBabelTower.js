@@ -480,6 +480,7 @@ const roll = async (username, io) => {
     const responseRoom = await client.get(`playersInGame${username}`);
     const response = await client.get(`gameRoom${responseRoom}`);
     var room = JSON.parse(response);
+   
     for (let i = 1; i < 5; i++) {
       // playersGame.push(`target${i}`)
       // console.log("TODOS LOS PLAYER",playersGame)
@@ -588,7 +589,7 @@ const roll = async (username, io) => {
           room.table[room.dataPlayers[target].box].actualPrice
           ];
         room.dataPlayers[target].henryCoin =
-          room.dataPlayers[target].henryCoin - cost;
+          room.dataPlayers[target].henryCoin - cost*50;
         room.dataPlayers[targetProperty].henryCoin =
           room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
@@ -649,7 +650,7 @@ const roll = async (username, io) => {
         room.dataPlayers[target].henryCoin =
           room.dataPlayers[target].henryCoin - cost;
         room.dataPlayers[targetProperty].henryCoin =
-          room.dataPlayers[targetProperty].henryCoin + cost;
+          room.dataPlayers[targetProperty].henryCoin + cost ;
       } else if (
         room.table[room.dataPlayers[target].box].owner !== username &&
         room.table[room.dataPlayers[target].box].type === "taxVip"
@@ -883,66 +884,55 @@ const roll = async (username, io) => {
         });
         room.move = false;
       }
-   
-  // ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!!///////////////////////////
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! <------   
-      //revisar aqui <---
-     /* if (room.dataPlayers[target].henryCoin <= 0) {
-       if (room.order.length > 2) {
-          let meTurn = false;
-          room.move = false
-          if (room.actualTurn === username) {
-            seconds[username] = 120;
-            room.actualTurn = room.order[1];
-            room.order.shift();
-            meTurn = true;
-         } else {
-         room.order = room.order.filter((players) => players !== username);
-          }
-          console.log('----------------------------------------->linea 864 si son +2 jugadores')
-          await callbackTest(4000)
-
-         room.order.forEach((player) => {
-            io.sockets.in(player).emit("setGame", {
-            status: "setTurns",
-            actualTurn: room.actualTurn,
-           order: room.order,
-        });
-       })
-        await callbackTest(150)
-          room.order.forEach((player) => {
-            io.sockets.in(player).emit("log", {
-              target: target,
-              text: `Has perdido, más suerte la próxima perro`,
-            }); 
-          });
-      }
-
-        if (room.order.length == 2) {
-          console.log('----------------------------------------->linea 884   si son 2 jugadores')
-          let meTurn = false;
-          room.move = false
-          if (room.actualTurn === username) {
-            seconds[username] = 120;
-            room.actualTurn = room.order[1];
-            room.order.shift();
-            meTurn = true;
-          } else {
-            room.order = room.order.filter((players) => players !== username);
-          }
-          room.order.forEach((player) => {
-            io.sockets.in(player).emit("log", {
-              target: target,
-              text: `Has perdido, más suerte la próxima perro`,
-            });
-          });
-        }
- 
-      }*/  /**/
-      await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
+    await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
     } 
-
-
+    const klokmybro = await client.get(`gameRoom${responseRoom}`);
+    var roomDenuevo = JSON.parse(klokmybro);
+    if(roomDenuevo.dataPlayers[target].henryCoin < 0){
+      let loser = roomDenuevo.dataPlayers[target].username;
+      console.log(roomDenuevo.dataPlayers[target].henryCoin)
+      roomDenuevo.dataPlayers[target].status = false
+      if (roomDenuevo.dataPlayers[target].username === roomDenuevo.actualTurn) {
+        seconds[responseRoom] = 120;
+        roomDenuevo.actualTurn = roomDenuevo.order[1];
+        let borrado = roomDenuevo.order.shift();
+        //roomDenuevo.order = arrayYQue;
+        roomDenuevo.move = true;
+        roomDenuevo.order.forEach((player) => {
+          io.sockets.in(player).emit("setGame", {
+            status: "setTurns",
+            actualTurn: roomDenuevo.actualTurn,
+            order: roomDenuevo.order,
+          });
+        })
+      } else {
+        roomDenuevo.order = roomDenuevo.order.filter((player) => player !== roomDenuevo.dataPlayers[target].username);  
+      }
+      await client.set(`gameRoom${responseRoom}`, JSON.stringify(roomDenuevo));
+      roomDenuevo.order.forEach((player) => {
+        io.sockets
+          .in(player)
+          .emit("log", { target: target, text: " pierde y deja la partida." });
+          io.sockets.in(player).emit("setGame", {
+            status: "statusGame",
+            type: "exitPlayer",
+            info: {
+              target: target,
+              turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
+            },
+          });
+      });        io.sockets
+          .in(loser)
+          .emit("setGame", { status: "perdiste", });
+          io.sockets.in(loser).emit("setGame", {
+            status: "statusGame",
+            type: "exitPlayer",
+            info: {
+              target: target,
+              turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
+            },
+          });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -1029,7 +1019,7 @@ const buyProperty = async (username, box, io) => {
           target: target,
           text: `No tiene fondos para comprar ${room.table[box].name}`,
         });
-         e.bancarrota === fa
+         e.bancarrota === false
       });
     }
   } catch (error) {
@@ -1224,7 +1214,7 @@ const jail = async (username, box, io) => {
     }
     if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue) {
       room.dataPlayers[target].henryCoin =
-        room.dataPlayers[target].henryCoin - 1600;
+        room.dataPlayers[target].henryCoin - room.table[box].licenseValue
       room.dataPlayers[target].jail = false;
 
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy

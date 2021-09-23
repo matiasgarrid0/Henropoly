@@ -90,10 +90,7 @@ io.on("connection", async (socket) => {
         await roll(decoded.user.username, io)
       } else if (data.type === "passTurn") {
         await passTurn(decoded.user.username, io)
-      } else if(data.type === "playerIsLoser") {
-        //console.log('HENRYCOINS ES MENOR A CERSO')
-        await playerIsLoser(decoded.user.username, io)
-      }
+      } 
       // }else if (data.type === "gameActionsBoard"){
       //   await gameActionsBoard(decoded.user.username, io)
       // } 

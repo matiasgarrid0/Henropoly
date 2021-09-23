@@ -80,6 +80,7 @@ const DisplayGameBeta = () => {
   });
   //--portales--
   const [cardBack, setCardBack] = useState(null)
+  const [perdedor, setPerdedor] = useState(false)
   const [goJailLuckyCard, setGoJailLuckyCard] = useState(false);
   const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
@@ -472,6 +473,8 @@ const DisplayGameBeta = () => {
         } else {
           dispatch(setMoveTurn(true))
         }
+      } else if(data.status === 'perdiste'){
+        setPerdedor(true)
       }
     })
 
@@ -485,6 +488,11 @@ const DisplayGameBeta = () => {
       {portal === "lucky" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
+        </Portal>
+      )}
+      {perdedor && (
+        <Portal onClose={()=>{setPerdedor(false)}}>
+          <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div>
         </Portal>
       )}
       {portal === "comunal" && (
