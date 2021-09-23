@@ -6,7 +6,7 @@ import { statusTrading } from "./../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const TurnsOptions = ({ turn, roll, pass }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { move, table } = useSelector((state) => state.henropolyGame);
   const { tradeStatus } = useSelector((state) => state.henryTrading);
   const { user } = useSelector((state) => state.auth);
