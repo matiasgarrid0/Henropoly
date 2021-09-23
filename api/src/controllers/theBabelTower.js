@@ -256,7 +256,7 @@ const goGame = async (username, io) => {
           cards: [],
           status: false,
           jail: false,
-          bancarrota: false,
+          bancarrota:false,
           box: 0,
           x: 120,
           y: 40,
@@ -481,17 +481,51 @@ const roll = async (username, io) => {
     const response = await client.get(`gameRoom${responseRoom}`);
     var room = JSON.parse(response);
     for (let i = 1; i < 5; i++) {
+      // playersGame.push(`target${i}`)
+      // console.log("TODOS LOS PLAYER",playersGame)
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`;
+        // playersGame.push(room.dataPlayers[`target${i}`])
+        // if( room.dataPlayers[`target${i}`].bancarrota === true){
+          //   console.log('ASDASKDLKSADLASKJDLASIKJDLASKJDNLASJDNMKLASJNDASLJD', `target${i}`)
+          //   playersGame.push(`target${i}`)
+          // }
+          if (room.dataPlayers[`target${i}`].henryCoin <= 0) { //
+            room.dataPlayers[`target${i}`].bancarrota = true //
+            playersEnBancarrota.push(room.dataPlayers[`target${i}`])
+           outPlayer = true
+        }
       }
-       if (room.dataPlayers[`target${i}`].henryCoin <= 0) { //
-         room.dataPlayers[`target${i}`].bancarrota = true //
-         playersEnBancarrota.push(room.dataPlayers[`target${i}`])
-        outPlayer = true
+    }
        // meEnd(true)
       
-    }
-  }
+       //FACUUUUUUUUU
+       // asd = playersGame.filter((e) => e.bancarrota === true);
+       // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', asd);
+  //   if(asd.length === 1){
+  //     room.move = false
+  //     room.order.forEach((player) => {
+  //       io.sockets.in(player).emit("log", {
+  //         target: target,
+  //         text: `ganaste`,
+  //       });
+  //     });
+  //   }
+  //   //if(room.dataPlayers[target].statusInGame === "inGame" && room.dataPlayers[target].bancarrota === false){
+      
+  //   // }
+  //   if(room.dataPlayers[target].henryCoin <= 0){
+  //     room.dataPlayers[target].bancarrota= true
+  //     room.move = false
+  //     room.order.forEach((player) => {
+  //       io.sockets.in(player).emit("log", {
+  //         target: target,
+  //         text: `se quedo sin dinero esta en bancarrota`,
+  //       });
+  //     });
+  //     // deletePlayer(room.dataPlayers[target].username)
+  //   }
+  // }
     
     if (
       room.actualTurn === username && room.move === true &&
