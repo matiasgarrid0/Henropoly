@@ -35,7 +35,8 @@ import {
   GamingLog,
   DataPlayerInfo,
   Trading,
-  MePanel
+  MePanel,
+  Alerts
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -87,6 +88,9 @@ const DisplayGameBeta = () => {
   });
   //--portales--
   const [cardBack, setCardBack] = useState(null)
+  const [dataAlert, setDataAlert] = useState(null)
+  const [dataAlertPagar, setDataAlertPagar] = useState(null)
+  const [ganador,setGanador] = useState(false)
   const [perdedor, setPerdedor] = useState(false)
   const [goJailLuckyCard, setGoJailLuckyCard] = useState(false);
   const [render, setRender] = useState('')
@@ -168,7 +172,7 @@ const DisplayGameBeta = () => {
       info.table[dataPlayers[player].box].type &&
       dataPlayers[player].username === user.username
     ) {
-
+      
       if (info.table[dataPlayers[player].box].type === "comunal") {
         setPortal("comunal");
       }
@@ -417,6 +421,13 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, mouseActive: false });
   };
   useEffect(() => {
+    socket.on('alert',(data)=>{
+      if(data.status === 'mePagan'){
+        setDataAlert(`el jugador ${data.nombreDelqueTePaga} cae en tu propiedad y te paga ${data.cuantoTePago} HenryCoins.`)
+      }else if(data.status === 'lePago'){
+        setDataAlertPagar(`caes en la propiedad de ${data.nombreDelqueTePaga} pagas ${data.cuantoTePago} HenryCoins.`)
+      }
+    })
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
         dispatch(statusTrading(null));
@@ -426,9 +437,10 @@ const DisplayGameBeta = () => {
         if (data.type === "endGame") {
           dispatch(setGameStatus("free"));
         } else if (data.type === "exitPlayer") {
+          console.log('-------> kiickplayer data,', data)
           dispatch(
             setTurns({
-              actualTurn: data.info.turn.altulTurn,
+              actualTurn: data.info.turn.actualTurn,
               order: data.info.turn.order,
             })
           );
@@ -448,10 +460,12 @@ const DisplayGameBeta = () => {
         });
         setCardBack(data.cardChoice)
         dispatch(setGameRoll(data.info));
+        setRender(`status:${data.status}`)
       } else if (data.status === "buyProperty") {
         dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
         dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
         dispatch(buyPropertyAction(data));
+        setRender(`status:${data.status}`)
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
         setRender(`status:${data.status}`)
@@ -482,7 +496,10 @@ const DisplayGameBeta = () => {
           dispatch(setMoveTurn(true))
         }
       } else if(data.status === 'perdiste'){
+        console.log(data)
         setPerdedor(true)
+        setGanador(true)
+        setRender(`status:${data.status}`)
       }else if (data.status === "updateTrade") {
         dispatch(updateTrade(data.data));
       }
@@ -490,6 +507,7 @@ const DisplayGameBeta = () => {
     socket.on("trading", (data) => {});
 
     return () => {
+      socket.off('alert');
       socket.off("setGame");
       socket.off("trading");
     };
@@ -497,6 +515,16 @@ const DisplayGameBeta = () => {
 
   return (
     <div className="display-beta-border">
+      {dataAlert && (
+        <Portal onClose={()=>{setDataAlert(false)}}>
+          <Alerts data={dataAlert} />
+        </Portal>
+      )}
+      {dataAlertPagar && (
+        <Portal onClose={()=>{setDataAlertPagar(false)}}>
+          <Alerts data={dataAlert} />
+        </Portal>
+      )}
       {portal === "lucky" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
@@ -507,6 +535,11 @@ const DisplayGameBeta = () => {
           <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div>
         </Portal>
       )}
+     {/* {ganador === false && (
+        <Portal onClose={closedPortal3}>
+          <div className='display-game-loser-one'><label className='display-game-loser-two'>GANASTE!</label></div>
+        </Portal>
+      )}  */}
       {portal === "comunal" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
@@ -573,7 +606,7 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
-                        className="display-beta-target"
+                        className="display-beta-target"           /*   src={require(`../room/img/`).default} */
                       ><img className='displaygamebeta-token-target1' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target2.status && (
@@ -585,7 +618,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
+                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div

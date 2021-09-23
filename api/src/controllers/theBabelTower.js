@@ -1162,25 +1162,37 @@ const roll = async (username, io) => {
           } espacios.`,
         });
       });
-      if (buyAlquiler) {
+      if (buyAlquiler) { 
         room.order.forEach(async (player) => {
           await callbackTest(100);
           io.sockets.in(player).emit("log", {
             target: target,
             text: `paga por licencia a ${room.dataPlayers[targetProperty].username} ${cost} henryCoins.`,
+            targetProperty: targetProperty,
+            probando:true,
           });
-        });
-
-        room.order.forEach(async (e) => {
+          io.sockets.in(room.dataPlayers[targetProperty].username).emit("alert", {
+            status:'mePagan',
+            nombreDelqueTePaga: room.dataPlayers[target].username,
+            cuantoTePago: cost
+          });
+          io.sockets.in(room.dataPlayers[target].username).emit("alert", {
+            status:'lePago',
+            nombreDelqueTePaga: room.dataPlayers[targetProperty].username,
+            cuantoTePago: cost
+          });
           await callbackTest(100);
-          io.sockets.in(e).emit("setGame", {
+          io.sockets.in(player).emit("setGame", {
             status: "setBalance",
             info: {
+              targetProperty: targetProperty, 
               target: target,
               henryCoin: room.dataPlayers[target].henryCoin,
+              henryCoinProperty:room.dataPlayers[targetProperty].henryCoin
             },
           });
         });
+        
       }
       if (buyTax) {
         room.order.forEach(async (player) => {
@@ -1308,6 +1320,7 @@ const roll = async (username, io) => {
       roomDenuevo.dataPlayers[target].status = false
       if (roomDenuevo.dataPlayers[target].username === roomDenuevo.actualTurn) {
         seconds[responseRoom] = 120;
+        console.log('......> entro' ,'Actual Turn')
         roomDenuevo.actualTurn = roomDenuevo.order[1];
         let borrado = roomDenuevo.order.shift();
         //roomDenuevo.order = arrayYQue;
@@ -1318,15 +1331,13 @@ const roll = async (username, io) => {
             actualTurn: roomDenuevo.actualTurn,
             order: roomDenuevo.order,
           });
-        })
-      } else {
-        roomDenuevo.order = roomDenuevo.order.filter((player) => player !== roomDenuevo.dataPlayers[target].username);  
-      }
-      await client.set(`gameRoom${responseRoom}`, JSON.stringify(roomDenuevo));
+        }) 
+        await client.set(`gameRoom${responseRoom}`, JSON.stringify(roomDenuevo));
       roomDenuevo.order.forEach((player) => {
         io.sockets
           .in(player)
           .emit("log", { target: target, text: " pierde y deja la partida." });
+        //  console.log('pasaaaaaaaaaa x acaaaaa linea 13335')
           io.sockets.in(player).emit("setGame", {
             status: "statusGame",
             type: "exitPlayer",
@@ -1335,17 +1346,51 @@ const roll = async (username, io) => {
               turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
             },
           });
-      });        io.sockets
-          .in(loser)
-          .emit("setGame", { status: "perdiste", });
-          io.sockets.in(loser).emit("setGame", {
+      });       
+       io.sockets.in(loser).emit("setGame", { status: "perdiste", });
+       io.sockets.in(loser).emit("setGame", {
             status: "statusGame",
             type: "exitPlayer",
             info: {
               target: target,
               turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
             },
-          });
+      });
+      } else {
+        roomDenuevo.order = roomDenuevo.order.filter((player) => player !== roomDenuevo.dataPlayers[target].username); 
+        console.log('......> entro' ,' NPOOOOO Actual Turn')
+        io.sockets.in(player).emit("setGame", {
+          status: "setTurns",
+          actualTurn: roomDenuevo.actualTurn,
+          order: roomDenuevo.order,
+        }); 
+        await client.set(`gameRoom${responseRoom}`, JSON.stringify(roomDenuevo));
+        roomDenuevo.order.forEach((player) => {
+  
+          io.sockets
+            .in(player)
+            .emit("log", { target: target, text: " pierde y deja la partida." }); 
+          io.sockets.in(player).emit("setGame", {
+              status: "statusGame",
+              type: "exitPlayer",
+              info: {
+                target: target,
+                turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
+              },
+            });
+        });       
+         io.sockets.in(loser).emit("setGame", { status: "perdiste", });
+         io.sockets.in(loser).emit("setGame", {
+              status: "statusGame",
+              type: "exitPlayer",
+              info: {
+                target: target,
+                turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
+              },
+        });
+      }
+     
+      
     }
   } catch (error) {
     console.log(error);

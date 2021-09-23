@@ -180,7 +180,7 @@
 .trading-card {
   background: radial-gradient(#313131, #0e0e0e);
   width: 80px;
-  height: 120px;
+  height: 125px;
   border-radius: 5px;
   box-shadow: inset 0 0 0 3px #ffffffc7;
   text-align: center;
@@ -189,7 +189,7 @@
 .trading-card-activo-red {
   background: radial-gradient(#313131, #0e0e0e);
   width: 80px;
-  height: 120px;
+  height: 125px;
   border-radius: 5px;
   box-shadow: inset 0 0 0 3px #ffffffc7;
   text-align: center;
@@ -203,10 +203,27 @@
 .trading-card-activo-red:hover .trading-card-style-title {
   box-shadow: inset 0 0 0 3px #ff0000c7;
 }
+.trading-card-activo-red-service {
+  background: radial-gradient(#313131, #0e0e0e);
+  width: 80px;
+  height: 125px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 3px #ffffffc7;
+  text-align: center;
+  color: #ffffffc7;
+}
+.trading-card-activo-red-service:hover {
+  background: radial-gradient(#313131, #0e0e0e);
+  box-shadow: inset 0 0 0 3px #ff0000c7;
+  color: #ffffffc7;
+}
+.trading-card-activo-red-service:hover .trading-card-style-title-service {
+  box-shadow: inset 0 0 0 3px #ff0000c7;
+}
 .trading-card-activo {
   background: radial-gradient(#313131, #0e0e0e);
   width: 80px;
-  height: 120px;
+  height: 125px;
   border-radius: 5px;
   box-shadow: inset 0 0 0 3px #ffffffc7;
   text-align: center;
@@ -221,7 +238,11 @@
   box-shadow: inset 0 0 0 3px #14f100c7;
 }
 .trading-card-contenido-icon {
-  height: 55px;
+  height: 50px;
+  display: flex;
+}
+.trading-card-contenido-icon-service {
+  height: 60px;
   display: flex;
 }
 .trading-card-icon {
@@ -265,6 +286,13 @@
   font-size: 16px;
   display: flex;
 }
+.trading-card-style-title-service{
+  box-shadow: inset 0 0 0 3px #ffffffc7;
+  font-family: var(--text-one);
+  height: 40px;
+  font-size: 16px;
+  display: flex;
+}
 .trading-card-style-title-label {
   margin: auto;
 }
@@ -280,8 +308,8 @@
 }
 .trading-card-text-three {
   font-family: var(--text-one);
-  height: 25px;
-  font-size: 14px;
+  height: 10px;
+  font-size: 10px;
   display: flex;
   letter-spacing: 1px;
 }
@@ -292,7 +320,7 @@
 .trading-card-two {
   background: radial-gradient(#f1f19e, #c6c648);
   width: 80px;
-  height: 120px;
+  height: 125px;
   border-radius: 5px;
   box-shadow: inset 0 0 0 3px #fcfc5a;
 }

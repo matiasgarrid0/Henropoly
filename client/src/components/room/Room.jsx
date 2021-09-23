@@ -97,7 +97,7 @@ const Room = () => {
             })}
           </div>
           <div className="room-table-tokens">
-            {statusRoom.room.tokens.map((avatar) => {
+            {statusRoom.room.tokens === undefined ? <> </>:statusRoom.room.tokens.map((avatar) => {
               return (
                 <div key={avatar.id} className="room-relative">
                   <div>
