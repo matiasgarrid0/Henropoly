@@ -589,7 +589,7 @@ const roll = async (username, io) => {
           room.table[room.dataPlayers[target].box].actualPrice
           ];
         room.dataPlayers[target].henryCoin =
-          room.dataPlayers[target].henryCoin - cost*50;
+          room.dataPlayers[target].henryCoin - cost; //<------------Perder x 50
         room.dataPlayers[targetProperty].henryCoin =
           room.dataPlayers[targetProperty].henryCoin + cost;
       } else if (
@@ -676,7 +676,7 @@ const roll = async (username, io) => {
         buyLuckyCard = true;
         luckyType = "";
         let luckyCards = room.lucky;
-        let numberLucky = 11; //Math.floor((Math.random() * 12) + 1)
+        let numberLucky = Math.floor((Math.random() * 12) + 1)
         let luckyCard = luckyCards.filter((e) => e.ID === numberLucky);
         cardChoice = luckyCard;
         if (luckyCard[0].type === "pagas") {
