@@ -8,7 +8,8 @@ import {
   BUY_PROPERTY_ACTION,
   SET_MOVE_TURN,
   SET_BALANCE,
-  GO_TO_JAIL
+  GO_TO_JAIL,
+  GAME_ADIOS
 } from "../constants";
 
 const initialState = {
@@ -105,6 +106,12 @@ const henropolyGame = (state = initialState, action) => {
         [payload.info.target]: {...state.dataPlayers[payload.info.target], box: payload.box}}
       };
 
+
+      case GAME_ADIOS:
+        return {
+        state
+
+        }
     default:
       return state;
   };

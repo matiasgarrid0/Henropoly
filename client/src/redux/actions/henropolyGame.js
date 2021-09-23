@@ -9,7 +9,8 @@ import {
   SET_MOVE_TURN,
   SET_BALANCE,
   GO_TO_JAIL,
-  SET_BUY_BOX
+  SET_BUY_BOX,
+  GAME_ADIOS
 } from "../constants";
 
 export const setGame = (data) => {
@@ -82,3 +83,12 @@ export const setBalance = (payload) => {
     payload: payload, //{target:"target1",henryCoin:1700,}
   };
 };
+
+export const gameAdios = (payload) => {
+  return {
+    type: GAME_ADIOS,
+    payload:payload
+  }
+}
+
+

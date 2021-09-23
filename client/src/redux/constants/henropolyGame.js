@@ -9,3 +9,4 @@ export const SET_MOVE_TURN = 'SET_MOVE_TURN'
 export const SET_BALANCE = 'SET_BALANCE'
 export const GO_TO_JAIL = 'GO_TO_JAIL';
 export const SET_BUY_BOX = 'SET_BUY_BOX';
+export const GAME_ADIOS = 'GAME_ADIOS';

@@ -256,6 +256,7 @@ const goGame = async (username, io) => {
           cards: [],
           status: false,
           jail: false,
+          bancarrota: false,
           box: 0,
           x: 120,
           y: 40,
@@ -266,6 +267,7 @@ const goGame = async (username, io) => {
           cards: [],
           status: false,
           jail: false,
+          bancarrota: false,
           box: 0,
           x: 40,
           y: 40,
@@ -279,6 +281,7 @@ const goGame = async (username, io) => {
       cards: [],
       status: true,
       jail: false,
+      bancarrota: false,
       box: 0,
       x: 120,
       y: 120,
@@ -288,6 +291,7 @@ const goGame = async (username, io) => {
       henryCoin: 1500,
       cards: [],
       status: true,
+      bancarrota: false,
       jail: false,
       box: 0,
       x: 40,
@@ -299,6 +303,7 @@ const goGame = async (username, io) => {
         henryCoin: 1500,
         cards: [],
         status: true,
+        bancarrota: false,
         jail: false,
         box: 0,
         x: 120,
@@ -312,6 +317,7 @@ const goGame = async (username, io) => {
         cards: [],
         status: true,
         jail: false,
+        bancarrota: false,
         box: 0,
         x: 40,
         y: 40,
@@ -330,6 +336,50 @@ const goGame = async (username, io) => {
     console.log(error);
   }
 };
+
+// const deletePlayer = async (username,io) => {
+//   try {
+//     const responseRoom = await client.get(`playersInGame${username}`);
+//     const response = await client.get(`gameRoom${responseRoom}`);
+//     var room = JSON.parse(response);
+//     console.log(username)
+//     for (let i = 1; i < 5; i++) {
+//       if (room.dataPlayers[`target${i}`].username === username) {
+//         target = `target${i}`;
+//         room.dataPlayers[`target${i}`].status = false;
+//       }
+//     }
+//     await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
+//     await client.del(`playersInGame${username}`);
+//     let newTarget;
+//     for (let i = 1; i < 5; i++) {
+//       if (room.dataPlayers[`target${i}`].username === room.actualTurn) {
+//         newTarget = `target${i}`;
+//       }
+//     }
+//     room.order.forEach((player) => {
+//       io.sockets.in(player).emit("setGame", {
+//         status: "statusGame",
+//         type: "exitPlayer",
+//         info: {
+//           target: target,
+//           turn: { actualTurn: room.actualTurn, order: room.order },
+//         },
+//       });
+//       io.sockets
+//         .in(player)
+//         .emit("log", { target: target, text: "Perdió." });
+//     });
+//     //await callbackTest(150)
+//     io.sockets.in(username).emit("setGame", {
+//       status: "statusGame",
+//       type: "meEnd",
+//     });
+
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 const gameOver = async (username, io) => {
   try {
@@ -351,13 +401,15 @@ const gameOver = async (username, io) => {
     console.log(error);
   }
 };
-const meEnd = async (username, io) => {
+const meEnd = async (username, io, condicion) => {
   try {
     const responseRoom = await client.get(`playersInGame${username}`);
     const response = await client.get(`gameRoom${responseRoom}`);
     var room = JSON.parse(response);
     if (room.order.length === 2) {
       gameOver(room.host, io);
+     /* if(condicion === true) {
+        gameOver(room.host, io)*/ 
     } else {
       let target;
       let meTurn = false;
@@ -423,6 +475,8 @@ const meEnd = async (username, io) => {
 const roll = async (username, io) => {
   try {
     let target;
+    let playersEnBancarrota = [];
+    let outPlayer;
     const responseRoom = await client.get(`playersInGame${username}`);
     const response = await client.get(`gameRoom${responseRoom}`);
     var room = JSON.parse(response);
@@ -430,10 +484,17 @@ const roll = async (username, io) => {
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`;
       }
+       if (room.dataPlayers[`target${i}`].henryCoin <= 0) { //
+         room.dataPlayers[`target${i}`].bancarrota = true //
+         playersEnBancarrota.push(room.dataPlayers[`target${i}`])
+        outPlayer = true
+       // meEnd(true)
+      
     }
+  }
+    
     if (
-      room.actualTurn === username &&
-      room.move === true &&
+      room.actualTurn === username && room.move === true &&
       room.dataPlayers[target].jail === false
     ) {
       let num1 = Math.floor(Math.random() * 6 + 1);
@@ -457,72 +518,6 @@ const roll = async (username, io) => {
           });
         });
       }
-      /*for (let i = 1; i < 5; i++) {
-        if (room.dataPlayers[`target${i}`].username === username) {
-          target = `target${i}`;
-          room.dataPlayers[`target${i}`].box =
-            room.dataPlayers[`target${i}`].box + num1 + num2;
-          if (room.dataPlayers[`target${i}`].box > 39) {
-            room.dataPlayers[`target${i}`].box =
-              room.dataPlayers[`target${i}`].box - 39;
-            room.dataPlayers[`target${i}`].henryCoin =
-              room.dataPlayers[`target${i}`].henryCoin + 200;
-            room.order.forEach((player) => {
-              io.sockets.in(player).emit("log", {
-                target: `target${i}`,
-                text: `pasa por salida y cobra 200 henryCoins.`,
-              });
-              io.sockets.in(player).emit("setGame", {
-                status: "setBalance",
-                info: {
-                  target: `target${i}`,
-                  henryCoin: room.dataPlayers[`target${i}`].henryCoin,
-                },
-              });
-            });
-          }
-          // if (room.dataPlayers[`target${i}`].box === 30) {
-          // if ((
-          //   room.table[room.dataPlayers[target].box].id === 10)) {
-          //   room.dataPlayers[target].x = targetX(target, room.dataPlayers[target].box);
-          //   room.dataPlayers[target].y = targetY(target, room.dataPlayers[target].box);
-          //   console.log("DADOSSSSSSSSSSSSS FUERA DEL IF", num1, num2)
-          //   if (num1 !== num2) {
-          //       console.log("DADOSSSSSSSSSSSSS DENTRO DEL IF DISTINTOS", num1, num2)
-          //       room.dataPlayers[target].box = room.dataPlayers[target].box
-          //       room.order.forEach(async (player) => {
-          //         io.sockets.in(player).emit("log", {
-          //           target: target,
-          //           text: `tira sus dados y no dio pares, va a seguir intentando.`,
-          //         })
-          //         io.sockets.in(player).emit("setGame", {
-          //           status: "setBalance",
-          //           info: {
-          //             target: target,
-          //             henryCoin: room.dataPlayers[target].henryCoin,
-          //           }
-          //         })
-          //       })
-          //     } else {
-          //       console.log("DADOSSSSSSSSSSSSS DENTRO DEL IF IGUALES", num1, num2)
-          //       room.dataPlayers[target].box = room.dataPlayers[target].box + num1 + num2;
-          //       room.order.forEach(async (player) => {
-          //         io.sockets.in(player).emit("log", {
-          //           target: target,
-          //           text: `salió de migración al sacar dados pares.`,
-          //         })
-          //         io.sockets.in(player).emit("setGame", {
-          //           status: "setBalance",
-          //           info: {
-          //             target: target,
-          //             henryCoin: room.dataPlayers[target].henryCoin,
-          //           }
-          //         })
-          //       })
-          //     }
-          //   }
-        }
-      }*/
       room.dataPlayers[target].x = targetX(
         target,
         room.dataPlayers[target].box
@@ -556,7 +551,7 @@ const roll = async (username, io) => {
         }
         cost =
           room.table[room.dataPlayers[target].box][
-            room.table[room.dataPlayers[target].box].actualPrice
+          room.table[room.dataPlayers[target].box].actualPrice
           ];
         room.dataPlayers[target].henryCoin =
           room.dataPlayers[target].henryCoin - cost;
@@ -597,7 +592,7 @@ const roll = async (username, io) => {
         }
         cost =
           room.table[room.dataPlayers[target].box][
-            room.table[room.dataPlayers[target].box].actualPrice
+          room.table[room.dataPlayers[target].box].actualPrice
           ];
         room.dataPlayers[target].henryCoin =
           room.dataPlayers[target].henryCoin - cost;
@@ -692,38 +687,6 @@ const roll = async (username, io) => {
       if (room.table[room.dataPlayers[target].box].type === "jail") {
         room.dataPlayers[target].jail = true;
       }
-      //else if (room.table[room.dataPlayers[target].box].type === 'jail') {
-      //   room.dataPlayers[target].jail = true
-
-      //   if (num1 !== num2) {
-      //     room.move = false;
-      //     console.log("DADOSSSSSSSSSSSSS", num1, num2)
-      //     // room.dataPlayers[target].box = room.dataPlayers[target].box
-      //     console.log("BOXXXXXXX DENTRO DEL IF DISTINTOS", room.dataPlayers[target].box)
-      //     room.order.forEach(async (player) => {
-      //       io.sockets.in(player).emit("log", {
-      //         target: target,
-      //         text: `tira sus dados y no dio pares, va a seguir intentando.`,
-      //       })
-      //     })
-      //   } else {
-      //     console.log("DADOSSSSSSSSSSSSS DENTRO DEL IF IGUALES", num1, num2)
-      //     room.dataPlayers[target].box = room.dataPlayers[target].box + num1 + num2;
-      //     room.order.forEach(async (player) => {
-      //       io.sockets.in(player).emit("log", {
-      //         target: target,
-      //         text: `salió de migración al sacar dados pares.`,
-      //       })
-      //       io.sockets.in(player).emit("setGame", {
-      //         status: "setBalance",
-      //         info: {
-      //           target: target,
-      //           henryCoin: room.dataPlayers[target].henryCoin,
-      //         }
-      //       })
-      //     })
-      //   }
-      // }
 
       if (num1 !== num2) {
         room.move = false;
@@ -746,9 +709,8 @@ const roll = async (username, io) => {
         });
         io.sockets.in(player).emit("log", {
           target: target,
-          text: `ha lanzado dado y tira : ${num1} / ${num2}. se mueve ${
-            num1 + num2
-          } espacios.`,
+          text: `ha lanzado dado y tira : ${num1} / ${num2}. se mueve ${num1 + num2
+            } espacios.`,
         });
       });
       if (buyAlquiler) {
@@ -887,8 +849,66 @@ const roll = async (username, io) => {
         });
         room.move = false;
       }
+   
+  // ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!!///////////////////////////
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! <------   
+      //revisar aqui <---
+     /* if (room.dataPlayers[target].henryCoin <= 0) {
+       if (room.order.length > 2) {
+          let meTurn = false;
+          room.move = false
+          if (room.actualTurn === username) {
+            seconds[username] = 120;
+            room.actualTurn = room.order[1];
+            room.order.shift();
+            meTurn = true;
+         } else {
+         room.order = room.order.filter((players) => players !== username);
+          }
+          console.log('----------------------------------------->linea 864 si son +2 jugadores')
+          await callbackTest(4000)
+
+         room.order.forEach((player) => {
+            io.sockets.in(player).emit("setGame", {
+            status: "setTurns",
+            actualTurn: room.actualTurn,
+           order: room.order,
+        });
+       })
+        await callbackTest(150)
+          room.order.forEach((player) => {
+            io.sockets.in(player).emit("log", {
+              target: target,
+              text: `Has perdido, más suerte la próxima perro`,
+            }); 
+          });
+      }
+
+        if (room.order.length == 2) {
+          console.log('----------------------------------------->linea 884   si son 2 jugadores')
+          let meTurn = false;
+          room.move = false
+          if (room.actualTurn === username) {
+            seconds[username] = 120;
+            room.actualTurn = room.order[1];
+            room.order.shift();
+            meTurn = true;
+          } else {
+            room.order = room.order.filter((players) => players !== username);
+          }
+          room.order.forEach((player) => {
+            io.sockets.in(player).emit("log", {
+              target: target,
+              text: `Has perdido, más suerte la próxima perro`,
+            });
+          });
+        }
+ 
+      }*/  /**/
       await client.set(`gameRoom${responseRoom}`, JSON.stringify(room));
-    }
+    } 
+
+
   } catch (error) {
     console.log(error);
   }
@@ -969,6 +989,14 @@ const buyProperty = async (username, box, io) => {
           text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
         });
       });
+    } else {
+      room.order.forEach((e) => {
+        io.sockets.in(e).emit("log", {
+          target: target,
+          text: `No tiene fondos para comprar ${room.table[box].name}`,
+        });
+         e.bancarrota === fa
+      });
     }
   } catch (error) {
     console.log(error);
@@ -1009,6 +1037,14 @@ const buyRailway = async (username, box, io) => {
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
     });
+  } else {
+    room.order.forEach((e) => {
+      io.sockets.in(e).emit("log", {
+        target: target,
+        text: `No tiene fondos para comprar ${room.table[box].name}`
+      });
+      e.bancarrota === false
+    });
   }
 };
 
@@ -1044,6 +1080,14 @@ const buyService = async (username, box, io) => {
         target: target,
         text: `ha comprado ${room.table[box].name} a ${room.table[box].licenseValue} HenryCoins.`,
       });
+    });
+  } else {
+    room.order.forEach((e) => {
+      io.sockets.in(e).emit("log", {
+        target: target,
+        text: `No tiene fondos para comprar ${room.table[box].name}`
+      });
+      e.bancarrota === false
     });
   }
 };
@@ -1093,6 +1137,7 @@ const goToJail = async (username, io) => {
 
 const goToJailCard = async (username, io) => {
   try {
+    //1135:7
     // console.log(io)
     const host = await client.get(`playersInGame${username}`);
     const responseGameRoom = await client.get(`gameRoom${host}`);
@@ -1142,10 +1187,10 @@ const jail = async (username, box, io) => {
       if (room.dataPlayers[`target${i}`].username === username) {
         target = `target${i}`;
       }
-    } 
-    if(room.dataPlayers[target].henryCoin >= room.table[box].licenseValue) {
+    }
+    if (room.dataPlayers[target].henryCoin >= room.table[box].licenseValue) {
       room.dataPlayers[target].henryCoin =
-        room.dataPlayers[target].henryCoin - room.table[box].licenseValue;
+        room.dataPlayers[target].henryCoin - 1600;
       room.dataPlayers[target].jail = false;
 
       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
@@ -1178,51 +1223,57 @@ const jail = async (username, box, io) => {
     console.log(error);
   }
 };
+const playerIsLoser = async (username, io) => {
+  // console.log('ENTRO A LA TORRE DE BABEL LINEA 1309')
+  console.log("USERNAMEEEE QUE LLEGA A LA FUNCION", username)
+  /* let target;
+  let playersEnBancarrota = [];
+  let outPlayer;
+  const host = await client.get(`playersInGame${username}`);
+  const responseGameRoom = await client.get(`gameRoom${host}`);
+  var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
+  for (let i = 1; i < 5; i++) {
+    if (room.dataPlayers[`target${i}`].username === username) {
+      target = `target${i}`;
+    }
+  }  if (room.dataPlayers[target].henryCoin <= 0) { //
+      room.dataPlayers[target].bancarrota = true //
+      playersEnBancarrota.push(room.dataPlayers[target])
+      outPlayer = true
+    }
+    if (room.order.length === 2) {
+      if (outPlayer && playersEnBancarrota.length === 1 && playersEnBancarrota[0].bancarrota === true) {
+        room.move = false
+        room.order.forEach((player) => {
+          io.sockets.in(player).emit("log", {
+            target: target,
+            text: `ganaste felicidades`,
+          });
+        });
+        gameOver(room.host, io)
+      }
+    }
+    try {
+     if (room.order.length >2) {
 
-// const jail = async (username, io) => {
-//   try {
-//     const host = await client.get(`playersInGame${username}`)
-//     const responseGameRoom = await client.get(`gameRoom${host}`);
-//     let target;
-//     var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
-//     if (room.actualTurn === username) {
-//       for (let i = 1; i < 5; i++) {
-//         if (room.dataPlayers[`target${i}`].username === username) {
-//           target = `target${i}`
-//         }
-//       }
-//       room.dataPlayers[target].jail === true
-
-//       await client.set(`gameRoom${host}`, JSON.stringify(room)); //----> seteo la info en redis a stringfy
-//       room.order.forEach((player) => {
-//         io.sockets.in(player).emit("setGame", { //----> mando la repuesta x socket
-//           status: "jail",
-//           info: { target: target, move: room.dataPlayers[target].box },
-//           box: room.dataPlayers[target].box,
-//           newProperty: target,
-//         });
-//         //await callbackTest(100);
-//         io.sockets.in(player).emit("log", {
-//           target: target,
-//           text: `paga 500 henryCoins por carta comunal.`,
-//         })
-//         io.sockets.in(player).emit("setGame", {
-//           status: "setBalance",
-//           info: {
-//             target: target,
-//             henryCoin: room.dataPlayers[target].henryCoin,
-//           }
-//         })
-//       });
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+      //console.log('entro en linea 1394')
+        let target;
+        let meTurn = false;
+        if (room.actualTurn === username) {
+          seconds[username] = 120;
+          //clearTimer(username)
+          //await callbackTest(1200);
+          room.actualTurn = room.order[1];
+          room.order.shift();
+          meTurn = true;
+        } else {
+          room.order = room.order.filter((players) => players !== username);
+        }
+      
+    } } catch (error) {
+      console.log(error);
+    } */
+  }
 module.exports = {
   createRoom,
   deleteRoom,
@@ -1240,6 +1291,7 @@ module.exports = {
   goToJail,
   goToJailCard,
   jail,
+  playerIsLoser
   //luckyComunalCard,
   /*luckyOrArc,
   gameActionsBoard*/

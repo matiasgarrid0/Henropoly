@@ -1,8 +1,12 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import React, { useEffect, useState } from "react";
 import "./Turns.css";
+import {gameAdios} from "./../../redux/actions"
+
 const Turns = ({ action }) => {
-  const reloj = (sec) => {
+
+const dispatch= useDispatch()
+const reloj = (sec) => {
     let minutos = `0${Math.floor(sec / 60)}`;
     let segundos = sec % 60;
     if (segundos < 10) {
@@ -15,6 +19,7 @@ const Turns = ({ action }) => {
     (state) => state.henropolyGame
   );
   const [segundos, setSegundos] = useState(0);
+  
   useEffect(() => {
     socket.on("timer", (data) => {
       setSegundos(data);
@@ -24,6 +29,28 @@ const Turns = ({ action }) => {
     };
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
+
+ /*  useEffect(() => {
+    socket.on("gameDashboard", (data) => {
+      if (data.status === "playerOff") {
+        console.log(data)
+       dispatch(gameAdios(data))
+      }
+    })
+
+    return () => {
+      socket.off("gameDashboard");
+    };
+  }, []); */
+
+
+/* const playerChau = () => {
+  console.log('pasoooooooooooooooooooooooooooooooooooo') //lo consologeo 50 vece
+  socket.emit("gameDashboard", { type: "playerIsLoser" })
+  return (
+    <span> PERDISTE :( </span>
+  )
+} */
 
   return (
     <div className="turns-table box-row">
@@ -37,7 +64,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target1.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target1.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target1.henryCoin }</label>
           {dataPlayers.target1.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
@@ -73,7 +100,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target3.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target3.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target3.henryCoin  }</label>
           {dataPlayers.target3.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
@@ -91,7 +118,7 @@ const Turns = ({ action }) => {
             {dataPlayers.target4.username}
           </label>
           <label className="turns-title">HenryCoins:</label>
-          <label className="turns-coin">{dataPlayers.target4.henryCoin}</label>
+          <label className="turns-coin">{dataPlayers.target4.henryCoin }</label>
           {dataPlayers.target4.username === actualTurn && (
             <div className="turns-btn-disabled-two">
               <label>{reloj(segundos)}</label>
