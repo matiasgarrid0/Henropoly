@@ -10,7 +10,8 @@ import {
   SET_BALANCE,
   GO_TO_JAIL,
   SET_BUY_BOX,
-  GAME_ADIOS
+  GAME_ADIOS,
+  SET_OWNER
 } from "../constants";
 
 export const setGame = (data) => {
@@ -92,3 +93,24 @@ export const gameAdios = (payload) => {
 }
 
 
+export const serOwner = (payload) => {
+  return {
+    type: SET_OWNER,
+    payload: payload,
+  };
+};
+
+export const updateTrade =(data)=>{
+  return async (dispatch) => {
+    data.targetTradeCard.forEach((card) => {
+      dispatch(serOwner({box:card.id ,target:data.hostTrading}));
+    });
+    data.hostTradeCard.forEach((card) => {
+      dispatch(serOwner({box:card.id ,target:data.targetTrading}));
+    });
+    let newBalanceHost = data.hostTotalHenryCoin - data.hostHenryCoin + data.targetHenryCoin
+    let newBalanceTarget = data.targetTotalHenryCoin - data.targetHenryCoin + data.hostHenryCoin
+    dispatch(setBalance({target:data.hostTrading, henryCoin:newBalanceHost}))
+    dispatch(setBalance({target:data.targetTrading, henryCoin:newBalanceTarget}))
+  };
+}

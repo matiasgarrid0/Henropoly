@@ -9,7 +9,8 @@ import {
   SET_MOVE_TURN,
   SET_BALANCE,
   GO_TO_JAIL,
-  GAME_ADIOS
+  GAME_ADIOS,
+  SET_OWNER
 } from "../constants";
 
 const initialState = {
@@ -70,6 +71,13 @@ const henropolyGame = (state = initialState, action) => {
         ...state,
         status: payload,
       };
+    case SET_OWNER:
+      let newOwner = state.table;
+      newOwner[payload.box].owner = state.dataPlayers[payload.target].username;
+      return {
+        ...state,
+        table: newOwner,
+      };
     case BUY_PROPERTY_ACTION:
       let newTable = state.table;
       newTable[payload.box].owner =
@@ -110,7 +118,6 @@ const henropolyGame = (state = initialState, action) => {
       case GAME_ADIOS:
         return {
         state
-
         }
     default:
       return state;

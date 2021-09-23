@@ -35,8 +35,16 @@ const {
   goToJail,
   goToJailCard,
   jail,
-  playerIsLoser
+  playerIsLoser,
   //luckyComunalCard
+  initialTrade,
+  acceptTrade,
+  addTradeOfert,
+  RemoveTradeOfert,
+  setHenryCoin,
+  setConfirmation,
+  cancelTrade,
+  selectAvatar
   /*luckyOrArc,
   gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
@@ -75,6 +83,8 @@ io.on("connection", async (socket) => {
         await leaveRoom(data.player, io);
       } else if (data.type === "goGame") {
         await goGame(decoded.user.username, io);
+      }else if (data.type === "selectAvatar") {
+        await selectAvatar(data, io);
       }
     });
     socket.on("roomStatus", () => { });
@@ -124,10 +134,29 @@ io.on("connection", async (socket) => {
         message: data.message,
       });
     });
-    socket.on("chatGlobal", () => { });
-    socket.on("disconnect", () => { });
+    socket.on("chatGlobal", () => {});
+    socket.on("disconnect", () => {});
+    //trader:
+    socket.on("sendTrade", async (data) => {
+      if (data.type === "initialTrade") {
+        await initialTrade(data.host, decoded.user.username, data.target, io);
+      } else if (data.type === "acceptTrade") {
+        await acceptTrade(data.host, decoded.user.username, io);
+      } else if (data.type === "addTradeOfert") {
+        await addTradeOfert(data, io);
+      } else if (data.type === "RemoveTradeOfert") {
+        await RemoveTradeOfert(data, io);
+      } else if (data.type === "setHenryCoin") {
+        await setHenryCoin(data, io);
+      } else if (data.type === "setConfirmation") {
+        await setConfirmation(data, io);
+      } else if (data.type === "cancelTrade") {
+        await cancelTrade(data, io);
+      }
+    });
+    socket.on("Trading", () => {});
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 });
 

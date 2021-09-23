@@ -28,6 +28,7 @@ import TurnsOptions from "./turnsOptions/TurnsOptions.jsx";
 import GamingLog from "./gamingLog/GamingLog.jsx";
 import DataPlayerInfo from "./dataPlayerInfo/DataPlayerInfo.jsx";
 import Trading from "./trading/Trading.jsx";
+import MePanel from './mePanel/MePanel.jsx'
 export {
   Loggin,
   RegisterForm,
@@ -58,6 +59,7 @@ export {
   TurnsOptions,
   GamingLog,
   DataPlayerInfo,
-  Trading
+  Trading,
+  MePanel
 };
 

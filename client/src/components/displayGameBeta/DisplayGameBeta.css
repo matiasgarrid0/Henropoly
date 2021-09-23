@@ -1,7 +1,6 @@
 .display-beta-border {
   width: 100%;
   height: 100vh;
-  background-color: aquamarine;
 }
 .display-beta-body-display {
   background-color: antiquewhite;
@@ -36,7 +35,7 @@
   width: 1300px;
   height: 1300px;
 }
-.display-beta-board-position{
+.display-beta-board-position {
   position: absolute;
 }
 .display-beta-game-box {
@@ -78,11 +77,11 @@
 }
 .display-beta-align-gameturns {
   position: absolute;
-  left: 50%; 
-  margin: 0 auto; 
+  left: 50%;
+  margin: 0 auto;
   top: 120px;
 }
-.display-beta-align-playerprops{
+.display-beta-align-playerprops {
   position: absolute;
   left: 50%;
   top: 250px;
@@ -95,33 +94,46 @@
 .display-beta-align-dices {
   position: absolute;
   left: 50%;
-  top:50%;
+  top: 50%;
 }
 .display-beta-align-log {
   position: absolute;
   left: 20px;
-  top:50%;
+  top: 50%;
 }
-.display-beta-bajo-touch{
+.display-beta-bajo-touch {
   position: absolute;
   width: 100%;
   height: 100vh;
 }
-.display-beta-align-dataplayer{
+.display-beta-align-dataplayer {
   position: absolute;
   top: 120px;
   left: 20px;
 }
-.display-beta-align-trading{
+.display-beta-align-trading {
   position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
 }
-.display-game-loser-one{
-  display: flex;
-  width: 300px;
-  height: 180px;
+.display-beta-align-mepanel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
-.display-game-loser-two{
-  margin: auto;
+.displaygamebeta-token-target1{
+  border-radius: 50%;
+  border: solid 2px rgb(255, 0, 0);
+}
+.displaygamebeta-token-target2{
+  border-radius: 50%;
+  border: solid 2px rgb(9, 255, 0);
+}
+.displaygamebeta-token-target3{
+  border-radius: 50%;
+  border: solid 2px rgb(0, 255, 234);
+}
+.displaygamebeta-token-target4{
+  border-radius: 50%;
+  border: solid 2px rgb(255, 0, 255);
 }

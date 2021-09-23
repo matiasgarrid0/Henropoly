@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-
+import Hola from '../room/img/01.gif'
 import {
   setView,
   setTargetValue,
@@ -14,7 +14,9 @@ import {
   moveToJail,
   setBalance,
   setBuyBox,
-  changeValueTarget
+  changeValueTarget,
+  statusTrading,
+  updateTrade
 } from "./../../redux/actions";
 import {
   Board,
@@ -33,6 +35,7 @@ import {
   GamingLog,
   DataPlayerInfo,
   Trading,
+  MePanel
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -44,8 +47,12 @@ const DisplayGameBeta = () => {
   sonidoOne.volumen = 0.5;
   sonidoOne.loop = false;
   const dispatch = useDispatch();
-  const { status, dataPlayers, host, actualTurn, table } = useSelector((state) => state.henropolyGame);
   const { tradeStatus } = useSelector((state) => state.henryTrading);
+  const { status, dataPlayers, host, actualTurn, table } = useSelector(
+    (state) => state.henropolyGame
+  );
+  //random Lucky y comunal cards
+  const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
@@ -412,6 +419,7 @@ const DisplayGameBeta = () => {
   useEffect(() => {
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
+        dispatch(statusTrading(null));
         dispatch(setTurns({ actualTurn: data.actualTurn, order: data.order }));
         dispatch(setMoveTurn(true));
       } else if (data.status === "statusGame") {
@@ -475,11 +483,15 @@ const DisplayGameBeta = () => {
         }
       } else if(data.status === 'perdiste'){
         setPerdedor(true)
+      }else if (data.status === "updateTrade") {
+        dispatch(updateTrade(data.data));
       }
     })
+    socket.on("trading", (data) => {});
 
     return () => {
       socket.off("setGame");
+      socket.off("trading");
     };
   }, []);
 
@@ -557,44 +569,45 @@ const DisplayGameBeta = () => {
                     {dataPlayers.target1.status && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target1' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
+                      
                         style={{
-                          backgroundColor: "rgb(9, 255, 0)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target2.x}px`,
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
                         style={{
-                          backgroundColor: "rgb(0, 255, 234)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target3.x}px`,
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target3' src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
                     ) : (
                       <></>
                     )}
                     {dataPlayers.target4.status !== false && (
                       <div
                         style={{
-                          backgroundColor: "rgb(255, 0, 255)",
+                          backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target4.x}px`,
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ></div>
+                      ><img className='displaygamebeta-token-target4' src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
                     )}
                   </div>
                 </div>
@@ -630,19 +643,8 @@ const DisplayGameBeta = () => {
     </div>  
     <div className="display-beta-align-gameturns">
             <Turns /> */}
-        <div className="display-beta-align-chatgame">
-          <ChatGame />
-        </div>
-        <div className="display-beta-align-gameoptions">
-          <GameOptions
-            host={user.username === host}
-            gameOver={() => {
-              socket.emit("gameDashboard", { type: "gameOver" });
-            }}
-            meEnd={() => {
-              socket.emit("gameDashboard", { type: "meEnd" });
-            }}
-          />
+            <div className="display-beta-align-mepanel">
+          <MePanel />
         </div>
         <div className="display-beta-align-gameturns">
           <Turns action={closeAndOpen} />
@@ -680,11 +682,23 @@ const DisplayGameBeta = () => {
           }}
         />
       </div>
-      {tradeStatus && (
-        <div className="display-beta-align-trading">
-          <Trading />
-        </div>
-      )}
+      <div className="display-beta-align-trading">
+        <Trading />
+      </div>
+      <div className="display-beta-align-chatgame">
+        <ChatGame />
+      </div>
+      <div className="display-beta-align-gameoptions">
+        <GameOptions
+          host={user.username === host}
+          gameOver={() => {
+            socket.emit("gameDashboard", { type: "gameOver" });
+          }}
+          meEnd={() => {
+            socket.emit("gameDashboard", { type: "meEnd" });
+          }}
+        />
+      </div>
     </div>
   );
 };
