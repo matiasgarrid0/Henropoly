@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./GameOptions.css";
 import { FiSettings, FiMinimize2 } from "react-icons/fi";
+
 const GameOptions = ({ host, gameOver, meEnd }) => {
   const [minimizar, setMinimizar] = useState(true);
 
@@ -32,7 +33,7 @@ const GameOptions = ({ host, gameOver, meEnd }) => {
           {host ? "Terminar Partida" : "Salir Del Juego"}
         </button>
       </div>
-      <div>hola2</div>
+      <div>musica aqui</div>
     </div>
   );
 };
