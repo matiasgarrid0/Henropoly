@@ -37,26 +37,33 @@ export const register = (username, email, password) => {
   };
 };
 
-export const login = (username, password) => {
+export const login = (username, password,devolverRespuesta) => {
   const data = {
     username: username,
     password: password,
   };
   return async (dispatch) => {
-    dispatch(setLoading(true));
+    //dispatch(setLoading(true));
     try {
       const response = await axios.post(`/auth/signIn`, data);
       if (response.data) {
-        dispatch(setUser(response.data.user));
-        dispatch(setToken(response.data.token));
-        dispatch(connectSocket(response.data.token));
-        dispatch(setAuthenticate(true));
+        if(response.data.status === 1){
+          dispatch(setLoading(true));
+          dispatch(setUser(response.data.user));
+          dispatch(setToken(response.data.token));
+          dispatch(connectSocket(response.data.token));
+          dispatch(setAuthenticate(true));
+          dispatch(setLoading(false));
+        } else if (response.data.status === 2){
+          devolverRespuesta(response.data.text)
+          
+        }
       } else {
+        dispatch(setLoading(true));
         dispatch(logOut());
+        dispatch(setLoading(false));
       }
-      dispatch(setLoading(false));
     } catch (error) {
-      console.log(error);
       dispatch(logOut());
       dispatch(setLoading(false));
     }

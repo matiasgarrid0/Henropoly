@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import './RailwayCard.css';
 import Modulo from './img/modulo.png'
 
-const RailwayCard = ({ data, username, buy }) => {
+const RailwayCard = ({ data, username, buy, henryCoin }) => {
     const { user } = useSelector((state) => state.auth);
     return (
         <div className='railway-background-initial'>
@@ -16,7 +16,7 @@ const RailwayCard = ({ data, username, buy }) => {
                     <span className="card-span-bold" >Tres checkpoint:{data.threeCheckpoint}$</span>
                     <span className="card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}$</span> */}
                 </div>
-                {username === user.username && <button className='railway-button' onClick={buy}>comprar</button>}
+                {username === user.username && henryCoin >= data.licenseValue ? <button className='railway-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
             </div>
         </div>
     )

@@ -45,7 +45,9 @@ return (
             onChange={(e)=>handleChange(e)} 
             placeholder='clave'/>
         </div>
+        {errorLogin.status && <div className='login-error'>{errorLogin.text}</div>}
         <button className='btn-enter' type="submit">entrar</button> 
+
     </form>  
          </div>
          <div className="down-card">

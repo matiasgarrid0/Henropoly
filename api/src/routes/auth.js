@@ -56,7 +56,7 @@ router.post("/signIn", async (req, res, next) => {
           where: { username: username },
         });
         if (userResult === null) {
-          return res.status(404).json({ error: "Username does not exist." });
+          return res.status(200).json({ status:2, text: "El usuario no existe." });
         }
         if (bcrypt.compareSync(password, userResult.password)) {
           const userResponse = await User.findOne({
@@ -66,15 +66,15 @@ router.post("/signIn", async (req, res, next) => {
           let token = jwt.sign({ user: userResponse }, AUTH_SECRET, {
             expiresIn: AUTH_EXPIRES,
           });
-          return res.status(200).json({ user: userResponse, token: token });
+          return res.status(200).json({status:1, user: userResponse, token: token });
         } else {
-          return res.status(404).json({ error: "the password is wrong." });
+          return res.status(200).json({status:2, text: "La Password es incorrecta." });
         }
       }
     }
     return res
-      .status(404)
-      .json({ error: "There is incomplete or invalid data." });
+      .status(200)
+      .json({ status:2, text: "Los datos estan inclompletos o invalidos." });
   } catch (error) {
     next(error);
   }

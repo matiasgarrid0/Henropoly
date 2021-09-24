@@ -35,7 +35,9 @@ import {
   GamingLog,
   DataPlayerInfo,
   Trading,
-  MePanel
+  MePanel,
+  Alerts,
+  Winner
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -87,6 +89,9 @@ const DisplayGameBeta = () => {
   });
   //--portales--
   const [cardBack, setCardBack] = useState(null)
+  const [dataAlert, setDataAlert] = useState(null)
+  const [dataAlertPagar, setDataAlertPagar] = useState(null)
+  const [ganador,setGanador] = useState(false)
   const [perdedor, setPerdedor] = useState(false)
   const [goJailLuckyCard, setGoJailLuckyCard] = useState(false);
   const [render, setRender] = useState('')
@@ -168,7 +173,7 @@ const DisplayGameBeta = () => {
       info.table[dataPlayers[player].box].type &&
       dataPlayers[player].username === user.username
     ) {
-
+      
       if (info.table[dataPlayers[player].box].type === "comunal") {
         setPortal("comunal");
       }
@@ -182,6 +187,7 @@ const DisplayGameBeta = () => {
       }
 
       if (info.table[dataPlayers[player].box].type === "property") {
+        
         setProperty(info.table[dataPlayers[player].box]);
         if (
           dataPlayers[player].username === user.username &&
@@ -190,15 +196,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,         
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyProperty", box: dataPlayers[player].box })
               setPortal(null)
             }
           });
+          setPortal("property");
         } else {
           setMeBox({ ...meBox, username: null });
         }
-        setPortal("property");
+        
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
         setTrain(info.table[dataPlayers[player].box])
@@ -206,15 +214,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyRailway", box: dataPlayers[player].box })
               setPortal(null)
-            },
+            },            
           })
+          setPortal("railway");
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        setPortal("railway");
+        
       }
       if (info.table[dataPlayers[player].box].type === "service") {
         setService(info.table[dataPlayers[player].box])
@@ -222,15 +232,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyService", box: dataPlayers[player].box })
               setPortal(null)
             },
           })
+          setPortal("service");
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        setPortal("service");
+        
       }
       if (
         info.table[dataPlayers[player].box].type === "tax" ||
@@ -417,6 +429,13 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, mouseActive: false });
   };
   useEffect(() => {
+    socket.on('alert',(data)=>{
+      if(data.status === 'mePagan'){
+        setDataAlert(`El jugador ${data.nombreDelqueTePaga} cae en tu propiedad y te paga ${data.cuantoTePago} HenryCoins.`)
+      }else if(data.status === 'lePago'){
+        setDataAlertPagar(`Caes en la propiedad de ${data.nombreDelqueTePaga}, pagas ${data.cuantoTePago} HenryCoins por la estadía en ella.`)
+      }
+    })
     socket.on("setGame", (data) => {
       if (data.status === "setTurns") {
         dispatch(statusTrading(null));
@@ -426,9 +445,10 @@ const DisplayGameBeta = () => {
         if (data.type === "endGame") {
           dispatch(setGameStatus("free"));
         } else if (data.type === "exitPlayer") {
+          console.log('-------> kiickplayer data,', data)
           dispatch(
             setTurns({
-              actualTurn: data.info.turn.altulTurn,
+              actualTurn: data.info.turn.actualTurn,
               order: data.info.turn.order,
             })
           );
@@ -448,10 +468,12 @@ const DisplayGameBeta = () => {
         });
         setCardBack(data.cardChoice)
         dispatch(setGameRoll(data.info));
+        setRender(`status:${data.status}`)
       } else if (data.status === "buyProperty") {
         dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
         dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
         dispatch(buyPropertyAction(data));
+        setRender(`status:${data.status}`)
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
         setRender(`status:${data.status}`)
@@ -482,7 +504,10 @@ const DisplayGameBeta = () => {
           dispatch(setMoveTurn(true))
         }
       } else if(data.status === 'perdiste'){
+        console.log(data)
         setPerdedor(true)
+        setGanador(true)
+        setRender(`status:${data.status}`)
       }else if (data.status === "updateTrade") {
         dispatch(updateTrade(data.data));
       }
@@ -490,6 +515,7 @@ const DisplayGameBeta = () => {
     socket.on("trading", (data) => {});
 
     return () => {
+      socket.off('alert');
       socket.off("setGame");
       socket.off("trading");
     };
@@ -497,6 +523,16 @@ const DisplayGameBeta = () => {
 
   return (
     <div className="display-beta-border">
+      {dataAlert && (
+        <Portal onClose={()=>{setDataAlert(false)}}>
+          <Alerts data={dataAlert} />
+        </Portal>
+      )}
+      {dataAlertPagar && (
+        <Portal onClose={()=>{setDataAlertPagar(false)}}>
+          <Alerts data={dataAlertPagar} />
+        </Portal>
+      )}
       {portal === "lucky" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
@@ -504,9 +540,15 @@ const DisplayGameBeta = () => {
       )}
       {perdedor && (
         <Portal onClose={()=>{setPerdedor(false)}}>
+          {/* <Winner /> */}
           <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div>
         </Portal>
       )}
+     {/* {ganador === false && (
+        <Portal onClose={closedPortal3}>
+          <div className='display-game-loser-one'><label className='display-game-loser-two'>GANASTE!</label></div>
+        </Portal>
+      )}  */}
       {portal === "comunal" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
@@ -514,17 +556,17 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} close={setPortal} />
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}  henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal}>
-          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} />
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal}>
-          <ServiceCard data={service} username={meBox.username} buy={meBox.buy} />
+          <ServiceCard data={service} username={meBox.username} buy={meBox.buy} henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "tax" && (
@@ -573,8 +615,8 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
-                        className="display-beta-target"
-                      ><img className='displaygamebeta-token-target1' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
+                        className="display-beta-target"           /*   src={require(`../room/img/`).default} */
+                      ><img className={`${dataGame.target1.box >= 10 && dataGame.target1.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target1.box >= 21 && dataGame.target1.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target1.box >= 31 && dataGame.target1.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target1`} src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
@@ -585,7 +627,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target2.box >= 10 && dataGame.target2.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target2.box >= 21 && dataGame.target2.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target2.box >= 31 && dataGame.target2.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target2`} src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
@@ -595,7 +637,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target3' src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target3.box >= 10 && dataGame.target3.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target3.box >= 21 && dataGame.target3.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target3.box >= 31 && dataGame.target3.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target3`} src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
                     ) : (
                       <></>
                     )}
@@ -607,7 +649,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target4' src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target4.box >= 10 && dataGame.target4.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target4.box >= 21 && dataGame.target4.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target4.box >= 31 && dataGame.target4.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target4`} src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
                     )}
                   </div>
                 </div>
