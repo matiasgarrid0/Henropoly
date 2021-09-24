@@ -52,7 +52,7 @@
     border: solid 2px #000;
     padding: 0.7rem 1.5rem;
     border-radius: 5px;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
     text-align: center;
   }
   .railway-button:hover {
@@ -62,3 +62,9 @@
     border: solid 2px #fbff18;
     transition: 0.3s;
   }
+  .card-railway-img{
+    display: flex;
+    text-align: center;
+    margin-left: 6.5rem;
+    margin-top: 0.5rem;
+}

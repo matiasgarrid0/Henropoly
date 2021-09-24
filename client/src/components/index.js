@@ -12,7 +12,7 @@ import Dices from "./dice/Dice.jsx";
 // import PlayerProps from "./playerProps/playerProps.jsx";
 import Action from "./playerProps/switchBoxBoard";
 import LuckyCard from './cards/LuckyCard'
-import PropertyCard from "./cards/PropertyCard.jsx";
+import PropertyCard from "./cards/PropertyCardTwo.jsx";
 import RailwayCard from "./cards/RailwayCard";
 import ServiceCard from "./cards/ServiceCard";
 import TaxCard from "./cards/TaxCard";
@@ -29,6 +29,8 @@ import GamingLog from "./gamingLog/GamingLog.jsx";
 import DataPlayerInfo from "./dataPlayerInfo/DataPlayerInfo.jsx";
 import Trading from "./trading/Trading.jsx";
 import MePanel from './mePanel/MePanel.jsx'
+import Alerts from './alerts/Alerts.jsx'
+import Winner from './winner/Winner.jsx'
 export {
   Loggin,
   RegisterForm,
@@ -60,6 +62,8 @@ export {
   GamingLog,
   DataPlayerInfo,
   Trading,
-  MePanel
+  MePanel,
+  Alerts,
+  Winner
 };
 

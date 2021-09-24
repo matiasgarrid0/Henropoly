@@ -1,67 +1,113 @@
 import React, { useEffect, useRef } from "react";
 import "./Dice.css";
-
+import { useSelector } from "react-redux";
 function Dices({ rollOne, rollTwo, username }) {
+  const { status } = useSelector(
+    (state) => state.henropolyGame
+  );
   const diceOne = useRef()
   const diceTwo = useRef()
 
   useEffect(() => {
+    if(status === 'inGame'){
     rollDice()
+    }
   }, [])
   
   function rollDice() {
+    if(diceOne.current !== undefined) {
+
       diceOne.current.style.transition = '';
       diceOne.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
       diceTwo.current.style.transition = '';
       diceTwo.current.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-
+    
       setTimeout(() => {
           let randomNumberDiceOne = rollOne
           let randomNumberDiceTwo = rollTwo
-
+          if(status === 'inGame'){
           switch (randomNumberDiceOne) {
               case 1:
+                if(diceOne.current === null) {
+                  break;
+              }
                   diceOne.current.style.transform = ` rotateX(3600deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 2:
+                if(diceOne.current === null) {
+                  break;
+              }
                   diceOne.current.style.transform = ` rotateX(4410deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 3:
+                if(diceOne.current === null) {
+                  break;
+              }
                   diceOne.current.style.transform = ` rotateX(3600deg) rotateY(4410deg) rotateZ(3600deg)`;
                   break;
               case 4:
+                if(diceOne.current === null) {
+                  break;
+              }
                   diceOne.current.style.transform = ` rotateX(3600deg) rotateY(2430deg) rotateZ(3600deg)`;
                   break;
               case 5:
+                if(diceOne.current === null) {
+                  break;
+              }
                   diceOne.current.style.transform = `rotateX(2430deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 6:
+                  if(diceOne.current === null) {
+                      break;
+                  }
                   diceOne.current.style.transform = ` rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
-                  break;
+                
           };
           switch (randomNumberDiceTwo) {
               case 1:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = ` rotateX(3600deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 2:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = ` rotateX(4410deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 3:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = ` rotateX(3600deg) rotateY(4410deg) rotateZ(3600deg)`;
                   break;
               case 4:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = ` rotateX(3600deg) rotateY(2430deg) rotateZ(3600deg)`;
                   break;
               case 5:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = `rotateX(2430deg) rotateY(3600deg) rotateZ(3600deg)`;
                   break;
               case 6:
+                if(diceTwo.current === null) {
+                  break;
+              }
                   diceTwo.current.style.transform = ` rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
                   break;
           };
+        }
       },40);
+    }
+    //aqui
   }
-
+ if(rollOne && rollTwo ){
   return (
     <div className="contenedor">
       {/* <span> Dados {username} </span> */}
@@ -161,6 +207,8 @@ function Dices({ rollOne, rollTwo, username }) {
       </div>
     </div>
   );
+ }
+  return <></>
 }
 
 export default Dices;

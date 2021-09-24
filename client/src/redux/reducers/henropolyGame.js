@@ -51,7 +51,12 @@ const henropolyGame = (state = initialState, action) => {
             ...state.dataPlayers[payload.target],
             henryCoin: payload.henryCoin,
           },
+          [payload.targetProperty]:{
+            ...state.dataPlayers[payload.targetProperty],
+            henryCoin: payload.henryCoinProperty,
+          }
         },
+        //targetProperty
       };
     case SET_MOVE_TURN:
       return {

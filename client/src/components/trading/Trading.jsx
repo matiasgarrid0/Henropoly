@@ -16,13 +16,18 @@ import "./Trading.css";
 import Card from "./Card";
 import money from "./money.mp3";
 import desactive from './setTargetSound.mp3';
+import franco from './Simuladores.mp3'
+
 const Trading = () => {
   var sonidos = {
     money: new Audio(money),
     desactive: new Audio(desactive),
+    franco: new Audio(franco)
   };
   sonidos.money.volume = 0.8;
   sonidos.money.loop = false;
+  sonidos.franco.volume = 0.7;
+  sonidos.franco.loop = false;
   sonidos.desactive.volume = 0.9
   sonidos.desactive.loop = false
   const { dataPlayers, table, host } = useSelector(
@@ -72,7 +77,6 @@ const Trading = () => {
         dispatch(setTradingFull(data.data));
         setInput({ ...input, henryCoin: 0 });
       } else if (data.status === "setTradeOfertHost") {
-        sonidos.desactive.play()
         dispatch(setTargetConfirmation(false));
         dispatch(setHostConfirmation(false));
         dispatch(setTradeOfertHost(data));
@@ -114,6 +118,7 @@ const Trading = () => {
         target: target,
         host: host,
       });
+      // sonidos.franco.play()
       dispatch(statusTrading("loading"));
     };
   };

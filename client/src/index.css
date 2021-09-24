@@ -52,6 +52,7 @@ body {
   cursor: pointer;
   transition: transform 250ms ease;
   margin-left: 1rem;
+  margin-right: 2rem;
 }
 .button-one:hover {
   color: var(--color-black);

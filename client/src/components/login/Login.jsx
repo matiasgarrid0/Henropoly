@@ -2,11 +2,18 @@ import './Login.css'
 import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { login }  from '../../redux/actions'
+import LogoBox from '../../image/logo-home.png'
 
 
 function Loggin (props) {
 const dispatch = useDispatch();
-
+const [errorLogin, setErrorLogin] = useState({
+  status :false,
+  text :''
+});
+const setError =(text)=>{
+  setErrorLogin({...errorLogin, status:true, text:text})
+}
 const [input, setInput] = useState({
     username :'',
     password :''
@@ -14,14 +21,16 @@ const [input, setInput] = useState({
  function handleChange(e) { 
     setInput({...input, 
       [e.target.name]: e.target.value});
+      setErrorLogin({...errorLogin, status:false })
 }  
 function handleSubmit(e) {
     e.preventDefault()
-    dispatch(login(input.username,input.password))
+    dispatch(login(input.username,input.password,setError))
 }
 return (
   <div className="container-login">
     <div className='box-register'>
+    <img className="home-img" src={LogoBox} alt="logo-box" />
       <form onSubmit={(e)=>handleSubmit(e)}>
         <div className="username">
         <label >Usuario: </label>
@@ -43,7 +52,9 @@ return (
             onChange={(e)=>handleChange(e)} 
             placeholder='clave'/>
         </div>
+        {errorLogin.status && <div className='login-error'>{errorLogin.text}</div>}
         <button className='btn-enter' type="submit">entrar</button> 
+
     </form>  
          </div>
          <div className="down-card">

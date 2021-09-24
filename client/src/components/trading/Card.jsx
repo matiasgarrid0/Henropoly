@@ -7,6 +7,7 @@ import Csharp from "./../board/img/c-sharp.png";
 import Cicon from "./../board/img/c.png";
 import Ui from "./../board/img/ui.png";
 import Sequelize from "./../board/img/sequelize.png";
+import Modulos from './../board/img/modulos.png'
 import {
   SiCss3,
   SiPostgresql,
@@ -17,6 +18,7 @@ import {
 } from "react-icons/si";
 import { DiSqllite, DiJava, DiReact, DiHtml5 } from "react-icons/di";
 import { BsFillBootstrapFill } from "react-icons/bs";
+import { FcWiFiLogo,FcIdea } from "react-icons/fc";
 import {
   FaVuejs,
   FaAngular,
@@ -33,6 +35,18 @@ const Card = ({ data, target, box, type }) => {
   );
   const selectoIcon = (icon) => {
     switch (icon) {
+      case 'ELECTRICITY COMPANY':
+        return <FcIdea className="trading-card-icon" />;
+        case 'INTERNET COMPANY':
+          return <FcWiFiLogo className="trading-card-icon" />;
+      case 'HENRY M1':
+        return <img src={Modulos} className="trading-card-icon-img" alt='img'/>;
+        case "HENRY M2":
+        return <img src={Modulos} className="trading-card-icon-img" alt='img'/>;
+        case "HENRY M3":
+        return <img src={Modulos} className="trading-card-icon-img" alt='img'/>;
+        case "HENRY M4":
+        return <img src={Modulos} className="trading-card-icon-img" alt='img'/>;
       case " CSS":
         return <SiCss3 className="trading-card-icon" />;
       case "HTML":
@@ -113,6 +127,81 @@ const Card = ({ data, target, box, type }) => {
       }
     };
   };
+  if (data && type === "panel" && data.type==='service') {
+    return (
+      <div
+        onClick={sendOfert()}
+        className={`${
+          target === "host"
+            ? hostTradeCardIncludes.includes(data.name)
+              ? "trading-card"
+              : hostTradeCardIncludes.length < 9
+              ? "trading-card-activo-service"
+              : "trading-card"
+            : targetTradeCardIncludes.includes(data.name)
+            ? "trading-card"
+            : targetTradeCardIncludes.length < 9
+            ? "trading-card-activo-service"
+            : "trading-card"
+        } no-select`}
+      >
+        <div className='trading-card-style-title-service'>
+          <label className="trading-card-style-title-label">{data.name}</label>
+        </div>
+        <div className="trading-card-contenido-icon">
+          {selectoIcon(data.name)}
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
+          </label>
+        </div>
+      </div>
+    );
+  }
+  if (data && type === "trade" && data.type==='service') {
+    return (
+      <div onClick={editOfert()} className="trading-card-activo-red-service no-select">
+        <div className='trading-card-style-title-service'>
+          <label className="trading-card-style-title-label">{data.name}</label>
+        </div>
+        <div className="trading-card-contenido-icon-service">
+          {selectoIcon(data.name)}
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
+          </label>
+        </div>
+      </div>
+    );
+  }
+  if (data && data.type==='service') {
+    return (
+      <div className="trading-card no-select">
+        <div className='trading-card-style-title-service'>
+          <label className="trading-card-style-title-label">{data.name}</label>
+        </div>
+        <div className="trading-card-contenido-icon-service">
+          {selectoIcon(data.name)}
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
+          </label>
+        </div>
+      </div>
+    );
+  }
   if (data && type === "panel") {
     return (
       <div
@@ -138,11 +227,19 @@ const Card = ({ data, target, box, type }) => {
           {selectoIcon(data.name)}
         </div>
         <div className="trading-card-text-two">
-          <label className="trading-card-text-two-label">Nivel Actual:</label>
+          <label className="trading-card-text-two-label">Precio Alquiler:</label>
         </div>
         <div className="trading-card-text-three">
           <label className="trading-card-text-three-label">
-            {data.actualPrice}
+            {`${data[data.actualPrice]} HenryCoins.`}
+          </label>
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
           </label>
         </div>
       </div>
@@ -158,11 +255,19 @@ const Card = ({ data, target, box, type }) => {
           {selectoIcon(data.name)}
         </div>
         <div className="trading-card-text-two">
-          <label className="trading-card-text-two-label">Nivel Actual:</label>
+          <label className="trading-card-text-two-label">Precio Alquiler:</label>
         </div>
         <div className="trading-card-text-three">
           <label className="trading-card-text-three-label">
-            {data.actualPrice}
+          {`${data[data.actualPrice]} HenryCoins.`}
+          </label>
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
           </label>
         </div>
       </div>
@@ -178,11 +283,19 @@ const Card = ({ data, target, box, type }) => {
           {selectoIcon(data.name)}
         </div>
         <div className="trading-card-text-two">
-          <label className="trading-card-text-two-label">Nivel Actual:</label>
+          <label className="trading-card-text-two-label">Precio Alquiler:</label>
         </div>
         <div className="trading-card-text-three">
           <label className="trading-card-text-three-label">
-            {data.actualPrice}
+          {`${data[data.actualPrice]} HenryCoins.`}
+          </label>
+        </div>
+        <div className="trading-card-text-two">
+          <label className="trading-card-text-two-label">Precio Compra:</label>
+        </div>
+        <div className="trading-card-text-three">
+          <label className="trading-card-text-three-label">
+          {`${data.licenseValue} HenryCoins.`}
           </label>
         </div>
       </div>

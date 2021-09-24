@@ -19,6 +19,7 @@
 font-size: 20px;
 }
 .taxCard-h3{
+    margin-top: -1rem;
     text-transform: uppercase;
     text-decoration: underline;
     font-size: 1.5rem;
@@ -26,4 +27,10 @@ font-size: 20px;
 .taxes-toniimpuestos{
     width: 1rem;
     height: 1rem;
+}
+.card-tax-img{
+    display: flex;
+    text-align: center;
+    margin-left: 5.6rem;
+    margin-top: 1.2rem;
 }

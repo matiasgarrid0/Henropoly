@@ -1,9 +1,7 @@
 .container-login {
     background-color: black;
-   
     display: flex;
 	flex-direction: column;
-	
     height:400px;
     width: 350px;
     border: solid black 2px;
@@ -22,11 +20,17 @@
     top: 15px;
 }
 
+.home-img {
+    margin: 1rem 5rem;
+    width: 200px;
+    height: 100px;
+}
+
 .username {
     text-align: center;
     align-items:center;
     padding-bottom: 5px;
-    margin-top: 4rem;
+    margin-top: 1rem;
 }
 
 .form {
@@ -50,7 +54,7 @@
     font-size: 1rem;
     padding: 1rem 3rem;
     margin-left: 96px;
-    margin-top: 3.5rem;
+    margin-top: 1rem;
     display: inline-block;
     text-align: center;
     text-transform: uppercase;
@@ -71,11 +75,15 @@
     text-align: center;
     align-items:center;
     padding-bottom: 5px;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .dont-have:hover{
     font-size: 17px;
     text-shadow: 2px 1px 5px rgba(255,247,29,0.85);
     border-bottom: 1px solid yellow;
+}
+.login-error{
+    color: #bb0909;
+    margin: auto;
 }

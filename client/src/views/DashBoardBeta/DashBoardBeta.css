@@ -1,5 +1,60 @@
 .repeat-total{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    user-select: none;
+   display:flex;
+   justify-content: space-between;
+}
+.dashboardbeta-toturial{
+    margin-left: 3.2rem;
+}
+.dashboardbeta-chat{
+    margin-right: 4rem;
+}
+.dashboard-room{
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+.centrar-winner{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.winner-display-title{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    font-size: 10rem;
+    -webkit-text-stroke: 2px black;
+    color: rgb(255, 255, 255);
+    margin-top: 0.1rem;
+    margin-right: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+.winner-display-span{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-size: 3rem;
+	margin-bottom: 2rem;
+}
+.psico-killer-wave:before, .psico-killer-wave:after{
+    content: '';
+	position: absolute;
+	left: -8px;
+	top: -8px;
+	background: linear-gradient(120deg, #79fb00, #8d01a0, #031ba5,#ff004c,  
+	#e6036d, #fb0094,#ff6600, #04c2e4,#adad02, #00c3ff);
+	background-size: 300%;
+	width: calc(100% + 16px);
+	height: calc(100% + 16px);
+	z-index: -1;
+	animation: BGgradient 15s ease infinite; 
+}
+@keyframes BGgradient {
+	0% {
+		background-position: 0% 200%;
+	}
+	50% {
+		background-position: 200% 0%;
+	}
+	100% {
+		background-position: 0% 330%;
+	}
 }

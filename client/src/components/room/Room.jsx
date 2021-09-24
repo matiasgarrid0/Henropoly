@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setGame, setGameStatus } from "./../../redux/actions";
+import { FaArrowAltCircleDown } from "react-icons/fa";
+
 import "./Room.css";
 
 const Room = () => {
@@ -57,47 +59,58 @@ const Room = () => {
     socket.emit("setRoom", { type: "join", host: input.unirse });
   };
   return (
-    <div>
+    <div className='room-div-total'>
       {status === "free" && (
         <div className="room-dashboard-box">
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              className="room-dashboard-form"
-              name="unirse"
-              value={input.unirse}
-              onChange={(e) => handleChange(e)}
-            />
-            <button className="button-two">Unirse a sala</button>
-          </form>
-          <button className="button-two" onClick={setRoom({ type: "create" })}>
-            Crear sala
-          </button>
-          <button className="button-two">Jugar</button>
+           <button className="button-two" onClick={setRoom({ type: "create" })}>
+              Crear sala
+            </button>
+          <div>
+            <p className='room-p-description'>Si creas una sala, la misma llevará tu nombre de usuario</p>
+            <p className='room-p-description'>Para ingresar a una sala coloca el nombre del host de la sala aquí:</p>
+            <FaArrowAltCircleDown className='room-card-icon' />
+          </div>
+          <div className='room-div-input'>
+            <form onSubmit={(e) => handleSubmit(e)}>  
+              <input
+                className="room-dashboard-form"
+                name="unirse"
+                value={input.unirse}
+                onChange={(e) => handleChange(e)}
+              />
+              <button className="button-two">Unirse a sala</button>
+            </form>
+           
+          </div>
         </div>
       )}
       {status === "inHold" && (
         <div className="room-total box-column">
-          <div>Anfitrion de sala: {statusRoom.room.host}</div>
-          Miembros:{" "}
-          <div>
-            {statusRoom.room.players.map((player) => {
-              return (
-                <label>
-                  {player}
-                  {statusRoom.room.host === user.username && (
-                    <button
-                      className="button-expulsar"
-                      onClick={setRoom({ type: "kickPlayer", player: player })}
-                    >
-                      expulsar jugador
-                    </button>
-                  )}
-                </label>
-              );
-            })}
+          <div className='room-anfitrion-div'>Anfitrion de sala: <span className='room-host-span'>{statusRoom.room.host}</span></div>
+          <div className='room-miembros-div-sala'>
+            <div>
+              <span className='room-miembros-span-sala'>Miembros:{" "}</span>
+            </div>
+            <div >
+              {statusRoom.room.players.map((player) => {
+                return (
+                  <div className='room-miembros-div'>
+                    <span className='room-player-span'>{player}</span>
+                    {statusRoom.room.host === user.username && (
+                      <button
+                        className="button-expulsar"
+                        onClick={setRoom({ type: "kickPlayer", player: player })}
+                      >
+                        expulsar
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+              </div>
           </div>
           <div className="room-table-tokens">
-            {statusRoom.room.tokens.map((avatar) => {
+            {statusRoom.room.tokens === undefined ? <> </>:statusRoom.room.tokens.map((avatar) => {
               return (
                 <div key={avatar.id} className="room-relative">
                   <div>

@@ -89,6 +89,7 @@ io.on("connection", async (socket) => {
     });
     socket.on("roomStatus", () => { });
     //gameDashboard
+    socket.on("alert", () => { });
     socket.on("log", () => { });
     socket.on("setGame", () => { });
     socket.on("gameDashboard", async (data) => {
@@ -135,6 +136,13 @@ io.on("connection", async (socket) => {
       });
     });
     socket.on("chatGlobal", () => {});
+    socket.on("sendGame", (data) => {
+      io.emit("chatGame", {
+        username: decoded.user.username,
+        message: data.message,
+      });
+    });
+    socket.on("chatGame", () => {});
     socket.on("disconnect", () => {});
     //trader:
     socket.on("sendTrade", async (data) => {

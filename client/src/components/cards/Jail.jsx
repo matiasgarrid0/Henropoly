@@ -12,14 +12,27 @@ const Jail = ({ data, username, buy }) => {
             <div className='card-jail-divtotal' >
                 <div>
                     <h3 className="Jail-Title" >Migración</h3>
-                    <img src={ToniJail} alt="Girl in a jacket" width="300" height="300" />
-                    <span>Se te ofrece pagar una multa por ÚNICA vez en tu temporal estadía. </span>
-                    <span>La multa vale: ${data.licenseValue} HenryCoins, ¿la pagas?.</span>
+                    <img className='jail-portal-image' src={ToniJail} alt="Girl in a jacket" width="300" height="300" />
+                    {/* <div className='jail-text-card'>
+                        <div className='jail-spans-text'>
+                            <span>Se te ofrece pagar una multa por ÚNICA vez en tu temporal estadía. </span>
+                            <span>La multa vale: ${data.licenseValue} HenryCoins, ¿la pagas?</span>
+                        </div>
+                        {username === user.username && (
+                            <button className="servicecard-button" onClick={buy}>
+                                Pagar
+                            </button>
+                        )}
+                    </div> */}
+                    <span className='jailtext-span-one'>Se te ofrece pagar una multa por ÚNICA vez en tu temporal estadía.</span>
+                    <span className='jailtext-span-two'>La multa vale: $500 HenryCoins, ¿la pagas?</span>
+                    <div>
                     {username === user.username && (
-                        <button className="servicecard-button" onClick={buy}>
-                            Pagar
-                        </button>
-                    )}
+                            <button className="servicecard-button-jail" onClick={buy}>
+                                Pagar
+                            </button>
+                        )}
+                        </div>
                 </div>
             </div>
         )
@@ -37,7 +50,7 @@ const Jail = ({ data, username, buy }) => {
             <div className='card-jail-divtotal' >
                 <div>
                     <h3 className="GoJail-Title" >Henry Feriado</h3>
-                    <img src={ToniVacations} alt="Girl in a jacket" width="300" height="300" />
+                    <img src={ToniVacations} alt="Girl in a jacket" width="450" height="300" />
                     <span className='card-henryferiado-span'>Hora de descansar</span>
                 </div>
             </div>
