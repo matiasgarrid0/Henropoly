@@ -9,10 +9,11 @@
   width: 22rem;
   height: 27rem;
   border-radius: 1.5rem;
-  border: solid 2px rgb(56, 56, 56);
+  border: solid 2px rgb(20, 20, 20);
   padding: 0.65rem;
   padding-bottom: 2.3rem;
   text-align: center;
+  user-select: none;
 }
 
 .room-total {
@@ -24,7 +25,7 @@
   max-width: 25rem;
   max-height: 43.75rem;
   width: 22rem;
-  height: 25rem;
+  height: 28rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
   padding: 2rem 2rem 1rem 2rem;
@@ -107,7 +108,7 @@
   padding: 1px;
   height: 3rem;
   width: 10rem;
-  margin-left: 10rem;
+  margin-left: 6rem;
   box-shadow: 1px 8px 7px 2px #111111;
   margin-top: 0.5rem;
   font-family: var(--text-one);
@@ -130,13 +131,13 @@
 }
 
 .button-expulsar {
-  border: 3px solid black;
+  border: 1px solid black;
   padding: 1px;
-  height: 3rem;
-  width: 10rem;
+  height: 2rem;
+  width: 6rem;
   box-shadow: 1px 8px 7px 2px #111111;
   font-family: var(--text-one);
-  font-size: 10px bold;
+  font-size: 8px bold;
   letter-spacing: 1px;
   border-radius: 8px;
   background-color: var(--color-yellow);
@@ -172,21 +173,21 @@
   border: 3px solid #000000;
   border-radius: 8px;
   padding: 5px;
-  width: 77px;
+  width: 40px;
 }
 .room-token:hover {
 cursor:pointer;
 -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
 -moz-box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
 box-shadow: 0px 0px 15px 0px rgba(255, 251, 0, 0.90);
-border: solid 2px rgb(251, 255, 0);
+border: solid 3px rgb(251, 255, 0);
 }
 .room-token-ocupado {
   box-shadow: inset 0 0 0 2px #7e7e7ec7;
   border: 3px solid #000000;
   border-radius: 8px;
   padding: 5px;
-  width: 77px;
+  width: 40px;
   filter: grayscale(1);
 }
 .room-relative {
@@ -196,14 +197,14 @@ border: solid 2px rgb(251, 255, 0);
   position: absolute;
   font-family: var(--text-one);
   color: #ff2b2b;
-  font-size: 35px;
+  font-size: 20px;
   transform: rotate(-45deg);
   top: 27px;
   left: 3px;
 }
 .button-four{
   position: inherit;
-  border: 3px solid black;
+  border: 1px solid black;
   padding: 2px;
   height: 3.2rem;
   width: 10rem;
@@ -225,10 +226,11 @@ border: solid 2px rgb(251, 255, 0);
   display: flex;
 }
 .room-player-span{
-  font-size: 2rem;
+  font-size: 1.75rem;
   color: #ffff00;
-  margin-right: -1rem;
+  /* margin-right: -1rem; */
   padding: 1rem;
+  margin-top: .3rem;
 }
 .room-miembros-div-sala{
   border-radius: 5px;
