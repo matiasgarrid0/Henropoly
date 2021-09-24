@@ -1085,7 +1085,11 @@ const roll = async (username, io) => {
         buyLuckyCard = true;
         luckyType = "";
         let luckyCards = room.lucky;
+        luckyCards= luckyCards.filter((e)=> e.type !== 'pasas')
         let numberLucky = Math.floor((Math.random() * 12) + 1)
+        if(numberLucky === 7){
+          numberLucky = Math.floor((Math.random() * 12) + 1) 
+        }
         let luckyCard = luckyCards.filter((e) => e.ID === numberLucky);
         cardChoice = luckyCard;
         if (luckyCard[0].type === "pagas") {
@@ -1214,12 +1218,12 @@ const roll = async (username, io) => {
               target: target,
               text: `${luckyType} unos $${cost} henryCoins por carta de suerte.`,
             });
-          } else if (cardChoice.type === "pasas") {
+          } else if(cardChoice.type === "pasas") {
             io.sockets.in(player).emit("log", {
               target: target,
               text: "consiguió una carta para salvarse de migrar.",
             });
-          } else {
+          } else{
             io.sockets.in(player).emit("log", {
               target: target,
               text: "se va a migrar, más suerte la próxima.",
@@ -1312,11 +1316,11 @@ const roll = async (username, io) => {
     var roomDenuevo = JSON.parse(klokmybro);
     if(roomDenuevo.dataPlayers[target].henryCoin < 0){
       let loser = roomDenuevo.dataPlayers[target].username;
-      console.log(roomDenuevo.dataPlayers[target].henryCoin)
+    
       roomDenuevo.dataPlayers[target].status = false
       if (roomDenuevo.dataPlayers[target].username === roomDenuevo.actualTurn) {
         seconds[responseRoom] = 120;
-        console.log('......> entro' ,'Actual Turn')
+       // console.log('......> entro' ,'Actual Turn')
         roomDenuevo.actualTurn = roomDenuevo.order[1];
         let borrado = roomDenuevo.order.shift();
         //roomDenuevo.order = arrayYQue;
@@ -1330,32 +1334,34 @@ const roll = async (username, io) => {
         }) 
         await client.set(`gameRoom${responseRoom}`, JSON.stringify(roomDenuevo));
         if(roomDenuevo.order.length === 1) {
-          console.log('esntra if length === 1      :)')
-          roomDenuevo.order.forEach((player) => {
-            io.sockets
-              .in(player)
-              .emit("log", { target: target, text: " pierde y deja la partida." });
-            //console.log('pasaaaaaaaaaa x acaaaaa linea 13335')
-              io.sockets.in(player).emit("setGame", {
+         // console.log('esntra if length === 1      :)')
+        
+            /* io.sockets
+              .in(roomDenuevo.order[0])
+              .emit("log", { target: target, text: " pierde y deja la partida." }); */
+             io.sockets.in(roomDenuevo.order[0]).emit("setGame", { status: "ganador"});
+             io.sockets.in(loser).emit("setGame", { status: "perdedor"});
+             //console.log('pasaaaaaaaaaa x acaaaaa linea 13335')
+             /*  io.sockets.in(player).emit("setGame", {
                 status: "statusGame",
                 type: "exitPlayer",
                 info: {
                   target: target,
                   turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
                 },
-              });
-          });       
-           io.sockets.in(loser).emit("setGame", { status: "perdiste", });
-           io.sockets.in(loser).emit("setGame", {
+              }); */
+           
+          
+          /*  io.sockets.in(loser).emit("setGame", {
                 status: "statusGame",
                 type: "exitPlayer",
                 info: {
                   target: target,
                   turn: { actualTurn: roomDenuevo.actualTurn, order: roomDenuevo.order },
                 },
-          });
-          console.log('aaaaacaaaaa linea 2345556677889')
-          await callbackTest(4000)
+          }); */
+         // console.log('aaaaacaaaaa linea 2345556677889')
+         /* */  //await callbackTest(7000)
           gameOver(room.host, io)
         }
       roomDenuevo.order.forEach((player) => {
@@ -1383,7 +1389,7 @@ const roll = async (username, io) => {
       });
       } else {
         roomDenuevo.order = roomDenuevo.order.filter((player) => player !== roomDenuevo.dataPlayers[target].username); 
-        console.log('......> entro' ,' NPOOOOO Actual Turn')
+        //console.log('......> entro' ,' NPOOOOO Actual Turn')
         io.sockets.in(player).emit("setGame", {
           status: "setTurns",
           actualTurn: roomDenuevo.actualTurn,
@@ -1732,55 +1738,7 @@ const jail = async (username, box, io) => {
   }
 };
 const playerIsLoser = async (username, io) => {
-  // console.log('ENTRO A LA TORRE DE BABEL LINEA 1309')
-  console.log("USERNAMEEEE QUE LLEGA A LA FUNCION", username)
-  /* let target;
-  let playersEnBancarrota = [];
-  let outPlayer;
-  const host = await client.get(`playersInGame${username}`);
-  const responseGameRoom = await client.get(`gameRoom${host}`);
-  var room = JSON.parse(responseGameRoom); // -----> traigo info necesaria la transefiero a JSON
-  for (let i = 1; i < 5; i++) {
-    if (room.dataPlayers[`target${i}`].username === username) {
-      target = `target${i}`;
-    }
-  }  if (room.dataPlayers[target].henryCoin <= 0) { //
-      room.dataPlayers[target].bancarrota = true //
-      playersEnBancarrota.push(room.dataPlayers[target])
-      outPlayer = true
-    }
-    if (room.order.length === 2) {
-      if (outPlayer && playersEnBancarrota.length === 1 && playersEnBancarrota[0].bancarrota === true) {
-        room.move = false
-        room.order.forEach((player) => {
-          io.sockets.in(player).emit("log", {
-            target: target,
-            text: `ganaste felicidades`,
-          });
-        });
-        gameOver(room.host, io)
-      }
-    }
-    try {
-     if (room.order.length >2) {
 
-      //console.log('entro en linea 1394')
-        let target;
-        let meTurn = false;
-        if (room.actualTurn === username) {
-          seconds[username] = 120;
-          //clearTimer(username)
-          //await callbackTest(1200);
-          room.actualTurn = room.order[1];
-          room.order.shift();
-          meTurn = true;
-        } else {
-          room.order = room.order.filter((players) => players !== username);
-        }
-      
-    } } catch (error) {
-      console.log(error);
-    } */
   }
 module.exports = {
   createRoom,
