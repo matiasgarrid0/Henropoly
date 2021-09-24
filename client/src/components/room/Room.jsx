@@ -101,7 +101,7 @@ const Room = () => {
                         className="button-expulsar"
                         onClick={setRoom({ type: "kickPlayer", player: player })}
                       >
-                        expulsar jugador
+                        expulsar
                       </button>
                     )}
                   </div>

@@ -5,7 +5,7 @@
   width: 22rem;
   height: 27rem;
   text-align: center;
-  margin-left: 2rem;
+  margin:auto;
   background: black;
   border-radius: 1.5rem;
   padding: 10px;
@@ -41,7 +41,7 @@
   text-align: center;
 }
 .chat-textarea {
-  margin-top: 2rem;
+  margin-top: .75rem;
   border-radius: 15px;
   height: 2rem;
   width: 17rem;
@@ -65,10 +65,10 @@
 .chat-container {
   background: #424242;
   border-radius: 5px;
-  margin: 0;
+  margin: auto;
   padding: 0 10px 10px;
-  height: 20rem;
-  width: 15rem;
+  height: 17rem;
+  width: 20rem;
   max-height: 80vh;
   max-width: 70vh;
   overflow-x: hidden;
@@ -82,7 +82,7 @@
   margin-top: 1rem;
   margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
-  margin-left: -17rem;
+  margin-left: -14rem;
 }
 .chat-message {
   margin-top: .5rem;
@@ -92,7 +92,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre;
-  padding: 0.5rem;
+  padding: 0.3rem;
   margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
 }
