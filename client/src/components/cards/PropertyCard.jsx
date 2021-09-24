@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./PropertyCard.css";
+import { MdMoneyOff } from "react-icons/md";
 
-const PropertyCard = ({ data, username, buy, close }) => {
+const PropertyCard = ({ data, username, buy, henryCoin }) => {
   const { user } = useSelector((state) => state.auth);
   const  table  = useSelector((state) => state.henropolyGame);
+
 
   return (
     <div className="all">
@@ -59,9 +61,12 @@ const PropertyCard = ({ data, username, buy, close }) => {
             {data.licenseValue}$
           </p>
         </div>
-        {username === user.username && <button className='propertycard-button' onClick={buy}>comprar</button>}
+        {username === user.username && henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
       </div>
     </div>
   );
 };
 export default PropertyCard;
+
+
+//username === user.username && user.henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>

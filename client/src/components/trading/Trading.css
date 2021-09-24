@@ -237,6 +237,23 @@
 .trading-card-activo:hover .trading-card-style-title {
   box-shadow: inset 0 0 0 3px #14f100c7;
 }
+.trading-card-activo-service {
+  background: radial-gradient(#313131, #0e0e0e);
+  width: 80px;
+  height: 125px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 3px #ffffffc7;
+  text-align: center;
+  color: #ffffffc7;
+}
+.trading-card-activo-service:hover {
+  background: radial-gradient(#313131, #0e0e0e);
+  box-shadow: inset 0 0 0 3px #14f100c7;
+  color: #ffffffc7;
+}
+.trading-card-activo-service:hover .trading-card-style-title-service {
+  box-shadow: inset 0 0 0 3px #14f100c7;
+}
 .trading-card-contenido-icon {
   height: 50px;
   display: flex;

@@ -36,7 +36,8 @@ import {
   DataPlayerInfo,
   Trading,
   MePanel,
-  Alerts
+  Alerts,
+  Winner
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -186,6 +187,7 @@ const DisplayGameBeta = () => {
       }
 
       if (info.table[dataPlayers[player].box].type === "property") {
+        
         setProperty(info.table[dataPlayers[player].box]);
         if (
           dataPlayers[player].username === user.username &&
@@ -194,15 +196,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,         
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyProperty", box: dataPlayers[player].box })
               setPortal(null)
             }
           });
+          setPortal("property");
         } else {
           setMeBox({ ...meBox, username: null });
         }
-        setPortal("property");
+        
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
         setTrain(info.table[dataPlayers[player].box])
@@ -210,15 +214,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyRailway", box: dataPlayers[player].box })
               setPortal(null)
-            },
+            },            
           })
+          setPortal("railway");
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        setPortal("railway");
+        
       }
       if (info.table[dataPlayers[player].box].type === "service") {
         setService(info.table[dataPlayers[player].box])
@@ -226,15 +232,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
+            henryCoin:dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyService", box: dataPlayers[player].box })
               setPortal(null)
             },
           })
+          setPortal("service");
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        setPortal("service");
+        
       }
       if (
         info.table[dataPlayers[player].box].type === "tax" ||
@@ -423,9 +431,9 @@ const DisplayGameBeta = () => {
   useEffect(() => {
     socket.on('alert',(data)=>{
       if(data.status === 'mePagan'){
-        setDataAlert(`el jugador ${data.nombreDelqueTePaga} cae en tu propiedad y te paga ${data.cuantoTePago} HenryCoins.`)
+        setDataAlert(`El jugador ${data.nombreDelqueTePaga} cae en tu propiedad y te paga ${data.cuantoTePago} HenryCoins.`)
       }else if(data.status === 'lePago'){
-        setDataAlertPagar(`caes en la propiedad de ${data.nombreDelqueTePaga} pagas ${data.cuantoTePago} HenryCoins.`)
+        setDataAlertPagar(`Caes en la propiedad de ${data.nombreDelqueTePaga}, pagas ${data.cuantoTePago} HenryCoins por la estadía en ella.`)
       }
     })
     socket.on("setGame", (data) => {
@@ -522,7 +530,7 @@ const DisplayGameBeta = () => {
       )}
       {dataAlertPagar && (
         <Portal onClose={()=>{setDataAlertPagar(false)}}>
-          <Alerts data={dataAlert} />
+          <Alerts data={dataAlertPagar} />
         </Portal>
       )}
       {portal === "lucky" && (
@@ -532,6 +540,7 @@ const DisplayGameBeta = () => {
       )}
       {perdedor && (
         <Portal onClose={()=>{setPerdedor(false)}}>
+          {/* <Winner /> */}
           <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div>
         </Portal>
       )}
@@ -547,17 +556,17 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} close={setPortal} />
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}  henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "railway" && (
         <Portal onClose={closedPortal}>
-          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} />
+          <RailwayCard data={train} username={meBox.username} buy={meBox.buy} henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "service" && (
         <Portal onClose={closedPortal}>
-          <ServiceCard data={service} username={meBox.username} buy={meBox.buy} />
+          <ServiceCard data={service} username={meBox.username} buy={meBox.buy} henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "tax" && (
@@ -607,7 +616,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
                         className="display-beta-target"           /*   src={require(`../room/img/`).default} */
-                      ><img className='displaygamebeta-token-target1' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target1.box >= 10 && dataGame.target1.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target1.box >= 21 && dataGame.target1.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target1.box >= 31 && dataGame.target1.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target1`} src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
@@ -618,7 +627,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target2' src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target2.box >= 10 && dataGame.target2.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target2.box >= 21 && dataGame.target2.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target2.box >= 31 && dataGame.target2.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target2`} src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
@@ -628,7 +637,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target3' src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target3.box >= 10 && dataGame.target3.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target3.box >= 21 && dataGame.target3.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target3.box >= 31 && dataGame.target3.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target3`} src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
                     ) : (
                       <></>
                     )}
@@ -640,7 +649,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className='displaygamebeta-token-target4' src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target4.box >= 10 && dataGame.target4.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target4.box >= 21 && dataGame.target4.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target4.box >= 31 && dataGame.target4.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target4`} src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
                     )}
                   </div>
                 </div>

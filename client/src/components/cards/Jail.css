@@ -1,4 +1,5 @@
 .card-jail-divtotal{
+    text-align:center;
     padding-top: -10rem;
     margin-bottom: -5rem;
 }
@@ -21,7 +22,7 @@
     -webkit-text-stroke: 2px black;
     color: rgb(255, 255, 255);
     margin-top: 0.1rem;
-    margin-right: -0.4rem;
+    margin-right: -0.5rem;
     margin-bottom: 0.5rem;
 }
 .card-henryferiado-span{

@@ -18,6 +18,7 @@ import {
 } from "react-icons/si";
 import { DiSqllite, DiJava, DiReact, DiHtml5 } from "react-icons/di";
 import { BsFillBootstrapFill } from "react-icons/bs";
+import { FcWiFiLogo,FcIdea } from "react-icons/fc";
 import {
   FaVuejs,
   FaAngular,
@@ -34,6 +35,10 @@ const Card = ({ data, target, box, type }) => {
   );
   const selectoIcon = (icon) => {
     switch (icon) {
+      case 'ELECTRICITY COMPANY':
+        return <FcIdea className="trading-card-icon" />;
+        case 'INTERNET COMPANY':
+          return <FcWiFiLogo className="trading-card-icon" />;
       case 'HENRY M1':
         return <img src={Modulos} className="trading-card-icon-img" alt='img'/>;
         case "HENRY M2":
@@ -131,12 +136,12 @@ const Card = ({ data, target, box, type }) => {
             ? hostTradeCardIncludes.includes(data.name)
               ? "trading-card"
               : hostTradeCardIncludes.length < 9
-              ? "trading-card-activo"
+              ? "trading-card-activo-service"
               : "trading-card"
             : targetTradeCardIncludes.includes(data.name)
             ? "trading-card"
             : targetTradeCardIncludes.length < 9
-            ? "trading-card-activo"
+            ? "trading-card-activo-service"
             : "trading-card"
         } no-select`}
       >

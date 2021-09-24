@@ -137,3 +137,12 @@
   border-radius: 50%;
   border: solid 2px rgb(255, 0, 255);
 }
+.displaygamebeta-giro90{
+transform: rotate(90deg);
+}
+.displaygamebeta-giro180{
+  transform: rotate(180deg);
+}
+.displaygamebeta-giro270{
+  transform: rotate(-90deg);
+}
