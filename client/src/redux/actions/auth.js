@@ -37,7 +37,7 @@ export const register = (username, email, password) => {
   };
 };
 
-export const login = (username, password,devolverRespuesta) => {
+export const login = (username, password,setError) => {
   const data = {
     username: username,
     password: password,
@@ -55,7 +55,7 @@ export const login = (username, password,devolverRespuesta) => {
           dispatch(setAuthenticate(true));
           dispatch(setLoading(false));
         } else if (response.data.status === 2){
-          devolverRespuesta(response.data.text)
+          setError(response.data.text)
           
         }
       } else {

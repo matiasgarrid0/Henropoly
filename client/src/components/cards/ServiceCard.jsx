@@ -35,7 +35,7 @@ const ServiceCard = ({ data, username, buy , henryCoin }) => {
           </div>
 
           <div className="servicecard-div-btn">
-            {username === user.username && henryCoin >= data.licenseValue ? <button className='servicecard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
+            {username === user.username && henryCoin >= data.licenseValue ? <button className='servicecard-button' onClick={buy}>comprar</button> : <span className='alert-nofunds'>No posee fondos</span>}
           </div>
         </div>
       }

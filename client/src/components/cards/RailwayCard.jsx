@@ -16,7 +16,7 @@ const RailwayCard = ({ data, username, buy, henryCoin }) => {
                     <span className="card-span-bold" >Tres checkpoint:{data.threeCheckpoint}$</span>
                     <span className="card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}$</span> */}
                 </div>
-                {username === user.username && henryCoin >= data.licenseValue ? <button className='railway-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
+                {username === user.username && henryCoin >= data.licenseValue ? <button className='railway-button' onClick={buy}>comprar</button> : <span className='alert-nofunds'>No posee fondos</span>}
             </div>
         </div>
     )

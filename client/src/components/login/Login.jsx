@@ -7,7 +7,13 @@ import LogoBox from '../../image/logo-home.png'
 
 function Loggin (props) {
 const dispatch = useDispatch();
-
+const [errorLogin, setErrorLogin] = useState({
+  status :false,
+  text :''
+});
+const setError =(text)=>{
+  setErrorLogin({...errorLogin, status:true, text:text})
+}
 const [input, setInput] = useState({
     username :'',
     password :''
@@ -15,10 +21,11 @@ const [input, setInput] = useState({
  function handleChange(e) { 
     setInput({...input, 
       [e.target.name]: e.target.value});
+      setErrorLogin({...errorLogin, status:false })
 }  
 function handleSubmit(e) {
     e.preventDefault()
-    dispatch(login(input.username,input.password))
+    dispatch(login(input.username,input.password,setError))
 }
 return (
   <div className="container-login">

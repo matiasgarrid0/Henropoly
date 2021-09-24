@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DisplayGameBeta.css";
 import { useDispatch, useSelector } from "react-redux";
-import Hola from '../room/img/01.gif'
 import {
   setView,
   setTargetValue,
@@ -91,8 +90,8 @@ const DisplayGameBeta = () => {
   const [cardBack, setCardBack] = useState(null)
   const [dataAlert, setDataAlert] = useState(null)
   const [dataAlertPagar, setDataAlertPagar] = useState(null)
-  const [ganador,setGanador] = useState(false)
-  const [perdedor, setPerdedor] = useState(false)
+  const [ganador,setGanador] = useState(true)
+  const [perdedor, setPerdedor] = useState(true)
   const [goJailLuckyCard, setGoJailLuckyCard] = useState(false);
   const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
@@ -123,7 +122,7 @@ const DisplayGameBeta = () => {
       if (actualBox === 40) actualBox = 0;
       let valueX = targetX(player, actualBox) - initialX;
       let valueY = targetY(player, actualBox) - initialY;
-      dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
+      /*dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
       dispatch(setTargetValue(player, "y", initialY + Math.floor(valueY / 5)));
       await moveTime(5);
       dispatch(
@@ -146,7 +145,7 @@ const DisplayGameBeta = () => {
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime(5);
+      await moveTime(5);*/
       dispatch(setTargetValue(player, "x", initialX + valueX));
       dispatch(setTargetValue(player, "y", initialY + valueY));
       await moveTime(5);
@@ -168,11 +167,13 @@ const DisplayGameBeta = () => {
       targetMove: false,
     });
 
+
     //------IF PARA RENDERIZAR PORTALES------
-    if (
-      info.table[dataPlayers[player].box].type &&
-      dataPlayers[player].username === user.username
-    ) {
+    // if(dataAlert){
+    //   setPortal("dataAlert")
+    // }
+
+    if (info.table[dataPlayers[player].box].type && dataPlayers[player].username === user.username) {
       
       if (info.table[dataPlayers[player].box].type === "comunal") {
         setPortal("comunal");
@@ -325,6 +326,7 @@ const DisplayGameBeta = () => {
 
 
   function closedPortal3() {
+    //setDataAlert(false)
     // if (setGoJailLuckyCard) {
     //   socket.emit("TradeDashboard", { type: "goToJailCard" })
     //   dispatch(setMoveTurn(false));
@@ -445,7 +447,7 @@ const DisplayGameBeta = () => {
         if (data.type === "endGame") {
           dispatch(setGameStatus("free"));
         } else if (data.type === "exitPlayer") {
-          console.log('-------> kiickplayer data,', data)
+          //console.log('-------> kiickplayer data,', data)
           dispatch(
             setTurns({
               actualTurn: data.info.turn.actualTurn,
@@ -477,7 +479,7 @@ const DisplayGameBeta = () => {
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
         setRender(`status:${data.status}`)
-        console.log('setBalance', data.info)
+        //console.log('setBalance', data.info)
       } else if (data.status === 'buyRailway') {
         dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
         dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
@@ -489,7 +491,7 @@ const DisplayGameBeta = () => {
         dispatch(buyPropertyAction(data))
         setRender(`status:${data.status}`)
       } else if (data.status === 'goToJail') {
-        console.log('dataStatusJail', data)
+        //console.log('dataStatusJail', data)
         dispatch(moveToJail(data))
       } else if (data.status === 'goToJailCard') {
         dispatch(moveToJail(data))
@@ -504,11 +506,18 @@ const DisplayGameBeta = () => {
           dispatch(setMoveTurn(true))
         }
       } else if(data.status === 'perdiste'){
-        console.log(data)
-        setPerdedor(true)
+       // console.log(data)
+       /*  setPerdedor(true)
         setGanador(true)
-        setRender(`status:${data.status}`)
-      }else if (data.status === "updateTrade") {
+        setRender(`status:${data.status}` */
+        dispatch(setGameStatus('perdedor'))
+      }else if(data.status === 'ganador'){
+        // console.log(data)
+        /*  setPerdedor(true)
+         setGanador(true)
+         setRender(`status:${data.status}` */
+         dispatch(setGameStatus('ganador'))
+       }else if (data.status === "updateTrade") {
         dispatch(updateTrade(data.data));
       }
     })
@@ -525,12 +534,12 @@ const DisplayGameBeta = () => {
     <div className="display-beta-border">
       {dataAlert && (
         <Portal onClose={()=>{setDataAlert(false)}}>
-          <Alerts data={dataAlert} />
+          <Alerts data={dataAlert}/>
         </Portal>
       )}
       {dataAlertPagar && (
         <Portal onClose={()=>{setDataAlertPagar(false)}}>
-          <Alerts data={dataAlertPagar} />
+          <Alerts data={dataAlertPagar}/>
         </Portal>
       )}
       {portal === "lucky" && (
@@ -538,12 +547,12 @@ const DisplayGameBeta = () => {
           <LuckyCard data={cardBack} />
         </Portal>
       )}
-      {perdedor && (
+    {/*   {perdedor && (
         <Portal onClose={()=>{setPerdedor(false)}}>
-          {/* <Winner /> */}
-          <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div>
-        </Portal>
-      )}
+          <Winner /> */}
+          {/* <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div> */}
+        {/* </Portal> */}
+    {/*   )} */}
      {/* {ganador === false && (
         <Portal onClose={closedPortal3}>
           <div className='display-game-loser-one'><label className='display-game-loser-two'>GANASTE!</label></div>

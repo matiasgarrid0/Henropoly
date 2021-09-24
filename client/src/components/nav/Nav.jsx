@@ -36,7 +36,7 @@ const Nav = () => {
           {isAuth && (
             <div>
               <span className="nav-text-user">
-                Bienvenido {user.username} :)
+                Bienvenid@ {user.username} :)
               </span>
             </div>
           )}

@@ -59,14 +59,14 @@ const Room = () => {
     socket.emit("setRoom", { type: "join", host: input.unirse });
   };
   return (
-    <div>
+    <div className='room-div-total'>
       {status === "free" && (
         <div className="room-dashboard-box">
            <button className="button-two" onClick={setRoom({ type: "create" })}>
               Crear sala
             </button>
           <div>
-            <p className='room-p-description'>Si creas una sala, la misma llevara tu nombre de usuario</p>
+            <p className='room-p-description'>Si creas una sala, la misma llevará tu nombre de usuario</p>
             <p className='room-p-description'>Para ingresar a una sala coloca el nombre del host de la sala aquí:</p>
             <FaArrowAltCircleDown className='room-card-icon' />
           </div>

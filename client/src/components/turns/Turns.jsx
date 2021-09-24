@@ -2,7 +2,7 @@ import { useSelector, useDispatch} from "react-redux";
 import React, { useEffect, useState } from "react";
 import "./Turns.css";
 import {gameAdios} from "./../../redux/actions"
-
+import coin from "./coinss.png"//Traer la moneda culeados
 import Img from '../room/img/05.gif'
 const Turns = ({ action }) => {
 

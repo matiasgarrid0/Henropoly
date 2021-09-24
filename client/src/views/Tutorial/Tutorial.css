@@ -1,28 +1,29 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css");
 .tutorial-total {
+    text-align: center;
     display:flex;
-    flex-direction: column;
-    max-width: 25rem;
-    max-height: 43.75rem;
+    flex-direction:column;
+    /* max-width: 25rem;
+    max-height: 43.75rem; */
     width: 22rem;
-    height: 29.6rem;;
+    height: 29.6rem;
     background: black;
     border-radius: 1.5rem;
-    padding: .65rem;
+    padding: 0.65rem;
     color: rgb(214, 214, 214);
     font-size: 16px;
     margin-top: -2.5rem;
-    margin-left:auto;
-    margin-right:auto;
 }
 
 .tutorial-texto {
+    color: rgb(255, 255, 0);
+    font-weight: 700;
+    font-size: 3rem;
     margin-top: 10px;
     margin-bottom: -3%;
 }
 
 .tutorial-position {
-    margin:auto;
     font-family: var(--text-one);
     font-size: 20px;
     margin-top: 40px;
@@ -33,7 +34,4 @@
     display: flex;
     width: 100%;
     /* margin-top: 3px; */
-}
-.tutorial-hijo{
-    margin:auto;
 }

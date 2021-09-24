@@ -15,17 +15,17 @@ const ChatGame = () => {
     const [mensajes, setMensajes] = useState([]);
     const submit = (e) => {
         e.preventDefault();
-        socket.emit(`sendGlobal`, { message: mensaje });
+        socket.emit(`sendGame`, { message: mensaje });
         setMensaje("");
     };
     useEffect(() => {
-        socket.on(`chatGlobal`, (msj) => {
+        socket.on(`chatGame`, (msj) => {
             setNotificacion(true)
             sonidoOne.play()
             setMensajes([...mensajes, msj]);
         });
         return () => {
-            socket.off("chatGlobal");
+            socket.off("chatGame");
         };
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [mensajes]);

@@ -3,6 +3,7 @@
     border-radius: 5px;
     border: 2px solid #ffff00;
     padding: 10px;
+    user-select: none;
   }
   .gameoptions-btn {
     background-color: #0f1417;
@@ -45,4 +46,34 @@
     border-radius: 5px;
     top: -10px;
     right: -10px;
+  }
+  .gameoptions-div-preguntar{
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+  }
+  .gameoptions-box-box{
+    margin: auto;
+    margin-top: 15px;
+  }
+  .gameoptions-btn-two{
+    background-color: #0f1417;
+    border-radius: 5px;
+    border: 2px solid #ffff00;
+    padding: 6px;
+    padding-bottom: 4px;
+    color: #ffff00;
+    width: 95px;
+  }
+  .gameoptions-btn-two:hover {
+    background-color: #162229;
+    border: 2px solid #f8990c;
+    color: #f8990c;
+    cursor: pointer;
+  }
+  .gameoptions-align-box {
+    width: 10px;
   }

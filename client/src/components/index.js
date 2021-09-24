@@ -12,7 +12,7 @@ import Dices from "./dice/Dice.jsx";
 // import PlayerProps from "./playerProps/playerProps.jsx";
 import Action from "./playerProps/switchBoxBoard";
 import LuckyCard from './cards/LuckyCard'
-import PropertyCard from "./cards/PropertyCard.jsx";
+import PropertyCard from "./cards/PropertyCardTwo.jsx";
 import RailwayCard from "./cards/RailwayCard";
 import ServiceCard from "./cards/ServiceCard";
 import TaxCard from "./cards/TaxCard";

@@ -118,7 +118,7 @@ const Trading = () => {
         target: target,
         host: host,
       });
-      sonidos.franco.play()
+      // sonidos.franco.play()
       dispatch(statusTrading("loading"));
     };
   };

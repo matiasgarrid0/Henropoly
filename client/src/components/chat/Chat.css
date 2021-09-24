@@ -1,3 +1,4 @@
+
 .chat-cuadro-general {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   max-width: 25rem;
@@ -5,7 +6,6 @@
   width: 22rem;
   height: 29.7rem;
   text-align: center;
-  margin:auto;
   background: black;
   border-radius: 1.5rem;
   padding: 10px;
@@ -74,25 +74,21 @@
   overflow-x: hidden;
 }
 .chat-username {
-  background-color: rgb(255, 255, 42);
-  box-shadow: 1px 8px 7px 2px #111111;
-  color: black;
   display: inline-block;
-  padding: 0.4rem;
-  margin-top: 1rem;
+  background-color: #f8990c;
+  color: #ffffff;
   margin-bottom: 0.4rem;
-  border-radius: 0 1.125rem 1.125rem 1.125rem;
-  margin-left: -14rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 1.125rem 1.125rem 1.125rem 1.125rem;
+  margin-left: 1rem;
 }
 .chat-message {
-  margin-top: .5rem;
-  background-color: rgb(146, 146, 146);
-  box-shadow: 1px 8px 7px 2px #111111;
+  background-color: #e4e4e4;
   text-align: start;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: pre;
   padding: 0.3rem;
   margin-bottom: 0.4rem;
   border-radius: 0 1.125rem 1.125rem 1.125rem;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
 }
