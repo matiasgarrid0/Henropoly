@@ -112,7 +112,7 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, targetMove: true });
     setRoll(true);
     sonidoOne.play();
-    await moveTime(5);
+    await moveTime(800);
     var actualBox = dataGame[player].box;
     var finalBox = dataPlayers[player].box;
     while (finalBox !== actualBox) {
@@ -122,33 +122,33 @@ const DisplayGameBeta = () => {
       if (actualBox === 40) actualBox = 0;
       let valueX = targetX(player, actualBox) - initialX;
       let valueY = targetY(player, actualBox) - initialY;
-      /*dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
+     dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
       dispatch(setTargetValue(player, "y", initialY + Math.floor(valueY / 5)));
-      await moveTime(5);
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 2))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 2))
       );
-      await moveTime(5);
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 3))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 3))
       );
-      await moveTime(5);
+      await moveTime(50);
       dispatch(
         setTargetValue(player, "x", initialX + Math.floor((valueX / 5) * 4))
       );
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime(5);*/
+      await moveTime(50); 
       dispatch(setTargetValue(player, "x", initialX + valueX));
       dispatch(setTargetValue(player, "y", initialY + valueY));
-      await moveTime(5);
+      await moveTime(50);
       setDataGame({
         ...dataGame,
         [player]: {
