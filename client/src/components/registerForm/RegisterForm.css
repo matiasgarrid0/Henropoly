@@ -1,9 +1,7 @@
 .container-register {
     background-color: black;
-    
     display: flex;
 	flex-direction: column;
-	
     height:400px;
     width: 350px;
     border: solid black 2px;
@@ -25,7 +23,7 @@
 .email {
     text-align: center;
     align-items:center;
-    margin-top: 6rem;
+    margin-top: 1rem;
 }
 
 .email-text {
@@ -54,7 +52,7 @@
 
 .username-text {
     height: 20px;
-    width: 230px;
+    width: 260px;
     border: none;
     border-bottom: 2px solid yellow;
     background-color: transparent;
@@ -62,14 +60,13 @@
 }
 
 .password {
-    /*text-align: center;*/
     align-items:center;
     padding-bottom: 15px;
 }
 
 .password-text {
     height: 20px;
-    width: 230px;
+    width: 270px;
     border: none;
     border-bottom: 2px solid yellow;
     background-color: transparent;
@@ -84,6 +81,8 @@
     font-size: 1rem;
     padding: 1rem 3rem;
     margin-top: 3.5rem;
+    margin-left: 4.4rem;
+    margin-bottom: 1rem;
     display: inline-block;
     align-items: center;
     text-align: center;
@@ -92,7 +91,7 @@
     transition: .3s ease;
     border-radius:4px;
     border: none;
-    margin-left: 3.2rem;
+    
 }
 
 .btn-send:hover {

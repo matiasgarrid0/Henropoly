@@ -60,6 +60,7 @@ const PropertyCard = ({ data, username, buy, close }) => {
           </p>
         </div>
         {username === user.username && <button className='propertycard-button' onClick={buy}>comprar</button>}
+        
       </div>
     </div>
   );

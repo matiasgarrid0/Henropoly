@@ -62,14 +62,18 @@
     text-decoration: underline;
   }
   .dataplayerinfo-p-cardname{
-    background-color: rgba(190, 190, 190, 0.5);
+    background: linear-gradient(#bbbbbb, #454646);
+    padding: 0.3rem 0.8rem;
+    box-shadow: inset 0 0 0 2px #ffffff;
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 2px;
+    color:black;
   }
   .dataplayerinfo-div-name{
       color: rgb(250, 250, 250);
+      
       margin-top: -12px;
-      border-radius: 5px;
+      border-radius: 2px;
       text-align: center;
       align-items: center;
   }
@@ -78,45 +82,67 @@
     font-size:2rem;
   }
   .dataplayerinfo-color-pink {
-    background-color: rgb(230, 86, 255);
+    background: linear-gradient(#fda7fd, #e060e0);
+    padding: 0.3rem 0.8rem;
+    box-shadow: inset 0 0 0 2px #ffffff; 
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 2px;
+    color:black;
   }
   .dataplayerinfo-color-brown {
-    background-color: rgb(180, 103, 3);
+    background: linear-gradient(#e49f68, #966237);
+    padding: 0.3rem 0.8rem;
+    box-shadow: inset 0 0 0 2px #ffffff;
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 2px;
+    color:black;
   }
   .dataplayerinfo-color-green {
-    background-color: #009218;
+    box-shadow: inset 0 0 0 2px #ffffff;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(#2ecc65, #028730);
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 2px;
+    color:black;
   }
   .dataplayerinfo-color-blue {
-      background-color: #0a51ad;
+      box-shadow: inset 0 0 0 2px #ffffff;  
+      padding: 0.3rem 0.8rem;  
+      background: linear-gradient(#5593d6, #154375);
       font-weight: 700;
-      border-radius: 5px;
+      border-radius: 2px;
+      color:black;
   }
   .dataplayerinfo-color-yellow {
-      background-color: #ffff00;
+    background: linear-gradient(#f5e557, #d4c218);
+      padding: 0.3rem 0.8rem;
+      box-shadow: inset 0 0 0 2px #ffffff;
       font-weight: 700;
       color: black;
-      border-radius: 5px;
+      border-radius: 2px;
   }
   .dataplayerinfo-color-red {
-      background-color: #f52828;
+    background: linear-gradient(#ee6c62, #b1342a);
+      padding: 0.3rem 0.8rem;
+      box-shadow: inset 0 0 0 2px #ffffff;
       font-weight: 700;
-      border-radius: 5px;
+      border-radius: 2px;
+      color:black;
   }
   .dataplayerinfo-color-light-blue {
-     background-color: rgb(57, 176, 245);
+    background: linear-gradient(#91d6f3, #3fa2cc);
+     padding: 0.3rem 0.8rem;
+     box-shadow: inset 0 0 0 2px #ffffff;
       font-weight: 700;
-      border-radius: 5px;
+      border-radius: 2px;
       color:black;
   }
   .dataplayerinfo-color-orange{
-      background-color: rgb(255, 168, 6);
+    background: linear-gradient(#eb924f, #bd6422);
+      padding: 0.3rem 0.8rem;
+      box-shadow: inset 0 0 0 2px #ffffff;
       font-weight: 700;
-      border-radius: 5px;
+      border-radius: 2px;
+      color:black;
   }
   

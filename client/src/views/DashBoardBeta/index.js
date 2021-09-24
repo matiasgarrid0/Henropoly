@@ -1,6 +1,5 @@
 import React from "react";
 import Tutorial from "../Tutorial";
-import Ranking from "../Ranking";
 import { Room, DisplayGameBeta, Chat } from "./../../components";
 import "./DashBoardBeta.css";
 import { useSelector } from "react-redux";
@@ -34,7 +33,6 @@ const DashBoardBeta = () => {
           </div>
           <div>
             <Chat />
-            {/* <Ranking /> */}
           </div>
         </div>
       </div>
