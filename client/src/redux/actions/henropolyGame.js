@@ -75,13 +75,13 @@ export const setMoveTurn = (payload) => {
 export const setBuyBox = (payload) => {
   return {
     type: SET_BUY_BOX,
-    payload: payload, //{box:1, target: 'target1',}
+    payload: payload,
   };
 };
 export const setBalance = (payload) => {
   return {
     type: SET_BALANCE,
-    payload: payload, //{target:"target1",henryCoin:1700,}
+    payload: payload,
   };
 };
 

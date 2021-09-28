@@ -1,6 +1,4 @@
 import axios from 'axios';
-//const URL = 'http://localhost:3001';
-//const axiosApi = axios.create({ baseURL: URL });
 const axiosApi = axios.create({ baseURL: process.env.REACT_APP_API || 'http://localhost:3001' });
 
 axiosApi.interceptors.request.use((req) => {
@@ -10,7 +8,6 @@ axiosApi.interceptors.request.use((req) => {
     }
     return req;
 })
-
 
 //actions:
 export const checkToken = () => axiosApi.post('/auth/check');

@@ -32,7 +32,7 @@ const GameOptions = ({ host, gameOver, meEnd }) => {
         /></div>
       </div>
       {preguntar ? <div className="gameoptions-div-preguntar box-column">
-        Seguro que quieres salir de la partida?
+        ¿Seguro que quieres salir de la partida?
         <div className='gameoptions-box-box box-row'>
           <button className='gameoptions-btn-two' onClick={()=>{setPreguntar(false);}}>Cancelar</button>
           <div className='gameoptions-align-box'></div>

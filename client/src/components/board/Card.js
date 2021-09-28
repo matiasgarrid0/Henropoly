@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./board.css";
 const Card = ({ data, grade, icons }) => {

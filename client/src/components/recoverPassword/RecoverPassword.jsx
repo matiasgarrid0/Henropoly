@@ -1,8 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-//import { register }  from '../../redux/actions'
-//import { Link, useHistory } from 'react-router-dom';
 
 function RecoverPassword() {
 const dispatch = useDispatch();
@@ -36,10 +33,8 @@ function handleChange(e){
           <button className='fdf' type="submit">send</button>
 
           </div>
-          
      </>
-   
  )
-}
+};
 
 export default RecoverPassword

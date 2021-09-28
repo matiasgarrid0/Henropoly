@@ -303,4 +303,5 @@ const Card = ({ data, target, box, type }) => {
   }
   return <div className="trading-card-two"></div>;
 };
+
 export default Card;

@@ -26,6 +26,3 @@ const node =(
 
 ReactDOM.render(node, root)
 reportWebVitals();
-
-
-

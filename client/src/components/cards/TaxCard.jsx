@@ -9,7 +9,7 @@ const TaxCard = ({data}) => {
                 <div className ="RailwayCard-background-no-repeat">
                     <h3 className = "taxCard-h3">Impuesto</h3>
                     <span className = "card-span-bold">Se te cobrará $200</span>
-                    <img className='card-tax-img' src={ToniTax} width='150'/>
+                    <img className='card-tax-img' src={ToniTax} width='150' alt='img'/>
                 </div>
             </div>
         )
@@ -19,10 +19,11 @@ const TaxCard = ({data}) => {
                 <div className ="RailwayCard-background-no-repeat">
                     <h3 className = "taxCard-h3">Impuesto-Vip</h3>
                     <span className = "card-span-bold">Se te cobrará $400</span>
-                    <img className='card-tax-img' src={ToniTax} width='150'/>
+                    <img className='card-tax-img' src={ToniTax} width='150' alt='img'/>
                 </div>
             </div>
         )
     }
 }
+
 export default TaxCard;

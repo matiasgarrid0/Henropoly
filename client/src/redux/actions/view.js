@@ -6,4 +6,3 @@ export const setView = (type, value) => {
     payload: { type, value },
   };
 };
-

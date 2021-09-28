@@ -16,7 +16,6 @@ const App = () => {
     } else {
       dispatch(setLoading(false));
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
   useEffect(() => {
    if(!stateI){

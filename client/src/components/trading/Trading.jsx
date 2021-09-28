@@ -108,8 +108,7 @@ const Trading = () => {
     return () => {
       socket.off("Trading");
     };
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, []);
+  }, [dispatch, input, socket, sonidos.desactive, sonidos.money]);
   const openTrade = (target) => {
     return () => {
       setInfoTrade({ ...infoTrade, target: target });
@@ -118,7 +117,6 @@ const Trading = () => {
         target: target,
         host: host,
       });
-      // sonidos.franco.play()
       dispatch(statusTrading("loading"));
     };
   };
@@ -878,4 +876,5 @@ const Trading = () => {
 
   return <></>;
 };
+
 export default Trading;

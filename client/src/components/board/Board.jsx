@@ -37,7 +37,6 @@ import {
   FaNode,
   FaPython,
   FaGitSquare,
-  FaReact,
   FaQuestion,
   FaMoneyBillAlt
 } from "react-icons/fa";

@@ -62,7 +62,7 @@ function Dices({ rollOne, rollTwo, username }) {
                       break;
                   }
                   diceOne.current.style.transform = ` rotateX(3600deg) rotateY(1980deg) rotateZ(3600deg)`;
-                
+            
           };
           switch (randomNumberDiceTwo) {
               case 1:

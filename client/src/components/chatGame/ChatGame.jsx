@@ -27,7 +27,7 @@ const ChatGame = () => {
         return () => {
             socket.off("chatGame");
         };
-        /* eslint-disable react-hooks/exhaustive-deps */
+        
     }, [mensajes]);
     if (minimizar) {
         return (

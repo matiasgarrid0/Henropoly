@@ -35,8 +35,6 @@ const {
   goToJail,
   goToJailCard,
   jail,
-  playerIsLoser,
-  //luckyComunalCard
   initialTrade,
   acceptTrade,
   addTradeOfert,
@@ -45,8 +43,6 @@ const {
   setConfirmation,
   cancelTrade,
   selectAvatar
-  /*luckyOrArc,
-  gameActionsBoard*/
 } = require("./controllers/theBabelTower.js");
 const server = express();
 const http = require("http").createServer(server);

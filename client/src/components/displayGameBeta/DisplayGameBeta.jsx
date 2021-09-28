@@ -13,7 +13,6 @@ import {
   moveToJail,
   setBalance,
   setBuyBox,
-  changeValueTarget,
   statusTrading,
   updateTrade
 } from "./../../redux/actions";
@@ -36,7 +35,7 @@ import {
   Trading,
   MePanel,
   Alerts,
-  Winner
+  //Winner
 } from "./../";
 
 import Imagen from "./table.jpg";
@@ -48,12 +47,10 @@ const DisplayGameBeta = () => {
   sonidoOne.volumen = 0.5;
   sonidoOne.loop = false;
   const dispatch = useDispatch();
-  const { tradeStatus } = useSelector((state) => state.henryTrading);
   const { status, dataPlayers, host, actualTurn, table } = useSelector(
     (state) => state.henropolyGame
   );
   //random Lucky y comunal cards
-  const { luckyCard, comunalCard } = useSelector((state) => state.reducerInfo);
   const { info } = useSelector((state) => state.reducerInfo);
   const { socket, user } = useSelector((state) => state.auth);
   const { view } = useSelector((state) => state.view);
@@ -90,8 +87,6 @@ const DisplayGameBeta = () => {
   const [cardBack, setCardBack] = useState(null)
   const [dataAlert, setDataAlert] = useState(null)
   const [dataAlertPagar, setDataAlertPagar] = useState(null)
-  const [ganador,setGanador] = useState(true)
-  const [perdedor, setPerdedor] = useState(true)
   const [goJailLuckyCard, setGoJailLuckyCard] = useState(false);
   const [render, setRender] = useState('')
   const [portal, setPortal] = useState(null)
@@ -122,7 +117,7 @@ const DisplayGameBeta = () => {
       if (actualBox === 40) actualBox = 0;
       let valueX = targetX(player, actualBox) - initialX;
       let valueY = targetY(player, actualBox) - initialY;
-     dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
+      dispatch(setTargetValue(player, "x", initialX + Math.floor(valueX / 5)));
       dispatch(setTargetValue(player, "y", initialY + Math.floor(valueY / 5)));
       await moveTime(50);
       dispatch(
@@ -145,7 +140,7 @@ const DisplayGameBeta = () => {
       dispatch(
         setTargetValue(player, "y", initialY + Math.floor((valueY / 5) * 4))
       );
-      await moveTime(50); 
+      await moveTime(50);
       dispatch(setTargetValue(player, "x", initialX + valueX));
       dispatch(setTargetValue(player, "y", initialY + valueY));
       await moveTime(50);
@@ -169,12 +164,9 @@ const DisplayGameBeta = () => {
 
 
     //------IF PARA RENDERIZAR PORTALES------
-    // if(dataAlert){
-    //   setPortal("dataAlert")
-    // }
 
     if (info.table[dataPlayers[player].box].type && dataPlayers[player].username === user.username) {
-      
+
       if (info.table[dataPlayers[player].box].type === "comunal") {
         setPortal("comunal");
       }
@@ -188,7 +180,7 @@ const DisplayGameBeta = () => {
       }
 
       if (info.table[dataPlayers[player].box].type === "property") {
-        
+
         setProperty(info.table[dataPlayers[player].box]);
         if (
           dataPlayers[player].username === user.username &&
@@ -197,7 +189,7 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
-            henryCoin:dataPlayers[player].henryCoin,         
+            henryCoin: dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyProperty", box: dataPlayers[player].box })
               setPortal(null)
@@ -207,7 +199,7 @@ const DisplayGameBeta = () => {
         } else {
           setMeBox({ ...meBox, username: null });
         }
-        
+
       }
       if (info.table[dataPlayers[player].box].type === "railway") {
         setTrain(info.table[dataPlayers[player].box])
@@ -215,17 +207,17 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
-            henryCoin:dataPlayers[player].henryCoin,
+            henryCoin: dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyRailway", box: dataPlayers[player].box })
               setPortal(null)
-            },            
+            },
           })
           setPortal("railway");
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        
+
       }
       if (info.table[dataPlayers[player].box].type === "service") {
         setService(info.table[dataPlayers[player].box])
@@ -233,7 +225,7 @@ const DisplayGameBeta = () => {
           setMeBox({
             ...meBox,
             username: dataPlayers[player].username,
-            henryCoin:dataPlayers[player].henryCoin,
+            henryCoin: dataPlayers[player].henryCoin,
             buy: () => {
               socket.emit("TradeDashboard", { type: "buyService", box: dataPlayers[player].box })
               setPortal(null)
@@ -243,7 +235,7 @@ const DisplayGameBeta = () => {
         } else {
           setMeBox({ ...meBox, username: null })
         }
-        
+
       }
       if (
         info.table[dataPlayers[player].box].type === "tax" ||
@@ -292,25 +284,21 @@ const DisplayGameBeta = () => {
     };
   }
   function closedPortal() {
-    if(goJailLuckyCard) {
+    if (goJailLuckyCard) {
       socket.emit("TradeDashboard", { type: "goToJailCard" })
       setRoll(false);
-    setRollDicesInGame({
-      valorOne: null,
-      valorTwo: null,
-      username: null,
-    });
-     setGoJailLuckyCard(false)
+      setRollDicesInGame({
+        valorOne: null,
+        valorTwo: null,
+        username: null,
+      });
+      setGoJailLuckyCard(false)
       dispatch(setMoveTurn(false));
       setPortal(null)
     }
     setRender(`status closed`)
     setPortal(null)
   }
-  // function closedPortal4() {
-  //   dispatch(changeValueTarget('target1','box', 10));
-  //   setPortal(null);
-  // }
 
   function closedPortal2() {
     socket.emit("TradeDashboard", { type: "goToJail" })
@@ -323,13 +311,7 @@ const DisplayGameBeta = () => {
     dispatch(setMoveTurn(false));
     setPortal(null)
   }
-
-
   function closedPortal3() {
-    //setDataAlert(false)
-    // if (setGoJailLuckyCard) {
-    //   socket.emit("TradeDashboard", { type: "goToJailCard" })
-    //   dispatch(setMoveTurn(false));
     setPortal(null)
   }
   function closedPortal4() {
@@ -341,17 +323,13 @@ const DisplayGameBeta = () => {
       dataGame.target1.box !== dataPlayers.target1.box &&
       dataGame.targetMove === false
     ) alignTarget("target1");
-    /**src\components\displayGameBeta\DisplayGameBeta.jsx
-     Line 270:3:  Expected an assignment or function call and instead saw an expression */
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [dataPlayers.target1.box]);
+  }, [dataPlayers.target1.box, alignTarget, dataGame.target1.box, dataGame.targetMove]);
 
   useEffect(() => {
     if (dataGame.target2.box !== dataPlayers.target2.box &&
       dataGame.targetMove === false
     ) alignTarget("target2");
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [dataPlayers.target2.box]);
+  }, [dataPlayers.target2.box, alignTarget, dataGame.target2.box, dataGame.targetMove]);
 
   useEffect(() => {
     if (
@@ -359,8 +337,7 @@ const DisplayGameBeta = () => {
       dataGame.targetMove === false
     )
       alignTarget("target3");
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [dataPlayers.target3.box]);
+  }, [dataPlayers.target3.box, alignTarget, dataGame.target3.box, dataGame.targetMove]);
 
   useEffect(() => {
     if (
@@ -368,8 +345,7 @@ const DisplayGameBeta = () => {
       dataGame.targetMove === false
     )
       alignTarget("target4");
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [dataPlayers.target4.box]);
+  }, [dataPlayers.target4.box, alignTarget, dataGame.target4.box, dataGame.targetMove]);
 
   const style = {
     backgroundSize: "2500px",
@@ -431,10 +407,10 @@ const DisplayGameBeta = () => {
     setDataGame({ ...dataGame, mouseActive: false });
   };
   useEffect(() => {
-    socket.on('alert',(data)=>{
-      if(data.status === 'mePagan'){
+    socket.on('alert', (data) => {
+      if (data.status === 'mePagan') {
         setDataAlert(`El jugador ${data.nombreDelqueTePaga} cae en tu propiedad y te paga ${data.cuantoTePago} HenryCoins.`)
-      }else if(data.status === 'lePago'){
+      } else if (data.status === 'lePago') {
         setDataAlertPagar(`Caes en la propiedad de ${data.nombreDelqueTePaga}, pagas ${data.cuantoTePago} HenryCoins por la estadía en ella.`)
       }
     })
@@ -447,7 +423,6 @@ const DisplayGameBeta = () => {
         if (data.type === "endGame") {
           dispatch(setGameStatus("free"));
         } else if (data.type === "exitPlayer") {
-          //console.log('-------> kiickplayer data,', data)
           dispatch(
             setTurns({
               actualTurn: data.info.turn.actualTurn,
@@ -472,74 +447,64 @@ const DisplayGameBeta = () => {
         dispatch(setGameRoll(data.info));
         setRender(`status:${data.status}`)
       } else if (data.status === "buyProperty") {
-        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
-        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
         dispatch(buyPropertyAction(data));
         setRender(`status:${data.status}`)
       } else if (data.status === "setBalance") {
         dispatch(setBalance(data.info));
         setRender(`status:${data.status}`)
-        //console.log('setBalance', data.info)
       } else if (data.status === 'buyRailway') {
-        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
-        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
         dispatch(buyPropertyAction(data))
         setRender(`status:${data.status}`)
       } else if (data.status === 'buyService') {
-        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
-        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
         dispatch(buyPropertyAction(data))
         setRender(`status:${data.status}`)
       } else if (data.status === 'goToJail') {
-        //console.log('dataStatusJail', data)
         dispatch(moveToJail(data))
       } else if (data.status === 'goToJailCard') {
         dispatch(moveToJail(data))
       } else if (data.status === 'buyJail') {
-        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))//refleja dinero de persona
-        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))//refleja el dueño
+        dispatch(setBalance({ target: data.newProperty, henryCoin: data.newbalase }))
+        dispatch(setBuyBox({ box: data.box, target: data.newProperty }))
         dispatch(buyPropertyAction(data));
-      }else if (data.status ==='dadosJail'){
-        if(data.fail){
+      } else if (data.status === 'dadosJail') {
+        if (data.fail) {
           dispatch(setMoveTurn(false))
         } else {
           dispatch(setMoveTurn(true))
         }
-      } else if(data.status === 'perdiste'){
-       // console.log(data)
-       /*  setPerdedor(true)
-        setGanador(true)
-        setRender(`status:${data.status}` */
+      } else if (data.status === 'perdiste') {
         dispatch(setGameStatus('perdedor'))
-      }else if(data.status === 'ganador'){
-        // console.log(data)
-        /*  setPerdedor(true)
-         setGanador(true)
-         setRender(`status:${data.status}` */
-         dispatch(setGameStatus('ganador'))
-       }else if (data.status === "updateTrade") {
+      } else if (data.status === 'ganador') {
+        dispatch(setGameStatus('ganador'))
+      } else if (data.status === "updateTrade") {
         dispatch(updateTrade(data.data));
       }
     })
-    socket.on("trading", (data) => {});
+    socket.on("trading", (data) => { });
 
     return () => {
       socket.off('alert');
       socket.off("setGame");
       socket.off("trading");
     };
-  }, []);
+  }, [dispatch,socket]);
 
   return (
     <div className="display-beta-border">
       {dataAlert && (
-        <Portal onClose={()=>{setDataAlert(false)}}>
-          <Alerts data={dataAlert}/>
+        <Portal onClose={() => { setDataAlert(false) }}>
+          <Alerts data={dataAlert} />
         </Portal>
       )}
       {dataAlertPagar && (
-        <Portal onClose={()=>{setDataAlertPagar(false)}}>
-          <Alerts data={dataAlertPagar}/>
+        <Portal onClose={() => { setDataAlertPagar(false) }}>
+          <Alerts data={dataAlertPagar} />
         </Portal>
       )}
       {portal === "lucky" && (
@@ -547,17 +512,6 @@ const DisplayGameBeta = () => {
           <LuckyCard data={cardBack} />
         </Portal>
       )}
-    {/*   {perdedor && (
-        <Portal onClose={()=>{setPerdedor(false)}}>
-          <Winner /> */}
-          {/* <div className='display-game-loser-one'><label className='display-game-loser-two'>perdiste por $%$!</label></div> */}
-        {/* </Portal> */}
-    {/*   )} */}
-     {/* {ganador === false && (
-        <Portal onClose={closedPortal3}>
-          <div className='display-game-loser-one'><label className='display-game-loser-two'>GANASTE!</label></div>
-        </Portal>
-      )}  */}
       {portal === "comunal" && (
         <Portal onClose={closedPortal}>
           <LuckyCard data={cardBack} />
@@ -565,7 +519,7 @@ const DisplayGameBeta = () => {
       )}
       {portal === "property" && (
         <Portal onClose={closedPortal}>
-          <PropertyCard data={property} username={meBox.username} buy={meBox.buy}  henryCoin={meBox.henryCoin} />
+          <PropertyCard data={property} username={meBox.username} buy={meBox.buy} henryCoin={meBox.henryCoin} />
         </Portal>
       )}
       {portal === "railway" && (
@@ -599,12 +553,6 @@ const DisplayGameBeta = () => {
         </Portal>
       )}
       <div>
-        {/* <PlayerProps
-          target1={dataPlayers.target1.box}
-          target2={dataPlayers.target2.box}
-          target3={dataPlayers.target3.box}
-          target4={dataPlayers.target4.box}
-        /> */}
       </div>
       <div className="display-beta-body-display no-select">
         {status === "inGame" ? (
@@ -624,19 +572,18 @@ const DisplayGameBeta = () => {
                           marginLeft: `${1260 - dataPlayers.target1.x}px`,
                           marginTop: `${1260 - dataPlayers.target1.y}px`,
                         }}
-                        className="display-beta-target"           /*   src={require(`../room/img/`).default} */
-                      ><img className={`${dataGame.target1.box >= 10 && dataGame.target1.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target1.box >= 21 && dataGame.target1.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target1.box >= 31 && dataGame.target1.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target1`} src={require(`../room/img/${dataPlayers.target1.img}`).default} width='50'/></div>
+                        className="display-beta-target"
+                      ><img className={`${dataGame.target1.box >= 10 && dataGame.target1.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target1.box >= 21 && dataGame.target1.box <= 30 ? 'displaygamebeta-giro180 ' : dataGame.target1.box >= 31 && dataGame.target1.box <= 39 ? 'displaygamebeta-giro270 ' : ''}displaygamebeta-token-target1`} src={require(`../room/img/${dataPlayers.target1.img}`).default} alt='token' width='50' /></div>
                     )}
                     {dataPlayers.target2.status && (
                       <div
-                      
                         style={{
                           backgroundColor: "transparent",
                           marginLeft: `${1260 - dataPlayers.target2.x}px`,
                           marginTop: `${1260 - dataPlayers.target2.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className={`${dataGame.target2.box >= 10 && dataGame.target2.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target2.box >= 21 && dataGame.target2.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target2.box >= 31 && dataGame.target2.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target2`} src={require(`../room/img/${dataPlayers.target2.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target2.box >= 10 && dataGame.target2.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target2.box >= 21 && dataGame.target2.box <= 30 ? 'displaygamebeta-giro180 ' : dataGame.target2.box >= 31 && dataGame.target2.box <= 39 ? 'displaygamebeta-giro270 ' : ''}displaygamebeta-token-target2`} src={require(`../room/img/${dataPlayers.target2.img}`).default} alt='token' width='50' /></div>
                     )}
                     {dataPlayers.target3.status !== false ? (
                       <div
@@ -646,7 +593,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target3.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className={`${dataGame.target3.box >= 10 && dataGame.target3.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target3.box >= 21 && dataGame.target3.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target3.box >= 31 && dataGame.target3.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target3`} src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target3.box >= 10 && dataGame.target3.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target3.box >= 21 && dataGame.target3.box <= 30 ? 'displaygamebeta-giro180 ' : dataGame.target3.box >= 31 && dataGame.target3.box <= 39 ? 'displaygamebeta-giro270 ' : ''}displaygamebeta-token-target3`} src={require(`../room/img/${dataPlayers.target3.img}`).default} width='50' alt='tokens' /></div>
                     ) : (
                       <></>
                     )}
@@ -658,7 +605,7 @@ const DisplayGameBeta = () => {
                           marginTop: `${1260 - dataPlayers.target4.y}px`,
                         }}
                         className="display-beta-target"
-                      ><img className={`${dataGame.target4.box >= 10 && dataGame.target4.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target4.box >= 21 && dataGame.target4.box <= 30 ? 'displaygamebeta-giro180 ': dataGame.target4.box >= 31 && dataGame.target4.box <= 39 ? 'displaygamebeta-giro270 ': ''}displaygamebeta-token-target4`} src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50'/></div>
+                      ><img className={`${dataGame.target4.box >= 10 && dataGame.target4.box <= 20 ? 'displaygamebeta-giro90 ' : dataGame.target4.box >= 21 && dataGame.target4.box <= 30 ? 'displaygamebeta-giro180 ' : dataGame.target4.box >= 31 && dataGame.target4.box <= 39 ? 'displaygamebeta-giro270 ' : ''}displaygamebeta-token-target4`} src={require(`../room/img/${dataPlayers.target4.img}`).default} width='50' alt='tokens'/></div>
                     )}
                   </div>
                 </div>
@@ -666,7 +613,7 @@ const DisplayGameBeta = () => {
             </div>
           </div>
         ) : (
-          <div>error</div>
+          <div>Error</div>
         )}
       </div>
       <div className="display-beta-bajo-touch">
@@ -682,29 +629,13 @@ const DisplayGameBeta = () => {
         onMouseUp={handleOnMouseUpEvent}
         onMouseOut={handleOnMouseUpEvent}
       >
-        {/* <div className="display-beta-align-chatgame">
-            <ChatGame />
-          </div>
-        <div className="display-beta-align-gameoptions">  
-      <GameOptions host={user.username === host} gameOver={() => {
-        socket.emit("gameDashboard", { type: "gameOver" });
-      }} meEnd={() => {
-        socket.emit("gameDashboard", { type: "meEnd" });
-      }}/>
-    </div>  
-    <div className="display-beta-align-gameturns">
-            <Turns /> */}
-            <div className="display-beta-align-mepanel">
+        <div className="display-beta-align-mepanel">
           <MePanel />
         </div>
         <div className="display-beta-align-gameturns">
           <Turns action={closeAndOpen} />
         </div>
-        {/* <div  className="display-beta-align-playerprops">
-        <PlayerProps action={closeAndOpen}/>
-        </div> */}
         <div className="display-beta-align-dataplayer">
-          {/* <Turns /> */}
           <DataPlayerInfo
             action={closeAndOpen}
             status={minimizarPlayers.status}

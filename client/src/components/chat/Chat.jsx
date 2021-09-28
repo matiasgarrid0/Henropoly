@@ -15,7 +15,7 @@ const Chat = ({ room }) => {
     return () => {
       socket.off('chatGlobal');
     };
-    /* eslint-disable react-hooks/exhaustive-deps */
+    
   },[mensajes])
   const submit = (e) => {
     e.preventDefault();

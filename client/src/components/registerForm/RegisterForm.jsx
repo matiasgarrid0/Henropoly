@@ -4,12 +4,6 @@ import { register } from '../../redux/actions';
 import LogoBox from '../../image/logo-home.png'
 import './RegisterForm.css'
 
-/* const expressions = {
-   expressionStandar: /^[a-zA-Z0-9_-]+$/, // Letras, numeros, guion y guion_bajo
-   usernameLong: /^.{4,25}$/, // 4 a 25 digitos.
-   passwordLong: /^.{8,16}$/, // 4 a 16 digitos.
- }; */
-//!/^[a-zA-Z0-9_-]+$/.test(input.username)
 function validate(input) { 
    let errors = {};
       if( !input.email || !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input.email)) {

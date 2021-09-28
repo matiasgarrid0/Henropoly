@@ -11,12 +11,9 @@ const RailwayCard = ({ data, username, buy, henryCoin }) => {
                 <h3 className="RailwayCard-h3">{data.name}</h3>
                 <div className="RailwayCard-div">
                     <span className="card-span-bold"> Checkpoint:{data.takeCheckpoint}$</span>
-                    <img className='card-railway-img' src={Modulo} width='90'/>
-                    {/* <span className="card-span-bold">Dos checkpoint:{data.twoCheckpoint}$</span>
-                    <span className="card-span-bold" >Tres checkpoint:{data.threeCheckpoint}$</span>
-                    <span className="card-span-bold">Cuatro checkpoint:{data.fourCheckpoint}$</span> */}
+                    <img className='card-railway-img' src={Modulo} width='90' alt="Railway"/>
                 </div>
-                {username === user.username && henryCoin >= data.licenseValue ? <button className='railway-button' onClick={buy}>comprar</button> : <span className='alert-nofunds'>No posee fondos</span>}
+                {username === user.username && henryCoin >= data.licenseValue ? <button className='railway-button' onClick={buy}>Comprar</button> : <span className='alert-nofunds'>No posee fondos suficientes</span>}
             </div>
         </div>
     )

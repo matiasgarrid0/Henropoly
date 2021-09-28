@@ -31,8 +31,8 @@ const GamingLog = () => {
     return () => {
       socket.off("log");
     };
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [mensajes]);
+    
+  }, [mensajes, socket, sonidos.comercio, user.username]);
 
   return (
     <div className="gaminglog-table">

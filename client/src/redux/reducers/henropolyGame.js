@@ -56,7 +56,6 @@ const henropolyGame = (state = initialState, action) => {
             henryCoin: payload.henryCoinProperty,
           }
         },
-        //targetProperty
       };
     case SET_MOVE_TURN:
       return {
@@ -128,14 +127,5 @@ const henropolyGame = (state = initialState, action) => {
       return state;
   };
 }
-/*
- box: 10
-info:
-move: 10
-target: "target2"
-[[Prototype]]: Object
-newProperty: "target2"
-status: "goToJail"
-[[Prototype]]: Object */
 
 export default henropolyGame;

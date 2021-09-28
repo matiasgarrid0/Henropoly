@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./PropertyCard.css";
-import { MdMoneyOff } from "react-icons/md";
+
 
 const PropertyCard = ({ data, username, buy, henryCoin }) => {
   const { user } = useSelector((state) => state.auth);
-  const  table  = useSelector((state) => state.henropolyGame);
+
 
 
   return (
@@ -19,27 +19,27 @@ const PropertyCard = ({ data, username, buy, henryCoin }) => {
         <div className="alignItemsssssss">
           <ul className="listStile-none">
             <p>
-              <span className="card-span-bold">Version desarrollo:</span>{" "}
+              <span className="card-span-bold">Versión desarrollo:</span>{" "}
               {data.versionAlpha}$
             </p>
             <p>
-              <span className="card-span-bold">Version uno:</span>{" "}
+              <span className="card-span-bold">Versión uno:</span>{" "}
               {data.versionOne}$
             </p>
             <p>
-              <span className="card-span-bold">Version dos:</span>{" "}
+              <span className="card-span-bold">Versión dos:</span>{" "}
               {data.versionTwo}$
             </p>
             <p>
-              <span className="card-span-bold">Version tres:</span>{" "}
+              <span className="card-span-bold">Versión tres:</span>{" "}
               {data.versionThree}$
             </p>
             <p>
-              <span className="card-span-bold">Version cuatro:</span>{" "}
+              <span className="card-span-bold">Versión cuatro:</span>{" "}
               {data.versionFour}$
             </p>
             <p>
-              <span className="card-span-bold">Version Premium:</span>{" "}
+              <span className="card-span-bold">Versión Premium:</span>{" "}
               {data.versionPremium}$
             </p>
           </ul>
@@ -48,11 +48,11 @@ const PropertyCard = ({ data, username, buy, henryCoin }) => {
             <span className="card-span-bold">Adicional:</span> {data.aditional}
           </p>
           <p className="pgame">
-            <span className="card-span-bold">Version Comun:</span>{" "}
+            <span className="card-span-bold">Versión Comun:</span>{" "}
             {data.commonVersion}$
           </p>
           <p className="pgame">
-            <span className="card-span-bold">Version Premium:</span>{" "}
+            <span className="card-span-bold">Versión Premium:</span>{" "}
             {data.premiumVersion}$
           </p>
           <div className="line-card"></div>
@@ -61,12 +61,9 @@ const PropertyCard = ({ data, username, buy, henryCoin }) => {
             {data.licenseValue}$
           </p>
         </div>
-        {username === user.username && henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
+        {username === user.username && henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>Comprar</button> : <span>No posee fondos suficientes</span>}
       </div>
     </div>
   );
-};
+};   
 export default PropertyCard;
-
-
-//username === user.username && user.henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./PropertyCardTwo.css";
-import { MdMoneyOff } from "react-icons/md";
 import Express from "./../board/img/express.png";
 import Cplus from "./../board/img/c-plus.png";
 import Csharp from "./../board/img/c-sharp.png";
@@ -30,7 +29,6 @@ import {
 
 const PropertyCard = ({ data, username, buy, henryCoin }) => {
   const { user } = useSelector((state) => state.auth);
-  const  table  = useSelector((state) => state.henropolyGame);
   const selectoIcon = (icon) => {
     switch (icon) {
       case 'ELECTRICITY COMPANY':
@@ -109,20 +107,20 @@ const PropertyCard = ({ data, username, buy, henryCoin }) => {
         <div className="alignItemsssssss">
           <div className="card-rpoperty-line-card"></div>
           <p className="pgame">
-            <span className="card-rpoperty-span-bold">Valor de Alquiler:</span>
+            <span className="card-rpoperty-span-bold">Valor del Alquiler:</span>
             </p>
             <p>
             <span className="card-rpoperty-span">{`${data[data.actualPrice]} HenryCoins`}</span>
           </p>
           <div className="line-card"></div>
           <p className="pgame-compra">
-            <span className="card-rpoperty-span-bold">Valor de compra:</span>
+            <span className="card-rpoperty-span-bold">Valor de la compra:</span>
             </p>
             <p>
             <span className="card-rpoperty-span">{`${data.licenseValue} HenryCoins`}</span>
           </p>
         </div>
-        {username === user.username && henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>comprar</button> : <span>No posee fondos</span>}
+        {username === user.username && henryCoin >= data.licenseValue ? <button className='propertycard-button' onClick={buy}>Comprar</button> : <span>No posee fondos suficiente</span>}
       </div>
     </div>
   );
