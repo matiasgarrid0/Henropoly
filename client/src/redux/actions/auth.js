@@ -129,6 +129,7 @@ export const logOut = () => {
     localStorage.removeItem("access_token");
   };
 };
+//Seba pusheo
 //'https://henropoly-grupo6.herokuapp.com/'
   //SI LEVANTAMOS EN LOCAL HOST PONER  "http://localhost:3001/" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export const connectSocket = (token) => {
@@ -137,4 +138,5 @@ export const connectSocket = (token) => {
     type: SET_SOCKET,
     payload: socket,
   };
-};
+} ;
+ 
