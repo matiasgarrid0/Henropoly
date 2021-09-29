@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setGame, setGameStatus } from "./../../redux/actions";
 import { FaArrowAltCircleDown } from "react-icons/fa";
-
 import "./Room.css";
 
 const Room = () => {
