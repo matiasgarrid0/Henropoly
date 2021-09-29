@@ -44,7 +44,11 @@ const Nav = () => {
             {isAuth ? (
               <>
                 <LogOut />
+                <div>
+                <Link to ="/AboutUs"> About Us</Link>
+                </div>
               </>
+              
             ) : (
               <>
                 <button

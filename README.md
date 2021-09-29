@@ -1,8 +1,8 @@
 <p align="left">
-  <img height="100" src="./img-Readme/LogoHome.png" />
+  <img height="100" src="./" />
 </p>
 
-## `HenrIpoly`  
+## `Henripoly`  
 
 Henropoly es un juego de mesa basado en Monopoly fácil de jugar creado por alumnos de Henry y pensado para su comunidad. Puede ser disfrutado por 2 a 4 jugadores a través de un sistema multijugador donde cada uno compite por no quedar en bancarrota y llegar hasta el final de la partida.
 

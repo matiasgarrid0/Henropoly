@@ -1,4 +1,5 @@
 import Home from "./Home";
 import SwitchPage from "./SwitchPage";
 import DashBoardBeta from './DashBoardBeta'
-export { Home, SwitchPage, DashBoardBeta }
+import AboutUs from "./About/aboutUs";
+export { Home, SwitchPage, DashBoardBeta, AboutUs }
