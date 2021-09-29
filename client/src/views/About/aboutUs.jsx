@@ -5,7 +5,7 @@ import Mati from './mati.jpg'
 import Alan from './Alan.jpg'
 import jose from './jose.jpeg'
 import seba from './seba.jpeg'
-import facu from './Facu.jpg'
+import facu from './Facu.jpg';
 
 const AboutUs = () => {
 
