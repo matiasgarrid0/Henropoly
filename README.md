@@ -38,7 +38,7 @@ If you want to play the game go to this link:
 - Vercel-Front
 
 
-## `Correr el proyecyo localmente`:
+## `Correr el proyecto localmente`:
 - Run 
 - Environment variables
 
