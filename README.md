@@ -2,6 +2,9 @@
 
 Henropoly es un juego de mesa traido al internet, este se basa en la compra y la venta de propiedades en casilleros, cobrando impuestos a los que caigan en lo del propietario.
 
+## `Para ver el tráiler oficial`
+[Tráiler Oficial](https://www.youtube.com/watch?v=5Sy9q5CwvDQ&ab_channel=FacuRearte)
+
 ## `Si querés jugar, entra al siguiente link:`
 [Henropoly](https://henropoly.vercel.app/)
 
