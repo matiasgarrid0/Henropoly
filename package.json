@@ -1,14 +1,15 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon -L"
-  },
-  "dependencies": {
-    "henropoly": "file:client",
-    "redis": "^3.1.2",
-    "use-sound": "^4.0.1"
-  }
+    "name": "henropoly",
+    "version": "2.0.0",
+    "description": "",
+    "workspaces": [
+        "api",
+        "frontend"
+    ],
+    "scripts": {
+        "build": "yarn workspace frontend build",
+        "start": "yarn workspace api start",
+        "dev:api": "yarn workspace api dev",
+        "dev:frontend": "yarn workspace frontend start"
+    }
 }
